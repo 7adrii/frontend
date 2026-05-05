@@ -1,5 +1,25 @@
+body {
+    background-color: #f2f2f2;
+}
+
 .container {
     margin-top: 3%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header"
+        "sidebar"
+        "filter"
+        "pacient-list";
+}
+
+.container-header {
+    grid-area: header;
+}
+
+.container-filter {
+    margin-top: 3%;
+    grid-area: filter;
 }
 
 .filter-options {
@@ -10,7 +30,9 @@
     gap: 15px;
 }
 
-.pacient-list {
+.container-pacient-list {
+    grid-area: pacient-list;
+    background-color: #F8F9FA;
     padding: 1%;
     margin-bottom: 3%;
     display: flex;
@@ -18,6 +40,15 @@
     gap: 10px;
     border-radius: 10px;
     border: 1px solid rgba(187, 187, 187, 0.5);
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 10px;
 }
 
 .btn-options {
@@ -34,7 +65,7 @@
 }
 
 .status-options {
-    font-size: 15px;
+    font-size: 0.8rem;
 }
 
 .fa-bone {
@@ -49,8 +80,94 @@
     color: #ac5707;
 }
 
+.nav-text {
+    text-decoration: none;
+    color: #1E272E;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-text:hover {
+    background-color: rgba(59, 178, 176, 0.5);
+    color: #1E272E;
+    border-radius: 2rem;
+}
+
 .table-pages {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+.line-hover:hover>* {
+    background-color: rgba(89, 178, 176, 0.5) !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list-group {
+    list-style: none;
+}
+
+.card {
+    border-radius: 20px;
+    max-width: 11rem;
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+
+p {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+@media (min-width: 1020px) {
+    .container {
+        max-width: 90%;
+        grid-template-columns: 80% 20%;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "header header"
+            "filter filter"
+            "pacient-list sidebar";
+        gap: 10px;
+        align-items: start;
+    }
+
+    .nav-text {
+        text-decoration: none;
+        color: #1E272E;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .nav-text:hover {
+        background-color: rgba(59, 178, 176, 0.5);
+        color: #1E272E;
+        border-radius: 2rem;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .card {
+        padding: 1rem;
+        border-radius: 20px;
+        width: 100%;
+        max-width: none;
+    }
 }

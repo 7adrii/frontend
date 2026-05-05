@@ -1,13 +1,19 @@
+h5{
+    font-family: 'Roboto', sans-serif;
+    color: $grey;
+    font-size: 1rem;
+}
+
 p {
-        font-family: 'Roboto', sans-serif;
-        color: $grey;
-        font-size: 1.5rem;
-    }
+    font-family: 'Roboto', sans-serif;
+    color: $grey;
+    font-size: 1rem;
+}
 
 @media (min-width: 1020px) {
     p {
         font-family: 'Roboto', sans-serif;
-        color: $white;
+        color: $grey;
         font-size: 1.5rem;
     }
 }

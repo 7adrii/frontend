@@ -27,6 +27,7 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="./js/pet-list-page_style.js"></script>
 </head>
 
 <body>
@@ -118,28 +119,18 @@
         </div>
 
         <div class="container-filter">
-            <div>
-                <ul class="filter-options">
-                    <li class="nav-item">
-                        <a class="nav-text active" aria-current="page" href="#">Perros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-text active" aria-current="page" href="#">Gatos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-text active" aria-current="page" href="#">Aves</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-text active" aria-current="page" href="#">Reptiles</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="filter-options" id="type-animal">
+
+            </ul>
         </div>
 
         <div class="container-pacient-list">
-            <div class="btn-options">
-                <button class="btn btn-secondary">Dar de alta</button>
+            <div class="btn-options" id="btn-register">
+                <a href="pet-detail.html">
+                    <button class="btn btn-secondary">Dar de alta</button>
+                </a>
             </div>
+
             <div>
                 <ul class="list-group">
                     <li class="list-group-item text-center">
@@ -156,7 +147,6 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">id</th>
                                     <th scope="col" class="d-none d-md-table-cell">Fecha alta</th>
                                     <th scope="col" class="d-none d-md-table-cell">Nombre</th>
                                     <th scope="col" class="d-none d-md-table-cell">Especie</th>
@@ -167,42 +157,8 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="line-hover">
-                                    <th scope="row">1</th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row">
-                                        <button class="btn btn-primary">+ info</button>
-                                    </th>
-                                </tr>
-                                <tr class="line-hover">
-                                    <th scope="row">2</th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row"></th>
-                                </tr>
-                                <tr class="line-hover">
-                                    <th scope="row">3</th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row" class="d-none d-md-table-cell"></th>
-                                    <th scope="row"></th>
-                                    <th scope="row"></th>
-                                </tr>
+                            <tbody id="pets-list">
+
                             </tbody>
                         </table>
                     </li>

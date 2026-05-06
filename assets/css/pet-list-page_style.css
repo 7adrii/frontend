@@ -24,13 +24,9 @@ body {
 }
 
 .container-last-aditions {
-    background-color: #F8F9FA;
     padding: 1%;
     grid-area: last-aditions;
     margin-top: 5%;
-    border-radius: 10px;
-    border: 1px solid rgba(187, 187, 187, 0.5);
-
 }
 
 .filter-options {
@@ -183,8 +179,11 @@ p {
         max-width: 40%;
     }
 
-    .container-last-aditions{
+    .container-last-aditions {
         margin-top: 0%;
+        background-color: #F8F9FA;
+        border-radius: 10px;
+        border: 1px solid rgba(187, 187, 187, 0.5);
     }
 
     .cards {

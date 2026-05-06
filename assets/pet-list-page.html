@@ -61,7 +61,8 @@
                                     class="bi bi-file-earmark-medical"></i> Historial clínico</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i class="fa-solid fa-paw"></i>
+                            <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                                    class="fa-solid fa-paw"></i>
                                 Clientes/Mascotas</a>
                         </li>
                         <li class="nav-item">
@@ -96,7 +97,8 @@
                                 class="bi bi-file-earmark-medical"></i> Historial clínico</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i class="fa-solid fa-paw"></i>
+                        <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                                class="fa-solid fa-paw"></i>
                             Clientes/Mascotas</a>
                     </li>
                     <li class="nav-item">
@@ -160,8 +162,9 @@
                                     <th scope="col" class="d-none d-md-table-cell">Especie</th>
                                     <th scope="col" class="d-none d-md-table-cell">Dueño</th>
                                     <th scope="col">Dni</th>
-                                    <th scope="col">Estado</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Estado</th>
                                     <th scope="col">Contacto</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,8 +175,11 @@
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
+                                    <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
-                                    <th scope="row"></th>
+                                    <th scope="row">
+                                        <button class="btn btn-primary">+ info</button>
+                                    </th>
                                 </tr>
                                 <tr class="line-hover">
                                     <th scope="row">2</th>
@@ -182,6 +188,7 @@
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
+                                    <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
                                     <th scope="row"></th>
                                 </tr>
@@ -192,6 +199,7 @@
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
+                                    <th scope="row" class="d-none d-md-table-cell"></th>
                                     <th scope="row"></th>
                                     <th scope="row"></th>
                                 </tr>
@@ -229,7 +237,44 @@
             </div>
         </div>
 
-        <div class="sidebar">
+        <div class="container-last-aditions">
+            <h4>Últimos registros</h4>
+            <div class="cards">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mascota</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Especie</h6>
+                        <p class="card-text">Dueño Dni</p>
+                        <a href="#" class="card-link">
+                            <button class="btn btn-primary">+ info</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mascota</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Especie</h6>
+                        <p class="card-text">Dueño Dni</p>
+                        <a href="#" class="card-link">
+                            <button class="btn btn-primary">+ info</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mascota</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Especie</h6>
+                        <p class="card-text">Dueño Dni</p>
+                        <a href="#" class="card-link">
+                            <button class="btn btn-primary">+ info</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container-sidebar">
             <div class="card">
                 <ul class="list-group">
                     <li>
@@ -237,7 +282,7 @@
                             <i class="fa-solid fa-paw"></i>
                             <div>
                                 <h5>100</h5>
-                                <p>Total Pacientes</p>
+                                <p>Registros</p>
                             </div>
                         </div>
                     </li>
@@ -249,8 +294,8 @@
                         <div class="card-info">
                             <i class="fa-solid fa-paw"></i>
                             <div>
-                                <h5>10</h5>
-                                <p>Registros hoy</p>
+                                <h5>+ 10</h5>
+                                <p>Nuevos</p>
                             </div>
                         </div>
                     </li>
@@ -262,21 +307,8 @@
                         <div class="card-info">
                             <i class="fa-solid fa-paw"></i>
                             <div>
-                                <h5>5</h5>
-                                <p>Total bajass</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>10</h5>
-                                <p>Total Pacientes</p>
+                                <h5>+ 5</h5>
+                                <p>Bajas</p>
                             </div>
                         </div>
                     </li>

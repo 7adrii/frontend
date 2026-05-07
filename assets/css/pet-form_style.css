@@ -1,0 +1,27 @@
+body {
+    background-color: #f2f2f2;
+}
+
+form {
+    background-color: #F8F9FA;
+    border: 1px solid rgba(187, 187, 187, 0.5);
+    border-radius: 5px;
+    padding: 1%;
+    margin: 3%;
+}
+
+.form-section {
+    margin-bottom: 5%;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.5);
+}
+
+.line-form {
+    display: flex;
+    gap: 10px;
+}
+
+.btns{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}

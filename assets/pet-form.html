@@ -27,6 +27,7 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/pet-form-page_script.js"></script>
 </head>
 
@@ -110,113 +111,11 @@
         </div>
     </header>
 
-    <form id="form-new-pet">
-        <h4>Nuevo Registro</h4>
-        <div class="form-section">
-            <h5>Datos del dueño</h5>
-            <div class="line-form">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                    <input type="text" class="form-control" placeholder="Ej: Juan">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
-                    <input type="text" class="form-control" placeholder="Ej: Pérez García">
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Teléfono*</label>
-                <input type="text" class="form-control" placeholder="Ej: 612 345 678">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email*</label>
-                <input type="email" class="form-control" placeholder="Ej: juan.perez@gmail.com">
-            </div>
-        </div>
-
-        <div class="form-section">
-            <h5>Datos de la mascota</h5>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                <input type="text" class="form-control" placeholder="Ej: Lana">
-            </div>
-            <div class="line-form">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Especie*</label>
-                    <input type="text" class="form-control" placeholder="Ej: Perro">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Raza</label>
-                    <input type="text" class="form-control" placeholder="Ej: Golden Retriever">
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Peso*</label>
-                <input type="text" class="form-control" placeholder="Ej: 25 kg">
-            </div>
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Sexo*</label>
-                <select id="disabledSelect" class="form-select">
-                    <option>Macho</option>
-                    <option>Hembra</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                <input type="date" class="form-control">
-            </div>
-        </div>
-
-        <div class="form-section">
-            <h5>Alergias</h5>
-            <button type="button" class="btn btn-primary" id="btn-add">Introducir nueva alergia</button>
-            <div id="container-allergies">
-
-            </div>
-            <template id="allergy-item">
-                <div class="form-section" id="allergy-block">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Alérgeno*</label>
-                        <input type="text" class="form-control" placeholder="Ej: Picadura de pulga">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Método de diagnóstico*</label>
-                        <input type="text" class="form-control" placeholder="Ej: Picadura de pulga">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Sintomatología*</label>
-                        <input type="text" class="form-control" placeholder="Ej: Ronchas, estornudos">
-                    </div>
-                    <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
-                        <select id="disabledSelect" class="form-select">
-                            <option>Leve</option>
-                            <option>Moderada</option>
-                            <option>Grave/Crítica</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Tratamiento de urgencia*</label>
-                        <input type="text" class="form-control" placeholder="Ej: Ronchas, estornudos">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-secondary" id="btn-remove" aria-label="Close">Eliminar</button>
-                </div>
-            </template>
-        </div>
-
-        <div class="btns">
-            <a href="pet-list-page.html">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </a>
-            <a href="pet-list-page.html">
-                <button type="button" class="btn btn-secondary">Cancelar</button>
-            </a>
-        </div>
-    </form>
+    <div class="container">
+        <form class="form-container" id="form-new-pet">
+            
+        </form>
+    </div>
 
 </body>
 

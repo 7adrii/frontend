@@ -91,7 +91,7 @@ const createPets = (petsList, ownersList) => {
   for (let i = petsList.length-1; i >= petsList.length-3; i--) {
 
     const pet = petsList[i];
-    const { id_pet, name, type, breed, weight, sex, birth_date, owner_dni } = pet;
+    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
 
     const cardPet = document.createElement("div");
     cardPet.classList.add("card");
@@ -99,7 +99,7 @@ const createPets = (petsList, ownersList) => {
 
     cardPet.innerHTML = `
       <div class="card-body">
-        <h5 class="card-title">${name}</h5>
+        <h5 class="card-title">${name_pet}</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">${type}</h6>
         <p class="card-text">${owner_dni}</p>
         <a href="#" class="card-link">

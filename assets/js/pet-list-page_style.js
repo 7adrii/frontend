@@ -33,9 +33,10 @@ const createPets = (petsList, ownersList) => {
   const types = [];
   petsList.forEach((pet) => {
     const { type } = pet;
+    const typeLow = type.toLowerCase();
 
-    if (!types.includes(type)) {
-        types.push(type);
+    if (!types.includes(typeLow)) {
+        types.push(typeLow);
 
         const listItem = document.createElement("li");
         listItem.classList.add("nav-item");
@@ -53,7 +54,7 @@ const createPets = (petsList, ownersList) => {
   listPets.innerHTML = ``;
 
   petsList.forEach((pet) => {
-    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
+    const { id, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
 
     // Obtener el dueño segun el DNI del dueño de la mascota
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
@@ -74,8 +75,8 @@ const createPets = (petsList, ownersList) => {
             <th scope="row" class="d-none d-md-table-cell"></th>
             <th scope="row">${ownerContact}</th>
             <th scope="row">
-                <a href="pet-detail.html?id=${id_pet}">
-                    <button class="btn btn-primary">+ info</button>
+                <a href="pet-detail.html?id=${id}" class="btn btn-primary">
+                  + info
                 </a>
             </th>
         `;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mascotas/Pacientes</title>
+    <title>Document</title>
 
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -22,12 +22,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/index_style.css">
-    <link rel="stylesheet" href="./css/pet-list-page_style.css">
+    <link rel="stylesheet" href="./css/pet-detail_style.css">
 
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
-    <script src="./js/pet-list-page_style.js"></script>
+    <script src="./js/pet-detail_script.js"></script>
 </head>
 
 <body>
@@ -112,135 +112,142 @@
     </header>
 
     <section class="container">
-        <div class="container-header">
-            <div class="title-section">
-                <h1>Pacientes/Mascotas</h1>
+        <div class="owner-info">
+            <div class="owner-name">
+                <i class="fa-solid fa-user fa-2x"></i>
+                <h4>Datos de contacto (nombre y apellidos dueño)</h4>
+            </div>
+            <div class="owner-contact">
+                <p><i class="fa-solid fa-address-card"></i> DNI</p>
+                <p><i class="fa-solid fa-envelope"></i> Email</p>
+                <p><i class="fa-solid fa-mobile"></i> Telefono</p>
             </div>
         </div>
 
-        <div class="container-filter">
-            <ul class="filter-options" id="type-animal">
+        <div class="pet-info">
+            <div class="pet-name">
+                <i class="fa-solid fa-paw fa-2x"></i>
+                <h2>Nombre Mascota</h2>
+            </div>
 
-            </ul>
-        </div>
-
-        <div class="container-pacient-list">
-            <div class="btn-options" id="btn-register">
-                <a href="pet-form.html">
-                    <button class="btn btn-secondary">Dar de alta</button>
-                </a>
+            <div class="pet-btns">
+                <a href="#" class="btn btn-primary">Editar</a>
+                <a href="#" class="btn btn-secondary">Eliminar</a>
             </div>
 
             <div>
-                <ul class="list-group">
-                    <li class="list-group-item text-center">
-                        <div>
-                            Lista Mascotas
-                            <div class="status-check">
-                                <p class="status-options"><i class="fa-solid fa-bone"></i> Sin citas</p>
-                                <p class="status-options"><i class="fa-solid fa-calendar-check"></i> Cita agendada</p>
-                                <p class="status-options"><i class="fa-solid fa-stethoscope"></i> En consulta</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
+                <div>
+                    <h4>Especie</h4>
+                    <h6>Raza (si tiene)</h6>
+                </div>
+                <p>Peso</p>
+                <p>Sexo</p>
+                <p>Fecha de nacimiento</p>
+            </div>
+        </div>
+
+        <div class="pet-nextAppointment">
+            <h4>Próxima cita</h4>
+            <h2>xx-xx-xxxx</h2>
+            <h3>00:00</h3>
+            <p>Tipo de cita</p>
+        </div>
+
+        <div class="pet-allergy">
+            <div class="allergy-actions">
+                <h4>Total alergias: nº</h4>
+                <a href="new-allergy.html" class="btn btn-secondary">Registrar</a>
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alergeno</th>
+                                <th scope="col">Tratamiento emergencia</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consult-list">
+                            <th scope="col">Pulgas</th>
+                            <th scope="col">Inyeccion</th>
+                        </tbody>
+                    </table>
+                    <div class="btns-allergy">
+                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="#" class="btn btn-secondary">Eliminar</a>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alergeno</th>
+                                <th scope="col">Tratamiento emergencia</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consult-list">
+                            <th scope="col">Pulgas</th>
+                            <th scope="col">Inyeccion</th>
+                        </tbody>
+                    </table>
+                    <div class="btns-allergy">
+                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="#" class="btn btn-secondary">Eliminar</a>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alergeno</th>
+                                <th scope="col">Tratamiento emergencia</th>
+                            </tr>
+                        </thead>
+                        <tbody id="consult-list">
+                            <th scope="col">Pulgas</th>
+                            <th scope="col">Inyeccion</th>
+                        </tbody>
+                    </table>
+                    <div class="btns-allergy">
+                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="#" class="btn btn-secondary">Eliminar</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="pet-clinic-history">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="scroll-container">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="d-none d-md-table-cell">Fecha alta</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Nombre</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Especie</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
-                                    <th scope="col">Dni</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Estado</th>
-                                    <th scope="col">Contacto</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Día de la cita</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Hora</th>
+                                    <th scope="col">Tipo cita</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Causa</th>
+                                    <th scope="col">Veterinario</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Duración</th>
                                 </tr>
                             </thead>
-                            <tbody id="pets-list">
-
+                            <tbody id="consult-list">
+                                <th scope="col">xxx-xx-xxxx</th>
+                                <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
+                                <th scope="col">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
+                                <th scope="col">Dr.@</th>
+                                <th scope="col" class="d-none d-md-table-cell">Duración</th>
                             </tbody>
                         </table>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <nav aria-label="Page navigation example">
-                    <div class="table-pages">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Pg. 1
-                                    <i class="fa-solid fa-angle-down"></i>
-                                </a></li>
-                            <li class="page-item"><a class="page-link" href="#">de 10</a></li>
-                        </ul>
                     </div>
-                </nav>
-            </div>
-        </div>
 
-        <div class="container-last-aditions">
-            <h4>Últimos registros</h4>
-            <div class="cards" id="last-aditions">
-
-            </div>
-
-        </div>
-
-        <div class="container-sidebar">
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>100</h5>
-                                <p>Registros</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 10</h5>
-                                <p>Nuevos</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 5</h5>
-                                <p>Bajas</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                </li>
+            </ul>
         </div>
     </section>
 </body>

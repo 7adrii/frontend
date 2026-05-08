@@ -53,13 +53,13 @@ const createPets = (petsList, ownersList) => {
   listPets.innerHTML = ``;
 
   petsList.forEach((pet) => {
-    const { id_pet, name, type, breed, weight, sex, birth_date, owner_dni } = pet;
+    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
 
     // Obtener el dueño segun el DNI del dueño de la mascota
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
 
     // Obtener el nombre y teléfono de contacto del dueño
-    const ownerName = owner ? owner.name : "Desconocido";
+    const ownerName = owner ? owner.name_owner : "Desconocido";
     const ownerContact = owner ? owner.phone : "Desconocido";
 
     const tableRow = document.createElement("tr");
@@ -67,7 +67,7 @@ const createPets = (petsList, ownersList) => {
 
     tableRow.innerHTML = `
             <th scope="row" class="d-none d-md-table-cell">Ej: xx-xx-xxxx</th>
-            <th scope="row">${name}</th>
+            <th scope="row">${name_pet}</th>
             <th scope="row" class="d-none d-md-table-cell">${type}</th>
             <th scope="row" class="d-none d-md-table-cell">${ownerName}</th>
             <th scope="row">${owner_dni}</th>

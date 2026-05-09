@@ -117,3 +117,13 @@ a.btn.btn-primary.btn-lg.custom-btn:hover {
     background-color: $turquoise;
     border-color: $turquoise;
 }
+
+.card-body h5.card-title {
+    font-size: 1.5rem;
+}
+
+.card-body p.card-text {
+    color: $grey;
+    font-size: 1.2rem;
+}
+

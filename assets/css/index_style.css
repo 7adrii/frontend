@@ -12090,4 +12090,13 @@ a.btn.btn-primary.btn-lg.custom-btn, .btn-group-lg > a.btn.btn-primary.custom-bt
 a.btn.btn-primary.btn-lg.custom-btn:hover, .btn-group-lg > a.btn.btn-primary.custom-btn:hover {
   background-color: #59B2B0;
   border-color: #59B2B0;
+}
+
+.card-body h5.card-title, .card-body .card-title.h5 {
+  font-size: 1.5rem;
+}
+
+.card-body p.card-text {
+  color: #1E272E;
+  font-size: 1.2rem;
 }/*# sourceMappingURL=index_style.css.map */

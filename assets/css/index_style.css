@@ -11989,6 +11989,10 @@ textarea.form-control-lg {
   background-color: #1E272E !important;
 }
 
+.bg-dark {
+  background-color: #1E272E !important;
+}
+
 .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
   gap: 20px;
 }

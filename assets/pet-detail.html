@@ -125,14 +125,16 @@
         </div>
 
         <div class="pet-info">
-            <div class="pet-name">
-                <i class="fa-solid fa-paw fa-2x"></i>
-                <h2>Nombre Mascota</h2>
-            </div>
+            <div class="pet-intro">
+                <div class="pet-name">
+                    <i class="fa-solid fa-paw fa-2x"></i>
+                    <h2>Nombre Mascota</h2>
+                </div>
 
-            <div class="pet-btns">
-                <a href="#" class="btn btn-primary">Editar</a>
-                <a href="#" class="btn btn-secondary">Eliminar</a>
+                <div class="pet-btns">
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+                    <a href="#" class="btn btn-secondary"><i class="fa-solid fa-trash"></i></a>
+                </div>
             </div>
 
             <div>
@@ -156,68 +158,94 @@
         <div class="pet-allergy">
             <div class="allergy-actions">
                 <h4>Total alergias: nº</h4>
-                <a href="new-allergy.html" class="btn btn-secondary">Registrar</a>
+                <a href="new-allergy.html" class="btn btn-secondary"><i class="fa-solid fa-plus"></i></a>
             </div>
 
             <ul class="list-group">
-                <li class="list-group-item">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Alergeno</th>
-                                <th scope="col">Tratamiento emergencia</th>
-                            </tr>
-                        </thead>
-                        <tbody id="consult-list">
-                            <th scope="col">Pulgas</th>
-                            <th scope="col">Inyeccion</th>
-                        </tbody>
-                    </table>
-                    <div class="btns-allergy">
-                        <a href="#" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-secondary">Eliminar</a>
-                    </div>
-                </li>
+                <div class="scroll-container-allergy">
+                    <li class="list-group-item">
 
-                <li class="list-group-item">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Alergeno</th>
-                                <th scope="col">Tratamiento emergencia</th>
-                            </tr>
-                        </thead>
-                        <tbody id="consult-list">
-                            <th scope="col">Pulgas</th>
-                            <th scope="col">Inyeccion</th>
-                        </tbody>
-                    </table>
-                    <div class="btns-allergy">
-                        <a href="#" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-secondary">Eliminar</a>
-                    </div>
-                </li>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Alergeno</th>
+                                    <th scope="col">Tratamiento emergencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="consult-list">
+                                <th scope="col">Pulgas</th>
+                                <th scope="col">Inyeccion</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                        </table>
+                    </li>
 
-                <li class="list-group-item">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Alergeno</th>
-                                <th scope="col">Tratamiento emergencia</th>
-                            </tr>
-                        </thead>
-                        <tbody id="consult-list">
-                            <th scope="col">Pulgas</th>
-                            <th scope="col">Inyeccion</th>
-                        </tbody>
-                    </table>
-                    <div class="btns-allergy">
-                        <a href="#" class="btn btn-primary">Editar</a>
-                        <a href="#" class="btn btn-secondary">Eliminar</a>
-                    </div>
-                </li>
+                    <li class="list-group-item">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Alergeno</th>
+                                    <th scope="col">Tratamiento emergencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="consult-list">
+                                <th scope="col">Pulgas</th>
+                                <th scope="col">Inyeccion</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                        </table>
+                    </li>
+
+                    <li class="list-group-item">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Alergeno</th>
+                                    <th scope="col">Tratamiento emergencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="consult-list">
+                                <th scope="col">Pulgas</th>
+                                <th scope="col">Inyeccion</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                        </table>
+                    </li>
+                </div>
             </ul>
-
         </div>
 
         <div class="pet-clinic-history">
@@ -229,23 +257,115 @@
                                 <tr>
                                     <th scope="col">Día de la cita</th>
                                     <th scope="col" class="d-none d-md-table-cell">Hora</th>
-                                    <th scope="col">Tipo cita</th>
+                                    <th scope="col" class="d-none d-md-table-cell">Tipo cita</th>
                                     <th scope="col" class="d-none d-md-table-cell">Causa</th>
                                     <th scope="col">Veterinario</th>
                                     <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="consult-list">
                                 <th scope="col">xxx-xx-xxxx</th>
                                 <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
-                                <th scope="col">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Revisión</th>
                                 <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
                                 <th scope="col">Dr.@</th>
                                 <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                            <tbody id="consult-list">
+                                <th scope="col">xxx-xx-xxxx</th>
+                                <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
+                                <th scope="col" class="d-none d-md-table-cell">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
+                                <th scope="col">Dr.@</th>
+                                <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                            <tbody id="consult-list">
+                                <th scope="col">xxx-xx-xxxx</th>
+                                <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
+                                <th scope="col" class="d-none d-md-table-cell">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
+                                <th scope="col">Dr.@</th>
+                                <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                            <tbody id="consult-list">
+                                <th scope="col">xxx-xx-xxxx</th>
+                                <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
+                                <th scope="col" class="d-none d-md-table-cell">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
+                                <th scope="col">Dr.@</th>
+                                <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
+                            </tbody>
+                            <tbody id="consult-list">
+                                <th scope="col">xxx-xx-xxxx</th>
+                                <th scope="col" class="d-none d-md-table-cell">xx:xx</th>
+                                <th scope="col" class="d-none d-md-table-cell">Revisión</th>
+                                <th scope="col" class="d-none d-md-table-cell">Intoxicación</th>
+                                <th scope="col">Dr.@</th>
+                                <th scope="col" class="d-none d-md-table-cell">Duración</th>
+                                <th scope="col">
+                                    <div class="dropdown">
+                                        <button class="btn-options" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
                             </tbody>
                         </table>
                     </div>
-
                 </li>
             </ul>
         </div>

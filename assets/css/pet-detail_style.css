@@ -18,6 +18,13 @@ body {
     width: 100%;
 }
 
+.pet-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+}
+
 .pet-name {
     display: flex;
     gap: 10px;
@@ -76,24 +83,32 @@ body {
     margin-top: 20px;
 }
 
-.scroll-container {
-    max-height: 400px;
+.scroll-container, .scroll-container-allergy {
+    max-height: 210px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #dee2e6;
     border-radius: 8px;
 }
 
-.scroll-container::-webkit-scrollbar{
+.scroll-container table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.scroll-container::-webkit-scrollbar {
     width: 8px;
 }
 
-.scroll-container::-webkit-scrollbar-thumb{
+.scroll-container::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 4px;
 }
 
-.scroll-container::-webkit-scrollbar-thumb:hover{
+.scroll-container::-webkit-scrollbar-thumb:hover {
     background: #adb5bd;
 }
 
@@ -106,17 +121,25 @@ body {
     width: 100%;
 }
 
-.allergy-actions{
+.allergy-actions {
     display: flex;
     gap: 10px;
     justify-content: space-between;
     padding: 1%;
 }
 
-.btns-allergy{
+.btns-allergy {
     display: flex;
     justify-content: end;
     gap: 10px;
+}
+
+.btn-options {
+    border: none;
+}
+
+.dropdown-menu {
+    border-radius: 2px solid rgba(187, 187, 187, 0.5);
 }
 
 @media (min-width: 1020px) {

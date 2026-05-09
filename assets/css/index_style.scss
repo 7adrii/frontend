@@ -68,3 +68,39 @@
         color: $white !important;
     }
 }
+
+// Estilos del main
+
+body.bg-background {
+    background-color: $background;
+}
+
+.home-main {
+    margin-top: 50px;
+}
+
+h1.text-center.title{
+    color: $turquoise;
+    font-size: 4rem;
+    padding-bottom: 5px;
+}
+
+@media (max-width: 500px){
+    h1.text-center.title{
+        font-size: 3rem;
+    }
+}
+
+h3.text-center{
+    color: $gold;
+    font-size: 2rem;
+    
+}
+
+@media (max-width: 500px){
+    h3.text-center{
+        font-size: 2rem;
+    }
+}
+
+

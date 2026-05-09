@@ -12047,4 +12047,47 @@ textarea.form-control-lg {
   .nav-link {
     color: #F8F9FA !important;
   }
+}
+body.bg-background {
+  background-color: #efe5e5;
+}
+
+.home-main {
+  margin-top: 50px;
+}
+
+h1.text-center.title, .text-center.title.h1 {
+  color: #59B2B0;
+  font-size: 4rem;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 500px) {
+  h1.text-center.title, .text-center.title.h1 {
+    font-size: 3rem;
+  }
+}
+h3.text-center, .text-center.h3 {
+  color: #D4AF37;
+  font-size: 2rem;
+}
+
+@media (max-width: 500px) {
+  h3.text-center, .text-center.h3 {
+    font-size: 2rem;
+  }
+}
+a.btn.btn-primary.btn-lg.custom-btn, .btn-group-lg > a.btn.btn-primary.custom-btn {
+  color: #F8F9FA;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+  transition: background-color 0.3s;
+  padding: 15px 35px;
+}
+
+a.btn.btn-primary.btn-lg.custom-btn:hover, .btn-group-lg > a.btn.btn-primary.custom-btn:hover {
+  background-color: #59B2B0;
+  border-color: #59B2B0;
 }/*# sourceMappingURL=index_style.css.map */

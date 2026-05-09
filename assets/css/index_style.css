@@ -12099,4 +12099,29 @@ a.btn.btn-primary.btn-lg.custom-btn:hover, .btn-group-lg > a.btn.btn-primary.cus
 .card-body p.card-text {
   color: #1E272E;
   font-size: 1.2rem;
+}
+
+.footer-gradient {
+  background: linear-gradient(135deg, #59B2B0 0%, #1E272E 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-bottom {
+  background-color: #1E272E;
+}
+
+.footer-gradient a {
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.footer-gradient a:hover {
+  opacity: 1;
+  color: #D4AF37 !important;
+  padding-left: 5px;
+}
+
+.footer-gradient i {
+  color: #D4AF37;
 }/*# sourceMappingURL=index_style.css.map */

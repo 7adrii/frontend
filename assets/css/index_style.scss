@@ -137,3 +137,38 @@ a.btn.btn-primary.btn-lg.custom-btn:hover {
     font-size: 1.2rem;
 }
 
+// Estilos del footer
+
+// Definición del degradado
+.footer-gradient {
+    background: linear-gradient(135deg, $turquoise 0%, $grey 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+
+// Sección inferior con tu color $grey
+.footer-bottom {
+    background-color: $grey;
+}
+
+
+// Estilo para los enlaces del footer
+.footer-gradient a {
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+
+// Efecto al pasar el ratón por los enlaces del footer
+.footer-gradient a:hover {
+    opacity: 1;
+    color: $gold !important;
+    padding-left: 5px;
+}
+
+
+// Iconos en dorado
+.footer-gradient i {
+    color: $gold;
+}

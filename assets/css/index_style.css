@@ -12048,8 +12048,10 @@ textarea.form-control-lg {
     color: #F8F9FA !important;
   }
 }
-body.bg-background {
+body {
   background-color: #efe5e5;
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 .home-main {

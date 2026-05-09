@@ -72,8 +72,10 @@
 // Estilos del main
 
 // Fondo general de la página
-body.bg-background {
+body {
     background-color: $background;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 // Margen del contenedor principal

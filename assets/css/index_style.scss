@@ -103,4 +103,17 @@ h3.text-center{
     }
 }
 
+a.btn.btn-primary.btn-lg.custom-btn{
+    color: $white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: $gold;
+    border-color: $gold;
+    transition: background-color 0.3s;
+    padding: 15px 35px;
+}   
 
+a.btn.btn-primary.btn-lg.custom-btn:hover {
+    background-color: $turquoise;
+    border-color: $turquoise;
+}

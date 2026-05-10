@@ -339,7 +339,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const numAllergies = allergiesData.length;
     allergiesQuantity.innerHTML = `
       <h4>Total alergias: ${numAllergies}</h4>
-      <a href="new-allergy.html" class="btn btn-secondary"><i class="fa-solid fa-plus"></i></a>
+      <a href="new-allergy.html?id=${id_pet}" class="btn"><i class="fa-solid fa-plus"></i></a>
     `;
 
     //Datos de las alergias

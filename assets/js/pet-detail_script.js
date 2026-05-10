@@ -117,41 +117,41 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
 
     //Pop Up para editar los datos del dueño
-    const btnPopUpOwner = document.getElementById('btnOpenPopUpOwner');
-    const popUpOwner = document.getElementById('editOwnerPopUp');
+    const btnPopUpOwner = document.getElementById("btnOpenPopUpOwner");
+    const popUpOwner = document.getElementById("editOwnerPopUp");
 
-    btnPopUpOwner.addEventListener('click', (e) => {
+    btnPopUpOwner.addEventListener("click", (e) => {
       e.preventDefault();
 
-      console.log("Abriendo modal")
+      console.log("Abriendo modal");
 
-      document.getElementById('name_owner').value = name_owner;
-      document.getElementById('surname').value = surname;
-      document.getElementById('phone').value = phone;
-      document.getElementById('email').value = email;
+      document.getElementById("name_owner").value = name_owner;
+      document.getElementById("surname").value = surname;
+      document.getElementById("phone").value = phone;
+      document.getElementById("email").value = email;
 
       popUpOwner.showModal();
     });
 
-    const saveBtnOwner = document.getElementById('saveChangesOwner');
-    saveBtnOwner.addEventListener('click', async (e) => {
+    const saveBtnOwner = document.getElementById("saveChangesOwner");
+    saveBtnOwner.addEventListener("click", async (e) => {
       e.preventDefault();
 
       const ownerPutAPI = {
-        name_owner: document.getElementById('name_owner').value.trim(),
-        surname: document.getElementById('surname').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        email: document.getElementById('email').value.trim()
-      }
+        name_owner: document.getElementById("name_owner").value.trim(),
+        surname: document.getElementById("surname").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+      };
 
       const { name_owner, surname, phone, email } = ownerPutAPI;
 
       if (!name_owner || !surname || !phone || !email) {
         Swal.fire({
-          title: 'Faltan datos por rellenar',
-          confirmButtonText: 'Volver a la edición'
+          title: "Faltan datos por rellenar",
+          confirmButtonText: "Volver a la edición",
         });
-        return
+        return;
       }
       console.log("Cuerpo del envío:", JSON.stringify(ownerPutAPI));
       await sendOwnerData(ownerPutAPI, dni_owner);
@@ -159,34 +159,42 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const sendOwnerData = async (ownerPutAPI, dni_owner) => {
       try {
-        const PutResponse = await fetch(`http://localhost:8080/owners/${dni_owner}`, {
-          method: "PUT",
-          body: JSON.stringify(ownerPutAPI),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8"
-          }
-        });
+        const PutResponse = await fetch(
+          `http://localhost:8080/owners/${dni_owner}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(ownerPutAPI),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          },
+        );
 
         if (PutResponse.ok) {
-
-          const popUp = document.getElementById('editOwnerPopUp');
+          const popUp = document.getElementById("editOwnerPopUp");
           popUp.close();
           window.location.reload();
-        }
-        else {
+        } else {
           const errorData = await PutResponse.json().catch(() => ({}));
           throw new Error(errorData.message || `Error: ${PutResponse.status}`);
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
       }
-    }
-
+    };
 
     //Datos de la mascota
     const petElement = document.getElementById("pet");
-    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = petData;
+    const {
+      id_pet,
+      name_pet,
+      type,
+      breed,
+      weight,
+      sex,
+      birth_date,
+      owner_dni,
+    } = petData;
 
     if (!breed || breed === undefined) {
       type = "-";
@@ -232,49 +240,49 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
 
     //Pop up de editar datos de la mascota y guardar los cambios
-    const btnPopUpPet = document.getElementById('btnOpenPopUpPet');
-    const popUpPet = document.getElementById('editPetPopUp');
+    const btnPopUpPet = document.getElementById("btnOpenPopUpPet");
+    const popUpPet = document.getElementById("editPetPopUp");
 
-    btnPopUpPet.addEventListener('click', (e) => {
+    btnPopUpPet.addEventListener("click", (e) => {
       e.preventDefault();
 
-      console.log("Abriendo modal")
+      console.log("Abriendo modal");
 
-      document.getElementById('name_pet').value = name_pet;
-      document.getElementById('type').value = type;
-      document.getElementById('breed').value = breed;
-      document.getElementById('weight').value = weight;
-      document.getElementById('sex').value = sex;
-      document.getElementById('birth_date').value = birth_date.split('T')[0];
+      document.getElementById("name_pet").value = name_pet;
+      document.getElementById("type").value = type;
+      document.getElementById("breed").value = breed;
+      document.getElementById("weight").value = weight;
+      document.getElementById("sex").value = sex;
+      document.getElementById("birth_date").value = birth_date.split("T")[0];
 
       popUpPet.showModal();
     });
 
-    const saveBtnPet = document.getElementById('saveChangesPet');
-    saveBtnPet.addEventListener('click', async (e) => {
+    const saveBtnPet = document.getElementById("saveChangesPet");
+    saveBtnPet.addEventListener("click", async (e) => {
       e.preventDefault();
 
       const petOwnerDni = petData.owner_dni;
 
       const petPutAPI = {
-        name_pet: document.getElementById('name_pet').value.trim(),
-        type: document.getElementById('type').value.trim(),
-        breed: document.getElementById('breed').value.trim(),
-        weight: parseFloat(document.getElementById('weight').value),
-        sex: document.getElementById('sex').value,
-        birth_date: document.getElementById('birth_date').value,
-        owner_dni: petOwnerDni
+        name_pet: document.getElementById("name_pet").value.trim(),
+        type: document.getElementById("type").value.trim(),
+        breed: document.getElementById("breed").value.trim(),
+        weight: parseFloat(document.getElementById("weight").value),
+        sex: document.getElementById("sex").value,
+        birth_date: document.getElementById("birth_date").value,
+        owner_dni: petOwnerDni,
+      };
 
-      }
-
-      const { name_pet, type, breed, weight, sex, birth_date, owner_dni } = petPutAPI;
+      const { name_pet, type, breed, weight, sex, birth_date, owner_dni } =
+        petPutAPI;
 
       if (!name_pet || !type || isNaN(weight) || !sex || !birth_date) {
         Swal.fire({
-          title: 'El campo año está vacio',
-          confirmButtonText: 'Volver a la edición'
+          title: "El campo año está vacio",
+          confirmButtonText: "Volver a la edición",
         });
-        return
+        return;
       }
       console.log(id_pet);
       console.log("Cuerpo del envío:", JSON.stringify(petPutAPI));
@@ -287,25 +295,22 @@ window.addEventListener("DOMContentLoaded", () => {
           method: "PUT",
           body: JSON.stringify(petPutAPI),
           headers: {
-            "Content-type": "application/json; charset=UTF-8"
-          }
+            "Content-type": "application/json; charset=UTF-8",
+          },
         });
 
         if (PutResponse.ok) {
-
-          const popUp = document.getElementById('editPetPopUp');
+          const popUp = document.getElementById("editPetPopUp");
           popUp.close();
           window.location.reload();
-        }
-        else {
+        } else {
           const errorData = await PutResponse.json().catch(() => ({}));
           throw new Error(errorData.message || `Error: ${PutResponse.status}`);
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     //Datos próxima cita, si hay una.
     const appointment = document.getElementById("appointment");
@@ -396,7 +401,6 @@ window.addEventListener("DOMContentLoaded", () => {
           <th scope="col" class="d-none d-md-table-cell">Causa</th>
           <th scope="col">Veterinario</th>
           <th scope="col" class="d-none d-md-table-cell">Duración</th>
-          <th scope="col"></th>
         </tr>
       </thead>
     `;
@@ -407,7 +411,6 @@ window.addEventListener("DOMContentLoaded", () => {
       No hay registro previo de citas para ${petData.name_pet}.
       `;
       appointmentsList.appendChild(appointmentInfo);
-
     } else {
       appointmentsData.forEach((appointment) => {
         const appointmentInfo = document.createElement("tbody");
@@ -436,24 +439,73 @@ window.addEventListener("DOMContentLoaded", () => {
           <td scope="col" class="d-none d-md-table-cell">${observations}</td>
           <td scope="col">${veterinarian_dni}</td>
           <td scope="col" class="d-none d-md-table-cell">${duration} minutos</td>
-          <td scope="col">
-            <div class="dropdown">
-              <button class="btn-options" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false"><i
-                class="fa-solid fa-ellipsis-vertical"></i>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Más información</a></li>
-                <li><a class="dropdown-item" href="#">Editar</a></li>
-                <li><a class="dropdown-item" href="#">Eliminar</a></li>
-              </ul>
-            </div>
-          </td>
         </tr>
       `;
 
         appointmentsList.appendChild(appointmentInfo);
       });
+    }
+
+    //Boton eliminar mascota de la base de datos
+
+    const btnDelete = document.getElementById("btn-delete");
+    btnDelete.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const confirmAction = await Swal.fire({
+        title: `¡Estás a punto de eliminar un registro!`,
+        html: `¿<strong>Segur@ que deseas eliminar</strong> a la mascota <strong>${name_pet}</strong>?`,
+        icon: "warning",
+        iconColor: "#8a3938",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+      });
+
+      if (confirmAction.isConfirmed) {
+        await deletePet(id_pet);
+      } else {
+        return;
+      }
+    });
+
+    const deletePet = async (id_pet) => {
+      try {
+        const deleteResponse = await fetch(urlPet, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UFT-8"
+          }
+        });
+
+        if (deleteResponse.ok) {
+          Swal.fire({
+            title: '¡Registro eliminado!',
+            text: 'El registro se ha eliminado correctamente',
+            icon: 'success',
+            iconColor: '#318a3a',
+            confirmButtonText: 'Volver al dashboard',
+            confirmButtonColor: '#2a1418'
+          }).then(() => {
+            window.location.href = 'pet-list-page.html';
+          });
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            text: `Error: ${deleteResponse.status}`,
+            icon: 'error'
+          });
+        }
+      }
+      catch (error) {
+        Swal.fire({
+          title: 'Error de conexión',
+          text: error.message,
+          icon: 'error'
+        });
+      }
+
     }
   };
 

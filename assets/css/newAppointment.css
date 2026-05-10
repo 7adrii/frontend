@@ -1,0 +1,23 @@
+/* Estilos extra para formularios */
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 0 3px rgba(89, 178, 176, 0.2);
+  border-color: var(--turquoise);
+  background-color: #fff !important;
+}
+
+label.small {
+  letter-spacing: 1px;
+}
+
+.input-group-text {
+  border-radius: 12px 0 0 12px !important;
+}
+
+.form-control {
+  border-radius: 12px !important;
+}
+
+textarea.form-control {
+  border-radius: 15px !important;
+  padding: 15px !important;
+}/*# sourceMappingURL=newAppointment.css.map */

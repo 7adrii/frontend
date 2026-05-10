@@ -27,7 +27,8 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
-    <script src="./js/pet-detail_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/pet-detail_script.js" defer></script>
 </head>
 
 <body>
@@ -114,13 +115,15 @@
     <section class="container">
         <div class="title-section">
             <h2>Perfil de la mascota</h2>
-        </div>
-        <div class="owner-info" id="owner">
-
+            <a href="#" class="btn"><i class="fa-solid fa-trash"></i></a>
         </div>
 
         <div class="pet-info" id="pet">
-            
+
+        </div>
+
+        <div class="owner-info" id="owner">
+
         </div>
 
         <div class="pet-nextAppointment" id="appointment">
@@ -134,7 +137,7 @@
 
             <ul class="list-group">
                 <div class="scroll-container-allergy" id="allergy">
-                    
+
                 </div>
             </ul>
         </div>
@@ -144,13 +147,52 @@
                 <li class="list-group-item">
                     <div class="scroll-container">
                         <table class="table table-striped" id="clinic-history">
-                        
+
                         </table>
                     </div>
                 </li>
             </ul>
         </div>
     </section>
+
+    <!-- Pop up para editar la información de la mascota -->
+    <dialog id="editPetPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Mascota</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_pet" required>
+            </div>
+            <div class="mb-3">
+                <label>Especie</label>
+                <input type="text" class="form-control" id="type" required>
+            </div>
+            <div class="mb-3">
+                <label>Raza</label>
+                <input type="text" class="form-control" id="breed" required>
+            </div>
+            <div class="mb-3">
+                <label>Peso</label>
+                <input type="number" class="form-control" step="0.1" id="weight">
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Sexo*</label>
+                <select class="form-select" id="sex">
+                    <option>Macho</option>
+                    <option>Hembra</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                <input type="date" class="form-control" id="birth_date">
+            </div>
+
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChanges" class="btn">Guardar</button>
+                <button type="button" class="btn" onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 
 </html>

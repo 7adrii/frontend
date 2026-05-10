@@ -9,6 +9,12 @@ body {
     margin-top: 3%;
 }
 
+.title-section {
+    display: flex;
+    margin-bottom: 2%;
+    justify-content: space-between;
+}
+
 .pet-info {
     margin: 1%;
     background-color: #F8F9FA;
@@ -18,7 +24,7 @@ body {
     width: 100%;
 }
 
-.pet-intro {
+.intro {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,13 +66,13 @@ body {
     padding: 2%;
 }
 
-.owner-direction{
+.owner-direction {
     border-top: 1px solid rgba(187, 187, 187, 0.5);
     display: flex;
     flex-direction: column;
 }
 
-.information-section{
+.information-section {
     display: flex;
     justify-content: space-between;
     padding: 2%;
@@ -99,15 +105,8 @@ body {
     margin-top: 20px;
 }
 
+.scroll-container,
 .scroll-container-allergy {
-    max-height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-}
-
-.scroll-container{
     max-height: 210px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -166,6 +165,26 @@ body {
     border-radius: 2px solid rgba(187, 187, 187, 0.5);
 }
 
+.pet-modal {
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.pet-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (min-width: 1020px) {
     .container {
         display: grid;
@@ -183,7 +202,7 @@ body {
         max-width: 98%;
     }
 
-    .title-section{
+    .title-section {
         grid-area: title;
         margin-bottom: 2%;
     }
@@ -215,5 +234,9 @@ body {
         margin: 0;
         height: 526px;
         max-height: 526px;
+    }
+
+    .scroll-container-allergy {
+        max-height: 500px;
     }
 }

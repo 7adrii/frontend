@@ -21,7 +21,13 @@ window.addEventListener("DOMContentLoaded", () => {
       const ownerData = await owner.json();
 
       const allergies = await fetch(urlAllergies);
-      const allergiesData = await allergies.json();
+      let allergiesData;
+
+      if (allergies.status === 404) {
+        allergiesData = { data: [] };
+      } else {
+        allergiesData = await allergies.json();
+      }
 
       const appointments = await fetch(urlAppointments);
       const appointmentsData = await appointments.json();
@@ -61,7 +67,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ownerElement.innerHTML = `
       <div class="owner-name">
-        <h6>Información del dueñ@</h6>
+        <div class="intro">
+          <h6>Información del dueñ@</h6>
+          <a href="#" class="btn"><i class="fa-solid fa-pencil"></i></a>
+        </div>
         <div class="information-section">
           <h6>Nombre</h6>
           <h6>${name_owner}</h6>
@@ -109,18 +118,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Datos de la mascota
     const petElement = document.getElementById("pet");
-    const { id_pet, name_pet, type, breed, weight, sex, birth_date } = petData;
+    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = petData;
 
     if (!breed || breed === undefined) {
       type = "-";
     }
 
     petElement.innerHTML = `
-      <div class="pet-intro">
+      <div class="intro">
         <h6>Información de la mascota</h6>
         <div class="pet-btns">
-          <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
-          <a href="#" class="btn btn-secondary"><i class="fa-solid fa-trash"></i></a>
+          <button type="button" id="btnOpenPopUp" class="btn"><i class="fa-solid fa-pencil"></i></button>
         </div>
       </div>
       <div class="information-section">
@@ -155,13 +163,92 @@ window.addEventListener("DOMContentLoaded", () => {
 
     `;
 
+    //Pop up de editar datos de la mascota y guardar los cambios
+    const btnPopUp = document.getElementById('btnOpenPopUp');
+    const popUp = document.getElementById('editPetPopUp');
+
+    btnPopUp.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      console.log("Abriendo modal")
+
+      document.getElementById('name_pet').value = name_pet;
+      document.getElementById('type').value = type;
+      document.getElementById('breed').value = breed;
+      document.getElementById('weight').value = weight;
+      document.getElementById('sex').value = sex;
+      document.getElementById('birth_date').value = birth_date.split('T')[0];
+
+      popUp.showModal();
+    });
+
+    const saveBtn = document.getElementById('saveChanges');
+    saveBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const petOwnerDni = petData.owner_dni;
+
+      const petPutAPI = {
+        name_pet: document.getElementById('name_pet').value.trim(),
+        type: document.getElementById('type').value.trim(),
+        breed: document.getElementById('breed').value.trim(),
+        weight: parseFloat(document.getElementById('weight').value),
+        sex: document.getElementById('sex').value,
+        birth_date: document.getElementById('birth_date').value,
+        owner_dni: petOwnerDni
+
+      }
+
+      const { name_pet, type, breed, weight, sex, birth_date, owner_dni } = petPutAPI;
+
+      if (!name_pet || !type || isNaN(weight) || !sex || !birth_date) {
+        Swal.fire({
+          title: 'El campo año está vacio',
+          confirmButtonText: 'Volver a la edición'
+        });
+        return
+      }
+      console.log(id_pet);
+      console.log("Cuerpo del envío:", JSON.stringify(petPutAPI));
+      await sendPetData(petPutAPI, id_pet);
+    });
+
+    const sendPetData = async (petPutAPI, id) => {
+      try {
+        const PutResponse = await fetch(`http://localhost:8080/pets/${id}`, {
+          method: "PUT",
+          body: JSON.stringify(petPutAPI),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        });
+
+        if (PutResponse.ok) {
+
+          const popUp = document.getElementById('editPetPopUp');
+          popUp.close();
+          window.location.reload();
+        }
+        else {
+          const errorData = await PutResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Error: ${PutResponse.status}`);
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+
     //Datos próxima cita, si hay una.
     const appointment = document.getElementById("appointment");
     const actualDate = new Date();
     const lastAppointment = appointmentsData.at(-1);
     console.log(lastAppointment);
 
-    if (!appointmentsData || lastAppointment.date_appointment <= actualDate) {
+    if (
+      appointmentsData.length === 0 ||
+      lastAppointment.date_appointment <= actualDate
+    ) {
       appointment.innerHTML = `
         <h4>Próxima cita</h4>
         <p>No hay citas concertadas</p>
@@ -186,13 +273,20 @@ window.addEventListener("DOMContentLoaded", () => {
     const allergyList = document.getElementById("allergy");
     allergyList.innerHTML = ``;
 
-    allergiesData.forEach((allergy) => {
-      const allergyInfo = document.createElement("li");
-      allergyInfo.classList.add("list-group-item");
-
-      const { id_allergy, allergen, emergency_treatment } = allergy;
-
+    if (numAllergies === 0) {
+      const allergyInfo = document.createElement("h6");
       allergyInfo.innerHTML = `
+        No hay alergias registradas para ${petData.name_pet}.
+      `;
+      allergyList.appendChild(allergyInfo);
+    } else {
+      allergiesData.forEach((allergy) => {
+        const allergyInfo = document.createElement("li");
+        allergyInfo.classList.add("list-group-item");
+
+        const { id_allergy, allergen, emergency_treatment } = allergy;
+
+        allergyInfo.innerHTML = `
         <table class="table table-striped">
           <thead>
             <tr>
@@ -220,8 +314,9 @@ window.addEventListener("DOMContentLoaded", () => {
         </table>
       `;
 
-      allergyList.appendChild(allergyInfo);
-    });
+        allergyList.appendChild(allergyInfo);
+      });
+    }
 
     //Datos del historial de citas
     const appointmentsList = document.getElementById("clinic-history");
@@ -238,27 +333,35 @@ window.addEventListener("DOMContentLoaded", () => {
       </thead>
     `;
 
-    appointmentsData.forEach((appointment) => {
-      const appointmentInfo = document.createElement("tbody");
-
-      const {
-        date_appointment,
-        start_time,
-        end_time,
-        observations,
-        consult_id,
-        veterinarian_dni,
-      } = appointment;
-
-      const date = "2024-01-01";
-
-      const start = new Date(`${date}T${start_time}`);
-      const end = new Date(`${date}T${end_time}`);
-
-      const diferenceMs = end - start;
-      const duration = diferenceMs / (1000 * 60);
-
+    if (appointmentsData.length === 0) {
+      const appointmentInfo = document.createElement("h6");
       appointmentInfo.innerHTML = `
+      No hay registro previo de citas para ${petData.name_pet}.
+      `;
+      appointmentsList.appendChild(appointmentInfo);
+
+    } else {
+      appointmentsData.forEach((appointment) => {
+        const appointmentInfo = document.createElement("tbody");
+
+        const {
+          date_appointment,
+          start_time,
+          end_time,
+          observations,
+          consult_id,
+          veterinarian_dni,
+        } = appointment;
+
+        const date = "2024-01-01";
+
+        const start = new Date(`${date}T${start_time}`);
+        const end = new Date(`${date}T${end_time}`);
+
+        const diferenceMs = end - start;
+        const duration = diferenceMs / (1000 * 60);
+
+        appointmentInfo.innerHTML = `
         <tr>
           <td scope="col">${date_appointment}</td>
           <td scope="col" class="d-none d-md-table-cell">${start_time}</td>
@@ -281,8 +384,9 @@ window.addEventListener("DOMContentLoaded", () => {
         </tr>
       `;
 
-      appointmentsList.appendChild(appointmentInfo);
-    });
+        appointmentsList.appendChild(appointmentInfo);
+      });
+    }
   };
 
   getPetData();

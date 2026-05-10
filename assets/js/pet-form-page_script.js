@@ -182,6 +182,22 @@ window.addEventListener("DOMContentLoaded", () => {
     const listOwners = document.getElementById("list-owners");
     listOwners.innerHTML = ``;
 
+    const newOwner = document.createElement("li");
+    newOwner.innerHTML = `
+      <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.remove('d-none')">
+        <strong>+ Dar de alta nuevo dueño</strong>
+      </a>
+    `;
+    listOwners.appendChild(newOwner);
+
+    const ownersDivider = document.createElement("li");
+    ownersDivider.innerHTML = `<hr class="dropdown-divider">`;
+    listOwners.appendChild(ownersDivider);
+
+    newOwner.addEventListener("click", (e) => {
+      isNewOwner = true;
+    });
+
     //Ordenamos la lista por apellidos en orden descendente
     ownersList.sort((a, b) => a.surname.localeCompare(b.surname));
 
@@ -210,21 +226,7 @@ window.addEventListener("DOMContentLoaded", () => {
       listOwners.appendChild(ownerElement);
     });
 
-    const ownersDivider = document.createElement("li");
-    ownersDivider.innerHTML = `<hr class="dropdown-divider">`;
-    listOwners.appendChild(ownersDivider);
-
-    const newOwner = document.createElement("li");
-    newOwner.innerHTML = `
-      <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.remove('d-none')">
-        <strong>+ Dar de alta nuevo dueño</strong>
-      </a>
-    `;
-    listOwners.appendChild(newOwner);
-
-    newOwner.addEventListener("click", (e) => {
-      isNewOwner = true;
-    });
+    
 
     const registerBtn = document.getElementById("btnRegister");
 

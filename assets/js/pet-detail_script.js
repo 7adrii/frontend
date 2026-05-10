@@ -61,13 +61,49 @@ window.addEventListener("DOMContentLoaded", () => {
 
     ownerElement.innerHTML = `
       <div class="owner-name">
-        <i class="fa-solid fa-user fa-2x"></i>
-        <h4>Datos de contacto ${name_owner} ${surname}</h4>
+        <h6>Información del dueñ@</h6>
+        <div class="information-section">
+          <h6>Nombre</h6>
+          <h6>${name_owner}</h6>
+        </div>
+        <div class="information-section">
+          <h6>Apellidos</h6>
+          <h6>${surname}</h6>
+        </div>
       </div>
       <div class="owner-contact">
-        <p><i class="fa-solid fa-address-card"></i> ${dni_owner}</p>
-        <p><i class="fa-solid fa-envelope"></i> ${email}</p>
-        <p><i class="fa-solid fa-mobile"></i> ${phone}</p>
+        <h6>Datos de contacto</h6>
+        <div class="information-section">
+          <i class="fa-solid fa-address-card"></i>
+          <h6>${dni_owner}</h6>
+        </div>
+        <div class="information-section">
+          <i class="fa-solid fa-envelope"></i>
+          <h6>${email}</h6>
+        </div>
+        <div class="information-section">
+          <i class="fa-solid fa-mobile"></i>
+          <h6>${phone}</h6>
+        </div>
+      </div>
+      <div class="owner-direction">
+        <h6>Dirección de residencia</h6>
+        <div class="information-section">
+          <h6>Calle y numero</h6>
+          <h6>Calle y numero</h6>
+        </div>
+        <div class="information-section">
+          <h6>Piso</h6>
+          <h6>Piso</h6>
+        </div>
+        <div class="information-section">
+          <h6>Ciudad</h6>
+          <h6>Ciudad</h6>
+        </div>
+        <div class="information-section">
+          <h6>Código Postal</h6>
+          <h6>Código Postal</h6>
+        </div>
       </div>
     `;
 
@@ -81,27 +117,62 @@ window.addEventListener("DOMContentLoaded", () => {
 
     petElement.innerHTML = `
       <div class="pet-intro">
-        <div class="pet-name">
-          <i class="fa-solid fa-paw fa-2x"></i>
-          <h2>${name_pet}</h2>
-        </div>
-
+        <h6>Información de la mascota</h6>
         <div class="pet-btns">
           <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
           <a href="#" class="btn btn-secondary"><i class="fa-solid fa-trash"></i></a>
         </div>
       </div>
-
-      <div>
-        <div>
-          <h4>${type}</h4>
-          <h6>${breed}</h6>
-        </div>
-          <p>${weight} kg</p>
-          <p>${sex}</p>
-          <p>${birth_date}</p>
+      <div class="information-section">
+          <h6>Nombre</h6>
+          <h6>${name_pet}</h6>
       </div>
+
+      <div class="information-section">
+          <h6>Especie</h6>
+          <h6>${type}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Raza</h6>
+          <h6>${breed}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Peso</h6>
+          <h6>${weight}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Sexo</h6>
+          <h6>${sex}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Fecha de nacimiento</h6>
+          <h6>${birth_date}</h6>
+      </div>
+
     `;
+
+    //Datos próxima cita, si hay una.
+    const appointment = document.getElementById("appointment");
+    const actualDate = new Date();
+    const lastAppointment = appointmentsData.at(-1);
+    console.log(lastAppointment);
+
+    if (!appointmentsData || lastAppointment.date_appointment <= actualDate) {
+      appointment.innerHTML = `
+        <h4>Próxima cita</h4>
+        <p>No hay citas concertadas</p>
+      `;
+    } else {
+      appointment.innerHTML = `
+        <h4>Próxima cita</h4>
+        <h6>${lastAppointment.date_appointment}</h6>
+        <h6>${lastAppointment.start_time}</h6>
+      `;
+    }
 
     //Numero de alergias
     const allergiesQuantity = document.getElementById("pet-allergy");

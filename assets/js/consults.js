@@ -37,25 +37,87 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderiza la tabla de consultas
     function renderTable(appointments) {
         const rows = appointments.map((app, index) => `
+        <!-- Cada fila de la tabla de consultas -->
             <tr class="align-middle" style="animation-delay: ${index * 0.1}s">
+                <!-- Columna de ID -->
                 <td class="fw-bold text-turquoise">#${app.id_appointment}</td>
+                <!-- Columna de fecha -->
                 <td><i class="bi bi-calendar-event me-2 text-muted"></i>${new Date(app.date_appointment).toLocaleDateString()}</td>
+                <!-- Columna de hora -->
                 <td><span class="badge bg-light text-dark border p-2 px-3"><i class="bi bi-clock me-1 text-turquoise"></i>${app.start_time.substring(0, 5)}</span></td>
+                <!-- Columna de mascota -->
                 <td><strong>Mascota: ${app.pet_id}</strong></td>
+                <!-- Columna de sala -->
                 <td><span class="fw-bold"><i class="bi bi-geo-alt me-1 text-turquoise"></i>${app.consult_room || 'Sala'}</span></td>
+                <!-- Columna de observaciones -->
                 <td class="text-muted small italic">${app.observations || '-'}</td>
+                <!-- Columna de acciones -->
+                <td>
+                    <div class="d-flex gap-2">
+                        <!-- Boton para editar -->
+                        <button class="btn btn-sm btn-outline-primary edit-btn" data-id="${app.id_appointment}" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <!-- Boton para eliminar -->
+                        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${app.id_appointment}" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
         `).join('');
         
         listContainer.innerHTML = `
             <table class="table">
+                <!-- Encabezado de la tabla -->
                 <thead>
                     <tr>
-                        <th>ID</th><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Ubicación</th><th>Notas</th>
+                        <th>ID</th><th>Fecha</th><th>Hora</th><th>Paciente</th><th>Ubicación</th><th>Notas</th><th>Acciones</th>
                     </tr>
                 </thead>
+                <!-- Cuerpo de la tabla -->
                 <tbody>${rows}</tbody>
             </table>`;
+
+        // Asignar eventos a los botones después de renderizar
+
+        // Botones de eliminar
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', () => deleteAppointment(btn.dataset.id));
+        });
+
+        // Botones de editar
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                window.location.href = `citaForm.html?edit=${btn.dataset.id}`;
+            });
+        });
+    }
+
+    // Función para eliminar una cita
+    async function deleteAppointment(id) {
+        if (!confirm('¿Estás seguro de que deseas eliminar esta cita?')) return;
+
+        // Elimina la cita
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'DELETE'
+            });
+
+            // Si la respuesta es OK, se elimina la cita
+            if (response.ok) {
+                alert('Cita eliminada con éxito.');
+                fetchConsultas(); // Recargar la tabla
+            } else {
+                // Si la respuesta no es OK, se muestra un error
+                const errorData = await response.json();
+                alert('Error al eliminar: ' + (errorData.message || 'No se pudo eliminar'));
+            }
+        } catch (error) {
+            // Si hay un error de conexión, se muestra un mensaje de error
+            console.error('Error al eliminar:', error);
+            alert('Error de conexión al intentar eliminar.');
+        }
     }
     
     // Actualiza el estado de las salas

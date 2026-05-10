@@ -79,6 +79,6 @@ form.addEventListener('submit', async (e) => {
         }
     } catch (error) {
         console.error('Error de red o ejecución:', error);
-        alert('❌ Error de conexión: ¿Está el servidor encendido en el puerto 8080?');
+        alert('Error de conexión: ¿Está el servidor encendido en el puerto 8080?');
     }
 });

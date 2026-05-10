@@ -188,8 +188,35 @@
             </div>
 
             <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChanges" class="btn">Guardar</button>
+                <button type="submit" id="saveChangesPet" class="btn">Guardar</button>
                 <button type="button" class="btn" onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información del dueño de la mascota -->
+    <dialog id="editOwnerPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Dueño</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_owner" required>
+            </div>
+            <div class="mb-3">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" id="surname" required>
+            </div>
+            <div class="mb-3">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="text" class="form-control" id="email" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesOwner" class="btn">Guardar</button>
+                <button type="button" class="btn" onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
             </div>
         </form>
     </dialog>

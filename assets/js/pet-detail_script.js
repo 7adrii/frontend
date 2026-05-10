@@ -69,7 +69,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="owner-name">
         <div class="intro">
           <h6>Información del dueñ@</h6>
-          <a href="#" class="btn"><i class="fa-solid fa-pencil"></i></a>
+          <button type="button" id="btnOpenPopUpOwner" class="btn"><i class="fa-solid fa-pencil"></i></button>
         </div>
         <div class="information-section">
           <h6>Nombre</h6>
@@ -116,6 +116,74 @@ window.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    //Pop Up para editar los datos del dueño
+    const btnPopUpOwner = document.getElementById('btnOpenPopUpOwner');
+    const popUpOwner = document.getElementById('editOwnerPopUp');
+
+    btnPopUpOwner.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      console.log("Abriendo modal")
+
+      document.getElementById('name_owner').value = name_owner;
+      document.getElementById('surname').value = surname;
+      document.getElementById('phone').value = phone;
+      document.getElementById('email').value = email;
+
+      popUpOwner.showModal();
+    });
+
+    const saveBtnOwner = document.getElementById('saveChangesOwner');
+    saveBtnOwner.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const ownerPutAPI = {
+        name_owner: document.getElementById('name_owner').value.trim(),
+        surname: document.getElementById('surname').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim()
+      }
+
+      const { name_owner, surname, phone, email } = ownerPutAPI;
+
+      if (!name_owner || !surname || !phone || !email) {
+        Swal.fire({
+          title: 'Faltan datos por rellenar',
+          confirmButtonText: 'Volver a la edición'
+        });
+        return
+      }
+      console.log("Cuerpo del envío:", JSON.stringify(ownerPutAPI));
+      await sendOwnerData(ownerPutAPI, dni_owner);
+    });
+
+    const sendOwnerData = async (ownerPutAPI, dni_owner) => {
+      try {
+        const PutResponse = await fetch(`http://localhost:8080/owners/${dni_owner}`, {
+          method: "PUT",
+          body: JSON.stringify(ownerPutAPI),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        });
+
+        if (PutResponse.ok) {
+
+          const popUp = document.getElementById('editOwnerPopUp');
+          popUp.close();
+          window.location.reload();
+        }
+        else {
+          const errorData = await PutResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Error: ${PutResponse.status}`);
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+
+
     //Datos de la mascota
     const petElement = document.getElementById("pet");
     const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = petData;
@@ -128,7 +196,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="intro">
         <h6>Información de la mascota</h6>
         <div class="pet-btns">
-          <button type="button" id="btnOpenPopUp" class="btn"><i class="fa-solid fa-pencil"></i></button>
+          <button type="button" id="btnOpenPopUpPet" class="btn"><i class="fa-solid fa-pencil"></i></button>
         </div>
       </div>
       <div class="information-section">
@@ -164,10 +232,10 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
 
     //Pop up de editar datos de la mascota y guardar los cambios
-    const btnPopUp = document.getElementById('btnOpenPopUp');
-    const popUp = document.getElementById('editPetPopUp');
+    const btnPopUpPet = document.getElementById('btnOpenPopUpPet');
+    const popUpPet = document.getElementById('editPetPopUp');
 
-    btnPopUp.addEventListener('click', (e) => {
+    btnPopUpPet.addEventListener('click', (e) => {
       e.preventDefault();
 
       console.log("Abriendo modal")
@@ -179,11 +247,11 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById('sex').value = sex;
       document.getElementById('birth_date').value = birth_date.split('T')[0];
 
-      popUp.showModal();
+      popUpPet.showModal();
     });
 
-    const saveBtn = document.getElementById('saveChanges');
-    saveBtn.addEventListener('click', async (e) => {
+    const saveBtnPet = document.getElementById('saveChangesPet');
+    saveBtnPet.addEventListener('click', async (e) => {
       e.preventDefault();
 
       const petOwnerDni = petData.owner_dni;

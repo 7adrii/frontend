@@ -7,6 +7,21 @@ h5, .h5 {
 
 p {
   font-family: "Roboto", sans-serif;
+  color: #F8F9FA;
+  font-size: 16px;
+}
+
+a {
+  font-family: "Roboto", sans-serif;
+  color: #F8F9FA;
+  font-size: 12px;
+}
+
+@media (min-width: 1200px) {
+  a {
+    font-family: "Roboto", sans-serif;
+    color: #F8F9FA;
+    font-size: 16px;
   color: #1E272E;
   font-size: 1rem;
 }
@@ -12002,6 +12017,10 @@ textarea.form-control-lg {
   background-color: #1E272E !important;
 }
 
+.bg-dark {
+  background-color: #1E272E !important;
+}
+
 .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
   gap: 20px;
 }
@@ -12056,8 +12075,85 @@ textarea.form-control-lg {
   font-size: 1.5rem;
 }
 
+.background-intro {
+  background-image: url(../img/background_image_intro.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 3%;
+  height: 500px;
+  max-height: 500px;
+  text-align: center;
+}
+
 @media (min-width: 1020px) {
   .nav-link {
     color: #F8F9FA !important;
   }
+  .text-size {
+    max-width: 550px;
+  }
+  .background-intro {
+    justify-content: space-around;
+    text-align: left;
+  }
+}
+body.bg-background {
+  background-color: #efe5e5;
+}
+
+.btn-display {
+  display: flex;
+  gap: 10px;
+}
+
+.home-main {
+  margin-top: 50px;
+}
+
+h1.text-center.title, .text-center.title.h1 {
+  color: #59B2B0;
+  font-size: 4rem;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 500px) {
+  h1.text-center.title, .text-center.title.h1 {
+    font-size: 3rem;
+  }
+}
+h3.text-center, .text-center.h3 {
+  color: #D4AF37;
+  font-size: 2rem;
+}
+
+@media (max-width: 500px) {
+  h3.text-center, .text-center.h3 {
+    font-size: 2rem;
+  }
+}
+a.btn.btn-primary.btn-lg.custom-btn, .btn-group-lg > a.btn.btn-primary.custom-btn {
+  color: #F8F9FA;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+  transition: background-color 0.3s;
+  padding: 15px 35px;
+}
+
+a.btn.btn-primary.btn-lg.custom-btn:hover, .btn-group-lg > a.btn.btn-primary.custom-btn:hover {
+  background-color: #59B2B0;
+  border-color: #59B2B0;
+}
+
+.card-body h5.card-title, .card-body .card-title.h5 {
+  font-size: 1.5rem;
+}
+
+.card-body p.card-text {
+  color: #1E272E;
+  font-size: 1.2rem;
 }/*# sourceMappingURL=index_style.css.map */

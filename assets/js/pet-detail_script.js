@@ -55,15 +55,21 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const createPet = async (
-    petData,
-    ownerData,
-    allergiesData,
-    appointmentsData,
-  ) => {
+  const createPet = async (petData, ownerData, allergiesData, appointmentsData) => {
     //Datos del dueño
     const ownerElement = document.getElementById("owner");
-    const { dni_owner, name_owner, surname, phone, email } = ownerData;
+    const {
+      dni_owner,
+      name_owner,
+      surname,
+      phone,
+      email,
+      direction,
+      floor,
+      city,
+      province,
+      postal_code,
+    } = ownerData;
 
     ownerElement.innerHTML = `
       <div class="owner-name">
@@ -99,19 +105,19 @@ window.addEventListener("DOMContentLoaded", () => {
         <h6>Dirección de residencia</h6>
         <div class="information-section">
           <h6>Calle y numero</h6>
-          <h6>Calle y numero</h6>
+          <h6>${direction}</h6>
         </div>
         <div class="information-section">
           <h6>Piso</h6>
-          <h6>Piso</h6>
+          <h6>${floor}</h6>
         </div>
         <div class="information-section">
           <h6>Ciudad</h6>
-          <h6>Ciudad</h6>
+          <h6>${city}</h6>
         </div>
         <div class="information-section">
           <h6>Código Postal</h6>
-          <h6>Código Postal</h6>
+          <h6>${postal_code}</h6>
         </div>
       </div>
     `;
@@ -129,6 +135,11 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("surname").value = surname;
       document.getElementById("phone").value = phone;
       document.getElementById("email").value = email;
+      document.getElementById("direction").value = direction;
+      document.getElementById("floor").value = floor;
+      document.getElementById("city").value = city;
+      document.getElementById("province").value = province;
+      document.getElementById("postal_code").value = postal_code;
 
       popUpOwner.showModal();
     });
@@ -142,11 +153,36 @@ window.addEventListener("DOMContentLoaded", () => {
         surname: document.getElementById("surname").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
+        direction: document.getElementById("direction").value.trim(),
+        floor: document.getElementById("floor").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        province: document.getElementById("province").value.trim(),
+        postal_code: document.getElementById("postal_code").value.trim(),
       };
 
-      const { name_owner, surname, phone, email } = ownerPutAPI;
+      const {
+        name_owner,
+        surname,
+        phone,
+        email,
+        direction,
+        floor,
+        city,
+        province,
+        postal_code,
+      } = ownerPutAPI;
 
-      if (!name_owner || !surname || !phone || !email) {
+      if (
+        !name_owner ||
+        !surname ||
+        !phone ||
+        !email ||
+        !direction ||
+        !floor ||
+        !city ||
+        !province ||
+        !postal_code
+      ) {
         Swal.fire({
           title: "Faltan datos por rellenar",
           confirmButtonText: "Volver a la edición",
@@ -289,6 +325,7 @@ window.addEventListener("DOMContentLoaded", () => {
       await sendPetData(petPutAPI, id_pet);
     });
 
+
     const sendPetData = async (petPutAPI, id) => {
       try {
         const PutResponse = await fetch(`http://localhost:8080/pets/${id}`, {
@@ -310,7 +347,7 @@ window.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         console.log(error);
       }
-    };
+    }
 
     //Datos próxima cita, si hay una.
     const appointment = document.getElementById("appointment");
@@ -357,19 +394,29 @@ window.addEventListener("DOMContentLoaded", () => {
         const allergyInfo = document.createElement("li");
         allergyInfo.classList.add("list-group-item");
 
-        const { id_allergy, allergen, emergency_treatment } = allergy;
+        const {
+          id_allergy,
+          allergen,
+          diagnostic_method,
+          symptoms,
+          severity_level,
+          emergency_treatment,
+          detection_date,
+        } = allergy;
 
         allergyInfo.innerHTML = `
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">Alergeno</th>
-              <th scope="col">Tratamiento emergencia</th>
+              <th scope="col">Nivel de severidad</th>
+              <th scope="col">Fecha de deteccion</th>
             </tr>
           </thead>
           <tbody id="consult-list">
-            <th scope="col">${allergen}</th>
-            <th scope="col">${emergency_treatment}</th>
+            <th scope="col" style="max-width: 80px">${allergen}</th>
+            <th scope="col" style="max-width: 80px">${severity_level}</th>
+            <th scope="col" style="max-width: 80px">${detection_date}</th>
             <th scope="col">
               <div class="dropdown">
                 <button class="btn-options" type="button" id="dropdownMenuButton1"
@@ -378,8 +425,8 @@ window.addEventListener("DOMContentLoaded", () => {
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a class="dropdown-item" href="#">Más información</a></li>
-                  <li><a class="dropdown-item" href="#">Editar</a></li>
-                  <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                  <li><a class="dropdown-item btn-edit-allergy" href="#" data-id="${id_allergy}">Editar</a></li>
+                  <li><a class="dropdown-item btn-delete-allergy" href="#" data-id="${id_allergy}">Eliminar</a></li>
                 </ul>
               </div>
             </th>
@@ -390,6 +437,175 @@ window.addEventListener("DOMContentLoaded", () => {
         allergyList.appendChild(allergyInfo);
       });
     }
+
+    //Pop up de editar datos de una alergia y guardar los cambios
+    let selectedAllergyId = null;
+    const btnPopUpAllergy = document.getElementById("btnOpenAllergyUpPet");
+    const popUpAllergy = document.getElementById("editAllergyPopUp");
+    let editBtn;
+
+    allergyList.addEventListener("click", (e) => {
+      //Se busca que se hizo click
+      editBtn = e.target.closest(".btn-edit-allergy");
+
+      if (editBtn) {
+        e.preventDefault();
+
+        //almacenamos el id de la alergia
+        selectedAllergyId = editBtn.getAttribute("data-id");
+
+        //buscamos la alergia de la base de datos que tiene ese id para mostrar los datos
+        const allergy = allergiesData.find(all => all.id_allergy == selectedAllergyId);
+
+        if (allergy) {
+          document.getElementById("allergen").value = allergy.allergen;
+          document.getElementById("diagnostic_method").value = allergy.diagnostic_method;
+          document.getElementById("symptoms").value = allergy.symptoms;
+          document.getElementById("severity_level").value = allergy.severity_level;
+          document.getElementById("emergency_treatment").value = allergy.emergency_treatment;
+          document.getElementById("detection_date").value = allergy.detection_date.split("T")[0];
+
+          popUpAllergy.showModal();
+        }
+      }
+    });
+
+    const saveBtnAllergy = document.getElementById("saveChangesAllergy");
+    saveBtnAllergy.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const allergyPutAPI = {
+        allergen: document.getElementById("allergen").value.trim(),
+        diagnostic_method: document
+          .getElementById("diagnostic_method")
+          .value.trim(),
+        symptoms: document.getElementById("symptoms").value.trim(),
+        severity_level: document.getElementById("severity_level").value,
+        emergency_treatment: document
+          .getElementById("emergency_treatment")
+          .value.trim(),
+        detection_date: document.getElementById("detection_date").value,
+      };
+
+      const {
+        allergen,
+        diagnostic_method,
+        symptoms,
+        severity_level,
+        emergency_treatment,
+        detection_date,
+      } = allergyPutAPI;
+
+      if (
+        !allergen ||
+        !diagnostic_method ||
+        !symptoms ||
+        !severity_level ||
+        !emergency_treatment ||
+        !detection_date
+      ) {
+        Swal.fire({
+          title: "Faltan campos por rellenar",
+          confirmButtonText: "Volver a la edición",
+        });
+        return;
+      }
+      console.log(id_pet);
+      console.log("Cuerpo del envío:", JSON.stringify(allergyPutAPI));
+      selectedAllergyId = editBtn.getAttribute("data-id");
+      await sendAllergyData(allergyPutAPI, selectedAllergyId);
+    });
+
+    const sendAllergyData = async (allergyPutAPI, selectedAllergyId) => {
+      try {
+        const PutResponse = await fetch(
+          `http://localhost:8080/allergies/${selectedAllergyId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(allergyPutAPI),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          },
+        );
+
+        if (PutResponse.ok) {
+          const popUp = document.getElementById("editAllergyPopUp");
+          popUp.close();
+          window.location.reload();
+        } else {
+          const errorData = await PutResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Error: ${PutResponse.status}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    //Boton eliminar una alergia de la mascota
+    let deleteBtn;
+
+    allergyList.addEventListener("click", async (e) => {
+
+      deleteBtn = e.target.closest(".btn-delete-allergy");
+      if (deleteBtn) {
+        e.preventDefault();
+
+        const idAllergyDelete = deleteBtn.getAttribute("data-id");
+
+        const confirmAction = await Swal.fire({
+          title: `¡Estás a punto de eliminar la alergia!`,
+          html: `¿<strong>Segur@ que deseas eliminar</strong> la alergia de la mascota <strong>${name_pet}</strong>?`,
+          icon: "warning",
+          iconColor: "#8a3938",
+          showCancelButton: true,
+          confirmButtonText: "Sí, eliminar",
+          cancelButtonText: "Cancelar",
+        });
+
+        if (confirmAction.isConfirmed) {
+          await deleteAllergy(idAllergyDelete);
+        } else {
+          return;
+        }
+      }
+    });
+
+    const deleteAllergy = async (idAllergyDelete) => {
+      try {
+        const deleteResponse = await fetch(`http://localhost:8080/allergies/${idAllergyDelete}`, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        });
+
+        if (deleteResponse.ok) {
+          Swal.fire({
+            title: "Alergia eliminado!",
+            text: "La alergia se ha eliminado correctamente",
+            icon: "success",
+            iconColor: "#318a3a",
+            confirmButtonText: "Volver al dashboard",
+            confirmButtonColor: "#2a1418",
+          }).then(() => {
+            window.location.reload();
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: `Error: ${deleteResponse.status}`,
+            icon: "error",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error de conexión",
+          text: error.message,
+          icon: "error",
+        });
+      }
+    };
 
     //Datos del historial de citas
     const appointmentsList = document.getElementById("clinic-history");
@@ -447,7 +663,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     //Boton eliminar mascota de la base de datos
-
     const btnDelete = document.getElementById("btn-delete");
     btnDelete.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -474,39 +689,36 @@ window.addEventListener("DOMContentLoaded", () => {
         const deleteResponse = await fetch(urlPet, {
           method: "DELETE",
           headers: {
-            "Content-type": "application/json; charset=UFT-8"
-          }
+            "Content-type": "application/json; charset=UTF-8",
+          },
         });
 
         if (deleteResponse.ok) {
           Swal.fire({
-            title: '¡Registro eliminado!',
-            text: 'El registro se ha eliminado correctamente',
-            icon: 'success',
-            iconColor: '#318a3a',
-            confirmButtonText: 'Volver al dashboard',
-            confirmButtonColor: '#2a1418'
+            title: "¡Registro eliminado!",
+            text: "El registro se ha eliminado correctamente",
+            icon: "success",
+            iconColor: "#318a3a",
+            confirmButtonText: "Volver al dashboard",
+            confirmButtonColor: "#2a1418",
           }).then(() => {
-            window.location.href = 'pet-list-page.html';
+            window.location.href = "pet-list-page.html";
           });
-        }
-        else {
+        } else {
           Swal.fire({
-            title: 'Error',
+            title: "Error",
             text: `Error: ${deleteResponse.status}`,
-            icon: 'error'
+            icon: "error",
           });
         }
-      }
-      catch (error) {
+      } catch (error) {
         Swal.fire({
-          title: 'Error de conexión',
+          title: "Error de conexión",
           text: error.message,
-          icon: 'error'
+          icon: "error",
         });
       }
-
-    }
+    };
   };
 
   getPetData();

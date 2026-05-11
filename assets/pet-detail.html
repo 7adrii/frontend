@@ -190,7 +190,8 @@
 
             <div class="pet-btns" style="margin-top: 20px;">
                 <button type="submit" id="saveChangesPet" class="btn">Guardar</button>
-                <button type="button" class="btn" onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
             </div>
         </form>
     </dialog>
@@ -215,9 +216,70 @@
                 <label>Email</label>
                 <input type="text" class="form-control" id="email" required>
             </div>
+            <div class="mb-3">
+                <label>Direccion</label>
+                <input type="text" class="form-control" id="direction" required>
+            </div>
+            <div class="mb-3">
+                <label>Piso</label>
+                <input type="text" class="form-control" id="floor" required>
+            </div>
+            <div class="mb-3">
+                <label>Ciudad</label>
+                <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="mb-3">
+                <label>Provincia</label>
+                <input type="text" class="form-control" id="province" required>
+            </div>
+            <div class="mb-3">
+                <label>Codigo postal</label>
+                <input type="text" class="form-control" id="postal_code" required>
+            </div>
             <div class="pet-btns" style="margin-top: 20px;">
                 <button type="submit" id="saveChangesOwner" class="btn">Guardar</button>
-                <button type="button" class="btn" onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información de una alergia de la mascota -->
+    <dialog id="editAllergyPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Alergia</h3>
+            <div class="mb-3">
+                <label>Allergeno</label>
+                <input type="text" class="form-control" id="allergen" required>
+            </div>
+            <div class="mb-3">
+                <label>Metodo de diagnostico</label>
+                <input type="text" class="form-control" id="diagnostic_method" required>
+            </div>
+            <div class="mb-3">
+                <label>Sintomas</label>
+                <input type="text" class="form-control" id="symptoms" required>
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                <select id="severity_level" class="form-select">
+                    <option>Leve</option>
+                    <option>Moderada</option>
+                    <option>Grave/Crítica</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Tratamiento de emergencia</label>
+                <input type="text" class="form-control" id="emergency_treatment" required>
+            </div>
+            <div class="mb-3">
+                <label>Fecha de deteccion</label>
+                <input type="date" class="form-control" id="detection_date" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesAllergy" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editAllergyPopUp').close()">Cancelar</button>
             </div>
         </form>
     </dialog>

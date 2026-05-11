@@ -424,7 +424,7 @@ window.addEventListener("DOMContentLoaded", () => {
                   class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Más información</a></li>
+                  <li><a class="dropdown-item btn-show-allergy" href="#" data-id="${id_allergy}">Más información</a></li>
                   <li><a class="dropdown-item btn-edit-allergy" href="#" data-id="${id_allergy}">Editar</a></li>
                   <li><a class="dropdown-item btn-delete-allergy" href="#" data-id="${id_allergy}">Eliminar</a></li>
                 </ul>
@@ -437,10 +437,35 @@ window.addEventListener("DOMContentLoaded", () => {
         allergyList.appendChild(allergyInfo);
       });
     }
-
-    //Pop up de editar datos de una alergia y guardar los cambios
+    //Variable para saber en que alergia estamos para sacar la informacion en los modales
     let selectedAllergyId = null;
-    const btnPopUpAllergy = document.getElementById("btnOpenAllergyUpPet");
+
+    //Pop up para mostrar la información de la alergia en mayor detalle
+    let showAllergyId = null;
+    let showBtn;
+    const popUpShowAllergy = document.getElementById('showAllergyPopUp');
+    allergyList.addEventListener("click", (e) => {
+      showBtn = e.target.closest('.btn-show-allergy');
+
+      if (showBtn) {
+        e.preventDefault();
+
+        selectedAllergyId = showBtn.getAttribute("data-id");
+        const allergy = allergiesData.find(all => all.id_allergy == selectedAllergyId);
+
+        document.getElementById("show_allergen").textContent = allergy.allergen;
+        document.getElementById("show_diagnostic_method").textContent = allergy.diagnostic_method;
+        document.getElementById("show_symptoms").textContent = allergy.symptoms;
+        document.getElementById("show_severity_level").textContent = allergy.severity_level;
+        document.getElementById("show_emergency_treatment").textContent = allergy.emergency_treatment;
+        document.getElementById("show_detection_date").textContent = allergy.detection_date;
+
+        popUpShowAllergy.showModal();
+      }
+    });
+
+
+    //Pop up de editar datos de una alergia y guardar los cambio
     const popUpAllergy = document.getElementById("editAllergyPopUp");
     let editBtn;
 

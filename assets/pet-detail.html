@@ -283,6 +283,41 @@
             </div>
         </form>
     </dialog>
+
+    <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
+    <dialog id="showAllergyPopUp" class="pet-modal">
+        <div id="showInfoAllergy">
+            <h3>Información de la alergia</h3>
+            <div class="mb-3">
+                <h3>Allergeno</h3>
+                <p id="show_allergen"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Metodo de diagnostico</h3>
+                <p id="show_diagnostic_method"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Sintomas</h3>
+                <p id="show_symptoms"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Nivel de severidad</h3>
+                <p id="show_severity_level"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Tratamiento de emergencia</h3>
+                <p id="show_emergency_treatment"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Fecha de deteccion</h3>
+                <p id="show_detection_date"></p>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="button" class="btn"
+                    onclick="document.getElementById('showAllergyPopUp').close()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 
 </html>

@@ -22,10 +22,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/index_style.css">
+    <link rel="stylesheet" href="./css/pet-detail_style.css">
 
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="./js/pet-detail_script.js"></script>
 </head>
 
 <body>
@@ -109,7 +111,46 @@
         </div>
     </header>
 
-</body>
+    <section class="container">
+        <div class="owner-info" id="owner">
 
+        </div>
+
+        <div class="pet-info" id="pet">
+            
+        </div>
+
+        <div class="pet-nextAppointment">
+            <h4>Próxima cita</h4>
+            <h2>xx-xx-xxxx</h2>
+            <h3>00:00</h3>
+            <p>Tipo de cita</p>
+        </div>
+
+        <div class="pet-allergy">
+            <div class="allergy-actions" id="pet-allergy">
+
+            </div>
+
+            <ul class="list-group">
+                <div class="scroll-container-allergy" id="allergy">
+                    
+                </div>
+            </ul>
+        </div>
+
+        <div class="pet-clinic-history">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="scroll-container">
+                        <table class="table table-striped" id="clinic-history">
+                        
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
 
 </html>

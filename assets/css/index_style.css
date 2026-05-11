@@ -2,9 +2,22 @@
 p {
   font-family: "Roboto", sans-serif;
   color: #F8F9FA;
-  font-size: 1.5rem;
+  font-size: 16px;
 }
 
+a {
+  font-family: "Roboto", sans-serif;
+  color: #F8F9FA;
+  font-size: 12px;
+}
+
+@media (min-width: 1200px) {
+  a {
+    font-family: "Roboto", sans-serif;
+    color: #F8F9FA;
+    font-size: 16px;
+  }
+}
 /*!
  * Bootstrap  v5.3.8 (https://getbootstrap.com/)
  * Copyright 2011-2025 The Bootstrap Authors
@@ -12047,13 +12060,38 @@ textarea.form-control-lg {
   font-size: 1.5rem;
 }
 
+.background-intro {
+  background-image: url(../img/background_image_intro.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 3%;
+  height: 500px;
+  max-height: 500px;
+  text-align: center;
+}
+
 @media (min-width: 1020px) {
   .nav-link {
     color: #F8F9FA !important;
   }
+  .text-size {
+    max-width: 550px;
+  }
+  .background-intro {
+    justify-content: space-around;
+    text-align: left;
+  }
 }
 body.bg-background {
   background-color: #efe5e5;
+}
+
+.btn-display {
+  display: flex;
+  gap: 10px;
 }
 
 .home-main {

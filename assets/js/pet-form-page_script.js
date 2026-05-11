@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
   //Definición rutas de la API
   const urlNewPet = `http://localhost:8080/pets`;
   const urlNewOwner = `http://localhost:8080/owners`;
+  const urlGetOwners = `http://localhost:8080/owners`;
   const urlNewAllergy = `http://localhost:8080/allergies`;
 
   //Creación de contenido de nueva alergia en el formulario de dada de alta de una mascota nueva
@@ -28,28 +29,21 @@ window.addEventListener("DOMContentLoaded", () => {
   //Creación de los datos para la inserción en la base de datos
   const getNewData = async () => {
     try {
-      const [pet, owner, allergy] = await Promise.all([
-        fetch(urlNewPet),
-        fetch(urlNewOwner),
-        fetch(urlNewAllergy),
-      ]);
+      const ownersList = await fetch(urlGetOwners);
+      const ownerListData = await ownersList.json();
+      console.log(ownerListData);
 
-      const petData = await pet.json();
-      const ownerData = await owner.json();
-      const allergyData = await allergy.json();
-
-      console.log(petData);
-      console.log(ownerData);
-      console.log(allergyData);
-
-      createNewData(petData.data, ownerData.data, allergyData.data);
+      createNewData(ownerListData.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   //Creación de los datos nuevos
-  const createNewData = () => {
+  const createNewData = (ownersList) => {
+    //De momento no sabemos si vamos a crear un dueño nuevo asi que dejarmos la variable en falso.
+    let isNewOwner = false;
+
     const form = document.getElementById("form-new-pet");
     form.innerHTML = `
             <div class="form-title">
@@ -57,7 +51,22 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="form-section form-owner">
                 <h5>Datos del dueño</h5>
-                <div class="line-form">
+                <div class="mb-4">
+                  <label class="form-label text-muted">Seleccionar dueño registrado:</label>
+                  <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
+                      type="button" id="owner-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span id="selected-owner-text"><i class="fa-solid fa-users me-2"></i> DNI - Nombre</span>
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1" id="list-owners">
+
+                    </ul>
+                  </div>
+                </div>
+                
+                <div id="new-owner-form" class="d-none">
+                  <h5>Datos del dueño</h5>
+                  <div class="line-form">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre*</label>
                         <input type="text" class="form-control" id="name_owner" placeholder="Ej: Juan">
@@ -66,18 +75,19 @@ window.addEventListener("DOMContentLoaded", () => {
                         <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
                         <input type="text" class="form-control" id="surname" placeholder="Ej: Pérez García">
                     </div>
-                </div>
-                <div class="mb-3">
+                  </div>
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
                     <input type="text" class="form-control" id="owner_dni" placeholder="Ej: 94299329V">
-                </div>
-                <div class="mb-3">
+                  </div>
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Teléfono*</label>
                     <input type="text" class="form-control" id="phone" placeholder="Ej: 612 345 678">
-                </div>
-                <div class="mb-3">
+                  </div>
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email*</label>
                     <input type="email" class="form-control" id="email" placeholder="Ej: juan.perez@gmail.com">
+                  </div>
                 </div>
             </div>
 
@@ -167,6 +177,56 @@ window.addEventListener("DOMContentLoaded", () => {
                 </a>
             </div>
     `;
+
+    //Sección para listar los dueños de la base de datos
+    const listOwners = document.getElementById("list-owners");
+    listOwners.innerHTML = ``;
+
+    const newOwner = document.createElement("li");
+    newOwner.innerHTML = `
+      <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.remove('d-none')">
+        <strong>+ Dar de alta nuevo dueño</strong>
+      </a>
+    `;
+    listOwners.appendChild(newOwner);
+
+    const ownersDivider = document.createElement("li");
+    ownersDivider.innerHTML = `<hr class="dropdown-divider">`;
+    listOwners.appendChild(ownersDivider);
+
+    newOwner.addEventListener("click", (e) => {
+      isNewOwner = true;
+    });
+
+    //Ordenamos la lista por apellidos en orden descendente
+    ownersList.sort((a, b) => a.surname.localeCompare(b.surname));
+
+    const selectElement = document.getElementById("selected-owner-text");
+
+    //Creamos los elementos para la lista
+    ownersList.forEach((owner) => {
+      const { dni_owner, name_owner, surname, phone, email } = owner;
+      const ownerElement = document.createElement("li");
+
+      ownerElement.innerHTML = `
+        <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.add('d-none')">${surname} ${name_owner} - ${dni_owner}</a>
+      `;
+
+      ownerElement.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        selectElement.innerHTML = `${surname} ${name_owner} - ${dni_owner}`;
+        document.getElementById("owner_dni").value = dni_owner;
+        document.getElementById("name_owner").value = name_owner;
+        document.getElementById("surname").value = surname;
+        document.getElementById("phone").value = phone;
+        document.getElementById("email").value = email;
+      });
+
+      listOwners.appendChild(ownerElement);
+    });
+
+    
 
     const registerBtn = document.getElementById("btnRegister");
 
@@ -322,16 +382,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (error) return;
 
-      const dataOwner = await sendNewOwner(ownerSendAPI);
-      const dataPet = await sendNewPet(petSendAPI);
+      try {
+        if (isNewOwner) {
+          const dataOwner = await sendNewOwner(ownerSendAPI);
+        }
 
-      if (allergies.length > 0) {
-        const dataAllergy = await sendAllergies(allergies);
+        const dataPet = await sendNewPet(petSendAPI);
+
+        if (allergies.length > 0) {
+          const dataAllergy = await sendAllergies(allergies);
+        }
+
+        Swal.fire("Registro completado", "success").then(() => {
+          window.location.href = `pet-list-page.html`;
+        });
+      } catch (err) {
+        Swal.fire("Problema a la hora de registrar");
+        console.error(err);
       }
-
-      Swal.fire("Registro completado", "success").then(() => {
-        window.location.href = `pet-list-page.html`;
-      });
     });
   };
 

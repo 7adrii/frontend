@@ -27,7 +27,8 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
-    <script src="./js/pet-detail_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/pet-detail_script.js" defer></script>
 </head>
 
 <body>
@@ -112,19 +113,21 @@
     </header>
 
     <section class="container">
+        <div class="title-section">
+            <h2>Perfil de la mascota</h2>
+            <a href="#" class="btn" id="btn-delete"><i class="fa-solid fa-trash"></i></a>
+        </div>
+
+        <div class="pet-info" id="pet">
+
+        </div>
+
         <div class="owner-info" id="owner">
 
         </div>
 
-        <div class="pet-info" id="pet">
-            
-        </div>
+        <div class="pet-nextAppointment" id="appointment">
 
-        <div class="pet-nextAppointment">
-            <h4>Próxima cita</h4>
-            <h2>xx-xx-xxxx</h2>
-            <h3>00:00</h3>
-            <p>Tipo de cita</p>
         </div>
 
         <div class="pet-allergy">
@@ -134,23 +137,187 @@
 
             <ul class="list-group">
                 <div class="scroll-container-allergy" id="allergy">
-                    
+
                 </div>
             </ul>
         </div>
 
         <div class="pet-clinic-history">
             <ul class="list-group">
+                <h6>Listado consultas</h6>
                 <li class="list-group-item">
                     <div class="scroll-container">
                         <table class="table table-striped" id="clinic-history">
-                        
+
                         </table>
                     </div>
                 </li>
             </ul>
         </div>
     </section>
+
+    <!-- Pop up para editar la información de la mascota -->
+    <dialog id="editPetPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Mascota</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_pet" required>
+            </div>
+            <div class="mb-3">
+                <label>Especie</label>
+                <input type="text" class="form-control" id="type" required>
+            </div>
+            <div class="mb-3">
+                <label>Raza</label>
+                <input type="text" class="form-control" id="breed" required>
+            </div>
+            <div class="mb-3">
+                <label>Peso</label>
+                <input type="number" class="form-control" step="0.1" id="weight">
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Sexo*</label>
+                <select class="form-select" id="sex">
+                    <option>Macho</option>
+                    <option>Hembra</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                <input type="date" class="form-control" id="birth_date">
+            </div>
+
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesPet" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información del dueño de la mascota -->
+    <dialog id="editOwnerPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Dueño</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_owner" required>
+            </div>
+            <div class="mb-3">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" id="surname" required>
+            </div>
+            <div class="mb-3">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="text" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label>Direccion</label>
+                <input type="text" class="form-control" id="direction" required>
+            </div>
+            <div class="mb-3">
+                <label>Piso</label>
+                <input type="text" class="form-control" id="floor" required>
+            </div>
+            <div class="mb-3">
+                <label>Ciudad</label>
+                <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="mb-3">
+                <label>Provincia</label>
+                <input type="text" class="form-control" id="province" required>
+            </div>
+            <div class="mb-3">
+                <label>Codigo postal</label>
+                <input type="text" class="form-control" id="postal_code" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesOwner" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información de una alergia de la mascota -->
+    <dialog id="editAllergyPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Alergia</h3>
+            <div class="mb-3">
+                <label>Allergeno</label>
+                <input type="text" class="form-control" id="allergen" required>
+            </div>
+            <div class="mb-3">
+                <label>Metodo de diagnostico</label>
+                <input type="text" class="form-control" id="diagnostic_method" required>
+            </div>
+            <div class="mb-3">
+                <label>Sintomas</label>
+                <input type="text" class="form-control" id="symptoms" required>
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                <select id="severity_level" class="form-select">
+                    <option>Leve</option>
+                    <option>Moderada</option>
+                    <option>Grave/Crítica</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Tratamiento de emergencia</label>
+                <input type="text" class="form-control" id="emergency_treatment" required>
+            </div>
+            <div class="mb-3">
+                <label>Fecha de deteccion</label>
+                <input type="date" class="form-control" id="detection_date" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesAllergy" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editAllergyPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
+    <dialog id="showAllergyPopUp" class="pet-modal">
+        <div id="showInfoAllergy">
+            <h3>Información de la alergia</h3>
+            <div class="mb-3">
+                <h3>Allergeno</h3>
+                <p id="show_allergen"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Metodo de diagnostico</h3>
+                <p id="show_diagnostic_method"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Sintomas</h3>
+                <p id="show_symptoms"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Nivel de severidad</h3>
+                <p id="show_severity_level"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Tratamiento de emergencia</h3>
+                <p id="show_emergency_treatment"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Fecha de deteccion</h3>
+                <p id="show_detection_date"></p>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="button" class="btn"
+                    onclick="document.getElementById('showAllergyPopUp').close()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 
 </html>

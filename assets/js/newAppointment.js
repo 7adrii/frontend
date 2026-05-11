@@ -1,77 +1,161 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const form = document.getElementById('formNuevaCita');
     const params = new URLSearchParams(window.location.search);
     const editId = params.get('edit');
 
-    // Si estamos en modo edición, cargamos los datos
-    if (editId) {
-        document.querySelector('h2').innerText = "Editar Cita";
-        document.querySelector('button[type="submit"]').innerHTML = 'Actualizar Cita <i class="bi bi-check-circle ms-2"></i>';
-    
-        fetch(`http://localhost:8080/appointments/${editId}`)
-            .then(res => res.json())
-            .then(result => {
-                if (result.data) {
-                    const app = result.data;
-                    console.log("Datos cargados para editar:", app);
-                    // Rellenar campos del formulario
-                    if (app.date_appointment) {
-                        // Convertimos la fecha a formato YYYY-MM-DD
-                        const date = new Date(app.date_appointment);
-                        form.date_appointment.value = date.toISOString().split('T')[0];
-                    }
-                    form.start_time.value = app.start_time || '';
-                    form.pet_id.value = app.pet_id || '';
-                    form.veterinarian_dni.value = app.veterinarian_dni || '';
-                    form.cleaner_dni.value = app.cleaner_dni || ''; 
-                    form.consult_id.value = app.consult_id || '';
-                    form.consult_room.value = app.consult_room || '';
-                    form.observations.value = app.observations || '';
-                }
-            })
-            .catch(err => console.error("Error al cargar cita para editar:", err));
+    //Función para cargar datos en los desplegables de la API
+    async function cargarDesplegable(url, selectId, labelFn, valueFn, placeholder) {
+        const select = document.getElementById(selectId);
+        try {
+            const res = await fetch(url);
+            const result = await res.json();
+            const items = result.data || [];
+
+            select.innerHTML = `<option value="">${placeholder}</option>`;
+            items.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = valueFn(item);
+                opt.textContent = labelFn(item);
+                select.appendChild(opt);
+            });
+        } catch (err) {
+            console.error(`Error cargando desplegable (${selectId}):`, err);
+            select.innerHTML = `<option value="">Error al cargar datos</option>`;
+        }
     }
 
-    // Evento de envio del formulario
+    // Cargamos los 4 desplegables en paralelo
+    await Promise.all([
+        // Mascotas
+        cargarDesplegable(
+            'http://localhost:8080/pets',
+            'select-mascota',
+            p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Dueño: ${p.owner_name} ${p.owner_surname})`,
+            p => p.id,
+            '— Selecciona una mascota —'
+        ),
+        // Veterinarios
+        cargarDesplegable(
+            'http://localhost:8080/veterinarians',
+            'select-veterinario',
+            v => `${v.surname}, ${v.name}  [${v.dni_veterinarian}]`,
+            v => v.dni_veterinarian,
+            '— Selecciona un veterinario —'
+        ),
+        // Personal de limpieza
+        cargarDesplegable(
+            'http://localhost:8080/cleaners',
+            'select-limpieza',
+            c => `${c.surname}, ${c.name}  [${c.dni_cleaner}]`,
+            c => c.dni_cleaner,
+            '— Selecciona personal de limpieza —'
+        ),
+        // Tipos de consulta
+        cargarDesplegable(
+            'http://localhost:8080/consults',
+            'select-consulta',
+            c => `${c.name} — ${c.consult_type} (${c.duration} min, ${c.base_price}€)`,
+            c => c.id_consult,
+            '— Selecciona tipo de consulta —'
+        )
+    ]);
+
+    // Carga de datos si es un id de edicion
+    if (editId) {
+        document.querySelector('h2').innerText = 'Editar Cita';
+        document.querySelector('button[type="submit"]').innerHTML = 'Actualizar Cita <i class="bi bi-check-circle ms-2"></i>';
+
+        try {
+            const res = await fetch(`http://localhost:8080/appointments/${editId}`);
+            const result = await res.json();
+
+            // Si hay datos de la cita, rellenamos el formulario
+            if (result.data) {
+                const app = result.data;
+                console.log('Datos cargados para editar:', app);
+
+                // Fecha
+                if (app.date_appointment) {
+                    const date = new Date(app.date_appointment);
+                    form.date_appointment.value = date.toISOString().split('T')[0];
+                }
+
+                // Hora
+                form.start_time.value = app.start_time || '';
+
+                // Desplegables: asignar el value que corresponde al dato guardado
+                document.getElementById('select-mascota').value    = app.pet_id || '';
+                document.getElementById('select-veterinario').value = app.veterinarian_dni || '';
+                document.getElementById('select-consulta').value   = app.consult_id || '';
+
+                // cleaner_dni viene del servicio de limpieza asociado a esta cita
+                // Lo buscamos consultando el clean_service
+                try {
+                    const csRes = await fetch(`http://localhost:8080/clean_services`);
+                    const csResult = await csRes.json();
+                    const csData = csResult.data || [];
+                    const cs = csData.find(s => s.appointment_id == editId);
+                    if (cs) {
+                        document.getElementById('select-limpieza').value = cs.cleaner_dni || '';
+                    }
+                } catch (e) {
+                    console.warn('No se pudo cargar el personal de limpieza de la cita:', e);
+                }
+
+                form.consult_room.value  = app.consult_room || '';
+                form.observations.value  = app.observations || '';
+            }
+        } catch (err) {
+            console.error('Error al cargar cita para editar:', err);
+        }
+    }
+
+    // Envío del formulario
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const dataCita = Object.fromEntries(formData.entries());
 
-        // Valida el dia para evitar el sabado y domingo
+        // Convertir a número los campos que el backend espera como int
+        dataCita.pet_id     = parseInt(dataCita.pet_id, 10);
+        dataCita.consult_id = parseInt(dataCita.consult_id, 10);
+
+        // Validar que no sea fin de semana
         const [year, month, day] = dataCita.date_appointment.split('-').map(Number);
         const fecha = new Date(year, month - 1, day);
 
-        // Si el dia es sabado o domingo, muestra un mensaje de error
+        // Control de fin de semana
         if (fecha.getDay() === 0 || fecha.getDay() === 6) {
-            alert('Vettion no abre los sabados ni domingos. Por favor, selecciona otro día.');
+            alert('Vettion no abre los sábados ni domingos. Por favor, selecciona otro día.');
             return;
         }
 
-        // Determinamos método y URL según si es edición o creación
+        // Ajusta el método y la URL
         const method = editId ? 'PUT' : 'POST';
-        const url = editId ? `http://localhost:8080/appointments/${editId}` : 'http://localhost:8080/appointments';
+        const url    = editId
+            ? `http://localhost:8080/appointments/${editId}`
+            : 'http://localhost:8080/appointments';
 
-        // Envio del formulario al backend 
+        // Envío de la solicitud
         try {
             const response = await fetch(url, {
-                method: method,
+                method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dataCita)
             });
 
-            // Si la respuesta es OK, se actualiza la cita
+            // Respuesta del servidor
             if (response.ok) {
                 alert(editId ? 'Cita actualizada con éxito.' : 'Cita agendada con éxito.');
                 window.location.href = 'consults.html';
             } else {
-                // Si la respuesta no es OK, se muestra un error
+                // Manejo de errores del servidor
                 const errorData = await response.json();
                 console.error('Error del servidor:', errorData);
-            
-                // Si hay errores de validación, se muestra un mensaje de error
+
                 if (errorData.errors) {
+                    // Muestra los errores de validación
                     const msg = errorData.errors.map(err => `${err.path}: ${err.msg}`).join('\n');
                     alert('Errores de validación:\n' + msg);
                 } else {

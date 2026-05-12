@@ -282,6 +282,9 @@ window.addEventListener("DOMContentLoaded", () => {
     btnPopUpPet.addEventListener("click", (e) => {
       e.preventDefault();
 
+      //Cambiamos la fecha a formato año-mes-año para que se muestre en el modal
+      const dayMonthYear = birth_date.split('/');
+      const newBirthDate = `${dayMonthYear[2]}-${dayMonthYear[1]}-${dayMonthYear[0]}`
       console.log("Abriendo modal");
 
       document.getElementById("name_pet").value = name_pet;
@@ -289,7 +292,7 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("breed").value = breed;
       document.getElementById("weight").value = weight;
       document.getElementById("sex").value = sex;
-      document.getElementById("birth_date").value = birth_date.split("T")[0];
+      document.getElementById("birth_date").value = newBirthDate;
 
       popUpPet.showModal();
     });

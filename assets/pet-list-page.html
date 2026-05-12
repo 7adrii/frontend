@@ -27,6 +27,7 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/pet-list-page_style.js"></script>
 </head>
 
@@ -118,6 +119,19 @@
             </div>
         </div>
 
+        <div class="cards">
+            <div class="card" id="card-all-register">
+
+            </div>
+            <div class="card" id="card-new-register">
+
+            </div>
+            <div class="card" id="card-delete">
+
+            </div>
+        </div>
+
+
         <div class="container-filter">
             <ul class="filter-options" id="type-animal">
 
@@ -144,107 +158,39 @@
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="d-none d-md-table-cell">Fecha alta</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Nombre</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Especie</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
-                                    <th scope="col">Dni</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Estado</th>
-                                    <th scope="col">Contacto</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="pets-list">
+                        <div class="scroll-container">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="d-none d-md-table-cell">Fecha alta</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Nombre</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Especie</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Dueño</th>
+                                        <th scope="col">Dni</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Estado</th>
+                                        <th scope="col">Contacto</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pets-list">
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </li>
                 </ul>
-            </div>
-            <div>
-                <nav aria-label="Page navigation example">
-                    <div class="table-pages">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Pg. 1
-                                    <i class="fa-solid fa-angle-down"></i>
-                                </a></li>
-                            <li class="page-item"><a class="page-link" href="#">de 10</a></li>
-                        </ul>
-                    </div>
-                </nav>
             </div>
         </div>
 
         <div class="container-last-aditions">
             <h4>Últimos registros</h4>
-            <div class="cards" id="last-aditions">
+            <div class="last-aditions" id="last-aditions">
 
-            </div>
-
-        </div>
-
-        <div class="container-sidebar">
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>100</h5>
-                                <p>Registros</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 10</h5>
-                                <p>Nuevos</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 5</h5>
-                                <p>Bajas</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
     </section>
 
-        <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
         <div class="container-footer">
             <div class="row gy-4">
 
@@ -252,7 +198,8 @@
                 <div class="col-12 col-md-4 text-center text-md-start">
                     <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
                     <p class="small">
-                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con atención personalizada.
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
+                        atención personalizada.
                     </p>
                 </div>
 

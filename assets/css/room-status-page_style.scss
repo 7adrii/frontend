@@ -1,0 +1,133 @@
+@import "variables";
+@import "typography_style";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Estilos del header
+.navbar {
+    background-color: $grey !important;
+}
+
+// Estilos para la página de estado de salas
+
+.rooms-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.hero-card {
+    background: linear-gradient(120deg, rgba($turquoise, 0.18), rgba($gold, 0.18));
+    border: 1px solid rgba($grey, 0.12);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+
+    h1 {
+        margin-bottom: 0.2rem;
+    }
+}
+
+.subtitle {
+    margin-bottom: 0;
+    color: $grey;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.refresh-info {
+    margin: 0;
+    color: #4b5761;
+    font-size: 0.9rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.stat-card {
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba($grey, 0.1);
+    background: $white;
+
+    p {
+        margin: 0;
+        color: $grey;
+        font-size: 0.9rem;
+    }
+
+    h3 {
+        margin-top: 0.2rem;
+        margin-bottom: 0;
+    }
+
+    &.free {
+        background: rgba($turquoise, 0.15);
+    }
+
+    &.busy {
+        background: rgba($gold, 0.2);
+    }
+}
+
+.table-wrapper {
+    border: 1px solid rgba($grey, 0.1);
+    border-radius: 14px;
+    padding: 0.5rem;
+    background: $white;
+
+    .table {
+        thead th {
+            color: $grey;
+            font-size: 0.86rem;
+        }
+
+        tbody td {
+            font-size: 0.92rem;
+        }
+    }
+}
+
+.badge {
+    font-weight: 500;
+}
+
+.note {
+    color: #5e6a73;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.error-message {
+    color: #b3261e;
+    margin: 0;
+}
+
+@media (min-width: 900px) {
+    .hero-card {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .table-wrapper {
+        padding: 1rem;
+    }
+}

@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     urlPets = `http://localhost:8080/pets`;
     urlServices = `http://localhost:8080/services`;
     urlVeterinarians = `http://localhost:8080/veterinarians`;
-    urlOwners =`http://localhost:8080/owners`;
+    urlOwners = `http://localhost:8080/owners`;
 
     const getData = async () => {
         try {
@@ -115,9 +115,19 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
         }
 
-        //Creacion de la tabla de historial de consultas
+        //Obtenemos la fecha de hoy y la formateamos a formato dd-mm-yyyy para comparar con la fecha de la cita en las proximas tablas
+        const dateToday = new Date();
+        const day = String(dateToday.getDate()).padStart(2, '0');
+        const month = String(dateToday.getMonth() + 1).padStart(2, '0');
+        const year = dateToday.getFullYear();
+        const formattedToday = `${day}/${month}/${year}`
+
+        const clinicDay = document.getElementById("today");
+        clinicDay.innerHTML=`Citas del día: ${formattedToday}`;
+
+        //Creacion de la tabla de historial de consultas que ya han pasado
         const table = document.getElementById("table-consults");
-        table.innerHTML=`
+        table.innerHTML = `
             <thead>
                 <tr>
                     <th scope="col">Fecha</th>
@@ -133,27 +143,28 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
 
         appointments.forEach((appointment) => {
-            const {date_appointment, start_time, end_time} = appointment;
-            const service = services.find(s => s.id_service === appointment.service_id);
-            const serviceName = service.name;
+            const { date_appointment, start_time, end_time } = appointment;
+            if (formattedToday > date_appointment) {
+                const service = services.find(s => s.id_service === appointment.service_id);
+                const serviceName = service.name;
 
-            const pet = pets.find(p => p.id === appointment.pet_id);
-            const petName = pet.name_pet;
+                const pet = pets.find(p => p.id === appointment.pet_id);
+                const petName = pet.name_pet;
 
-            const veterinarian = veterinarians.find(v=> v.dni_veterinarian === appointment.veterinarian_dni);
-            const veterinarianName = veterinarian.name;
-            const veterinarianSurname = veterinarian.surname;
-            const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
+                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
+                const veterinarianName = veterinarian.name;
+                const veterinarianSurname = veterinarian.surname;
+                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
 
-            const owner = owners.find(o => o.dni_owner === pet.owner_dni);
-            const ownerName = owner.name_owner;
-            const ownerSurname = owner.surname;
+                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
 
-            const fullNameOwner = ownerName + " " + ownerSurname;
+                const fullNameOwner = ownerName + " " + ownerSurname;
 
 
-            const tbody = document.createElement("tbody");
-            tbody.innerHTML=`
+                const tbody = document.createElement("tbody");
+                tbody.innerHTML = `
                 <tr>
                     <th scope="row">${date_appointment}</th>
                     <td scope="row">${petName}</td>
@@ -165,7 +176,64 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row"><a href="#"><i class="fa-solid fa-plus"></i></a></td>
                 </tr>
             `;
-            table.appendChild(tbody);
+                table.appendChild(tbody);
+            }
+        });
+
+        //Tabla con las citas para el dia actual.
+        const tableToday = document.getElementById("table-today-consults");
+        tableToday.innerHTML = `
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
+                    <th scope="col">Servicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Hora inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Hora fin</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        `;
+
+        appointments.forEach((appointment) => {
+
+            if (formattedToday === appointment.date_appointment) {
+                const { date_appointment, start_time, end_time } = appointment;
+                const service = services.find(s => s.id_service === appointment.service_id);
+                const serviceName = service.name;
+
+                const pet = pets.find(p => p.id === appointment.pet_id);
+                const petName = pet.name_pet;
+
+                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
+                const veterinarianName = veterinarian.name;
+                const veterinarianSurname = veterinarian.surname;
+                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
+
+                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
+
+                const fullNameOwner = ownerName + " " + ownerSurname;
+
+
+                const tbody = document.createElement("tbody");
+                tbody.innerHTML = `
+                <tr>
+                    <th scope="row">${date_appointment}</th>
+                    <td scope="row">${petName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
+                    <td scope="row">${serviceName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
+                    <td scope="row"><a href="#"><i class="fa-solid fa-plus"></i></a></td>
+                </tr>
+            `;
+                tableToday.appendChild(tbody);
+            }
         });
     }
 

@@ -80,6 +80,13 @@
     text-align: center;
 }
 
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 @media (min-width: 1020px) {
     .nav-link {
         color: $white !important;

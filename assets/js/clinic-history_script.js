@@ -2,6 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
     urlAppointments = `http://localhost:8080/appointments`;
     urlPets = `http://localhost:8080/pets`;
     urlServices = `http://localhost:8080/services`;
+    urlVeterinarians = `http://localhost:8080/veterinarians`;
+    urlOwners =`http://localhost:8080/owners`;
 
     const getData = async () => {
         try {
@@ -14,14 +16,20 @@ window.addEventListener("DOMContentLoaded", () => {
             const services = await fetch(urlServices);
             const servicesData = await services.json();
 
-            createData(appointmentsData.data, petsData.data, servicesData.data);
+            const veterinarians = await fetch(urlVeterinarians);
+            const veterinariansData = await veterinarians.json();
+
+            const owners = await fetch(urlOwners);
+            const ownersData = await owners.json();
+
+            createData(appointmentsData.data, petsData.data, servicesData.data, veterinariansData.data, ownersData.data);
         }
         catch (Error) {
             console.error(Error);
         }
     }
 
-    const createData = async (appointments, pets, services) => {
+    const createData = async (appointments, pets, services, veterinarians, owners) => {
 
         //Tarjeta de total citas
         const cardAppointment = document.getElementById("card-appointments");
@@ -114,27 +122,47 @@ window.addEventListener("DOMContentLoaded", () => {
                 <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Paciente</th>
+                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
                     <th scope="col">Servicio</th>
-                    <th></th>
+                    <th scope="col" class="d-none d-md-table-cell">Hora inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Hora fin</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
         `;
 
         appointments.forEach((appointment) => {
-            const {date_appointment} = appointment;
+            const {date_appointment, start_time, end_time} = appointment;
             const service = services.find(s => s.id_service === appointment.service_id);
             const serviceName = service.name;
 
             const pet = pets.find(p => p.id === appointment.pet_id);
             const petName = pet.name_pet;
 
+            const veterinarian = veterinarians.find(v=> v.dni_veterinarian === appointment.veterinarian_dni);
+            const veterinarianName = veterinarian.name;
+            const veterinarianSurname = veterinarian.surname;
+            const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
+
+            const owner = owners.find(o => o.dni_owner === pet.owner_dni);
+            const ownerName = owner.name_owner;
+            const ownerSurname = owner.surname;
+
+            const fullNameOwner = ownerName + " " + ownerSurname;
+
+
             const tbody = document.createElement("tbody");
             tbody.innerHTML=`
                 <tr>
                     <th scope="row">${date_appointment}</th>
-                    <td>${petName}</td>
-                    <td>${serviceName}</td>
-                    <td><a href="#"><i class="fa-solid fa-plus"></i></a></td>
+                    <td scope="row">${petName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
+                    <td scope="row">${serviceName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
+                    <td scope="row"><a href="#"><i class="fa-solid fa-plus"></i></a></td>
                 </tr>
             `;
             table.appendChild(tbody);

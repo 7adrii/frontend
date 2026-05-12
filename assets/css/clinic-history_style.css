@@ -19,3 +19,11 @@
     padding: 1%;
     margin-bottom: 3%;
 }
+
+@media (min-width: 1020px){
+    .cards{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

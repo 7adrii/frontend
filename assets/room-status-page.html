@@ -160,64 +160,31 @@
 
     <!-- Contenido principal de la página -->
     <main class="container rooms-page py-4">
-      <section class="hero-card">
+      <section class="hero-card mb-5">
         <div>
           <h1>Estado de salas</h1>
         </div>
       </section>
 
-      <!-- Estadísticas rápidas -->
-      <section class="stats-grid" id="rooms-stats">
+      <!-- Mensaje de error en caso de fallo al cargar los datos -->
+      <div id="rooms-error" class="alert alert-danger" role="alert" hidden></div>
 
-        <!-- Salas totales -->
-        <article class="stat-card">
-          <p>Total salas</p>
-          <h3 id="total-rooms">0</h3>
-        </article>
+      <!-- Contador de salas -->
+      <div class="mb-4">
+        <p class="text-muted">Total de salas: <strong id="total-rooms">0</strong></p>
+      </div>
 
-        <!-- Salas libres -->
-        <article class="stat-card free">
-          <p>Libres ahora</p>
-          <h3 id="free-rooms">0</h3>
-        </article>
-
-        <!-- Salas ocupadas -->
-        <article class="stat-card busy">
-          <p>Ocupadas ahora</p>
-          <h3 id="busy-rooms">0</h3>
-        </article>
-      </section>
-
-      <!-- Tabla de estado de salas -->
-      <section class="table-wrapper">
-        <!-- Tabla de estado de salas -->
-        <div class="table-responsive">
-        <!-- Encabezado de la tabla -->
-          <table class="table align-middle">
-            <thead>
-              <tr>
-                <th>Sala</th>
-                <th>Tipo</th>
-                <th>Ubicación</th>
-                <th>Estado actual</th>
-                <th>Paciente</th>
-                <th>Servicio</th>
-                <th>Horario</th>
-              </tr>
-            </thead>
-            <!-- Cuerpo de la tabla -->
-            <tbody id="rooms-table-body">
-              <tr>
-                <!-- Fila de carga mientras se obtienen los datos -->
-                <td colspan="7" class="text-center py-4">
-                  Cargando datos de salas...
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <!-- Grid de salas -->
+      <section class="rooms-grid">
+        <div id="rooms-container" class="row g-4">
+          <!-- Las tarjetas de salas se generarán aquí -->
+          <div class="col-12 text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-3 text-muted">Cargando salas...</p>
+          </div>
         </div>
-        <!-- Mensaje de error en caso de fallo al cargar los datos -->
-        <p class="error-message" id="rooms-error" hidden></p>
       </section>
     </main>
 

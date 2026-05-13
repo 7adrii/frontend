@@ -143,6 +143,14 @@ p {
     margin-bottom: 0.3rem;
 }
 
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+
 @media (min-width: 1020px) {
     .container {
         max-width: 90%;

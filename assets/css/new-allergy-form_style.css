@@ -14,6 +14,10 @@ form {
     margin: 3%;
 }
 
+.form-allergy{
+        padding: 2%;
+    }
+
 .form-section {
     margin-bottom: 5%;
 }
@@ -40,18 +44,11 @@ form {
 @media (min-width: 1020px) {
     .container{
         justify-content: center;
-        max-width: 80%;
+        max-width: 40%;
     }
-    .form-container{
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: auto auto;
-        grid-template-areas: 
-        "form-title form-title"
-        "form-pet form-owner"
-        "form-allergy form-allergy"
-        "btns btns";
-        gap:10px;
+
+    form{
+        display: flex;
         justify-content: center;
     }
 
@@ -67,12 +64,8 @@ form {
         max-width: 570px;
     }
 
-    .form-pet{
-        grid-area: form-pet;
-    }
-
     .form-allergy{
-        grid-area: form-allergy;
+        width: 320px;
     }
 
     .btns{
@@ -80,5 +73,11 @@ form {
     }
     .form-section {
         margin-bottom: 3%;
+    }
+
+    .double-element{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
     }
 }

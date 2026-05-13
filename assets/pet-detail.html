@@ -114,8 +114,11 @@
 
     <section class="container">
         <div class="title-section">
-            <h2>Perfil de la mascota</h2>
-            <a href="#" class="btn" id="btn-delete"><i class="fa-solid fa-trash"></i></a>
+            <h2>Ficha del paciente</h2>
+        </div>
+
+        <div class="pet-header" id="pet-header">
+
         </div>
 
         <div class="pet-info" id="pet">
@@ -123,10 +126,6 @@
         </div>
 
         <div class="owner-info" id="owner">
-
-        </div>
-
-        <div class="pet-nextAppointment" id="appointment">
 
         </div>
 
@@ -300,38 +299,67 @@
     <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
     <dialog id="showPathologyPopUp" class="pet-modal">
         <div id="showInfoPathology">
-            <h3>Información de la alergia</h3>
-            <div class="mb-3">
-                <h3>Nombre</h3>
-                <p id="show_name"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Tipo</h3>
-                <p id="show_type"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Diagnostico</h3>
-                <p id="show_diagnostic_method"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Sintomas</h3>
-                <p id="show_symptoms"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Nivel de severidad</h3>
-                <p id="show_severity_level"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Tratamiento</h3>
-                <p id="show_treatment"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Tratamiento</h3>
-                <p id="show_is_chronic"></p>
-            </div>
-            <div class="mb-3">
-                <h3>Tratamiento</h3>
-                <p id="show_detection_date"></p>
+            <h3>Información de la patología</h3>
+            <div class="elements">
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
+                    <div class="mb-3">
+                        <h5>Nombre</h5>
+                        <p id="show_name"></p>
+                    </div>
+                </div>
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
+                    <div class="mb-3">
+                        <h5>Tipo</h5>
+                        <p id="show_type"></p>
+                    </div>
+                </div>
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-stethoscopes"></i></span>
+                    <div class="mb-3">
+                        <h5>Diagnostico</h5>
+                        <p id="show_diagnostic_method"></p>
+                    </div>
+                </div>
+
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
+                    <div class="mb-3">
+                        <h5>Sintomas</h5>
+                        <p id="show_symptoms"></p>
+                    </div>
+                </div>
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                    <div class="mb-3">
+                        <h5>Nivel de severidad</h5>
+                        <p id="show_severity_level"></p>
+                    </div>
+                </div>
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
+                    <div class="mb-3">
+                        <h5>Tratamiento</h5>
+                        <p id="show_treatment"></p>
+                    </div>
+                </div>
+
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
+                    <div class="mb-3">
+                        <h5>Crónico</h5>
+                        <p id="show_is_chronic"></p>
+                    </div>
+                </div>
+
+                <div class="element-info">
+                    <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
+                    <div class="mb-3">
+                        <h5>Tratamiento</h5>
+                        <p id="show_detection_date"></p>
+                    </div>
+                </div>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
                 <button type="button" class="btn"
@@ -340,7 +368,7 @@
         </div>
     </dialog>
 
-        <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
         <div class="container-footer">
             <div class="row gy-4">
 
@@ -348,7 +376,8 @@
                 <div class="col-12 col-md-4 text-center text-md-start">
                     <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
                     <p class="small">
-                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con atención personalizada.
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
+                        atención personalizada.
                     </p>
                 </div>
 

@@ -1,5 +1,5 @@
 body {
-    background-color: #f2f2f2;
+    background-color: rgba(196, 227, 227, 0.368);
 }
 
 .container {
@@ -7,6 +7,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 3%;
+    gap: 10px;
 }
 
 .title-section {
@@ -16,12 +17,48 @@ body {
 }
 
 .pet-info {
-    margin: 1%;
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 1%;
+    padding: 5%;
     width: 100%;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+}
+
+.pet-header{
+    background-color: #1E272E;
+    border: 1px solid rgba(187, 187, 187, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+}
+
+.header-info{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.avatar-text {
+    width: 100px;
+    height: 100px;
+    background-color: #D4AF37;
+    color: #1E272E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgb(89, 178, 176);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    flex-shrink: 0;
 }
 
 .intro {
@@ -47,8 +84,9 @@ body {
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 1%;
+    padding: 5%;
     width: 100%;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .owner-name {
@@ -56,38 +94,31 @@ body {
     flex-direction: column;
     gap: 10px;
     padding: 2%;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.5);
 }
 
 .owner-contact {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    text-align: center;
     justify-content: center;
     padding: 2%;
+    margin-top: 5%;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.5);
 }
 
 .owner-direction {
-    border-top: 1px solid rgba(187, 187, 187, 0.5);
     display: flex;
     flex-direction: column;
+    text-align: center;
     padding: 2%;
+    margin-top: 5%;
 }
 
 .information-section {
     display: flex;
     justify-content: space-between;
-    padding: 2%;
-}
-
-.pet-nextAppointment {
-    margin: 1%;
-    background-color: #F8F9FA;
-    border: 1px solid rgba(187, 187, 187, 0.5);
-    border-radius: 10px;
-    padding: 1%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -98,6 +129,7 @@ body {
     border-radius: 10px;
     padding: 1%;
     width: 100%;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .table-pages {
@@ -106,8 +138,8 @@ body {
     margin-top: 20px;
 }
 
-.scroll-container,
-.scroll-container-allergy {
+.-container,
+.-container-allergy {
     max-height: 210px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -115,7 +147,7 @@ body {
     border-radius: 8px;
 }
 
-.scroll-container table thead th {
+.-container table thead th {
     position: sticky;
     top: 0;
     background-color: #f8f9fa;
@@ -123,17 +155,43 @@ body {
     border-bottom: 2px solid #dee2e6;
 }
 
-.scroll-container::-webkit-scrollbar {
+.-container::-webkit-bar {
     width: 8px;
 }
 
-.scroll-container::-webkit-scrollbar-thumb {
+.-container::-webkit-bar-thumb {
     background-color: #ccc;
     border-radius: 4px;
 }
 
-.scroll-container::-webkit-scrollbar-thumb:hover {
+.-container::-webkit-bar-thumb:hover {
     background: #adb5bd;
+}
+
+.elements{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+.element-info{
+    display: flex;
+    gap: 15px;
+}
+
+.icon-element{
+    width: 50px;
+    height: 50px;
+    color: #1E272E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+    border: 2px solid rgba(56, 144, 144, 0.1);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    background-color: rgba(56, 144, 144, 0.1);
 }
 
 .pet-allergy {
@@ -143,6 +201,7 @@ body {
     border-radius: 10px;
     padding: 1%;
     width: 100%;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .allergy-actions {
@@ -186,7 +245,7 @@ dialog[open] {
     flex-direction: column;
 }
 
-.container-footer{
+.container-footer {
     display: flex;
     flex-direction: column;
     padding-left: 5%;
@@ -197,19 +256,21 @@ dialog[open] {
 @media (min-width: 1020px) {
     .container {
         display: grid;
-        grid-template-columns: 20% 20% 60%;
+        grid-template-columns: 25% 25% 50%;
         grid-template-rows: auto auto auto;
         grid-template-areas:
             "title title title"
+            "header owner allergy"
             "info owner allergy"
-            "info owner allergy"
-            "next-appointment owner allergy"
             "clinic-history clinic-history clinic-history";
-        margin-top: 3%;
-        gap: 10px;
+        gap: 20px;
         align-items: start;
-        max-width: 98%;
+        max-width: 80%;
     }
+
+    .pet-header{
+    grid-area: header;
+}
 
     .title-section {
         grid-area: title;
@@ -218,18 +279,10 @@ dialog[open] {
 
     .pet-info {
         grid-area: info;
-        margin: 0;
-        height: 390px;
-        max-height: 390px;
     }
 
     .owner-info {
         grid-area: owner;
-        margin: 0;
-    }
-
-    .pet-nextAppointment {
-        grid-area: next-appointment;
         margin: 0;
     }
 
@@ -241,12 +294,12 @@ dialog[open] {
     .pet-allergy {
         grid-area: allergy;
         margin: 0;
-        height: 526px;
-        max-height: 526px;
+        height: 480px;
+        max-height: 480px;
     }
 
-    .scroll-container-allergy {
-        height: 500px;
-        max-height: 500px;
+    .-container-allergy {
+        height: 450px;
+        max-height: 450px;
     }
 }

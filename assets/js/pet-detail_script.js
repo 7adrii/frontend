@@ -8,6 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const urlPet = `http://localhost:8080/pets/${idPet}`;
   const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
   const urlAppointments = `http://localhost:8080/appointments/pet/${idPet}`;
+  const urlVeterinarians = `http://localhost:8080/veterinarians`;
 
   const getPetData = async () => {
     try {
@@ -32,6 +33,9 @@ window.addEventListener("DOMContentLoaded", () => {
       const appointments = await fetch(urlAppointments);
       const appointmentsData = await appointments.json();
 
+      const veterinarians = await fetch(urlVeterinarians);
+      const veterinariansData = await veterinarians.json();
+
       console.log(petData);
       console.log(ownerData);
       console.log(pathologiesData);
@@ -41,13 +45,15 @@ window.addEventListener("DOMContentLoaded", () => {
         petData.data &&
         ownerData.data &&
         pathologiesData.data &&
-        appointmentsData.data
+        appointmentsData.data &&
+        veterinariansData
       ) {
         createPet(
           petData.data,
           ownerData.data,
           pathologiesData.data,
           appointmentsData.data,
+          veterinariansData.data
         );
       }
     } catch (error) {
@@ -55,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const createPet = async (petData, ownerData, pathologiesData, appointmentsData) => {
+  const createPet = async (petData, ownerData, pathologiesData, appointmentsData, veterinariansData) => {
     //Datos del dueño
     const ownerElement = document.getElementById("owner");
     const {
@@ -74,50 +80,50 @@ window.addEventListener("DOMContentLoaded", () => {
     ownerElement.innerHTML = `
       <div class="owner-name">
         <div class="intro">
-          <h6>Información del dueñ@</h6>
+          <h5>Información del dueñ@</h5>
           <button type="button" id="btnOpenPopUpOwner" class="btn"><i class="fa-solid fa-pencil"></i></button>
         </div>
         <div class="information-section">
           <h6>Nombre</h6>
-          <h6>${name_owner}</h6>
+          <h6 class="text-primary">${name_owner}</h6>
         </div>
         <div class="information-section">
           <h6>Apellidos</h6>
-          <h6>${surname}</h6>
+          <h6 class="text-primary">${surname}</h6>
         </div>
       </div>
       <div class="owner-contact">
         <h6>Datos de contacto</h6>
         <div class="information-section">
           <i class="fa-solid fa-address-card"></i>
-          <h6>${dni_owner}</h6>
+          <h6 class="text-primary">${dni_owner}</h6>
         </div>
         <div class="information-section">
           <i class="fa-solid fa-envelope"></i>
-          <h6>${email}</h6>
+          <h6 class="text-primary">${email}</h6>
         </div>
         <div class="information-section">
           <i class="fa-solid fa-mobile"></i>
-          <h6>${phone}</h6>
+          <h6 class="text-primary">${phone}</h6>
         </div>
       </div>
       <div class="owner-direction">
         <h6>Dirección de residencia</h6>
         <div class="information-section">
           <h6>Calle y numero</h6>
-          <h6>${direction}</h6>
+          <h6 class="text-primary">${direction}</h6>
         </div>
         <div class="information-section">
           <h6>Piso</h6>
-          <h6>${floor}</h6>
+          <h6 class="text-primary">${floor}</h6>
         </div>
         <div class="information-section">
           <h6>Ciudad</h6>
-          <h6>${city}</h6>
+          <h6 class="text-primary">${city}</h6>
         </div>
         <div class="information-section">
           <h6>Código Postal</h6>
-          <h6>${postal_code}</h6>
+          <h6 class="text-primary">${postal_code}</h6>
         </div>
       </div>
     `;
@@ -220,7 +226,9 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     //Datos de la mascota
+    const petHeader = document.getElementById("pet-header");
     const petElement = document.getElementById("pet");
+
     const {
       id_pet,
       name_pet,
@@ -238,51 +246,51 @@ window.addEventListener("DOMContentLoaded", () => {
       type = "-";
     }
 
+    const initialsPet = name_pet.substring(0,2).toUpperCase();
+
+    petHeader.innerHTML=`
+      <span class="avatar-text">${initialsPet}</span>
+      <h5 class="text-light">${name_pet}</h5>
+      <div class="header-info">
+        <h6 class="text-light">${type}</h6>
+        <h6 class="text-light">${breed}</h6>
+      </div>
+      <div class="btn-options">
+        <button type="button" id="btnOpenPopUpPet" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></button>
+        <a href="#" class="btn btn-secondary" id="btn-delete"><i class="fa-solid fa-trash"></i></a>
+      </div>
+      
+
+    `
+
     petElement.innerHTML = `
       <div class="intro">
         <h6>Información de la mascota</h6>
-        <div class="pet-btns">
-          <button type="button" id="btnOpenPopUpPet" class="btn"><i class="fa-solid fa-pencil"></i></button>
-        </div>
-      </div>
-      <div class="information-section">
-          <h6>Nombre</h6>
-          <h6>${name_pet}</h6>
-      </div>
-
-      <div class="information-section">
-          <h6>Especie</h6>
-          <h6>${type}</h6>
-      </div>
-
-      <div class="information-section">
-          <h6>Raza</h6>
-          <h6>${breed}</h6>
       </div>
 
       <div class="information-section">
           <h6>Peso</h6>
-          <h6>${weight}</h6>
+          <h6 class="text-primary">${weight} kg</h6>
       </div>
 
       <div class="information-section">
           <h6>Sexo</h6>
-          <h6>${sex}</h6>
+          <h6 class="text-primary">${sex}</h6>
       </div>
 
       <div class="information-section">
           <h6>Fecha de nacimiento</h6>
-          <h6>${birth_date}</h6>
+          <h6 class="text-primary">${birth_date}</h6>
       </div>
 
       <div class="information-section">
           <h6>Edad</h6>
-          <h6>${age}</h6>
+          <h6 class="text-primary">${age}</h6>
       </div>
 
       <div class="information-section">
           <h6>Fecha de registro</h6>
-          <h6>${register_date}</h6>
+          <h6 class="text-primary">${register_date}</h6>
       </div>
 
     `;
@@ -364,28 +372,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    //Datos próxima cita, si hay una.
-    const appointment = document.getElementById("appointment");
-    const actualDate = new Date();
-    const lastAppointment = appointmentsData.at(-1);
-    console.log(lastAppointment);
-
-    if (
-      appointmentsData.length === 0 ||
-      lastAppointment.date_appointment <= actualDate
-    ) {
-      appointment.innerHTML = `
-        <h4>Próxima cita</h4>
-        <p>No hay citas concertadas</p>
-      `;
-    } else {
-      appointment.innerHTML = `
-        <h4>Próxima cita</h4>
-        <h6>${lastAppointment.date_appointment}</h6>
-        <h6>${lastAppointment.start_time}</h6>
-      `;
-    }
-
     //Numero de patologias
     const pathologiesQuantity = document.getElementById("pet-pathology");
     const numPathologies = pathologiesData.length;
@@ -423,15 +409,16 @@ window.addEventListener("DOMContentLoaded", () => {
             <tr>
               <th scope="col">Nombre</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Nivel de severidad</th>
-              <th scope="col">Fecha de deteccion</th>
+              <th scope="col" class="d-none d-md-table-cell">Nivel</th>
+              <th scope="col" class="d-none d-md-table-cell">Fecha</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody id="consult-list">
             <th scope="col" style="max-width: 80px">${name}</th>
             <th scope="col" style="max-width: 80px">${type}</th>
-            <th scope="col" style="max-width: 80px">${severity_level}</th>
-            <th scope="col" style="max-width: 80px">${detection_date}</th>
+            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</th>
+            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</th>
             <th scope="col">
               <div class="dropdown">
                 <button class="btn-options" type="button" id="dropdownMenuButton1"
@@ -685,6 +672,12 @@ window.addEventListener("DOMContentLoaded", () => {
           veterinarian_dni,
         } = appointment;
 
+        //Buscamos el nombre del veterinario buscando por su DNI
+        const veterinarian = veterinariansData.find(v => v.dni_veterinarian == veterinarian_dni);
+        const veterinarianName = veterinarian.name;
+        const veterinarianSurname = veterinarian.surname;
+        const fullVeterinarianName = veterinarianName + " " + veterinarianSurname;
+
         const date = "2024-01-01";
 
         const start = new Date(`${date}T${start_time}`);
@@ -698,7 +691,7 @@ window.addEventListener("DOMContentLoaded", () => {
           <td scope="col">${date_appointment}</td>
           <td scope="col" class="d-none d-md-table-cell">${start_time}</td>
           <td scope="col" class="d-none d-md-table-cell">${observations}</td>
-          <td scope="col">${veterinarian_dni}</td>
+          <td scope="col">${fullVeterinarianName}</td>
           <td scope="col" class="d-none d-md-table-cell">${duration} minutos</td>
         </tr>
       `;

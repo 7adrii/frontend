@@ -131,3 +131,28 @@
     padding: 1rem;
   }
 }
+
+// Estilos para las tarjetas de salas
+.room-card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.room-card .card-header {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.room-card .card-footer {
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.rooms-grid {
+  margin-bottom: 2rem;
+}

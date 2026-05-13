@@ -69,24 +69,44 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="line-form">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                        <input type="text" class="form-control" id="name_owner" placeholder="Ej: Juan">
+                        <input type="text" class="form-control" id="name_owner" placeholder="Juan">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
-                        <input type="text" class="form-control" id="surname" placeholder="Ej: Pérez García">
+                        <input type="text" class="form-control" id="surname" placeholder="Pérez García">
                     </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
-                    <input type="text" class="form-control" id="owner_dni" placeholder="Ej: 94299329V">
+                    <input type="text" class="form-control" id="owner_dni" placeholder="94299329V">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Teléfono*</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Ej: 612 345 678">
+                    <input type="text" class="form-control" id="phone" placeholder="612345678">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email*</label>
-                    <input type="email" class="form-control" id="email" placeholder="Ej: juan.perez@gmail.com">
+                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="direction" placeholder="Paseo de Independencia 1">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Piso</label>
+                    <input type="text" class="form-control" id="floor" placeholder="3B">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Ciudad*</label>
+                    <input type="text" class="form-control" id="city" placeholder="Zaragoza">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Provincia*</label>
+                    <input type="text" class="form-control" id="province" placeholder="Zaragoza">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Codigo postal*</label>
+                    <input type="text" class="form-control" id="postal_code" placeholder="50007">
                   </div>
                 </div>
             </div>
@@ -95,21 +115,21 @@ window.addEventListener("DOMContentLoaded", () => {
                 <h5>Datos de la mascota</h5>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                    <input type="text" class="form-control" id="name_pet" placeholder="Ej: Lana">
+                    <input type="text" class="form-control" id="name_pet" placeholder="Lana">
                 </div>
                 <div class="line-form">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Especie*</label>
-                        <input type="text" class="form-control" id="type" placeholder="Ej: Perro">
+                        <input type="text" class="form-control" id="type" placeholder="Perro">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Raza</label>
-                        <input type="text" class="form-control" id="breed" placeholder="Ej: Golden Retriever">
+                        <input type="text" class="form-control" id="breed" placeholder="Golden Retriever">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Peso*</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Ej: 25 kg">
+                    <label for="exampleInputEmail1" class="form-label">Peso (en kg)*</label>
+                    <input type="text" class="form-control" id="weight" placeholder="25">
                 </div>
                 <div class="mb-3">
                     <label for="disabledSelect" class="form-label">Sexo*</label>
@@ -135,15 +155,15 @@ window.addEventListener("DOMContentLoaded", () => {
                         <div class="form-section allergy-block">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Alérgeno*</label>
-                                <input type="text" class="form-control allergen" placeholder="Ej: Picadura de pulga">
+                                <input type="text" class="form-control allergen" placeholder="Picadura de pulga">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Método de diagnóstico*</label>
-                                <input type="text" class="form-control diagnostic_method" placeholder="Ej: Picadura de pulga">
+                                <input type="text" class="form-control diagnostic_method" placeholder="Análisis de sangre">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Sintomatología</label>
-                                <input type="text" class="form-control symptoms" placeholder="Ej: Ronchas, estornudos">
+                                <input type="text" class="form-control symptoms" placeholder="Ronchas, estornudos, etc">
                             </div>
                             <div class="mb-3">
                                 <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
@@ -155,7 +175,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Tratamiento de urgencia*</label>
-                                <input type="text" class="form-control emergency_treatment" placeholder="Ej: Ronchas, estornudos">
+                                <input type="text" class="form-control emergency_treatment" placeholder="Vacunación">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
@@ -205,7 +225,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Creamos los elementos para la lista
     ownersList.forEach((owner) => {
-      const { dni_owner, name_owner, surname, phone, email } = owner;
+      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
       ownerElement.innerHTML = `
@@ -221,12 +241,15 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("surname").value = surname;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
+        document.getElementById("direction").value = direction;
+        document.getElementById("floor").value = floor;
+        document.getElementById("city").value = city;
+        document.getElementById("province").value = province;
+        document.getElementById("postal_code").value = postal_code;
       });
 
       listOwners.appendChild(ownerElement);
     });
-
-    
 
     const registerBtn = document.getElementById("btnRegister");
 
@@ -295,11 +318,16 @@ window.addEventListener("DOMContentLoaded", () => {
         surname: document.getElementById("surname").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
+        direction: document.getElementById("direction").value.trim(),
+        floor: document.getElementById("floor").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        province: document.getElementById("province").value.trim(),
+        postal_code: document.getElementById("postal_code").value.trim(),
       };
 
-      const { dni_owner, name_owner, surname, phone, email } = ownerSendAPI;
+      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = ownerSendAPI;
 
-      if (!dni_owner || !name_owner || !surname || !phone || !email) {
+      if (!dni_owner || !name_owner || !surname || !phone || !email || !direction || !city || !province || !postal_code) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de dueño",
           icon: "warning",

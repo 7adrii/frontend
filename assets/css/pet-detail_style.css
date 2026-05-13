@@ -70,6 +70,7 @@ body {
     border-top: 1px solid rgba(187, 187, 187, 0.5);
     display: flex;
     flex-direction: column;
+    padding: 2%;
 }
 
 .information-section {
@@ -218,8 +219,8 @@ dialog[open] {
     .pet-info {
         grid-area: info;
         margin: 0;
-        height: 350px;
-        max-height: 350px;
+        height: 390px;
+        max-height: 390px;
     }
 
     .owner-info {

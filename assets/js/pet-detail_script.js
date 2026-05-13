@@ -229,6 +229,8 @@ window.addEventListener("DOMContentLoaded", () => {
       weight,
       sex,
       birth_date,
+      age,
+      register_date,
       owner_dni,
     } = petData;
 
@@ -271,6 +273,16 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="information-section">
           <h6>Fecha de nacimiento</h6>
           <h6>${birth_date}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Edad</h6>
+          <h6>${age}</h6>
+      </div>
+
+      <div class="information-section">
+          <h6>Fecha de registro</h6>
+          <h6>${register_date}</h6>
       </div>
 
     `;

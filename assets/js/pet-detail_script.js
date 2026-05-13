@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log(idPet);
 
   const urlPet = `http://localhost:8080/pets/${idPet}`;
-  const urlAllergies = `http://localhost:8080/allergies/pet/${idPet}`;
+  const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
   const urlAppointments = `http://localhost:8080/appointments/pet/${idPet}`;
 
   const getPetData = async () => {
@@ -20,13 +20,13 @@ window.addEventListener("DOMContentLoaded", () => {
       const owner = await fetch(urlOwner);
       const ownerData = await owner.json();
 
-      const allergies = await fetch(urlAllergies);
-      let allergiesData;
+      const pathologies = await fetch(urlPathologies);
+      let pathologiesData;
 
-      if (allergies.status === 404) {
-        allergiesData = { data: [] };
+      if (pathologies.status === 404) {
+        pathologiesData = { data: [] };
       } else {
-        allergiesData = await allergies.json();
+        pathologiesData = await pathologies.json();
       }
 
       const appointments = await fetch(urlAppointments);
@@ -34,19 +34,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
       console.log(petData);
       console.log(ownerData);
-      console.log(allergiesData);
+      console.log(pathologiesData);
       console.log(appointmentsData);
 
       if (
         petData.data &&
         ownerData.data &&
-        allergiesData.data &&
+        pathologiesData.data &&
         appointmentsData.data
       ) {
         createPet(
           petData.data,
           ownerData.data,
-          allergiesData.data,
+          pathologiesData.data,
           appointmentsData.data,
         );
       }
@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const createPet = async (petData, ownerData, allergiesData, appointmentsData) => {
+  const createPet = async (petData, ownerData, pathologiesData, appointmentsData) => {
     //Datos del dueño
     const ownerElement = document.getElementById("owner");
     const {
@@ -386,50 +386,50 @@ window.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    //Numero de alergias
-    const allergiesQuantity = document.getElementById("pet-allergy");
-    const numAllergies = allergiesData.length;
-    allergiesQuantity.innerHTML = `
-      <h4>Total alergias: ${numAllergies}</h4>
+    //Numero de patologias
+    const pathologiesQuantity = document.getElementById("pet-pathology");
+    const numPathologies = pathologiesData.length;
+    pathologiesQuantity.innerHTML = `
+      <h4>Total patologías: ${numPathologies}</h4>
       <a href="new-allergy.html?id=${id_pet}" class="btn"><i class="fa-solid fa-plus"></i></a>
     `;
 
-    //Datos de las alergias
-    const allergyList = document.getElementById("allergy");
-    allergyList.innerHTML = ``;
+    //Datos de las patologias
+    const pathologiesList = document.getElementById("pathology");
+    pathologiesList.innerHTML = ``;
 
-    if (numAllergies === 0) {
-      const allergyInfo = document.createElement("h6");
-      allergyInfo.innerHTML = `
+    if (numPathologies === 0) {
+      const pathologyInfo = document.createElement("h6");
+      pathologyInfo.innerHTML = `
         No hay alergias registradas para ${petData.name_pet}.
       `;
-      allergyList.appendChild(allergyInfo);
+      pathologiesList.appendChild(pathologyInfo);
     } else {
-      allergiesData.forEach((allergy) => {
-        const allergyInfo = document.createElement("li");
-        allergyInfo.classList.add("list-group-item");
+      pathologiesData.forEach((pathology) => {
+        const pathologyInfo = document.createElement("li");
+        pathologyInfo.classList.add("list-group-item");
 
         const {
-          id_allergy,
-          allergen,
-          diagnostic_method,
-          symptoms,
+          id_pathology,
+          name,
+          type,
           severity_level,
-          emergency_treatment,
-          detection_date,
-        } = allergy;
+          detection_date
+        } = pathology;
 
-        allergyInfo.innerHTML = `
+        pathologyInfo.innerHTML = `
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Alergeno</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Tipo</th>
               <th scope="col">Nivel de severidad</th>
               <th scope="col">Fecha de deteccion</th>
             </tr>
           </thead>
           <tbody id="consult-list">
-            <th scope="col" style="max-width: 80px">${allergen}</th>
+            <th scope="col" style="max-width: 80px">${name}</th>
+            <th scope="col" style="max-width: 80px">${type}</th>
             <th scope="col" style="max-width: 80px">${severity_level}</th>
             <th scope="col" style="max-width: 80px">${detection_date}</th>
             <th scope="col">
@@ -439,9 +439,9 @@ window.addEventListener("DOMContentLoaded", () => {
                   class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item btn-show-allergy" href="#" data-id="${id_allergy}">Más información</a></li>
-                  <li><a class="dropdown-item btn-edit-allergy" href="#" data-id="${id_allergy}">Editar</a></li>
-                  <li><a class="dropdown-item btn-delete-allergy" href="#" data-id="${id_allergy}">Eliminar</a></li>
+                  <li><a class="dropdown-item btn-show-pathology" data-id="${id_pathology}">Más información</a></li>
+                  <li><a class="dropdown-item btn-edit-pathology" data-id="${id_pathology}">Editar</a></li>
+                  <li><a class="dropdown-item btn-delete-pathology" data-id="${id_pathology}">Eliminar</a></li>
                 </ul>
               </div>
             </th>
@@ -449,99 +449,104 @@ window.addEventListener("DOMContentLoaded", () => {
         </table>
       `;
 
-        allergyList.appendChild(allergyInfo);
+        pathologiesList.appendChild(pathologyInfo);
       });
     }
     //Variable para saber en que alergia estamos para sacar la informacion en los modales
-    let selectedAllergyId = null;
+    let selectedPathologyId = null;
 
     //Pop up para mostrar la información de la alergia en mayor detalle
-    let showAllergyId = null;
+    let showPathologyId = null;
     let showBtn;
-    const popUpShowAllergy = document.getElementById('showAllergyPopUp');
-    allergyList.addEventListener("click", (e) => {
-      showBtn = e.target.closest('.btn-show-allergy');
+    const popUpShowPathology = document.getElementById('showPathologyPopUp');
+    pathologiesList.addEventListener("click", (e) => {
+      showBtn = e.target.closest('.btn-show-pathology');
 
       if (showBtn) {
         e.preventDefault();
 
-        selectedAllergyId = showBtn.getAttribute("data-id");
-        const allergy = allergiesData.find(all => all.id_allergy == selectedAllergyId);
+        selectedPathologyId = showBtn.getAttribute("data-id");
+        const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
+        console.log(pathology);
 
-        document.getElementById("show_allergen").textContent = allergy.allergen;
-        document.getElementById("show_diagnostic_method").textContent = allergy.diagnostic_method;
-        document.getElementById("show_symptoms").textContent = allergy.symptoms;
-        document.getElementById("show_severity_level").textContent = allergy.severity_level;
-        document.getElementById("show_emergency_treatment").textContent = allergy.emergency_treatment;
-        document.getElementById("show_detection_date").textContent = allergy.detection_date;
+        document.getElementById("show_name").textContent = pathology.name;
+        document.getElementById("show_type").textContent = pathology.type;
+        document.getElementById("show_diagnostic_method").textContent = pathology.diagnostic_method;
+        document.getElementById("show_symptoms").textContent = pathology.symptoms;
+        document.getElementById("show_severity_level").textContent = pathology.severity_level;
+        document.getElementById("show_treatment").textContent = pathology.treatment;
+        document.getElementById("show_is_chronic").textContent = pathology.is_chronic;
+        document.getElementById("show_detection_date").textContent = pathology.detection_date;
 
-        popUpShowAllergy.showModal();
+        popUpShowPathology.showModal();
       }
     });
 
 
     //Pop up de editar datos de una alergia y guardar los cambio
-    const popUpAllergy = document.getElementById("editAllergyPopUp");
+    const popUpPathology = document.getElementById("editPathologyPopUp");
     let editBtn;
 
-    allergyList.addEventListener("click", (e) => {
+    pathologiesList.addEventListener("click", (e) => {
       //Se busca que se hizo click
-      editBtn = e.target.closest(".btn-edit-allergy");
+      editBtn = e.target.closest(".btn-edit-pathology");
 
       if (editBtn) {
         e.preventDefault();
 
         //almacenamos el id de la alergia
-        selectedAllergyId = editBtn.getAttribute("data-id");
+        selectedPathologyId = editBtn.getAttribute("data-id");
 
         //buscamos la alergia de la base de datos que tiene ese id para mostrar los datos
-        const allergy = allergiesData.find(all => all.id_allergy == selectedAllergyId);
+        const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
 
-        if (allergy) {
-          document.getElementById("allergen").value = allergy.allergen;
-          document.getElementById("diagnostic_method").value = allergy.diagnostic_method;
-          document.getElementById("symptoms").value = allergy.symptoms;
-          document.getElementById("severity_level").value = allergy.severity_level;
-          document.getElementById("emergency_treatment").value = allergy.emergency_treatment;
-          document.getElementById("detection_date").value = allergy.detection_date.split("T")[0];
+        if (pathology) {
+          document.getElementById("name").value = pathology.name;
+          document.getElementById("type").value = pathology.type;
+          document.getElementById("diagnostic_method").value = pathology.diagnostic_method;
+          document.getElementById("symptoms").value = pathology.symptoms;
+          document.getElementById("severity_level").value = pathology.severity_level;
+          document.getElementById("treatment").value = pathology.treatment;
+          document.getElementById("is_chronic").value = pathology.is_chronic;
+          document.getElementById("detection_date").value = pathology.detection_date.split("T")[0];
 
-          popUpAllergy.showModal();
+          popUpPathology.showModal();
         }
       }
     });
 
-    const saveBtnAllergy = document.getElementById("saveChangesAllergy");
-    saveBtnAllergy.addEventListener("click", async (e) => {
+    const saveBtnPathology = document.getElementById("saveChangesPathology");
+    saveBtnPathology.addEventListener("click", async (e) => {
       e.preventDefault();
 
-      const allergyPutAPI = {
-        allergen: document.getElementById("allergen").value.trim(),
-        diagnostic_method: document
-          .getElementById("diagnostic_method")
-          .value.trim(),
+      const pathologyPutAPI = {
+
+        name: document.getElementById("name").value.trim(),
+        type: document.getElementById("type").value.trim(),
+        diagnostic_method: document.getElementById("diagnostic_method").value.trim(),
         symptoms: document.getElementById("symptoms").value.trim(),
-        severity_level: document.getElementById("severity_level").value,
-        emergency_treatment: document
-          .getElementById("emergency_treatment")
-          .value.trim(),
-        detection_date: document.getElementById("detection_date").value,
+        severity_level: document.getElementById("severity_level").value.trim(),
+        treatment: document.getElementById("treatment").value.trim(),
+        is_chronic: document.getElementById("is_chronic").value.trim(),
+        detection_date: document.getElementById("detection_date").value.trim(),
       };
 
       const {
-        allergen,
+        name,
+        type, 
         diagnostic_method,
         symptoms,
         severity_level,
-        emergency_treatment,
-        detection_date,
-      } = allergyPutAPI;
+        treatment,
+        is_chronic,
+        detection_date
+      } = pathologyPutAPI;
 
       if (
-        !allergen ||
-        !diagnostic_method ||
-        !symptoms ||
+        !name ||
+        !type ||
         !severity_level ||
-        !emergency_treatment ||
+        !treatment ||
         !detection_date
       ) {
         Swal.fire({
@@ -551,18 +556,18 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
       }
       console.log(id_pet);
-      console.log("Cuerpo del envío:", JSON.stringify(allergyPutAPI));
-      selectedAllergyId = editBtn.getAttribute("data-id");
-      await sendAllergyData(allergyPutAPI, selectedAllergyId);
+      console.log("Cuerpo del envío:", JSON.stringify(pathologyPutAPI));
+      selectedPathologyId = editBtn.getAttribute("data-id");
+      await sendPathologyData(pathologyPutAPI, selectedPathologyId);
     });
 
-    const sendAllergyData = async (allergyPutAPI, selectedAllergyId) => {
+    const sendPathologyData = async (pathologyPutAPI, selectedPathologyId) => {
       try {
         const PutResponse = await fetch(
-          `http://localhost:8080/allergies/${selectedAllergyId}`,
+          `http://localhost:8080/pathologies/${selectedPathologyId}`,
           {
             method: "PUT",
-            body: JSON.stringify(allergyPutAPI),
+            body: JSON.stringify(pathologyPutAPI),
             headers: {
               "Content-type": "application/json; charset=UTF-8",
             },
@@ -570,7 +575,7 @@ window.addEventListener("DOMContentLoaded", () => {
         );
 
         if (PutResponse.ok) {
-          const popUp = document.getElementById("editAllergyPopUp");
+          const popUp = document.getElementById("editPathologyPopUp");
           popUp.close();
           window.location.reload();
         } else {
@@ -582,16 +587,16 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    //Boton eliminar una alergia de la mascota
+    //Boton eliminar una patologia de la mascota
     let deleteBtn;
 
-    allergyList.addEventListener("click", async (e) => {
+    pathologiesList.addEventListener("click", async (e) => {
 
-      deleteBtn = e.target.closest(".btn-delete-allergy");
+      deleteBtn = e.target.closest(".btn-delete-pathology");
       if (deleteBtn) {
         e.preventDefault();
 
-        const idAllergyDelete = deleteBtn.getAttribute("data-id");
+        const idPathologyDelete = deleteBtn.getAttribute("data-id");
 
         const confirmAction = await Swal.fire({
           title: `¡Estás a punto de eliminar la alergia!`,
@@ -604,16 +609,16 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         if (confirmAction.isConfirmed) {
-          await deleteAllergy(idAllergyDelete);
+          await deletePathology(idPathologyDelete);
         } else {
           return;
         }
       }
     });
 
-    const deleteAllergy = async (idAllergyDelete) => {
+    const deletePathology = async (idPathologyDelete) => {
       try {
-        const deleteResponse = await fetch(`http://localhost:8080/allergies/${idAllergyDelete}`, {
+        const deleteResponse = await fetch(`http://localhost:8080/pathologies/${idPathologyDelete}`, {
           method: "DELETE",
           headers: {
             "Content-type": "application/json; charset=UTF-8",

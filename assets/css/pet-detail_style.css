@@ -246,6 +246,7 @@ dialog[open] {
     }
 
     .scroll-container-allergy {
+        height: 500px;
         max-height: 500px;
     }
 }

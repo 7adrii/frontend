@@ -131,12 +131,12 @@
         </div>
 
         <div class="pet-allergy">
-            <div class="allergy-actions" id="pet-allergy">
+            <div class="allergy-actions" id="pet-pathology">
 
             </div>
 
             <ul class="list-group">
-                <div class="scroll-container-allergy" id="allergy">
+                <div class="scroll-container-allergy" id="pathology">
 
                 </div>
             </ul>
@@ -245,15 +245,24 @@
     </dialog>
 
     <!-- Pop up para editar la información de una alergia de la mascota -->
-    <dialog id="editAllergyPopUp" class="pet-modal">
+    <dialog id="editPathologyPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
-            <h3>Editar Alergia</h3>
+            <h3>Editar Patologia</h3>
             <div class="mb-3">
                 <label>Allergeno</label>
-                <input type="text" class="form-control" id="allergen" required>
+                <input type="text" class="form-control" id="name" required>
             </div>
             <div class="mb-3">
-                <label>Metodo de diagnostico</label>
+                <label>Tipo</label>
+                <select id="type" class="form-select">
+                    <option>Alergia</option>
+                    <option>Enfermedad</option>
+                    <option>Síndrome</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Diagnostico (metodo)</label>
                 <input type="text" class="form-control" id="diagnostic_method" required>
             </div>
             <div class="mb-3">
@@ -269,31 +278,39 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label>Tratamiento de emergencia</label>
-                <input type="text" class="form-control" id="emergency_treatment" required>
+                <label>Tratamiento</label>
+                <input type="text" class="form-control" id="treatment" required>
+            </div>
+            <div class="mb-3">
+                <label>Es cronico</label>
+                <input type="checkbox" class="form-control" id="is_chronic" required>
             </div>
             <div class="mb-3">
                 <label>Fecha de deteccion</label>
                 <input type="date" class="form-control" id="detection_date" required>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesAllergy" class="btn">Guardar</button>
+                <button type="submit" id="saveChangesPathology" class="btn">Guardar</button>
                 <button type="button" class="btn"
-                    onclick="document.getElementById('editAllergyPopUp').close()">Cancelar</button>
+                    onclick="document.getElementById('editPathologyPopUp').close()">Cancelar</button>
             </div>
         </form>
     </dialog>
 
     <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
-    <dialog id="showAllergyPopUp" class="pet-modal">
-        <div id="showInfoAllergy">
+    <dialog id="showPathologyPopUp" class="pet-modal">
+        <div id="showInfoPathology">
             <h3>Información de la alergia</h3>
             <div class="mb-3">
-                <h3>Allergeno</h3>
-                <p id="show_allergen"></p>
+                <h3>Nombre</h3>
+                <p id="show_name"></p>
             </div>
             <div class="mb-3">
-                <h3>Metodo de diagnostico</h3>
+                <h3>Tipo</h3>
+                <p id="show_type"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Diagnostico</h3>
                 <p id="show_diagnostic_method"></p>
             </div>
             <div class="mb-3">
@@ -305,16 +322,20 @@
                 <p id="show_severity_level"></p>
             </div>
             <div class="mb-3">
-                <h3>Tratamiento de emergencia</h3>
-                <p id="show_emergency_treatment"></p>
+                <h3>Tratamiento</h3>
+                <p id="show_treatment"></p>
             </div>
             <div class="mb-3">
-                <h3>Fecha de deteccion</h3>
+                <h3>Tratamiento</h3>
+                <p id="show_is_chronic"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Tratamiento</h3>
                 <p id="show_detection_date"></p>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
                 <button type="button" class="btn"
-                    onclick="document.getElementById('showAllergyPopUp').close()">Cancelar</button>
+                    onclick="document.getElementById('showPathologyPopUp').close()">Cancelar</button>
             </div>
         </div>
     </dialog>

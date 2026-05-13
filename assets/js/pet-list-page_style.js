@@ -35,12 +35,16 @@ const createPets = (petsList, ownersList) => {
     cardAllRegister.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-check"></i></h5>
+                    <h5 class="card-title"><i class="fa-solid fa-book-open"></i></h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Registros</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
-                <h5 class="card-title">${numberRegister}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Total</h6>
+                <div class="body-card">
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Histórico completo</h6>
+                  <h5 class="card-title">${numberRegister}</h5>
+                </div>
             </div>
+            
         `;
   }
 
@@ -52,16 +56,77 @@ const createPets = (petsList, ownersList) => {
     cardDeleteRegister.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-check"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Registros</h6>
+                    <h5 class="card-title"><i class="fa-solid fa-calendar-minus"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Bajas</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Bajas</h6>
-                <h5 class="card-title">${deletePetData}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Registros desactivados</h6>
+                <div class="body-card">
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Bajas</h6>
+                  <h5 class="card-title">${deletePetData}</h5>
+                </div>
             </div>
         `;
   }
 
-  //Obtenemos la fecha de hoy y la formateamos a formato dd-mm-yyyy para comparar con la fecha de la cita en las proximas tablas
+  //Tarjeta de total de especies que hay en la clínica
+  const cardAllSpecies = document.getElementById("card-species");
+
+  const differentSpecies = [];
+  let numberSpecies = 0;
+
+  for (let i = 0; i < petsList.length; i++) {
+    if (!differentSpecies.includes(petsList[i].type)) {
+      differentSpecies.push(petsList[i].type);
+      numberSpecies++;
+    }
+  }
+
+  if (cardAllSpecies) {
+    cardAllSpecies.innerHTML = `
+            <div class="card-body">
+                <div class="header-card">
+                    <h5 class="card-title"><i class="fa-solid fa-bone"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Especies</h6>
+                </div>
+                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Tipos de animales diferentes</h6>
+                <div class="body-card">
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                  <h5 class="card-title">${numberSpecies}</h5>
+                </div>
+            </div>
+        `;
+  }
+
+  //Tarjeta de total de dueños que hay registrados
+  const cardAllOwners = document.getElementById("card-owners");
+
+  const dniOwners = [];
+  let numberOwners =0;
+
+  for(let i = 0; i<ownersList.length; i++){
+    if(!dniOwners.includes(ownersList[i].dni_owner)){
+      dniOwners.push(ownersList[i].dni_owner);
+      numberOwners++;
+    }
+  }
+
+  if (cardAllOwners) {
+    cardAllOwners.innerHTML = `
+            <div class="card-body">
+                <div class="header-card">
+                    <h5 class="card-title"><i class="fa-solid fa-user"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Dueños</h6>
+                </div>
+                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Dueños registrados</h6>
+                <div class="body-card">
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                  <h5 class="card-title">${numberOwners}</h5>
+                </div>
+            </div>
+        `;
+  }
+
+  //Obtenemos la fecha de hoy y la formateamos a formato dd-mm-yyyy para ponerla en la tarjeta de nuevos registros del dia
   const dateToday = new Date();
   const day = String(dateToday.getDate()).padStart(2, '0');
   const month = String(dateToday.getMonth() + 1).padStart(2, '0');
@@ -73,10 +138,12 @@ const createPets = (petsList, ownersList) => {
   let numberNewRegister = 0;
 
 
-  //TODO cambiar a registro en la base de datos. Calculamos cuantas mascotas se han registrado hoy
+  //Calculamos cuantas mascotas se han registrado hoy
   petsList.forEach((pet) => {
-    const { birth_date } = pet;
-    if (formattedToday === birth_date) {
+    const dateParts = pet.register_date.split('/');
+    const registerDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+    if (dateToday.getDate() === registerDate.getDate()) {
       numberNewRegister++;
     }
   });
@@ -85,44 +152,24 @@ const createPets = (petsList, ownersList) => {
     cardNewRegisters.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-check"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Registros</h6>
+                    <h5 class="card-title"><i class="fa-solid fa-calendar-plus"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Altas</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary">${formattedToday}</h6>
-                <h5 class="card-title">${numberNewRegister}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Nuevos ingresos</h6>
+                <div class="body-card">
+                  <h6 class="card-subtitle mb-2 text-body-secondary">${formattedToday}</h6>
+                  <h5 class="card-title">${numberNewRegister}</h5>
+                </div>
             </div>
         `;
   }
-
-  //Creacion de la linea de tipos de especies de la base de datos
-  const typeAnimal = document.getElementById("type-animal");
-  typeAnimal.innerHTML = ``;
-
-  const types = [];
-  petsList.forEach((pet) => {
-    const { type } = pet;
-    const typeLow = type.toLowerCase();
-
-    if (!types.includes(typeLow)) {
-      types.push(typeLow);
-
-      const listItem = document.createElement("li");
-      listItem.classList.add("nav-item");
-
-      listItem.innerHTML = `
-                <a class="nav-text active" aria-current="page" href="#">${type}</a>
-        `;
-
-      typeAnimal.appendChild(listItem);
-    }
-  });
 
   //Creacion de la tabla de mascotas con su respectiva informacion y contacto del dueño
   const listPets = document.getElementById("pets-list");
   listPets.innerHTML = ``;
 
   petsList.forEach((pet) => {
-    const { id, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
+    const { id, name_pet, type, breed, weight, sex, birth_date, register_date, owner_dni } = pet;
 
     // Obtener el dueño segun el DNI del dueño de la mascota
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
@@ -135,22 +182,21 @@ const createPets = (petsList, ownersList) => {
     tableRow.classList.add("line-hover");
 
     tableRow.innerHTML = `
-            <th scope="row" class="d-none d-md-table-cell">Ej: xx-xx-xxxx</th>
+            <th scope="row">${register_date}</th>
             <th scope="row">${name_pet}</th>
             <th scope="row" class="d-none d-md-table-cell">${type}</th>
-            <th scope="row" class="d-none d-md-table-cell">${ownerName}</th>
-            <th scope="row">${owner_dni}</th>
-            <th scope="row" class="d-none d-md-table-cell"></th>
-            <th scope="row">${ownerContact}</th>
+            <th scope="row">${ownerName}</th>
+            <th scope="row" class="d-none d-md-table-cell">${owner_dni}</th>
+            <th scope="row" class="d-none d-md-table-cell">${ownerContact}</th>
             <th scope="row">
-              <div>
                   <a href="pet-detail.html?id=${id}" class="btn">
                     <i class="fa-solid fa-info"></i>
                   </a>
-                  <a class="btn btn-delete-pet">
+            </th>
+            <th scope="row">
+                  <a class="btn btn-delete-pet d-none d-md-table-cell">
                     <i class="fa-solid fa-trash"></i>
                   </a>
-                </div>
             </th>
             
         `;
@@ -184,10 +230,10 @@ const createPets = (petsList, ownersList) => {
   const cardPets = document.getElementById("last-aditions");
   cardPets.innerHTML = ``;
 
-  for (let i = petsList.length - 1; i >= petsList.length - 4; i--) {
+  for (let i = petsList.length - 1; i >= petsList.length - 6; i--) {
 
     const pet = petsList[i];
-    const { id_pet, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
+    const { id, name_pet, type, breed, weight, sex, birth_date, owner_dni } = pet;
 
     const owner = ownersList.find(o => o.dni_owner === owner_dni);
     const ownerName = owner.name_owner;
@@ -196,7 +242,6 @@ const createPets = (petsList, ownersList) => {
 
     const cardPet = document.createElement("div");
     cardPet.classList.add("card-last-register");
-    cardPet.style.width = "18rem";
 
     cardPet.innerHTML = `
     <div class="card-new">
@@ -208,7 +253,7 @@ const createPets = (petsList, ownersList) => {
         <h5 class="card-title">${name_pet}</h5>
         <h6 class="card-title">${fullName}</h6>
         <div class="btn-options">
-          <a href="pet-detail.html?id=${id_pet}" class="btn">
+          <a href="pet-detail.html?id=${id}" class="btn">
             <i class="fa-solid fa-info"></i>
           </a>
           <a class="btn btn-delete-pet">

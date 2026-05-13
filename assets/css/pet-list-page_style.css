@@ -16,7 +16,6 @@ body {
         "header"
         "cards"
         "last-aditions"
-        "filter"
         "pacient-list";
 }
 
@@ -24,25 +23,22 @@ body {
     grid-area: header;
 }
 
-.container-filter {
-    margin-top: 3%;
-    grid-area: filter;
-}
 .container-last-aditions {
     grid-area: last-aditions;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 1%;
     margin-top: 5%;
+    margin-bottom: 5%;
     width: 100%;
     min-width: 0;
 }
 
 .last-aditions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    width: 22rem;
     gap: 10px;
 }
 
@@ -55,16 +51,8 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    min-width: 0; 
+    min-width: 0;
     overflow: hidden;
-}
-
-.filter-options {
-    padding-left: 0%;
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 15px;
 }
 
 .container-pacient-list {
@@ -79,9 +67,19 @@ body {
     border: 1px solid rgba(187, 187, 187, 0.5);
 }
 
+.pacients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-top: 3%;
+}
+
 .cards {
     grid-area: cards;
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
     gap: 10px;
 }
 
@@ -90,14 +88,19 @@ body {
     border-radius: 15px
 }
 
-
-
 .header-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 1%;
     margin-bottom: 4%;
+}
+
+.body-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .btn-options {
@@ -133,7 +136,6 @@ body {
     text-decoration: none;
     color: #1E272E;
     font-family: "Roboto", sans-serif;
-    font-size: 0.75rem;
     padding: 0.8rem 1.5rem;
     transition: all 0.3s ease;
 }
@@ -142,6 +144,10 @@ body {
     background-color: rgba(59, 178, 176, 0.5);
     color: #1E272E;
     border-radius: 2rem;
+}
+
+ul {
+    margin-top: 1rem;
 }
 
 .table-pages {
@@ -161,7 +167,7 @@ body {
 }
 
 .scroll-container {
-    max-height: 300px;
+    max-height: 406px;
     overflow-y: auto;
     overflow-x: hidden;
     border: 1px solid #dee2e6;
@@ -211,16 +217,27 @@ p {
 
 @media (min-width: 1020px) {
     .container {
-        max-width: 90%;
-        grid-template-columns: 80% 20%;
+        max-width: 95%;
+        grid-template-columns: 75% 25%;
         grid-template-rows: auto auto;
         grid-template-areas:
             "header header"
-            "cards last-aditions"
-            "filter last-aditions"
+            "cards cards"
             "pacient-list last-aditions";
         gap: 10px;
         align-items: start;
+    }
+
+    .header-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1%;
+        margin-bottom: 2%;
+    }
+
+    .scroll-container {
+        max-height: 390px;
     }
 
     .nav-text {
@@ -228,8 +245,8 @@ p {
         color: #1E272E;
         font-family: "Roboto", sans-serif;
         font-size: 1rem;
-        padding: 0.8rem 1.5rem;
         transition: all 0.3s ease;
+        text-align: center;
     }
 
     .nav-text:hover {
@@ -238,24 +255,47 @@ p {
         border-radius: 2rem;
     }
 
+    .container-pacient-list {
+        margin-top: 3%;
+    }
+
+    .pacients-header{
+        margin-top: 1%;
+    }
+
     .cards {
+        display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         gap: 10px;
+        margin-top: 0%;
     }
 
     .card {
-        width: 18rem;
+        width: 30rem;
         border-radius: 15px
+    }
+
+    .body-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .container-last-aditions {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 0%;
-        background-color: #F8F9FA;
+        padding: 3%;
+        margin-top: 9%;
         border-radius: 10px;
         border: 1px solid rgba(187, 187, 187, 0.5);
+        background-color: white;
+    }
+
+    .last-aditions {
+        width: 100%;
+        margin-top: 3%;
+        gap: 10px;
     }
 }

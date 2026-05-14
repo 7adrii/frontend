@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #f2f2f2;
+   background-color: rgba(196, 227, 227, 0.368);
 }
 
 .container {
@@ -27,11 +27,12 @@ body {
     grid-area: last-aditions;
     display: flex;
     flex-direction: column;
-    padding: 1%;
     margin-top: 5%;
     margin-bottom: 5%;
     width: 100%;
     min-width: 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .last-aditions {
@@ -58,22 +59,23 @@ body {
 .container-pacient-list {
     grid-area: pacient-list;
     background-color: #F8F9FA;
-    padding: 1%;
     margin-bottom: 3%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     border-radius: 10px;
     border: 1px solid rgba(187, 187, 187, 0.5);
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .pacients-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 1%;
-    padding-right: 1%;
-    margin-top: 3%;
+    padding: 2%;
+    background-color: #1E272E;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .cards {
@@ -85,7 +87,8 @@ body {
 
 .card {
     width: 11rem;
-    border-radius: 15px
+    border-radius: 15px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .header-card {
@@ -118,18 +121,6 @@ body {
 
 .status-options {
     font-size: 0.8rem;
-}
-
-.fa-bone {
-    color: #59B2B0;
-}
-
-.fa-calendar-check {
-    color: #F2B705;
-}
-
-.fa-stethoscope {
-    color: #ac5707;
 }
 
 .nav-text {
@@ -214,6 +205,9 @@ p {
     padding-right: 5%;
 }
 
+.list{
+    padding: 1%;
+}
 
 @media (min-width: 1020px) {
     .container {
@@ -257,10 +251,7 @@ p {
 
     .container-pacient-list {
         margin-top: 3%;
-    }
-
-    .pacients-header{
-        margin-top: 1%;
+        max-height: 550px;
     }
 
     .cards {
@@ -285,8 +276,6 @@ p {
     .container-last-aditions {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 3%;
         margin-top: 9%;
         border-radius: 10px;
         border: 1px solid rgba(187, 187, 187, 0.5);
@@ -294,8 +283,10 @@ p {
     }
 
     .last-aditions {
-        width: 100%;
+        width: 95%;
         margin-top: 3%;
+        padding: 2%;
+        align-items: center;
         gap: 10px;
     }
 }

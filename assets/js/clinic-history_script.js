@@ -40,26 +40,35 @@ window.addEventListener("DOMContentLoaded", () => {
             cardAppointment.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-check"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Citas</h6>
+                    <h5 class="card-title text-light"><i class="fa-solid fa-calendar-check"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-light">Citas</h6>
                 </div>
-                <h5 class="card-title">${numberAppointments}</h5>
+                <h5 class="card-title text-light">${numberAppointments}</h5>
             </div>
         `;
         }
 
         //Tarjeta total mascotas/pacientes
         const cardPet = document.getElementById("card-pets");
-        const numberPets = pets.length;
+
+        //Aqui buscamos ver de las mascotas que estan registradas, cuales ya han tenido minimo una cita
+        const numberPacients = [];
+        let numberPets = 0;
+        for (let i = 0; i < appointments.length; i++) {
+            if (!numberPacients.includes(appointments[i].pet_id)) {
+                numberPacients.push(appointments[i].pet_id);
+                numberPets++;
+            }
+        }
 
         if (cardPet) {
             cardPet.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-bone"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Pacientes</h6>
+                    <h5 class="card-title text-light"><i class="fa-solid fa-bone"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-light">Pacientes</h6>
                 </div>
-                <h5 class="card-title">${numberPets}</h5>
+                <h5 class="card-title text-light">${numberPets}</h5>
             </div>
         `;
         }
@@ -123,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const formattedToday = `${day}/${month}/${year}`
 
         const clinicDay = document.getElementById("today");
-        clinicDay.innerHTML=`Citas del día: ${formattedToday}`;
+        clinicDay.innerHTML = `Citas del día: ${formattedToday}`;
 
         //Creacion de la tabla de historial de consultas que ya han pasado
         const table = document.getElementById("table-consults");
@@ -142,6 +151,8 @@ window.addEventListener("DOMContentLoaded", () => {
             </thead>
         `;
 
+        //Tabla para mostrar el listado de citas que ya han ocurrido
+        let counter=0;
         appointments.forEach((appointment) => {
             const { date_appointment, start_time, end_time } = appointment;
             if (formattedToday > date_appointment) {
@@ -162,7 +173,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const fullNameOwner = ownerName + " " + ownerSurname;
 
-
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
                 <tr>
@@ -177,8 +187,17 @@ window.addEventListener("DOMContentLoaded", () => {
                 </tr>
             `;
                 table.appendChild(tbody);
+                counter++;
             }
         });
+
+        if (counter == 0) {
+            table.innerHTML = `
+            <div class="p-2 text-center justify-content-center">
+                <h6>No hay registro de citas</h6>
+            </div>
+                `;
+        }
 
         //Tabla con las citas para el dia actual.
         const tableToday = document.getElementById("table-today-consults");
@@ -197,6 +216,7 @@ window.addEventListener("DOMContentLoaded", () => {
             </thead>
         `;
 
+        let counterToday = 0;
         appointments.forEach((appointment) => {
 
             if (formattedToday === appointment.date_appointment) {
@@ -218,7 +238,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const fullNameOwner = ownerName + " " + ownerSurname;
 
-
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
                 <tr>
@@ -233,8 +252,17 @@ window.addEventListener("DOMContentLoaded", () => {
                 </tr>
             `;
                 tableToday.appendChild(tbody);
+                counterToday++;
             }
         });
+
+        if (counterToday == 0) {
+            tableToday.innerHTML = `
+            <div class="p-2 text-center justify-content-center">
+                <h6>No hay citas agendas para hoy</h6>
+            </div>
+                `;
+        }
     }
 
     getData();

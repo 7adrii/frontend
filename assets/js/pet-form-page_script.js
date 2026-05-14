@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const urlNewPet = `http://localhost:8080/pets`;
   const urlNewOwner = `http://localhost:8080/owners`;
   const urlGetOwners = `http://localhost:8080/owners`;
-  const urlNewAllergy = `http://localhost:8080/allergies`;
+  const urlNewPathology = `http://localhost:8080/pathologies`;
 
   //Creación de contenido de nueva alergia en el formulario de dada de alta de una mascota nueva
   const setAllergyForm = () => {
@@ -47,14 +47,14 @@ window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-new-pet");
     form.innerHTML = `
             <div class="form-title">
-                    <h4>Nuevo Registro</h4>
+                    <h4 class="text-light">Nuevo Registro</h4>
             </div>
             <div class="form-section form-owner">
                 <h5>Datos del dueño</h5>
                 <div class="mb-4">
-                  <label class="form-label text-muted">Seleccionar dueño registrado:</label>
+                  <label class="form-label text-muted">Seleccionar dueño</label>
                   <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
+                    <button class="btn btn-outline-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
                       type="button" id="owner-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
                       <span id="selected-owner-text"><i class="fa-solid fa-users me-2"></i> DNI - Nombre</span>
                     </button>
@@ -69,24 +69,44 @@ window.addEventListener("DOMContentLoaded", () => {
                   <div class="line-form">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                        <input type="text" class="form-control" id="name_owner" placeholder="Ej: Juan">
+                        <input type="text" class="form-control" id="name_owner" placeholder="Juan">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
-                        <input type="text" class="form-control" id="surname" placeholder="Ej: Pérez García">
+                        <input type="text" class="form-control" id="surname" placeholder="Pérez García">
                     </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
-                    <input type="text" class="form-control" id="owner_dni" placeholder="Ej: 94299329V">
+                    <input type="text" class="form-control" id="owner_dni" placeholder="94299329V">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Teléfono*</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Ej: 612 345 678">
+                    <input type="text" class="form-control" id="phone" placeholder="612345678">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email*</label>
-                    <input type="email" class="form-control" id="email" placeholder="Ej: juan.perez@gmail.com">
+                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="direction" placeholder="Paseo de Independencia 1">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Piso</label>
+                    <input type="text" class="form-control" id="floor" placeholder="3B">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Ciudad*</label>
+                    <input type="text" class="form-control" id="city" placeholder="Zaragoza">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Provincia*</label>
+                    <input type="text" class="form-control" id="province" placeholder="Zaragoza">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Codigo postal*</label>
+                    <input type="text" class="form-control" id="postal_code" placeholder="50007">
                   </div>
                 </div>
             </div>
@@ -95,21 +115,21 @@ window.addEventListener("DOMContentLoaded", () => {
                 <h5>Datos de la mascota</h5>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                    <input type="text" class="form-control" id="name_pet" placeholder="Ej: Lana">
+                    <input type="text" class="form-control" id="name_pet" placeholder="Lana">
                 </div>
                 <div class="line-form">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Especie*</label>
-                        <input type="text" class="form-control" id="type" placeholder="Ej: Perro">
+                        <input type="text" class="form-control" id="type" placeholder="Perro">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Raza</label>
-                        <input type="text" class="form-control" id="breed" placeholder="Ej: Golden Retriever">
+                        <input type="text" class="form-control" id="breed" placeholder="Golden Retriever">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Peso*</label>
-                    <input type="text" class="form-control" id="weight" placeholder="Ej: 25 kg">
+                    <label for="exampleInputEmail1" class="form-label">Peso (en kg)*</label>
+                    <input type="text" class="form-control" id="weight" placeholder="25">
                 </div>
                 <div class="mb-3">
                     <label for="disabledSelect" class="form-label">Sexo*</label>
@@ -134,28 +154,44 @@ window.addEventListener("DOMContentLoaded", () => {
                     <template id="allergy-item">
                         <div class="form-section allergy-block">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alérgeno*</label>
-                                <input type="text" class="form-control allergen" placeholder="Ej: Picadura de pulga">
+                                <label for="exampleInputEmail1" class="form-label">Nombre Patología*</label>
+                                <input type="text" class="form-control name" placeholder="Soplo en el corazón">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Método de diagnóstico*</label>
-                                <input type="text" class="form-control diagnostic_method" placeholder="Ej: Picadura de pulga">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Sintomatología</label>
-                                <input type="text" class="form-control symptoms" placeholder="Ej: Ronchas, estornudos">
-                            </div>
-                            <div class="mb-3">
+                            <div class="row mb-3"> 
+                              <div class="col-md-6">
+                                <label for="exampleInputEmail1" class="form-label">Tipo*</label>
+                                <select id="disabledSelect" class="form-select type">
+                                    <option>Alergia</option>
+                                    <option>Enfermedad</option>
+                                    <option>Síndrome</option>
+                                    <option>Otros</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6">
                                 <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
                                 <select id="disabledSelect" class="form-select severity_level">
                                     <option>Leve</option>
                                     <option>Moderada</option>
                                     <option>Grave/Crítica</option>
                                 </select>
+                              </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tratamiento de urgencia*</label>
-                                <input type="text" class="form-control emergency_treatment" placeholder="Ej: Ronchas, estornudos">
+                                <label for="exampleInputEmail1" class="form-label">Método de diagnostico</label>
+                                <input type="text" class="form-control diagnostic_method" placeholder="Analisis de sangre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Sintomas</label>
+                                <textarea class="form-control symptoms" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Tratamiento* </label>
+                                <textarea class="form-control treatment" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Es cronico*</label>
+                                <input type="checkbox" class="form-check-input is_chronic">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
@@ -205,7 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Creamos los elementos para la lista
     ownersList.forEach((owner) => {
-      const { dni_owner, name_owner, surname, phone, email } = owner;
+      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
       ownerElement.innerHTML = `
@@ -221,12 +257,15 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("surname").value = surname;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
+        document.getElementById("direction").value = direction;
+        document.getElementById("floor").value = floor;
+        document.getElementById("city").value = city;
+        document.getElementById("province").value = province;
+        document.getElementById("postal_code").value = postal_code;
       });
 
       listOwners.appendChild(ownerElement);
     });
-
-    
 
     const registerBtn = document.getElementById("btnRegister");
 
@@ -259,6 +298,12 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
+
+        const data = await postPetResponse.json();
+        //Almacenamos el id para la asignacion de la patologias
+        const id = data.data.id_pet;
+        return id;
+
       } catch (error) {
         Swal.fire({
           title: "Error de conexión",
@@ -269,10 +314,11 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     //Función para conectar con el postAllergy de la API
-    const sendAllergies = async (allergies) => {
-      for (const element of allergies) {
+    const sendPathologies = async (pathologies, petId) => {
+      for (const element of pathologies) {
+        element.pet_id = petId;
         try {
-          const postAllergyResponse = await fetch(urlNewAllergy, {
+          const postPathologyResponse = await fetch(urlNewPathology, {
             method: "POST",
             body: JSON.stringify(element),
             headers: {
@@ -280,7 +326,7 @@ window.addEventListener("DOMContentLoaded", () => {
             },
           });
         } catch (error) {
-          console.error("Error en los datos de alergias: ", error);
+          console.error("Error en los datos de patologias: ", error);
         }
       }
     };
@@ -295,11 +341,16 @@ window.addEventListener("DOMContentLoaded", () => {
         surname: document.getElementById("surname").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
+        direction: document.getElementById("direction").value.trim(),
+        floor: document.getElementById("floor").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        province: document.getElementById("province").value.trim(),
+        postal_code: document.getElementById("postal_code").value.trim(),
       };
 
-      const { dni_owner, name_owner, surname, phone, email } = ownerSendAPI;
+      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = ownerSendAPI;
 
-      if (!dni_owner || !name_owner || !surname || !phone || !email) {
+      if (!dni_owner || !name_owner || !surname || !phone || !email || !direction || !city || !province || !postal_code) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de dueño",
           icon: "warning",
@@ -331,45 +382,45 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      //Registrar datos de las alergias
-      const allergyList = document.querySelectorAll(".allergy-block");
-      const allergies = [];
+      //Registrar datos de las patologias
+      const pathologyList = document.querySelectorAll(".allergy-block");
+      const pathologies = [];
       let error = false;
 
-      for (let i = 0; i < allergyList.length; i++) {
-        const element = allergyList[i];
-        const allergy = {
-          allergen: element.querySelector(".allergen").value.trim(),
-          diagnostic_method: element
-            .querySelector(".diagnostic_method")
-            .value.trim(),
+      for (let i = 0; i < pathologyList.length; i++) {
+        const element = pathologyList[i];
+        const pathology = {
+          name: element.querySelector(".name").value.trim(),
+          type: element.querySelector(".type").value.trim(),
+          diagnostic_method: element.querySelector(".diagnostic_method").value.trim(),
           symptoms: element.querySelector(".symptoms").value.trim(),
-          emergency_treatment: element
-            .querySelector(".emergency_treatment")
-            .value.trim(),
           severity_level: element.querySelector(".severity_level").value,
+          treatment: element.querySelector(".treatment").value.trim(),
+          is_chronic: element.querySelector(".is_chronic").checked,
           detection_date: element.querySelector(".detection_date").value,
         };
 
         const {
-          allergen,
+          name,
+          type,
           diagnostic_method,
           symptoms,
-          emergency_treatment,
           severity_level,
+          treatment,
+          is_chronic,
           detection_date,
-        } = allergy;
+        } = pathology;
 
         //Validacion de datos
         if (
-          !allergen ||
-          !diagnostic_method ||
-          !emergency_treatment ||
+          !name ||
+          !type ||
+          !treatment ||
           !severity_level ||
           !detection_date
         ) {
           Swal.fire({
-            title: `Faltan campos por rellenar en la alergia nº ${i + 1}`,
+            title: `Faltan campos por rellenar en la patologia nº ${i + 1}`,
             icon: "warning",
             confirmButtonText: "Volver al registro",
           });
@@ -377,7 +428,7 @@ window.addEventListener("DOMContentLoaded", () => {
           break;
         }
 
-        allergies.push(allergy);
+        pathologies.push(pathology);
       }
 
       if (error) return;
@@ -387,10 +438,12 @@ window.addEventListener("DOMContentLoaded", () => {
           const dataOwner = await sendNewOwner(ownerSendAPI);
         }
 
-        const dataPet = await sendNewPet(petSendAPI);
+        const petIdCreated = await sendNewPet(petSendAPI);
 
-        if (allergies.length > 0) {
-          const dataAllergy = await sendAllergies(allergies);
+        if (petIdCreated) {
+          if (pathologies.length > 0) {
+            const dataPathology = await sendPathologies(pathologies, petIdCreated);
+          }
         }
 
         Swal.fire("Registro completado", "success").then(() => {

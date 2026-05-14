@@ -22,13 +22,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/index_style.css">
-    <link rel="stylesheet" href="./css/pet-form_style.css">
+    <link rel="stylesheet" href="./css/clinic-history_style.css">
 
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/pet-form-page_script.js"></script>
+    <script src="./js/clinic-history_script.js"></script>
 </head>
 
 <body>
@@ -55,8 +54,8 @@
                                 Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="room-status-page.html"><i class="bi bi-door-closed"></i>
-                                Salas</a>
+                            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-calendar"></i>
+                                Calendario de citas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
@@ -91,8 +90,8 @@
                             Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="room-status-page.html"><i class="bi bi-door-closed"></i>
-                            Salas</a>
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-calendar"></i>
+                            Calendario de citas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
@@ -112,13 +111,51 @@
         </div>
     </header>
 
-    <div class="container">
-        <form class="form-container" id="form-new-pet">
+    <section class="container">
+        <div class="cards">
+            <div class="card" id="card-appointments">
 
-        </form>
-    </div>
+            </div>
+            <div class="card" id="card-pets">
 
-        <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+            </div>
+            <div class="card" id="card-breeds">
+
+            </div>
+            <div class="card" id="card-services">
+
+            </div>
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h6 id="today"></h6>
+                <div class="scroll-container">
+                    <table class="table table-striped" id="table-today-consults">
+
+                    </table>
+                </div>
+
+
+            </li>
+        </ul>
+
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h6>Historial de la clinica</h6>
+                <div class="scroll-container">
+                    <table class="table table-striped" id="table-consults">
+
+                    </table>
+                </div>
+
+
+            </li>
+        </ul>
+
+    </section>
+
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
         <div class="container-footer">
             <div class="row gy-4">
 
@@ -126,7 +163,8 @@
                 <div class="col-12 col-md-4 text-center text-md-start">
                     <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
                     <p class="small">
-                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con atención personalizada.
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
+                        atención personalizada.
                     </p>
                 </div>
 
@@ -165,7 +203,6 @@
             </div>
         </div>
     </footer>
-
 </body>
 
 </html>

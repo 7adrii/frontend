@@ -27,6 +27,7 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/pet-list-page_style.js"></script>
 </head>
 
@@ -58,7 +59,7 @@
                                 Salas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><i
+                            <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
                                     class="bi bi-file-earmark-medical"></i> Historial clínico</a>
                         </li>
                         <li class="nav-item">
@@ -94,7 +95,7 @@
                             Salas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><i
+                        <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
                                 class="bi bi-file-earmark-medical"></i> Historial clínico</a>
                     </li>
                     <li class="nav-item">
@@ -118,131 +119,116 @@
             </div>
         </div>
 
-        <div class="container-filter">
-            <ul class="filter-options" id="type-animal">
+        <div class="cards">
+            <div class="card" id="card-all-register">
 
-            </ul>
+            </div>
+            <div class="card" id="card-new-register">
+
+            </div>
+            <div class="card" id="card-delete">
+
+            </div>
+            <div class="card" id="card-species">
+
+            </div>
+            <div class="card" id="card-owners">
+
+            </div>
         </div>
 
         <div class="container-pacient-list">
-            <div class="btn-options" id="btn-register">
-                <a href="pet-form.html">
-                    <button class="btn btn-secondary">Dar de alta</button>
-                </a>
+            <div class="pacients-header">
+                <h5>Listado de Mascotas</h5>
+                <div class="btn-options" id="btn-register">
+                    <a href="pet-form.html">
+                        <button class="btn btn-secondary">Dar de alta</button>
+                    </a>
+                </div>
             </div>
-
             <div>
                 <ul class="list-group">
-                    <li class="list-group-item text-center">
-                        <div>
-                            Lista Mascotas
-                            <div class="status-check">
-                                <p class="status-options"><i class="fa-solid fa-bone"></i> Sin citas</p>
-                                <p class="status-options"><i class="fa-solid fa-calendar-check"></i> Cita agendada</p>
-                                <p class="status-options"><i class="fa-solid fa-stethoscope"></i> En consulta</p>
-                            </div>
+                    <li class="list-group-item">
+                        <div class="scroll-container">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Registro</th>
+                                        <th scope="col">Mascota</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Especie</th>
+                                        <th scope="col">Dueño</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Dni</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Contacto</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pets-list">
+
+                                </tbody>
+                            </table>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="d-none d-md-table-cell">Fecha alta</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Nombre</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Especie</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
-                                    <th scope="col">Dni</th>
-                                    <th scope="col" class="d-none d-md-table-cell">Estado</th>
-                                    <th scope="col">Contacto</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="pets-list">
-
-                            </tbody>
-                        </table>
-                    </li>
                 </ul>
-            </div>
-            <div>
-                <nav aria-label="Page navigation example">
-                    <div class="table-pages">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Pg. 1
-                                    <i class="fa-solid fa-angle-down"></i>
-                                </a></li>
-                            <li class="page-item"><a class="page-link" href="#">de 10</a></li>
-                        </ul>
-                    </div>
-                </nav>
             </div>
         </div>
 
         <div class="container-last-aditions">
-            <h4>Últimos registros</h4>
-            <div class="cards" id="last-aditions">
+            <h5>Últimos registros</h5>
+            <div class="last-aditions" id="last-aditions">
 
-            </div>
-
-        </div>
-
-        <div class="container-sidebar">
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>100</h5>
-                                <p>Registros</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 10</h5>
-                                <p>Nuevos</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="card">
-                <ul class="list-group">
-                    <li>
-                        <div class="card-info">
-                            <i class="fa-solid fa-paw"></i>
-                            <div>
-                                <h5>+ 5</h5>
-                                <p>Bajas</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
     </section>
+
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+        <div class="container-footer">
+            <div class="row gy-4">
+
+                <!-- Vettion -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+                    <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
+                    <p class="small">
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
+                        atención personalizada.
+                    </p>
+                </div>
+
+                <!-- Contactos Directos -->
+                <div class="col-12 col-md-4 text-center">
+                    <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
+                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Ciudad</p>
+                    <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
+                    <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
+                </div>
+
+                <!-- Soporte -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+                    <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
+                    <p class="small mb-1">¿Problemas con la aplicación?</p>
+                    <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
+                        <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4 border-primary opacity-50">
+
+            <!-- Copyright y Estado -->
+            <div class="row justify-content-between">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small">
+                        &copy; 2026 Vettion - Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="small">
+                        <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

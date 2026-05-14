@@ -9,11 +9,15 @@
     background-color: $grey !important;
 }
 
+.bg-dark {
+    background-color: #1E272E !important;
+}
+
 .container-fluid {
     gap: 20px;
 }
 
-.navbar-toggler-icon{
+.navbar-toggler-icon {
     background-image: url("");
 }
 
@@ -57,15 +61,44 @@
     z-index: 1999 !important;
 }
 
-.clock{
+.clock {
     font-family: "Roboto", sans-serif;
     color: $white;
     font-size: 1.5rem;
 }
 
-@media (min-width: 1020px){
-    .nav-link{
+.background-intro {
+    background-image: url(../img/background_image_intro.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 3%;
+    height: 500px;
+    max-height: 500px;
+    text-align: center;
+}
+
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+@media (min-width: 1020px) {
+    .nav-link {
         color: $white !important;
+    }
+
+    .text-size {
+        max-width: 550px;
+    }
+
+    .background-intro {
+        justify-content: space-around;
+        text-align: left;
     }
 }
 
@@ -78,41 +111,47 @@ body {
     overflow-x: hidden;
 }
 
+.btn-display {
+    display: flex;
+    gap: 10px;
+
+}
+
 // Margen del contenedor principal
 .home-main {
     margin-top: 50px;
 }
 
 // Estilos del título principal
-h1.text-center.title{
+h1.text-center.title {
     color: $turquoise;
     font-size: 4rem;
     padding-bottom: 5px;
 }
 
 // Tamaño del título principal en móvil
-@media (max-width: 500px){
-    h1.text-center.title{
+@media (max-width: 500px) {
+    h1.text-center.title {
         font-size: 3rem;
     }
 }
 
 // Estilos del subtítulo
-h3.text-center{
+h3.text-center {
     color: $gold;
     font-size: 2rem;
-    
+
 }
 
 // Tamaño del subtítulo en móvil
-@media (max-width: 500px){
-    h3.text-center{
+@media (max-width: 500px) {
+    h3.text-center {
         font-size: 2rem;
     }
 }
 
 // Estilos de los botones principales
-a.btn.btn-primary.btn-lg.custom-btn{
+a.btn.btn-primary.btn-lg.custom-btn {
     color: $white;
     font-size: 1.1rem;
     font-weight: 600;
@@ -120,7 +159,7 @@ a.btn.btn-primary.btn-lg.custom-btn{
     border-color: $gold;
     transition: background-color 0.3s;
     padding: 15px 35px;
-}   
+}
 
 // Efecto al pasar el ratón por los botones principales
 a.btn.btn-primary.btn-lg.custom-btn:hover {

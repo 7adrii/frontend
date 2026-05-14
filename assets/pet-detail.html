@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Fuentes de tipografia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/index_style.css">
+    <link rel="stylesheet" href="./css/pet-detail_style.css">
+
+    <!-- Scripts js -->
+    <script src="./js/clock_header_script.js" defer></script>
+    <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/pet-detail_script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <img src="./img/list.svg" alt="Icono menú">
+                </button>
+                <div class="d-flex align-items-center mx-auto">
+                    <a class="navbar-brand mb-2 mb-lg-0" href="index.html">
+                        <img src="./img/logo.png" alt="Logo" class="img-header">
+                    </a>
+                    <div class="collapse navbar-collapse">
+                        <p class="mb-0 me-3">Clínica veterinaria</p>
+                    </div>
+                </div>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-grid"></i>
+                                Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-calendar"></i>
+                                Calendario de citas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
+                                    class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                                    class="fa-solid fa-paw"></i>
+                                Clientes/Mascotas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-chat-list"></i>
+                                Consultas</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="clock" class="clock"></div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Vettion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-grid"></i>
+                            Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-calendar"></i>
+                            Calendario de citas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
+                                class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                                class="fa-solid fa-paw"></i>
+                            Clientes/Mascotas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-chat-list"></i>
+                            Consultas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="title-section">
+            <h2>Perfil de la mascota</h2>
+            <a href="#" class="btn" id="btn-delete"><i class="fa-solid fa-trash"></i></a>
+        </div>
+
+        <div class="pet-info" id="pet">
+
+        </div>
+
+        <div class="owner-info" id="owner">
+
+        </div>
+
+        <div class="pet-nextAppointment" id="appointment">
+
+        </div>
+
+        <div class="pet-allergy">
+            <div class="allergy-actions" id="pet-allergy">
+
+            </div>
+
+            <ul class="list-group">
+                <div class="scroll-container-allergy" id="allergy">
+
+                </div>
+            </ul>
+        </div>
+
+        <div class="pet-clinic-history">
+            <ul class="list-group">
+                <h6>Listado consultas</h6>
+                <li class="list-group-item">
+                    <div class="scroll-container">
+                        <table class="table table-striped" id="clinic-history">
+
+                        </table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Pop up para editar la información de la mascota -->
+    <dialog id="editPetPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Mascota</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_pet" required>
+            </div>
+            <div class="mb-3">
+                <label>Especie</label>
+                <input type="text" class="form-control" id="type" required>
+            </div>
+            <div class="mb-3">
+                <label>Raza</label>
+                <input type="text" class="form-control" id="breed" required>
+            </div>
+            <div class="mb-3">
+                <label>Peso</label>
+                <input type="number" class="form-control" step="0.1" id="weight">
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Sexo*</label>
+                <select class="form-select" id="sex">
+                    <option>Macho</option>
+                    <option>Hembra</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                <input type="date" class="form-control" id="birth_date">
+            </div>
+
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesPet" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información del dueño de la mascota -->
+    <dialog id="editOwnerPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Dueño</h3>
+            <div class="mb-3">
+                <label>Nombre</label>
+                <input type="text" class="form-control" id="name_owner" required>
+            </div>
+            <div class="mb-3">
+                <label>Apellidos</label>
+                <input type="text" class="form-control" id="surname" required>
+            </div>
+            <div class="mb-3">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="text" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label>Direccion</label>
+                <input type="text" class="form-control" id="direction" required>
+            </div>
+            <div class="mb-3">
+                <label>Piso</label>
+                <input type="text" class="form-control" id="floor" required>
+            </div>
+            <div class="mb-3">
+                <label>Ciudad</label>
+                <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="mb-3">
+                <label>Provincia</label>
+                <input type="text" class="form-control" id="province" required>
+            </div>
+            <div class="mb-3">
+                <label>Codigo postal</label>
+                <input type="text" class="form-control" id="postal_code" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesOwner" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para editar la información de una alergia de la mascota -->
+    <dialog id="editAllergyPopUp" class="pet-modal">
+        <form id="formEditPet" method="dialog">
+            <h3>Editar Alergia</h3>
+            <div class="mb-3">
+                <label>Allergeno</label>
+                <input type="text" class="form-control" id="allergen" required>
+            </div>
+            <div class="mb-3">
+                <label>Metodo de diagnostico</label>
+                <input type="text" class="form-control" id="diagnostic_method" required>
+            </div>
+            <div class="mb-3">
+                <label>Sintomas</label>
+                <input type="text" class="form-control" id="symptoms" required>
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                <select id="severity_level" class="form-select">
+                    <option>Leve</option>
+                    <option>Moderada</option>
+                    <option>Grave/Crítica</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Tratamiento de emergencia</label>
+                <input type="text" class="form-control" id="emergency_treatment" required>
+            </div>
+            <div class="mb-3">
+                <label>Fecha de deteccion</label>
+                <input type="date" class="form-control" id="detection_date" required>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="submit" id="saveChangesAllergy" class="btn">Guardar</button>
+                <button type="button" class="btn"
+                    onclick="document.getElementById('editAllergyPopUp').close()">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
+    <dialog id="showAllergyPopUp" class="pet-modal">
+        <div id="showInfoAllergy">
+            <h3>Información de la alergia</h3>
+            <div class="mb-3">
+                <h3>Allergeno</h3>
+                <p id="show_allergen"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Metodo de diagnostico</h3>
+                <p id="show_diagnostic_method"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Sintomas</h3>
+                <p id="show_symptoms"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Nivel de severidad</h3>
+                <p id="show_severity_level"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Tratamiento de emergencia</h3>
+                <p id="show_emergency_treatment"></p>
+            </div>
+            <div class="mb-3">
+                <h3>Fecha de deteccion</h3>
+                <p id="show_detection_date"></p>
+            </div>
+            <div class="pet-btns" style="margin-top: 20px;">
+                <button type="button" class="btn"
+                    onclick="document.getElementById('showAllergyPopUp').close()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
+
+        <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+        <div class="container-footer">
+            <div class="row gy-4">
+
+                <!-- Vettion -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+                    <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
+                    <p class="small">
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con atención personalizada.
+                    </p>
+                </div>
+
+                <!-- Contactos Directos -->
+                <div class="col-12 col-md-4 text-center">
+                    <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
+                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Ciudad</p>
+                    <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
+                    <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
+                </div>
+
+                <!-- Soporte -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+                    <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
+                    <p class="small mb-1">¿Problemas con la aplicación?</p>
+                    <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
+                        <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4 border-primary opacity-50">
+
+            <!-- Copyright y Estado -->
+            <div class="row justify-content-between">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small">
+                        &copy; 2026 Vettion - Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="small">
+                        <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

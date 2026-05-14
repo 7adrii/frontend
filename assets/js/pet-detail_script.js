@@ -246,8 +246,13 @@ window.addEventListener("DOMContentLoaded", () => {
       owner_dni,
     } = petData;
 
-    if (!breed || breed === undefined) {
-      type = "-";
+    let newBreed;
+
+    if (!breed || breed === undefined || breed == "anonymous") {
+      newBreed = "-";
+    }
+    else{
+      newBreed = breed;
     }
 
     const initialsPet = name_pet.substring(0, 2).toUpperCase();
@@ -257,7 +262,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <h5 class="text-light">${name_pet}</h5>
       <div class="header-info">
         <h6 class="text-light">${type}</h6>
-        <h6 class="text-light">${breed}</h6>
+        <h6 class="text-light">${newBreed}</h6>
       </div>
       <div class="btn-options">
         <button type="button" id="btnOpenPopUpPet" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></button>

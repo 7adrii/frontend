@@ -251,7 +251,7 @@ p {
 
     .container-pacient-list {
         margin-top: 3%;
-        height: 540px;
+        max-height: 550px;
     }
 
     .cards {

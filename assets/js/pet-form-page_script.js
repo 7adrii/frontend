@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const urlNewPet = `http://localhost:8080/pets`;
   const urlNewOwner = `http://localhost:8080/owners`;
   const urlGetOwners = `http://localhost:8080/owners`;
-  const urlNewAllergy = `http://localhost:8080/allergies`;
+  const urlNewPathology = `http://localhost:8080/pathologies`;
 
   //Creación de contenido de nueva alergia en el formulario de dada de alta de una mascota nueva
   const setAllergyForm = () => {
@@ -52,9 +52,9 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="form-section form-owner">
                 <h5>Datos del dueño</h5>
                 <div class="mb-4">
-                  <label class="form-label text-muted">Seleccionar dueño registrado:</label>
+                  <label class="form-label text-muted">Seleccionar dueño</label>
                   <div class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
+                    <button class="btn btn-outline-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
                       type="button" id="owner-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
                       <span id="selected-owner-text"><i class="fa-solid fa-users me-2"></i> DNI - Nombre</span>
                     </button>
@@ -154,28 +154,44 @@ window.addEventListener("DOMContentLoaded", () => {
                     <template id="allergy-item">
                         <div class="form-section allergy-block">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Alérgeno*</label>
-                                <input type="text" class="form-control allergen" placeholder="Picadura de pulga">
+                                <label for="exampleInputEmail1" class="form-label">Nombre Patología*</label>
+                                <input type="text" class="form-control name" placeholder="Soplo en el corazón">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Método de diagnóstico*</label>
-                                <input type="text" class="form-control diagnostic_method" placeholder="Análisis de sangre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Sintomatología</label>
-                                <input type="text" class="form-control symptoms" placeholder="Ronchas, estornudos, etc">
-                            </div>
-                            <div class="mb-3">
+                            <div class="row mb-3"> 
+                              <div class="col-md-6">
+                                <label for="exampleInputEmail1" class="form-label">Tipo*</label>
+                                <select id="disabledSelect" class="form-select type">
+                                    <option>Alergia</option>
+                                    <option>Enfermedad</option>
+                                    <option>Síndrome</option>
+                                    <option>Otros</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6">
                                 <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
                                 <select id="disabledSelect" class="form-select severity_level">
                                     <option>Leve</option>
                                     <option>Moderada</option>
                                     <option>Grave/Crítica</option>
                                 </select>
+                              </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tratamiento de urgencia*</label>
-                                <input type="text" class="form-control emergency_treatment" placeholder="Vacunación">
+                                <label for="exampleInputEmail1" class="form-label">Método de diagnostico</label>
+                                <input type="text" class="form-control diagnostic_method" placeholder="Analisis de sangre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Sintomas</label>
+                                <textarea class="form-control symptoms" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Tratamiento* </label>
+                                <textarea class="form-control treatment" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Es cronico*</label>
+                                <input type="checkbox" class="form-check-input is_chronic">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
@@ -282,6 +298,14 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
+
+        const data = await postPetResponse.json();
+        console.log("Control 1 - Respuesta cruda del servidor:", data);
+        //Almacenamos el id para la asignacion de la patologias
+        const id = data.data.id_pet;
+        console.log("Control 2 - ID extraído:", id);
+        return id;
+
       } catch (error) {
         Swal.fire({
           title: "Error de conexión",
@@ -292,10 +316,12 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     //Función para conectar con el postAllergy de la API
-    const sendAllergies = async (allergies) => {
-      for (const element of allergies) {
+    const sendPathologies = async (pathologies, petId) => {
+      console.log("PUNTO A - Función iniciada. ID Recibido:", petId, "Total patologías:", pathologies.length);
+      for (const element of pathologies) {
+        element.pet_id = petId;
         try {
-          const postAllergyResponse = await fetch(urlNewAllergy, {
+          const postPathologyResponse = await fetch(urlNewPathology, {
             method: "POST",
             body: JSON.stringify(element),
             headers: {
@@ -303,7 +329,7 @@ window.addEventListener("DOMContentLoaded", () => {
             },
           });
         } catch (error) {
-          console.error("Error en los datos de alergias: ", error);
+          console.error("Error en los datos de patologias: ", error);
         }
       }
     };
@@ -359,45 +385,45 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      //Registrar datos de las alergias
-      const allergyList = document.querySelectorAll(".allergy-block");
-      const allergies = [];
+      //Registrar datos de las patologias
+      const pathologyList = document.querySelectorAll(".allergy-block");
+      const pathologies = [];
       let error = false;
 
-      for (let i = 0; i < allergyList.length; i++) {
-        const element = allergyList[i];
-        const allergy = {
-          allergen: element.querySelector(".allergen").value.trim(),
-          diagnostic_method: element
-            .querySelector(".diagnostic_method")
-            .value.trim(),
+      for (let i = 0; i < pathologyList.length; i++) {
+        const element = pathologyList[i];
+        const pathology = {
+          name: element.querySelector(".name").value.trim(),
+          type: element.querySelector(".type").value.trim(),
+          diagnostic_method: element.querySelector(".diagnostic_method").value.trim(),
           symptoms: element.querySelector(".symptoms").value.trim(),
-          emergency_treatment: element
-            .querySelector(".emergency_treatment")
-            .value.trim(),
           severity_level: element.querySelector(".severity_level").value,
+          treatment: element.querySelector(".treatment").value.trim(),
+          is_chronic: element.querySelector(".is_chronic").checked,
           detection_date: element.querySelector(".detection_date").value,
         };
 
         const {
-          allergen,
+          name,
+          type,
           diagnostic_method,
           symptoms,
-          emergency_treatment,
           severity_level,
+          treatment,
+          is_chronic,
           detection_date,
-        } = allergy;
+        } = pathology;
 
         //Validacion de datos
         if (
-          !allergen ||
-          !diagnostic_method ||
-          !emergency_treatment ||
+          !name ||
+          !type ||
+          !treatment ||
           !severity_level ||
           !detection_date
         ) {
           Swal.fire({
-            title: `Faltan campos por rellenar en la alergia nº ${i + 1}`,
+            title: `Faltan campos por rellenar en la patologia nº ${i + 1}`,
             icon: "warning",
             confirmButtonText: "Volver al registro",
           });
@@ -405,7 +431,7 @@ window.addEventListener("DOMContentLoaded", () => {
           break;
         }
 
-        allergies.push(allergy);
+        pathologies.push(pathology);
       }
 
       if (error) return;
@@ -415,13 +441,15 @@ window.addEventListener("DOMContentLoaded", () => {
           const dataOwner = await sendNewOwner(ownerSendAPI);
         }
 
-        const dataPet = await sendNewPet(petSendAPI);
+        const petIdCreated = await sendNewPet(petSendAPI);
 
-        if (allergies.length > 0) {
-          const dataAllergy = await sendAllergies(allergies);
+        if (petIdCreated) {
+          if (pathologies.length > 0) {
+            const dataPathology = await sendPathologies(pathologies, petIdCreated);
+          }
         }
 
-        Swal.fire("Registro completado", "success").then(() => {
+        Swal.fire("Registro completado", "success", petIdCreated).then(() => {
           window.location.href = `pet-list-page.html`;
         });
       } catch (err) {

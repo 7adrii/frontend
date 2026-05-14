@@ -20,12 +20,11 @@ body {
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 5%;
     width: 100%;
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
-.pet-header{
+.pet-header {
     background-color: #1E272E;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 15px;
@@ -39,7 +38,7 @@ body {
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
-.header-info{
+.header-info {
     display: flex;
     gap: 10px;
     justify-content: space-between;
@@ -62,10 +61,44 @@ body {
 }
 
 .intro {
+    background-color: #1E272E;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1%;
+    padding: 4%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.intro-pathologies {
+    background-color: #1E272E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.intro-appointments {
+    background-color: #1E272E;
+    display: flex;
+    text-align: center;
+    padding: 3%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.no-pathology {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+
+.information-elements {
+    padding: 5%;
 }
 
 .pet-name {
@@ -84,7 +117,6 @@ body {
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 5%;
     width: 100%;
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
@@ -93,7 +125,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 2%;
     border-bottom: 1px solid rgba(187, 187, 187, 0.5);
 }
 
@@ -120,6 +151,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .pet-clinic-history {
@@ -127,7 +159,6 @@ body {
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 1%;
     width: 100%;
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
@@ -168,17 +199,13 @@ body {
     background: #adb5bd;
 }
 
-.elements{
+.element-info {
     display: flex;
-    flex-direction: column;
-    margin-top: 5%;
-}
-.element-info{
-    display: flex;
+    margin-left: 1%;
     gap: 15px;
 }
 
-.icon-element{
+.icon-element {
     width: 50px;
     height: 50px;
     color: #1E272E;
@@ -199,16 +226,8 @@ body {
     background-color: #F8F9FA;
     border: 1px solid rgba(187, 187, 187, 0.5);
     border-radius: 10px;
-    padding: 1%;
     width: 100%;
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
-}
-
-.allergy-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
-    padding: 1%;
 }
 
 .btns-allergy {
@@ -228,21 +247,46 @@ body {
 .pet-modal {
     border: none;
     border-radius: 15px;
-    padding: 25px;
-    background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     width: 90%;
     max-width: 500px;
 }
 
-.pet-modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.6);
+.pathology-modal {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 800px;
+}
+
+.pathology-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(3px);
+}
+
+.pet-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+}
+
+.p-display{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
 }
 
 dialog[open] {
     display: flex;
     flex-direction: column;
+}
+
+.data-form {
+    margin-top: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
+
 }
 
 .container-footer {
@@ -256,21 +300,48 @@ dialog[open] {
 @media (min-width: 1020px) {
     .container {
         display: grid;
-        grid-template-columns: 25% 25% 50%;
+        grid-template-columns: 25% 50% 25%;
         grid-template-rows: auto auto auto;
         grid-template-areas:
             "title title title"
-            "header owner allergy"
-            "info owner allergy"
+            "header allergy owner"
+            "info allergy owner"
             "clinic-history clinic-history clinic-history";
         gap: 20px;
         align-items: start;
         max-width: 80%;
     }
 
-    .pet-header{
-    grid-area: header;
-}
+    .p-display {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto;
+        grid-template-areas: "elements1 elements2";
+        align-items: center;
+        justify-items: center;
+    }
+
+    .elements-1 {
+        grid-area: elements1;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+
+    .elements-2 {
+        grid-area: elements2;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+    }
+
+    .intro-appointments {
+        padding: 2%;
+    }
+
+    .pet-header {
+        grid-area: header;
+    }
 
     .title-section {
         grid-area: title;
@@ -294,12 +365,17 @@ dialog[open] {
     .pet-allergy {
         grid-area: allergy;
         margin: 0;
-        height: 480px;
-        max-height: 480px;
+        height: 505px;
+        max-height: 505px;
     }
 
     .-container-allergy {
         height: 450px;
         max-height: 450px;
+    }
+
+    .no-pathology {
+        margin-top: 30%;
+        text-align: center;
     }
 }

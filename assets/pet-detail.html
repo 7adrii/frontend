@@ -143,7 +143,9 @@
 
         <div class="pet-clinic-history">
             <ul class="list-group">
-                <h6>Listado consultas</h6>
+                <div class="intro-appointments">
+                    <h6 class="text-light">Listado consultas</h6>
+                </div>
                 <li class="list-group-item">
                     <div class="scroll-container">
                         <table class="table table-striped" id="clinic-history">
@@ -158,212 +160,230 @@
     <!-- Pop up para editar la información de la mascota -->
     <dialog id="editPetPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
-            <h3>Editar Mascota</h3>
-            <div class="mb-3">
-                <label>Nombre</label>
-                <input type="text" class="form-control" id="name_pet" required>
+            <div class="intro">
+                <h3 class="text-light">Actualizar datos</h3>
             </div>
-            <div class="mb-3">
-                <label>Especie</label>
-                <input type="text" class="form-control" id="type" required>
-            </div>
-            <div class="mb-3">
-                <label>Raza</label>
-                <input type="text" class="form-control" id="breed" required>
-            </div>
-            <div class="mb-3">
-                <label>Peso</label>
-                <input type="number" class="form-control" step="0.1" id="weight">
-            </div>
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Sexo*</label>
-                <select class="form-select" id="sex">
-                    <option>Macho</option>
-                    <option>Hembra</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                <input type="date" class="form-control" id="birth_date">
-            </div>
+            <div class="data-form">
+                <div class="mb-3">
+                    <label>Nombre*</label>
+                    <input type="text" class="form-control" id="name_pet" required>
+                </div>
+                <div class="mb-3">
+                    <label>Especie*</label>
+                    <input type="text" class="form-control" id="type" required>
+                </div>
+                <div class="mb-3">
+                    <label>Raza*</label>
+                    <input type="text" class="form-control" id="breed" required>
+                </div>
+                <div class="mb-3">
+                    <label>Peso*</label>
+                    <input type="number" class="form-control" step="0.1" id="weight">
+                </div>
+                <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">Sexo*</label>
+                    <select class="form-select" id="sex">
+                        <option>Macho</option>
+                        <option>Hembra</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <input type="date" class="form-control" id="birth_date">
+                </div>
 
-            <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesPet" class="btn">Guardar</button>
-                <button type="button" class="btn"
-                    onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+                <div class="pet-btns" style="margin-top: 20px;">
+                    <button type="submit" id="saveChangesPet" class="btn btn-dark">Guardar</button>
+                    <button type="button" class="btn btn-dark"
+                        onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+                </div>
             </div>
         </form>
     </dialog>
 
     <!-- Pop up para editar la información del dueño de la mascota -->
     <dialog id="editOwnerPopUp" class="pet-modal">
-        <form id="formEditPet" method="dialog">
-            <h3>Editar Dueño</h3>
-            <div class="mb-3">
-                <label>Nombre</label>
-                <input type="text" class="form-control" id="name_owner" required>
+        <div id="formEditPet" method="dialog">
+            <div class="intro">
+                <h3 class="text-light">Actualizar dueño</h3>
             </div>
-            <div class="mb-3">
-                <label>Apellidos</label>
-                <input type="text" class="form-control" id="surname" required>
+            <div class="data-form">
+                <div class="mb-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" id="name_owner" required>
+                </div>
+                <div class="mb-3">
+                    <label>Apellidos</label>
+                    <input type="text" class="form-control" id="surname" required>
+                </div>
+                <div class="mb-3">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" id="phone" required>
+                </div>
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="text" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label>Direccion</label>
+                    <input type="text" class="form-control" id="direction" required>
+                </div>
+                <div class="mb-3">
+                    <label>Piso</label>
+                    <input type="text" class="form-control" id="floor" required>
+                </div>
+                <div class="mb-3">
+                    <label>Ciudad</label>
+                    <input type="text" class="form-control" id="city" required>
+                </div>
+                <div class="mb-3">
+                    <label>Provincia</label>
+                    <input type="text" class="form-control" id="province" required>
+                </div>
+                <div class="mb-3">
+                    <label>Codigo postal</label>
+                    <input type="text" class="form-control" id="postal_code" required>
+                </div>
+                <div class="pet-btns" style="margin-top: 20px;">
+                    <button type="submit" id="saveChangesOwner" class="btn btn-dark">Guardar</button>
+                    <button type="button" class="btn btn-dark"
+                        onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label>Teléfono</label>
-                <input type="text" class="form-control" id="phone" required>
-            </div>
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="text" class="form-control" id="email" required>
-            </div>
-            <div class="mb-3">
-                <label>Direccion</label>
-                <input type="text" class="form-control" id="direction" required>
-            </div>
-            <div class="mb-3">
-                <label>Piso</label>
-                <input type="text" class="form-control" id="floor" required>
-            </div>
-            <div class="mb-3">
-                <label>Ciudad</label>
-                <input type="text" class="form-control" id="city" required>
-            </div>
-            <div class="mb-3">
-                <label>Provincia</label>
-                <input type="text" class="form-control" id="province" required>
-            </div>
-            <div class="mb-3">
-                <label>Codigo postal</label>
-                <input type="text" class="form-control" id="postal_code" required>
-            </div>
-            <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesOwner" class="btn">Guardar</button>
-                <button type="button" class="btn"
-                    onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
-            </div>
-        </form>
+            </form>
     </dialog>
 
     <!-- Pop up para editar la información de una alergia de la mascota -->
     <dialog id="editPathologyPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
-            <h3>Editar Patologia</h3>
-            <div class="mb-3">
-                <label>Allergeno</label>
-                <input type="text" class="form-control" id="name" required>
+            <div class="intro">
+                <h3 class="text-light">Editar Patologia</h3>
             </div>
-            <div class="mb-3">
-                <label>Tipo</label>
-                <select id="type" class="form-select">
-                    <option>Alergia</option>
-                    <option>Enfermedad</option>
-                    <option>Síndrome</option>
-                    <option>Otro</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label>Diagnostico (metodo)</label>
-                <input type="text" class="form-control" id="diagnostic_method" required>
-            </div>
-            <div class="mb-3">
-                <label>Sintomas</label>
-                <input type="text" class="form-control" id="symptoms" required>
-            </div>
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Nivel de severidad</label>
-                <select id="severity_level" class="form-select">
-                    <option>Leve</option>
-                    <option>Moderada</option>
-                    <option>Grave/Crítica</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label>Tratamiento</label>
-                <input type="text" class="form-control" id="treatment" required>
-            </div>
-            <div class="mb-3">
-                <label>Es cronico</label>
-                <input type="checkbox" class="form-control" id="is_chronic" required>
-            </div>
-            <div class="mb-3">
-                <label>Fecha de deteccion</label>
-                <input type="date" class="form-control" id="detection_date" required>
+            <div class="data-form">
+                <div class="mb-3">
+                    <label>Allergeno</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label>Tipo</label>
+                    <select id="type" class="form-select">
+                        <option>Alergia</option>
+                        <option>Enfermedad</option>
+                        <option>Síndrome</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Diagnostico (metodo)</label>
+                    <input type="text" class="form-control" id="diagnostic_method" required>
+                </div>
+                <div class="mb-3">
+                    <label>Sintomas</label>
+                    <input type="text" class="form-control" id="symptoms" required>
+                </div>
+                <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                    <select id="severity_level" class="form-select">
+                        <option>Leve</option>
+                        <option>Moderada</option>
+                        <option>Grave/Crítica</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Tratamiento</label>
+                    <input type="text" class="form-control" id="treatment" required>
+                </div>
+                <div class="mb-3">
+                    <label>Es cronico</label>
+                    <input type="checkbox" class="form-control" id="is_chronic" required>
+                </div>
+                <div class="mb-3">
+                    <label>Fecha de deteccion</label>
+                    <input type="date" class="form-control" id="detection_date" required>
+                </div>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesPathology" class="btn">Guardar</button>
-                <button type="button" class="btn"
+                <button type="submit" id="saveChangesPathology" class="btn btn-dark">Guardar</button>
+                <button type="button" class="btn btn-dark"
                     onclick="document.getElementById('editPathologyPopUp').close()">Cancelar</button>
             </div>
         </form>
     </dialog>
 
     <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
-    <dialog id="showPathologyPopUp" class="pet-modal">
+    <dialog id="showPathologyPopUp" class="pathology-modal">
         <div id="showInfoPathology">
-            <h3>Información de la patología</h3>
-            <div class="elements">
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
-                    <div class="mb-3">
-                        <h5>Nombre</h5>
-                        <p id="show_name"></p>
-                    </div>
-                </div>
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
-                    <div class="mb-3">
-                        <h5>Tipo</h5>
-                        <p id="show_type"></p>
-                    </div>
-                </div>
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-stethoscopes"></i></span>
-                    <div class="mb-3">
-                        <h5>Diagnostico</h5>
-                        <p id="show_diagnostic_method"></p>
-                    </div>
-                </div>
-
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
-                    <div class="mb-3">
-                        <h5>Sintomas</h5>
-                        <p id="show_symptoms"></p>
-                    </div>
-                </div>
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                    <div class="mb-3">
-                        <h5>Nivel de severidad</h5>
-                        <p id="show_severity_level"></p>
-                    </div>
-                </div>
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
-                    <div class="mb-3">
-                        <h5>Tratamiento</h5>
-                        <p id="show_treatment"></p>
-                    </div>
-                </div>
-
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
-                    <div class="mb-3">
-                        <h5>Crónico</h5>
-                        <p id="show_is_chronic"></p>
-                    </div>
-                </div>
-
-                <div class="element-info">
-                    <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
-                    <div class="mb-3">
-                        <h5>Tratamiento</h5>
-                        <p id="show_detection_date"></p>
-                    </div>
-                </div>
+            <div class="intro">
+                <h3 class="text-light">Información de la patología</h3>
+                <button type="button" class="btn btn-light"
+                    onclick="document.getElementById('showPathologyPopUp').close()"><i
+                        class="fa-solid fa-x"></i></button>
             </div>
-            <div class="pet-btns" style="margin-top: 20px;">
-                <button type="button" class="btn"
-                    onclick="document.getElementById('showPathologyPopUp').close()">Cancelar</button>
+
+            <div class="p-display">
+                <div class="elements-1">
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
+                        <div class="mb-3">
+                            <h5>Nombre</h5>
+                            <p id="show_name"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
+                        <div class="mb-3">
+                            <h5>Tipo</h5>
+                            <p id="show_type"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-stethoscope"></i></span>
+                        <div class="mb-3">
+                            <h5>Diagnostico</h5>
+                            <p id="show_diagnostic_method"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
+                        <div class="mb-3">
+                            <h5>Sintomas</h5>
+                            <p id="show_symptoms"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="elements-2">
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div class="mb-3">
+                            <h5>Nivel de severidad</h5>
+                            <p id="show_severity_level"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
+                        <div class="mb-3">
+                            <h5>Tratamiento</h5>
+                            <p id="show_treatment"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
+                        <div class="mb-3">
+                            <h5>Crónico</h5>
+                            <p id="show_is_chronic"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
+                        <div class="mb-3">
+                            <h5>Tratamiento</h5>
+                            <p id="show_detection_date"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </dialog>

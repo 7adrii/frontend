@@ -78,39 +78,42 @@ window.addEventListener("DOMContentLoaded", () => {
     } = ownerData;
 
     ownerElement.innerHTML = `
-      <div class="owner-name">
+    <div class="owner-name">
         <div class="intro">
-          <h5>Información del dueñ@</h5>
-          <button type="button" id="btnOpenPopUpOwner" class="btn"><i class="fa-solid fa-pencil"></i></button>
+          <h6 class="text-light">Información del dueñ@</h6>
+          <button type="button" id="btnOpenPopUpOwner" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></button>
         </div>
-        <div class="information-section">
-          <h6>Nombre</h6>
-          <h6 class="text-primary">${name_owner}</h6>
+
+      <div class="information-elements">
+        <div class="owner-name">
+          <div class="information-section">
+            <h6>Nombre</h6>
+            <h6 class="text-primary">${name_owner}</h6>
+          </div>
+          <div class="information-section">
+            <h6>Apellidos</h6>
+            <h6 class="text-primary">${surname}</h6>
+          </div>
         </div>
-        <div class="information-section">
-          <h6>Apellidos</h6>
-          <h6 class="text-primary">${surname}</h6>
+        <div class="owner-contact">
+          <h6>Datos de contacto</h6>
+          <div class="information-section">
+            <i class="fa-solid fa-address-card"></i>
+            <h6 class="text-primary">${dni_owner}</h6>
+          </div>
+          <div class="information-section">
+            <i class="fa-solid fa-envelope"></i>
+            <h6 class="text-primary">${email}</h6>
+          </div>
+          <div class="information-section">
+            <i class="fa-solid fa-mobile"></i>
+            <h6 class="text-primary">${phone}</h6>
+          </div>
         </div>
-      </div>
-      <div class="owner-contact">
-        <h6>Datos de contacto</h6>
-        <div class="information-section">
-          <i class="fa-solid fa-address-card"></i>
-          <h6 class="text-primary">${dni_owner}</h6>
-        </div>
-        <div class="information-section">
-          <i class="fa-solid fa-envelope"></i>
-          <h6 class="text-primary">${email}</h6>
-        </div>
-        <div class="information-section">
-          <i class="fa-solid fa-mobile"></i>
-          <h6 class="text-primary">${phone}</h6>
-        </div>
-      </div>
       <div class="owner-direction">
         <h6>Dirección de residencia</h6>
         <div class="information-section">
-          <h6>Calle y numero</h6>
+          <h6>Calle</h6>
           <h6 class="text-primary">${direction}</h6>
         </div>
         <div class="information-section">
@@ -126,6 +129,7 @@ window.addEventListener("DOMContentLoaded", () => {
           <h6 class="text-primary">${postal_code}</h6>
         </div>
       </div>
+    </div>
     `;
 
     //Pop Up para editar los datos del dueño
@@ -246,9 +250,9 @@ window.addEventListener("DOMContentLoaded", () => {
       type = "-";
     }
 
-    const initialsPet = name_pet.substring(0,2).toUpperCase();
+    const initialsPet = name_pet.substring(0, 2).toUpperCase();
 
-    petHeader.innerHTML=`
+    petHeader.innerHTML = `
       <span class="avatar-text">${initialsPet}</span>
       <h5 class="text-light">${name_pet}</h5>
       <div class="header-info">
@@ -264,9 +268,11 @@ window.addEventListener("DOMContentLoaded", () => {
     `
 
     petElement.innerHTML = `
-      <div class="intro">
-        <h6>Información de la mascota</h6>
-      </div>
+    <div class="intro">
+        <h6 class="text-light">Información de la mascota</h6>
+    </div>
+
+    <div class="information-elements">
 
       <div class="information-section">
           <h6>Peso</h6>
@@ -293,6 +299,7 @@ window.addEventListener("DOMContentLoaded", () => {
           <h6 class="text-primary">${register_date}</h6>
       </div>
 
+    </div>
     `;
 
     //Pop up de editar datos de la mascota y guardar los cambios
@@ -302,9 +309,13 @@ window.addEventListener("DOMContentLoaded", () => {
     btnPopUpPet.addEventListener("click", (e) => {
       e.preventDefault();
 
-      //Cambiamos la fecha a formato año-mes-año para que se muestre en el modal
+      //Cambiamos la fecha a formato año-mes-dia para que se muestre en el modal
       const dayMonthYear = birth_date.split('/');
-      const newBirthDate = `${dayMonthYear[2]}-${dayMonthYear[1]}-${dayMonthYear[0]}`
+      const day = dayMonthYear[0].toString().padStart(2, '0');
+      const month = dayMonthYear[1].toString().padStart(2, '0');
+      const year = dayMonthYear[2];
+      const newBirthDate = `${year}-${month}-${day}`;
+
       console.log("Abriendo modal");
 
       document.getElementById("name_pet").value = name_pet;
@@ -375,9 +386,10 @@ window.addEventListener("DOMContentLoaded", () => {
     //Numero de patologias
     const pathologiesQuantity = document.getElementById("pet-pathology");
     const numPathologies = pathologiesData.length;
+    pathologiesQuantity.classList.add("intro-pathologies");
     pathologiesQuantity.innerHTML = `
-      <h4>Total patologías: ${numPathologies}</h4>
-      <a href="new-allergy.html?id=${id_pet}" class="btn"><i class="fa-solid fa-plus"></i></a>
+      <h5 class="text-light">Total patologías: ${numPathologies}</h5>
+      <a href="new-allergy.html?id=${id_pet}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
     `;
 
     //Datos de las patologias
@@ -385,9 +397,10 @@ window.addEventListener("DOMContentLoaded", () => {
     pathologiesList.innerHTML = ``;
 
     if (numPathologies === 0) {
-      const pathologyInfo = document.createElement("h6");
+      const pathologyInfo = document.createElement("div");
+      pathologyInfo.classList.add("no-pathology")
       pathologyInfo.innerHTML = `
-        No hay alergias registradas para ${petData.name_pet}.
+        <h6>No hay alergias registradas para ${petData.name_pet}.</h6>
       `;
       pathologiesList.appendChild(pathologyInfo);
     } else {
@@ -487,6 +500,13 @@ window.addEventListener("DOMContentLoaded", () => {
         //buscamos la alergia de la base de datos que tiene ese id para mostrar los datos
         const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
 
+        //formateamos la fecha para poder mostrarla
+        const dayMonthYear = pathology.detection_date.split('/');
+        const day = dayMonthYear[0].toString().padStart(2, '0');
+        const month = dayMonthYear[1].toString().padStart(2, '0');
+        const year = dayMonthYear[2];
+        const newDetectionDate = `${year}-${month}-${day}`;
+
         if (pathology) {
           document.getElementById("name").value = pathology.name;
           document.getElementById("type").value = pathology.type;
@@ -495,7 +515,7 @@ window.addEventListener("DOMContentLoaded", () => {
           document.getElementById("severity_level").value = pathology.severity_level;
           document.getElementById("treatment").value = pathology.treatment;
           document.getElementById("is_chronic").value = pathology.is_chronic;
-          document.getElementById("detection_date").value = pathology.detection_date.split("T")[0];
+          document.getElementById("detection_date").value = newDetectionDate;
 
           popUpPathology.showModal();
         }
@@ -520,7 +540,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const {
         name,
-        type, 
+        type,
         diagnostic_method,
         symptoms,
         severity_level,

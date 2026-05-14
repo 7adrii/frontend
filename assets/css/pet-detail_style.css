@@ -125,7 +125,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-bottom: 1px solid rgba(187, 187, 187, 0.5);
 }
 
 .owner-contact {
@@ -296,6 +295,33 @@ dialog[open] {
     padding-right: 5%;
 }
 
+.scroll-container {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.scroll-container table thead th {
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
 
 @media (min-width: 1020px) {
     .container {
@@ -365,8 +391,8 @@ dialog[open] {
     .pet-allergy {
         grid-area: allergy;
         margin: 0;
-        height: 505px;
-        max-height: 505px;
+        height: 495px;
+        max-height: 495px;
     }
 
     .-container-allergy {
@@ -377,5 +403,9 @@ dialog[open] {
     .no-pathology {
         margin-top: 30%;
         text-align: center;
+    }
+
+    .scroll-container{
+        max-height: 420px;
     }
 }

@@ -35,6 +35,7 @@ form {
     display: flex;
     justify-content: end;
     gap: 10px;
+    padding: 3%;
 }
 
 .container-footer {
@@ -76,14 +77,17 @@ form {
         display: flex;
         flex-direction: column;
         max-width: 570px;
+        border-bottom: none;
     }
 
     .form-pet {
         grid-area: form-pet;
+        border-bottom: none;
     }
 
     .form-allergy {
         grid-area: form-allergy;
+        border-bottom: none;
     }
 
     .btns {
@@ -91,6 +95,7 @@ form {
     }
 
     .form-section {
-        margin-bottom: 3%;
+        margin-bottom: 2%;
+        border-bottom: none;
     }
 }

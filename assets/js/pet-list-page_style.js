@@ -33,15 +33,15 @@ const createPets = (petsList, ownersList) => {
 
   if (cardAllRegister) {
     cardAllRegister.innerHTML = `
-            <div class="card-body">
+            <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-book-open"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Registros</h6>
+                    <h5 class="card-title text-light"><i class="fa-solid fa-book-open"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-light">Registros</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Total</h6>
+                <h6 class="card-subtitle mb-2 text-light d-none d-lg-block">Total</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Histórico completo</h6>
-                  <h5 class="card-title">${numberRegister}</h5>
+                  <h6 class="card-subtitle mb-2 text-light">Histórico completo</h6>
+                  <h5 class="card-title text-light">${numberRegister}</h5>
                 </div>
             </div>
             
@@ -54,15 +54,15 @@ const createPets = (petsList, ownersList) => {
 
   if (cardDeleteRegister) {
     cardDeleteRegister.innerHTML = `
-            <div class="card-body">
+            <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-minus"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Bajas</h6>
+                    <h5 class="card-title text-secondary"><i class="fa-solid fa-calendar-minus"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-secondary">Bajas</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Registros desactivados</h6>
+                <h6 class="card-subtitle mb-2 text-secondary d-none d-lg-block">Registros desactivados</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Bajas</h6>
-                  <h5 class="card-title">${deletePetData}</h5>
+                  <h6 class="card-subtitle mb-2 text-secondary">Bajas</h6>
+                  <h5 class="card-title text-secondary">${deletePetData}</h5>
                 </div>
             </div>
         `;
@@ -86,11 +86,11 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-bone"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Especies</h6>
+                    <h6 class="card-subtitle mb-2">Especies</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Tipos de animales diferentes</h6>
+                <h6 class="card-subtitle mb-2 d-none d-lg-block">Tipos de animales diferentes</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                  <h6 class="card-subtitle mb-2">Total</h6>
                   <h5 class="card-title">${numberSpecies}</h5>
                 </div>
             </div>
@@ -115,11 +115,11 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-user"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Dueños</h6>
+                    <h6 class="card-subtitle mb-2">Dueños</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Dueños registrados</h6>
+                <h6 class="card-subtitle mb-2 d-none d-lg-block">Dueños registrados</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                  <h6 class="card-subtitle mb-2">Total</h6>
                   <h5 class="card-title">${numberOwners}</h5>
                 </div>
             </div>
@@ -150,15 +150,15 @@ const createPets = (petsList, ownersList) => {
 
   if (cardNewRegisters) {
     cardNewRegisters.innerHTML = `
-            <div class="card-body">
+            <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
-                    <h5 class="card-title"><i class="fa-solid fa-calendar-plus"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Altas</h6>
+                    <h5 class="card-title text-primary"><i class="fa-solid fa-calendar-plus"></i></h5>
+                    <h6 class="card-subtitle mb-2 text-primary">Altas</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-body-secondary d-none d-lg-block">Nuevos ingresos</h6>
+                <h6 class="card-subtitle mb-2 text-primary d-none d-lg-block">Nuevos ingresos</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-body-secondary">${formattedToday}</h6>
-                  <h5 class="card-title">${numberNewRegister}</h5>
+                  <h6 class="card-subtitle mb-2 text-primary">${formattedToday}</h6>
+                  <h5 class="card-title text-primary">${numberNewRegister}</h5>
                 </div>
             </div>
         `;

@@ -16,66 +16,69 @@ window.addEventListener("DOMContentLoaded", () => {
     const createNewPathology = () => {
         const form = document.getElementById("form-new-pathology");
         form.innerHTML = `
-        <div class="form-allergy">
-            <div class="form-section">
-                <h5>Nueva alergia</h5>
-                <div class="form-section allergy-block">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Nombre*</label>
-                        <input type="text" class="form-control" id="name" placeholder="Ej: Picadura de pulga">
-                    </div>
-                    <div class="double-element">
-                        <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Tipo*</label>
-                        <select class="form-select" id="type">
-                            <option>Alergia</option>
-                            <option>Sindrome</option>
-                            <option>Enfermedad</option>
-                            <option>Otros</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
-                        <select class="form-select" id="severity_level">
-                            <option>Leve</option>
-                            <option>Moderada</option>
-                            <option>Grave/Crítica</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Es cronico*</label>
-                        <input type="checkbox" class="form-control" id="is_chronic">
-                    </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Diagnostico</label>
-                        <input type="text" class="form-control" id="diagnostic_method" placeholder="Analisis de sangre">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Sintomas*</label>
-                        <input type="text" class="form-control" id="symptoms" placeholder="Ronchas, estornudos">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Tratamiento*</label>
-                        <input type="text" class="form-control" id="treatment" placeholder="Administracion por via intravenosa">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
-                        <input type="date" class="form-control" id="detection_date">
-                    </div>
+        <div class="form-title">
+                    <h4 class="text-light">Nueva Patología</h4>
+            </div>
+            
+            <div class="form-allergy">
+                <div class="form-section">
+                        <div class="form-section allergy-block">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Nombre Patología*</label>
+                                <input type="text" class="form-control" id="name" placeholder="Soplo en el corazón">
+                            </div>
+                            <div class="row mb-3"> 
+                              <div class="col-md-6">
+                                <label for="exampleInputEmail1" class="form-label">Tipo*</label>
+                                <select class="form-select" id="type">
+                                    <option>Alergia</option>
+                                    <option>Enfermedad</option>
+                                    <option>Síndrome</option>
+                                    <option>Otros</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
+                                <select class="form-select" id="severity_level">
+                                    <option>Leve</option>
+                                    <option>Moderada</option>
+                                    <option>Grave/Crítica</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Método de diagnostico</label>
+                                <input type="text" class="form-control" id="diagnostic_method" placeholder="Analisis de sangre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Sintomas</label>
+                                <textarea class="form-control" id="symptoms" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Tratamiento* </label>
+                                <textarea class="form-control" id="treatment" rows="3" placeholder="Ronchas"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Es cronico*</label>
+                                <input type="checkbox" class="form-check-input" id="is_chronic">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
+                                <input type="date" class="form-control" id="detection_date">
+                            </div>
+                        </div>
                 </div>
             </div>
+
             <div class="btns">
-                <button type="submit" class="btn btn-primary" id="btnRegister">Registrar</button>
+                <a>
+                    <button type="submit" class="btn btn-primary" id="btnRegister">Registrar</button>
+                </a>
                 <a href="pet-detail.html?id=${idPet}">
                     <button type="button" class="btn btn-secondary">Cancelar</button>
                 </a>
             </div>
-        </div>
     `;
 
         const registerBtn = document.getElementById("btnRegister");
@@ -91,7 +94,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 treatment: document.getElementById("treatment").value,
                 is_chronic: document.getElementById("is_chronic").checked,
                 detection_date: document.getElementById("detection_date").value,
-                id_pet: idPet,
+                pet_id: idPet,
             };
 
             const {

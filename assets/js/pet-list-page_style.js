@@ -284,7 +284,7 @@ const createPets = (petsList, ownersList) => {
           text: "El registro se ha eliminado correctamente",
           icon: "success",
           iconColor: "#318a3a",
-          confirmButtonText: "Volver al dashboard",
+          confirmButtonText: "Volver al listado de registros",
           confirmButtonColor: "#2a1418",
         }).then(() => {
           window.location.href = "pet-list-page.html";

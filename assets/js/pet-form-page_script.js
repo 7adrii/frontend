@@ -300,10 +300,8 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await postPetResponse.json();
-        console.log("Control 1 - Respuesta cruda del servidor:", data);
         //Almacenamos el id para la asignacion de la patologias
         const id = data.data.id_pet;
-        console.log("Control 2 - ID extraído:", id);
         return id;
 
       } catch (error) {
@@ -317,7 +315,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Función para conectar con el postAllergy de la API
     const sendPathologies = async (pathologies, petId) => {
-      console.log("PUNTO A - Función iniciada. ID Recibido:", petId, "Total patologías:", pathologies.length);
       for (const element of pathologies) {
         element.pet_id = petId;
         try {
@@ -449,7 +446,7 @@ window.addEventListener("DOMContentLoaded", () => {
           }
         }
 
-        Swal.fire("Registro completado", "success", petIdCreated).then(() => {
+        Swal.fire("Registro completado", "success").then(() => {
           window.location.href = `pet-list-page.html`;
         });
       } catch (err) {

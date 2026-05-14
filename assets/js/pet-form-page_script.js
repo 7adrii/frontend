@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-new-pet");
     form.innerHTML = `
             <div class="form-title">
-                    <h4>Nuevo Registro</h4>
+                    <h4 class="text-light">Nuevo Registro</h4>
             </div>
             <div class="form-section form-owner">
                 <h5>Datos del dueño</h5>

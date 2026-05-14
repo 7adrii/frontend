@@ -31,6 +31,8 @@ body {
     margin-bottom: 5%;
     width: 100%;
     min-width: 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .last-aditions {
@@ -63,6 +65,7 @@ body {
     gap: 10px;
     border-radius: 10px;
     border: 1px solid rgba(187, 187, 187, 0.5);
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .pacients-header {
@@ -85,6 +88,7 @@ body {
 .card {
     width: 11rem;
     border-radius: 15px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .header-card {
@@ -201,6 +205,9 @@ p {
     padding-right: 5%;
 }
 
+.list{
+    padding: 1%;
+}
 
 @media (min-width: 1020px) {
     .container {
@@ -244,6 +251,7 @@ p {
 
     .container-pacient-list {
         margin-top: 3%;
+        height: 540px;
     }
 
     .cards {

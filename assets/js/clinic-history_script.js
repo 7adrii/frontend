@@ -141,10 +141,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Paciente</th>
-                    <th scope="col" class="d-none d-md-table-cell">Dueño</th>
+                    <th scope="col" class="d-none d-ld-table-cell">Dueño</th>
                     <th scope="col">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Hora inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Hora fin</th>
+                    <th scope="col" class="d-none d-ld-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-ld-table-cell">Fin</th>
                     <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
                     <th scope="col"></th>
                 </tr>
@@ -178,12 +178,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 <tr>
                     <th scope="row">${date_appointment}</th>
                     <td scope="row">${petName}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
+                    <td scope="row" class="d-none d-ld-table-cell">${fullNameOwner}</td>
                     <td scope="row">${serviceName}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
+                    <td scope="row" class="d-none d-ld-table-cell">${start_time}</td>
+                    <td scope="row" class="d-none d-ld-table-cell">${end_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-plus"></i></a></td>
+                    <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
                 </tr>
             `;
                 table.appendChild(tbody);
@@ -208,8 +208,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     <th scope="col">Paciente</th>
                     <th scope="col" class="d-none d-md-table-cell">Dueño</th>
                     <th scope="col">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Hora inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Hora fin</th>
+                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Fin</th>
                     <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
                     <th scope="col"></th>
                 </tr>

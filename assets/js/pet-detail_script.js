@@ -679,11 +679,11 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
 
     if (appointmentsData.length === 0) {
-      const appointmentInfo = document.createElement("h6");
-      appointmentInfo.innerHTML = `
-      No hay registro previo de citas para ${petData.name_pet}.
+      appointmentsList.classList.add("text-center")
+      appointmentsList.classList.add("m-2")
+      appointmentsList.innerHTML = `
+      <h6>No hay registro previo de citas para ${petData.name_pet}.</h6>
       `;
-      appointmentsList.appendChild(appointmentInfo);
     } else {
       appointmentsData.forEach((appointment) => {
         const appointmentInfo = document.createElement("tbody");

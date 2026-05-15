@@ -319,7 +319,68 @@ dialog[open] {
     background: #adb5bd;
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 768px){
+
+    .container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "title title"
+            "header owner"
+            "info owner"
+            "allergy allergy"
+            "clinic-history clinic-history";
+        gap: 20px;
+        align-items: start;
+        max-width: 80%;
+    }
+
+    .pet-header {
+        grid-area: header;
+    }
+
+    .title-section {
+        grid-area: title;
+        margin-bottom: 2%;
+    }
+
+    .pet-info {
+        grid-area: info;
+    }
+
+    .owner-info {
+        grid-area: owner;
+        margin: 0;
+    }
+
+    .pet-allergy {
+        grid-area: allergy;
+        margin: 0;
+        height: 335px;
+        max-height: 335px;
+    }
+
+    .pet-clinic-history {
+        grid-area: clinic-history;
+        margin: 0;
+    }
+
+    .no-pathology {
+        text-align: center;
+    }
+
+    .scroll-container {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+}
+
+@media (min-width: 1024px) {
     .container {
         display: grid;
         grid-template-columns: 25% 50% 25%;
@@ -387,18 +448,13 @@ dialog[open] {
     .pet-allergy {
         grid-area: allergy;
         margin: 0;
-        height: 495px;
-        max-height: 495px;
+        height: 508px;
+        max-height: 508px;
     }
 
     .-container-allergy {
         height: 450px;
         max-height: 450px;
-    }
-
-    .no-pathology {
-        margin-top: 30%;
-        text-align: center;
     }
 
     .scroll-container{

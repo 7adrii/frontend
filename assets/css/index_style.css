@@ -8,6 +8,7 @@ a {
   font-family: "Roboto", sans-serif;
   color: #F8F9FA;
   font-size: 12px;
+  text-decoration: none;
 }
 
 @media (min-width: 1200px) {
@@ -12092,7 +12093,7 @@ textarea.form-control-lg {
   }
 }
 body {
-  background-color: #efe5e5;
+  background-color: rgba(196, 227, 227, 0.368627451);
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }

@@ -1,226 +1,187 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Información de Sala</title>
 
-    <link rel="stylesheet" href="./css/index_style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Información de Sala</title>
 
-    <!-- Bootstrap icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
+  <link rel="stylesheet" href="./css/index_style.css" />
 
-    <script src="./js/bootstrap.bundle.min.js" defer></script>
-    <script src="./js/clock_header_script.js" defer></script>
-    <script src="./js/room-info_script.js" defer></script>
-  </head>
-  <body class="bg-background">
-    <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <img src="./img/list.svg" alt="Icono menú" />
-          </button>
-          <div class="d-flex align-items-center mx-auto">
-            <a class="navbar-brand mb-2 mb-lg-0" href="index.html">
-              <img src="./img/logo.png" alt="Logo" class="img-header" />
-            </a>
-            <div class="collapse navbar-collapse">
-              <p class="mb-0 me-3">Clínica veterinaria</p>
-            </div>
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <script src="./js/bootstrap.bundle.min.js" defer></script>
+  <script src="./js/clock_header_script.js" defer></script>
+  <script src="./js/room-info_script.js" defer></script>
+</head>
+
+<body class="bg-background">
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <img src="./img/list.svg" alt="Icono menú">
+        </button>
+        <div class="d-flex align-items-center mx-auto">
+          <a class="navbar-brand mb-2 mb-lg-0" href="index.html">
+            <img src="./img/logo.png" alt="Logo" class="img-header">
+          </a>
+          <div class="collapse navbar-collapse">
+            <p class="mb-0 me-3">Clínica veterinaria</p>
           </div>
-
-          <div
-            class="collapse navbar-collapse justify-content-center"
-            id="navbarSupportedContent"
-          >
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  ><i class="bi bi-grid"></i> Dashboard</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="room-status-page.html"
-                  ><i class="bi bi-door-closed"></i> Salas</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  ><i class="bi bi-file-earmark-medical"></i> Historial
-                  clínico</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="pet-list-page.html"
-                  ><i class="fa-solid fa-paw"></i> Clientes/Mascotas</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  ><i class="bi bi-chat-list"></i> Consultas</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <div id="clock" class="clock"></div>
         </div>
-      </nav>
 
-      <div
-        class="offcanvas offcanvas-start"
-        tabindex="-1"
-        id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel"
-      >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Vettion</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                ><i class="bi bi-grid"></i> Dashboard</a
-              >
+              <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
+                  class="bi bi-door-closed"></i>
+                Salas</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="room-status-page.html"
-                ><i class="bi bi-door-closed"></i> Salas</a
-              >
+              <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
+                  class="bi bi-file-earmark-medical"></i> Historial clínico</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                ><i class="bi bi-file-earmark-medical"></i> Historial clínico</a
-              >
+              <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                  class="fa-solid fa-book-medical"></i>
+                Pacientes</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="pet-list-page.html"
-                ><i class="fa-solid fa-paw"></i> Clientes/Mascotas</a
-              >
+              <a class="nav-link active" aria-current="page" href="pet-form.html"><i class="fa-solid fa-paw"></i>
+                Dar de alta</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                ><i class="bi bi-chat-list"></i> Consultas</a
-              >
+              <a class="nav-link active" aria-current="page" href="citaForm.html"><i
+                  class="fa-solid fa-calendar-plus"></i>
+                Concertar cita</a>
             </li>
           </ul>
         </div>
+
+        <div id="clock" class="clock"></div>
       </div>
-    </header>
+    </nav>
 
-    <main class="container py-4">
-      <section class="hero-card">
-        <div>
-          <h1 id="room-title">Sala</h1>
-        </div>
-      </section>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Vettion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
+                class="bi bi-door-closed"></i>
+              Salas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
+                class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
+                class="fa-solid fa-book-medical"></i>
+              Pacientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="pet-form.html"><i class="fa-solid fa-paw"></i>
+              Dar de alta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="citaForm.html"><i
+                class="fa-solid fa-calendar-plus"></i>
+              Concertar cita</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
-      <section class="mb-4">
-        <label for="date-input">Fecha:</label>
-        <input type="date" id="date-input" />
-        <button id="load-day" class="btn btn-primary ms-2">Cargar</button>
-      </section>
+  <main class="container py-4">
+    <section class="hero-card">
+      <div>
+        <h1 id="room-title">Sala</h1>
+      </div>
+    </section>
 
-      <section>
-        <h3>Citas</h3>
-        <div id="appointments-list">
-          <p class="text-muted">No hay citas para la fecha seleccionada.</p>
-        </div>
-      </section>
+    <section class="mb-4">
+      <label for="date-input">Fecha:</label>
+      <input type="date" id="date-input" />
+      <button id="load-day" class="btn btn-primary ms-2">Cargar</button>
+    </section>
 
-      <section class="mt-4">
-        <h3>Servicios de limpieza</h3>
-        <div id="cleaning-list">
-          <p class="text-muted">
-            No hay servicios de limpieza para la fecha seleccionada.
+    <section>
+      <h3>Citas</h3>
+      <div id="appointments-list">
+        <p class="text-muted">No hay citas para la fecha seleccionada.</p>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <h3>Servicios de limpieza</h3>
+      <div id="cleaning-list">
+        <p class="text-muted">
+          No hay servicios de limpieza para la fecha seleccionada.
+        </p>
+      </div>
+    </section>
+
+    <p class="error-message" id="room-info-error" hidden></p>
+  </main>
+
+  <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-12 col-md-4 text-center text-md-start">
+          <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
+          <p class="small">
+            El cuidado que tu mascota merece, con el amor que tú le das.
+            Expertos en salud animal con atención personalizada.
           </p>
         </div>
-      </section>
 
-      <p class="error-message" id="room-info-error" hidden></p>
-    </main>
-
-    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-12 col-md-4 text-center text-md-start">
-            <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
-            <p class="small">
-              El cuidado que tu mascota merece, con el amor que tú le das.
-              Expertos en salud animal con atención personalizada.
-            </p>
-          </div>
-
-          <div class="col-12 col-md-4 text-center">
-            <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
-            <p class="small">
-              <i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123,
-              Ciudad
-            </p>
-            <p class="small">
-              <i class="bi bi-telephone-fill me-2"></i> +34 900 123 456
-            </p>
-            <p class="small">
-              <i class="bi bi-envelope-fill me-2"></i> info@vettion.com
-            </p>
-          </div>
-
-          <div class="col-12 col-md-4 text-center text-md-end">
-            <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
-            <p class="small mb-1">¿Problemas con la aplicación?</p>
-            <a
-              href="mailto:soporte@tuclinica.com"
-              class="text-decoration-none text-primary small"
-            >
-              <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
-            </a>
-          </div>
+        <div class="col-12 col-md-4 text-center">
+          <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
+          <p class="small">
+            <i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123,
+            Ciudad
+          </p>
+          <p class="small">
+            <i class="bi bi-telephone-fill me-2"></i> +34 900 123 456
+          </p>
+          <p class="small">
+            <i class="bi bi-envelope-fill me-2"></i> info@vettion.com
+          </p>
         </div>
 
-        <hr class="my-4 border-primary opacity-50" />
-
-        <div class="row justify-content-between">
-          <div class="col-md-6 text-center text-md-start">
-            <p class="small">
-              &copy; 2026 Vettion - Todos los derechos reservados.
-            </p>
-          </div>
-          <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
-            <span class="small">
-              <i class="bi bi-shield-check text-success"></i> Entorno Seguro
-            </span>
-          </div>
+        <div class="col-12 col-md-4 text-center text-md-end">
+          <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
+          <p class="small mb-1">¿Problemas con la aplicación?</p>
+          <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
+            <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+          </a>
         </div>
       </div>
-    </footer>
-  </body>
+
+      <hr class="my-4 border-primary opacity-50" />
+
+      <div class="row justify-content-between">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="small">
+            &copy; 2026 Vettion - Todos los derechos reservados.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+          <span class="small">
+            <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>

@@ -4,10 +4,6 @@
     padding: 0;
 }
 
-body {
-   background-color: rgba(196, 227, 227, 0.368);
-}
-
 .container {
     margin-top: 3%;
     display: grid;
@@ -24,6 +20,7 @@ body {
 }
 
 .container-last-aditions {
+    background-color: #F8F9FA;
     grid-area: last-aditions;
     display: flex;
     flex-direction: column;
@@ -36,10 +33,11 @@ body {
 }
 
 .last-aditions {
+    margin: 3%;
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
-    width: 22rem;
+    width: 95%;
     gap: 10px;
 }
 
@@ -82,11 +80,11 @@ body {
     grid-area: cards;
     display: grid;
     grid-template-columns: 50% 50%;
-    gap: 10px;
+    gap: 5px;
 }
 
 .card {
-    width: 11rem;
+    width: 97%;
     border-radius: 15px;
     box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
@@ -205,11 +203,63 @@ p {
     padding-right: 5%;
 }
 
-.list{
+.list {
     padding: 1%;
 }
 
-@media (min-width: 1020px) {
+@media (min-width: 768px) {
+    .cards {
+        grid-area: cards;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+    }
+
+    .last-aditions {
+        display: grid;
+        margin: 3%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto;
+        justify-content: center;
+        width: 94%;
+        gap: 10px;
+    }
+
+    .card-new {
+        width: 100%;
+        min-width: 0;
+        background-color: white;
+        border: 1px solid rgba(187, 187, 187, 0.5);
+        border-radius: 15px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .header-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1%;
+        margin-bottom: 2%;
+    }
+
+    .body-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
     .container {
         max-width: 95%;
         grid-template-columns: 75% 25%;
@@ -280,13 +330,5 @@ p {
         border-radius: 10px;
         border: 1px solid rgba(187, 187, 187, 0.5);
         background-color: white;
-    }
-
-    .last-aditions {
-        width: 95%;
-        margin-top: 3%;
-        padding: 2%;
-        align-items: center;
-        gap: 10px;
     }
 }

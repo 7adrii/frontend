@@ -1,7 +1,6 @@
 @charset "UTF-8";
 p {
   font-family: "Roboto", sans-serif;
-  color: #F8F9FA;
   font-size: 16px;
 }
 
@@ -9,6 +8,7 @@ a {
   font-family: "Roboto", sans-serif;
   color: #F8F9FA;
   font-size: 12px;
+  text-decoration: none;
 }
 
 @media (min-width: 1200px) {
@@ -12104,10 +12104,30 @@ textarea.form-control-lg {
     justify-content: space-between;
     align-items: center;
   }
-  .stats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
   .table-wrapper {
     padding: 1rem;
   }
+}
+.room-card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.room-card .card-header {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.room-card .card-footer {
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.rooms-grid {
+  margin-bottom: 2rem;
 }/*# sourceMappingURL=room-status-page_style.css.map */

@@ -27,6 +27,7 @@
     <!-- Scripts js -->
     <script src="./js/clock_header_script.js" defer></script>
     <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/clinic-history_script.js"></script>
 </head>
 
@@ -133,11 +134,12 @@
             </div>
         </div>
 
+        <!-- Tabla que muestra las citas del día actual -->
         <ul class="list-group">
             <li class="list-group-item p-0">
                 <div class="bg-dark p-2 rounded-top-2 header-today">
                     <h6 class="text-light" id="today"></h6>
-                    <a href="pet-form.html">
+                    <a href="citaForm.html">
                         <button class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
                     </a>
                 </div>
@@ -150,6 +152,7 @@
             </li>
         </ul>
 
+        <!-- Tabla que muestra las proximas citas -->
         <ul class="list-group">
             <li class="list-group-item p-0">
                 <div class="bg-dark p-2 rounded-top-2">
@@ -163,6 +166,7 @@
             </li>
         </ul>
 
+        <!-- Tabla que muestra las citas que ya han ocurrido -->
         <ul class="list-group">
             <li class="list-group-item p-0">
                 <div class="bg-dark p-2 rounded-top-2">
@@ -226,6 +230,40 @@
             </div>
         </div>
     </footer>
+
+    <!-- Pop up para editar una cita que todavía no ha ocurrido -->
+    <dialog id="editAppointmentPopUp" class="appointment-modal">
+        <form id="formEditPet" method="dialog">
+            <div class="intro">
+                <h3 class="text-light">Editar Cita</h3>
+            </div>
+            <div class="data-form">
+                <div class="row g-3">
+                    <!-- Fecha -->
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted">FECHA</label>
+                        <input type="date" class="form-control" id="date_appointment" required>
+                    </div>
+
+                    <!-- Hora -->
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted">HORA INICIO</label>
+                        <input type="time" class="form-control" id="start_time" required>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="col-12">
+                        <label class="form-label small fw-bold text-muted">OBSERVACIONES</label>
+                        <textarea class="form-control" id="observations" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="pet-btns" style="margin-top: 20px;">
+                    <button type="submit" id="saveChangesAppointment" class="btn btn-dark">Guardar</button>
+                    <button type="button" class="btn btn-light"
+                        onclick="document.getElementById('editAppointmentPopUp').close()">Cancelar</button>
+                </div>
+        </form>
+    </dialog>
 </body>
 
 </html>

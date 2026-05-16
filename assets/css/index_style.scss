@@ -103,6 +103,14 @@
     box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }
 
+.btn-light:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
 @media (min-width: 1020px) {
     .nav-link {
         color: $white !important;

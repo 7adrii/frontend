@@ -5,10 +5,10 @@
   gap: 20px;
 }
 
-.header-today{
+.header-today {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .cards {
@@ -33,7 +33,7 @@
 }
 
 .scroll-container {
-  max-height: 300px;
+  max-height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid #dee2e6;
@@ -63,6 +63,24 @@
 
 .list-group {
   box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4) !important;
+}
+
+.appointment-modal {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+}
+
+.appointment-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {

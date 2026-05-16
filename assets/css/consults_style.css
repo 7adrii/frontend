@@ -9,6 +9,7 @@ a {
   color: #F8F9FA;
   font-size: 12px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media (min-width: 1200px) {

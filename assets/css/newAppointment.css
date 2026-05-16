@@ -9,6 +9,7 @@ a {
   color: #F8F9FA;
   font-size: 12px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media (min-width: 1200px) {
@@ -12095,4 +12096,20 @@ textarea.form-control {
   flex-direction: column;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+.btn-dark:hover {
+  background-color: #59b2b0;
+  color: #1E272E;
+  border-color: #59b2b0;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-info:hover {
+  background-color: #D4AF37;
+  color: #1E272E;
+  border-color: #D4AF37;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }/*# sourceMappingURL=newAppointment.css.map */

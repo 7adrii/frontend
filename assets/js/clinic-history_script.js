@@ -151,7 +151,7 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
 
         //Tabla para mostrar el listado de citas que ya han ocurrido
-        let counter=0;
+        let counter = 0;
         appointments.forEach((appointment) => {
             const { date_appointment, start_time } = appointment;
             if (formattedToday > date_appointment) {
@@ -170,7 +170,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 const ownerName = owner.name_owner;
                 const ownerSurname = owner.surname;
 
-                const fullNameOwner =ownerSurname + " " + ownerName;
+                const fullNameOwner = ownerSurname + " " + ownerName;
 
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
@@ -216,9 +216,9 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
 
         //Tabla para mostrar el listado de citas que se han concertado en el futuro
-        let counterNext=0;
+        let counterNext = 0;
         appointments.forEach((appointment) => {
-            const { date_appointment, start_time } = appointment;
+            const { id_appointment, date_appointment, start_time } = appointment;
             if (formattedToday < date_appointment) {
                 const service = services.find(s => s.id_service === appointment.service_id);
                 const serviceName = service.name;
@@ -235,7 +235,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 const ownerName = owner.name_owner;
                 const ownerSurname = owner.surname;
 
-                const fullNameOwner =ownerSurname + " " + ownerName;
+                const fullNameOwner = ownerSurname + " " + ownerName;
 
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
@@ -246,13 +246,35 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-edit text-dark"></i></a></td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-trash text-dark"></i></a></td>
+                    <td scope="row"><a class="btn-show-app" data-id="${id_appointment}"><i class="fa-solid fa-info text-dark"></i></a></td>
+                    <td scope="row"><a class="btn-edit-app" data-id="${id_appointment}"><i class="fa-solid fa-edit text-dark"></i></a></td>
+                    <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
                 </tr>
             `;
                 tableFuture.appendChild(tbody);
                 counterNext++;
+
+                //Boton eliminar mascota de la base de datos
+                const btnDelete = tbody.querySelector(".btn-delete-app");
+                btnDelete.addEventListener("click", async (e) => {
+                    e.preventDefault();
+
+                    const confirmAction = await Swal.fire({
+                        title: `You are going to remove this appointment!`,
+                        html: `¿<strong>Are you sure you want to remove</strong> this appointment for<strong>${petName}</strong>?`,
+                        icon: "warning",
+                        iconColor: "#8a3938",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, cancel",
+                        cancelButtonText: "No",
+                    });
+
+                    if (confirmAction.isConfirmed) {
+                        await deleteAppointment(id_appointment);
+                    } else {
+                        return;
+                    }
+                });
             }
         });
 
@@ -263,6 +285,140 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
                 `;
         }
+
+        //Pop up de editar datos de una cita y guardar los cambios
+        const popUpAppointment = document.getElementById("editAppointmentPopUp");
+        let editBtn;
+        let selectedAppointmentId;
+
+        tableFuture.addEventListener("click", (e) => {
+            //Se busca que se hizo click
+            editBtn = e.target.closest(".btn-edit-app");
+
+            if (editBtn) {
+                e.preventDefault();
+
+                //almacenamos el id de la cita
+                selectedAppointmentId = editBtn.getAttribute("data-id");
+
+                //buscamos la cita de la base de datos que tiene ese id para mostrar los datos
+                const appointment = appointments.find(all => all.id_appointment == selectedAppointmentId);
+
+                //formateamos la fecha para poder mostrarla
+                let formatedDate = appointment.date_appointment;
+                if (formatedDate && formatedDate.includes('/')) {
+                    const dayMonthYear = formatedDate.split('/');
+                    const day = dayMonthYear[0].toString().padStart(2, '0');
+                    const month = dayMonthYear[1].toString().padStart(2, '0');
+                    const year = dayMonthYear[2];
+                    formatedDate = `${year}-${month}-${day}`;
+                }
+
+                if (appointment) {
+                    document.getElementById("date_appointment").value = formatedDate;
+                    document.getElementById("start_time").value = appointment.start_time;
+                    document.getElementById("observations").value = appointment.observations;
+
+                    popUpAppointment.showModal();
+                }
+            }
+        });
+
+        const saveBtnAppointment = document.getElementById("saveChangesAppointment");
+        saveBtnAppointment.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const appointmentPutAPI = {
+
+                date_appointment: document.getElementById("date_appointment").value.trim(),
+                start_time: document.getElementById("start_time").value.trim(),
+                observations: document.getElementById("observations").value.trim(),
+            };
+
+            const {
+                date_appointment,
+                start_time,
+                observations
+            } = appointmentPutAPI;
+
+            if (
+                !date_appointment ||
+                !start_time ||
+                !observations
+            ) {
+                Swal.fire({
+                    title: "Required fields are empty.",
+                    confirmButtonText: "Go back to edition",
+                    target: document.getElementById('editAppointmentPopUp')
+                });
+                return;
+            }
+            selectedAppointmentId = editBtn.getAttribute("data-id");
+            await sendAppointmentData(appointmentPutAPI, selectedAppointmentId);
+        });
+
+        const sendAppointmentData = async (appointmentPutAPI, selectedAppointmentId) => {
+            try {
+                const PutResponse = await fetch(
+                    `http://localhost:8080/appointments/${selectedAppointmentId}`,
+                    {
+                        method: "PUT",
+                        body: JSON.stringify(appointmentPutAPI),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                        },
+                    },
+                );
+
+                if (PutResponse.ok) {
+                    const popUp = document.getElementById("editAppointmentPopUp");
+                    popUp.close();
+                    window.location.reload();
+                } else {
+                    const errorData = await PutResponse.json().catch(() => ({}));
+                    throw new Error(errorData.message || `Error: ${PutResponse.status}`);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        //Boton eliminar cita que todavía no ha ocurrido
+        const deleteAppointment = async (id_appointment) => {
+            try {
+                const deleteResponse = await fetch(`http://localhost:8080/appointments/${id_appointment}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                    },
+                });
+
+                if (deleteResponse.ok) {
+                    Swal.fire({
+                        title: "Appointment cancelled!",
+                        text: "Appointment successfully cancelled",
+                        icon: "success",
+                        iconColor: "#318a3a",
+                        confirmButtonText: "GO back to clinic historic",
+                        confirmButtonColor: "#2a1418",
+                    }).then(() => {
+                        window.location.href = "clinic-historic.html";
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: `Error: ${deleteResponse.status}`,
+                        icon: "error",
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: "Error de conexión",
+                    text: error.message,
+                    icon: "error",
+                });
+            }
+        };
 
         //Tabla con las citas para el dia actual.
         const tableToday = document.getElementById("table-today-consults");

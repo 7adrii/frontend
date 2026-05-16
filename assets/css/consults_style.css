@@ -12068,7 +12068,7 @@ body {
 }
 
 .btn-vettion-primary {
-  background-color: #D4AF37;
+  background-color: #1E272E;
   color: white;
   border: none;
   border-radius: 12px;
@@ -12081,7 +12081,24 @@ body {
 
 .btn-vettion-primary:hover {
   background-color: #59b2b0;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-vettion-secondary {
+  background-color: #1E272E;
   color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-vettion-secondary:hover {
+  background-color: #D4AF37;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }

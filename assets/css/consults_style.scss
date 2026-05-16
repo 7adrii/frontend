@@ -80,7 +80,7 @@ body {
 
 // Boton para crear una nueva cita
 .btn-vettion-primary {
-    background-color: $gold;
+    background-color: $grey;
     color: white;
     border: none;
     border-radius: 12px;
@@ -94,7 +94,26 @@ body {
 // Animacion y transicion del boton nueva cita
 .btn-vettion-primary:hover {
     background-color: $turquoise;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+// Boton para cancelar la creacion una nueva cita
+.btn-vettion-secondary{
+    background-color: $grey;
     color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+// Animacion y transicion del boton cancelar la creacion de una nueva cita
+.btn-vettion-secondary:hover {
+    background-color: $gold;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }

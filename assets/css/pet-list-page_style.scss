@@ -1,0 +1,334 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header"
+        "cards"
+        "last-aditions"
+        "pacient-list";
+}
+
+.container-header {
+    grid-area: header;
+}
+
+.container-last-aditions {
+    background-color: #F8F9FA;
+    grid-area: last-aditions;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+    min-width: 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+}
+
+.last-aditions {
+    margin: 3%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    width: 95%;
+    gap: 10px;
+}
+
+.card-new {
+    width: 100%;
+    min-width: 0;
+    background-color: white;
+    border: 1px solid rgba(187, 187, 187, 0.5);
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.container-pacient-list {
+    grid-area: pacient-list;
+    background-color: #F8F9FA;
+    margin-bottom: 3%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(187, 187, 187, 0.5);
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+}
+
+.pacients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+    background-color: #1E272E;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.cards {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 5px;
+}
+
+.card {
+    width: 97%;
+    border-radius: 15px;
+    box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+}
+
+.header-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1%;
+    margin-bottom: 4%;
+}
+
+.body-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-options {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.status-check {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.status-options {
+    font-size: 0.8rem;
+}
+
+.nav-text {
+    text-decoration: none;
+    color: #1E272E;
+    font-family: "Roboto", sans-serif;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-text:hover {
+    background-color: rgba(59, 178, 176, 0.5);
+    color: #1E272E;
+    border-radius: 2rem;
+}
+
+ul {
+    margin-top: 1rem;
+}
+
+.table-pages {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.line-hover:hover>* {
+    background-color: rgba(89, 178, 176, 0.5) !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list-group {
+    list-style: none;
+}
+
+.scroll-container {
+    max-height: 406px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.scroll-container table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+
+p {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.container-footer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.list {
+    padding: 1%;
+}
+
+@media (min-width: 768px) {
+    .cards {
+        grid-area: cards;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
+    }
+
+    .last-aditions {
+        display: grid;
+        margin: 3%;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto;
+        justify-content: center;
+        width: 94%;
+        gap: 10px;
+    }
+
+    .card-new {
+        width: 100%;
+        min-width: 0;
+        background-color: white;
+        border: 1px solid rgba(187, 187, 187, 0.5);
+        border-radius: 15px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .header-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1%;
+        margin-bottom: 2%;
+    }
+
+    .body-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 95%;
+        grid-template-columns: 75% 25%;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "header header"
+            "cards cards"
+            "pacient-list last-aditions";
+        gap: 10px;
+        align-items: start;
+    }
+
+    .header-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1%;
+        margin-bottom: 2%;
+    }
+
+    .scroll-container {
+        max-height: 390px;
+    }
+
+    .nav-text {
+        text-decoration: none;
+        color: #1E272E;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .nav-text:hover {
+        background-color: rgba(59, 178, 176, 0.5);
+        color: #1E272E;
+        border-radius: 2rem;
+    }
+
+    .container-pacient-list {
+        margin-top: 3%;
+        max-height: 550px;
+    }
+
+    .cards {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 0%;
+    }
+
+    .card {
+        width: 30rem;
+        border-radius: 15px
+    }
+
+    .body-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .container-last-aditions {
+        display: flex;
+        flex-direction: column;
+        margin-top: 9%;
+        border-radius: 10px;
+        border: 1px solid rgba(187, 187, 187, 0.5);
+        background-color: white;
+    }
+}

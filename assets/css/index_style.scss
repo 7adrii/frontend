@@ -176,19 +176,19 @@ h3.text-center {
 
 // Estilos de los botones principales
 a.btn.btn-primary.btn-lg.custom-btn {
-    color: $white;
+    color: $grey;
     font-size: 1.1rem;
     font-weight: 600;
-    background-color: $gold;
-    border-color: $gold;
+    background-color: $turquoise;
+    border-color: $turquoise;
     transition: background-color 0.3s;
     padding: 15px 35px;
 }
 
 // Efecto al pasar el ratón por los botones principales
 a.btn.btn-primary.btn-lg.custom-btn:hover {
-    background-color: $turquoise;
-    border-color: $turquoise;
+    background-color: $gold;
+    border-color: $gold;
 }
 
 // Tamaño del título de las tarjetas

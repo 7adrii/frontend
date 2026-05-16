@@ -12154,18 +12154,18 @@ h3.text-center, .text-center.h3 {
   }
 }
 a.btn.btn-primary.btn-lg.custom-btn, .btn-group-lg > a.btn.btn-primary.custom-btn {
-  color: #F8F9FA;
+  color: #1E272E;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: #D4AF37;
-  border-color: #D4AF37;
+  background-color: #59b2b0;
+  border-color: #59b2b0;
   transition: background-color 0.3s;
   padding: 15px 35px;
 }
 
 a.btn.btn-primary.btn-lg.custom-btn:hover, .btn-group-lg > a.btn.btn-primary.custom-btn:hover {
-  background-color: #59b2b0;
-  border-color: #59b2b0;
+  background-color: #D4AF37;
+  border-color: #D4AF37;
 }
 
 .card-body h5.card-title, .card-body .card-title.h5 {

@@ -196,14 +196,6 @@ a.btn.btn-primary.btn-lg.custom-btn:hover {
 
 // Estilos del footer
 
-// Definición del degradado
-.footer-gradient {
-    background: linear-gradient(135deg, $turquoise 0%, $grey 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-
 // Sección inferior con tu color $grey
 .footer-bottom {
     background-color: $grey;

@@ -98,3 +98,10 @@ textarea.form-control {
     border-radius: 15px !important;
     padding: 15px !important;
 }
+
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}

@@ -175,7 +175,7 @@ const createPets = (petsList, ownersList) => {
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
 
     // Obtener el nombre y teléfono de contacto del dueño
-    const ownerName = owner ? owner.name_owner : "Desconocido";
+    const ownerSurname = owner ? owner.surname : "Desconocido";
     const ownerContact = owner ? owner.phone : "Desconocido";
 
     const tableRow = document.createElement("tr");
@@ -185,7 +185,7 @@ const createPets = (petsList, ownersList) => {
             <th scope="row">${register_date}</th>
             <th scope="row">${name_pet}</th>
             <th scope="row" class="d-none d-md-table-cell">${type}</th>
-            <th scope="row">${ownerName}</th>
+            <th scope="row">${ownerSurname}</th>
             <th scope="row" class="d-none d-md-table-cell">${owner_dni}</th>
             <th scope="row" class="d-none d-md-table-cell">${ownerContact}</th>
             <th scope="row">

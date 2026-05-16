@@ -260,7 +260,7 @@
             </form>
     </dialog>
 
-    <!-- Pop up para editar la información de una alergia de la mascota -->
+    <!-- Pop up para editar la información de una patologia de la mascota -->
     <dialog id="editPathologyPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
             <div class="intro">
@@ -317,7 +317,7 @@
         </form>
     </dialog>
 
-    <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
+    <!-- Pop up para mostrar la información detalle de una patologia de la mascota -->
     <dialog id="showPathologyPopUp" class="pathology-modal">
         <div id="showInfoPathology">
             <div class="intro">
@@ -390,6 +390,25 @@
                             <p id="show_detection_date"></p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Pop up para mostrar la información detalle de un registro de la mascota -->
+    <dialog id="showRegisterPopUp" class="pathology-modal">
+        <div id="showInfoRegister">
+            <div class="intro">
+                <h3 class="text-light">Información del registro</h3>
+                <button type="button" class="btn btn-light"
+                    onclick="document.getElementById('showRegisterPopUp').close()"><i
+                        class="fa-solid fa-x"></i></button>
+            </div>
+            <div class="element-info mt-3">
+                <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
+                <div class="mb-3">
+                    <h5>Observaciones</h5>
+                    <p id="show_observation_appointment"></p>
                 </div>
             </div>
         </div>

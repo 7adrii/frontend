@@ -7,8 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const urlPet = `http://localhost:8080/pets/${idPet}`;
   const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
-  const urlAppointments = `http://localhost:8080/appointments/pet/${idPet}`;
+  const urlRegisters = `http://localhost:8080/registers/pet/${idPet}`;
   const urlVeterinarians = `http://localhost:8080/veterinarians`;
+  const urlServices = `http://localhost:8080/services`;
+  const urlAppointments = `http://localhost:8080/appointments`;
 
   const getPetData = async () => {
     try {
@@ -30,30 +32,35 @@ window.addEventListener("DOMContentLoaded", () => {
         pathologiesData = await pathologies.json();
       }
 
-      const appointments = await fetch(urlAppointments);
-      const appointmentsData = await appointments.json();
+      const registers = await fetch(urlRegisters);
+      const registersData = await registers.json();
 
       const veterinarians = await fetch(urlVeterinarians);
       const veterinariansData = await veterinarians.json();
 
-      console.log(petData);
-      console.log(ownerData);
-      console.log(pathologiesData);
-      console.log(appointmentsData);
+      const services = await fetch(urlServices);
+      const servicesData = await services.json();
+
+      const appointments = await fetch(urlAppointments);
+      const appointmentsData = await appointments.json();
 
       if (
         petData.data &&
         ownerData.data &&
         pathologiesData.data &&
-        appointmentsData.data &&
-        veterinariansData
+        registersData.data &&
+        veterinariansData.data &&
+        servicesData.data &&
+        appointmentsData.data
       ) {
         createPet(
           petData.data,
           ownerData.data,
           pathologiesData.data,
-          appointmentsData.data,
-          veterinariansData.data
+          registersData.data,
+          veterinariansData.data,
+          servicesData.data,
+          appointmentsData.data
         );
       }
     } catch (error) {
@@ -61,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const createPet = async (petData, ownerData, pathologiesData, appointmentsData, veterinariansData) => {
+  const createPet = async (petData, ownerData, pathologiesData, registersData, veterinariansData, servicesData, appointmentsData) => {
     //Datos del dueño
     const ownerElement = document.getElementById("owner");
     const {
@@ -251,7 +258,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!breed || breed === undefined || breed == "anonymous") {
       newBreed = "-";
     }
-    else{
+    else {
       newBreed = breed;
     }
 
@@ -665,37 +672,37 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     //Datos del historial de citas
-    const appointmentsList = document.getElementById("clinic-history");
-    appointmentsList.innerHTML = `
+    const registersList = document.getElementById("clinic-history");
+    registersList.innerHTML = `
       <thead>
         <tr>
           <th scope="col">Día de la cita</th>
-          <th scope="col" class="d-none d-md-table-cell">Hora</th>
-          <th scope="col" class="d-none d-md-table-cell">Causa</th>
-          <th scope="col">Veterinario</th>
+          <th scope="col" class="d-none d-md-table-cell">Nombre</th>
+          <th scope="col" class="d-none d-md-table-cell">Tipo de servicio</th>
           <th scope="col" class="d-none d-md-table-cell">Duración</th>
+          <th scope="col">Veterinario</th>
+          <th scope="col"></th>
         </tr>
       </thead>
     `;
 
-    if (appointmentsData.length === 0) {
-      appointmentsList.classList.add("text-center")
-      appointmentsList.classList.add("m-2")
-      appointmentsList.innerHTML = `
+    if (registersData.length === 0) {
+      registersList.classList.add("text-center")
+      registersList.classList.add("m-2")
+      registersList.innerHTML = `
       <h6>No hay registro previo de citas para ${petData.name_pet}.</h6>
       `;
     } else {
-      appointmentsData.forEach((appointment) => {
-        const appointmentInfo = document.createElement("tbody");
+      registersData.forEach((register) => {
+        const registerInfo = document.createElement("tbody");
 
         const {
-          date_appointment,
-          start_time,
-          end_time,
-          observations,
-          consult_id,
-          veterinarian_dni,
-        } = appointment;
+          id_register,
+          date_service,
+          observation_appointment,
+          service_id,
+          veterinarian_dni
+        } = register;
 
         //Buscamos el nombre del veterinario buscando por su DNI
         const veterinarian = veterinariansData.find(v => v.dni_veterinarian == veterinarian_dni);
@@ -703,25 +710,51 @@ window.addEventListener("DOMContentLoaded", () => {
         const veterinarianSurname = veterinarian.surname;
         const fullVeterinarianName = veterinarianName + " " + veterinarianSurname;
 
-        const date = "2024-01-01";
+        //Buscamos el nombre del servicio
+        const service = servicesData.find(s => s.id_service == service_id);
+        const serviceName = service.name;
+        const serviceType = service.service_type;
 
-        const start = new Date(`${date}T${start_time}`);
-        const end = new Date(`${date}T${end_time}`);
+        //Buscamos la duracion del servicio
+        const serviceDuration = service.duration;
 
-        const diferenceMs = end - start;
-        const duration = diferenceMs / (1000 * 60);
-
-        appointmentInfo.innerHTML = `
+        registerInfo.innerHTML = `
         <tr>
-          <td scope="col">${date_appointment}</td>
-          <td scope="col" class="d-none d-md-table-cell">${start_time}</td>
-          <td scope="col" class="d-none d-md-table-cell">${observations}</td>
+          <td scope="col">${date_service}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceName}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceType}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceDuration} min</td>
           <td scope="col">${fullVeterinarianName}</td>
-          <td scope="col" class="d-none d-md-table-cell">${duration} minutos</td>
+          <td scope="row">
+            <a class="btn text-dark btn-show-register" data-id="${id_register}" style="cursor: pointer;">
+              <i class="fa-solid fa-info"></i>
+            </a>
+          </td>
         </tr>
       `;
+        registersList.appendChild(registerInfo);
+      });
 
-        appointmentsList.appendChild(appointmentInfo);
+      //Variable para saber en que registro estamos para sacar la informacion en los modales
+      let selectedRegisterId = null;
+
+      //Pop up para mostrar las observaciones del registro
+      let showRegisterId = null;
+      let showBtn;
+      const popUpShowRegister = document.getElementById('showRegisterPopUp');
+      registersList.addEventListener("click", (e) => {
+        showBtn = e.target.closest('.btn-show-register');
+
+        if (showBtn) {
+          e.preventDefault();
+
+          selectedRegisterId = showBtn.getAttribute("data-id");
+          const register = registersData.find(all => all.id_register == selectedRegisterId);
+
+          document.getElementById("show_observation_appointment").textContent = register.observation_appointment;
+
+          popUpShowRegister.showModal();
+        }
       });
     }
 

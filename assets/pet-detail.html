@@ -268,11 +268,11 @@
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Allergeno</label>
+                    <label>Nombre Patología*</label>
                     <input type="text" class="form-control" id="name" required>
                 </div>
                 <div class="mb-3">
-                    <label>Tipo</label>
+                    <label>Tipo*</label>
                     <select id="type" class="form-select">
                         <option>Alergia</option>
                         <option>Enfermedad</option>
@@ -289,7 +289,7 @@
                     <input type="text" class="form-control" id="symptoms" required>
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                    <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
                     <select id="severity_level" class="form-select">
                         <option>Leve</option>
                         <option>Moderada</option>
@@ -301,8 +301,8 @@
                     <input type="text" class="form-control" id="treatment" required>
                 </div>
                 <div class="mb-3">
-                    <label>Es cronico</label>
-                    <input type="checkbox" class="form-control" id="is_chronic" required>
+                    <label>Es cronico*</label>
+                    <input type="checkbox" class="form-check-input" id="is_chronic" required>
                 </div>
                 <div class="mb-3">
                     <label>Fecha de deteccion</label>
@@ -367,13 +367,6 @@
                             <p id="show_severity_level"></p>
                         </div>
                     </div>
-                    <div class="element-info">
-                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
-                        <div class="mb-3">
-                            <h5>Tratamiento</h5>
-                            <p id="show_treatment"></p>
-                        </div>
-                    </div>
 
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
@@ -386,12 +379,21 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
                         <div class="mb-3">
-                            <h5>Tratamiento</h5>
+                            <h5>Fecha de detección</h5>
                             <p id="show_detection_date"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
+                        <div class="mb-3">
+                            <h5>Tratamiento</h5>
+                            <p id="show_treatment"></p>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </dialog>
 

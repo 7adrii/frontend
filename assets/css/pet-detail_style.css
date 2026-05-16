@@ -399,8 +399,9 @@ dialog[open] {
         display: grid;
         grid-template-columns: 50% 50%;
         grid-template-rows: auto auto;
-        grid-template-areas: "elements1 elements2";
-        align-items: center;
+        grid-template-areas: 
+        "elements1 elements2";
+        align-items: start;
         justify-items: center;
     }
 

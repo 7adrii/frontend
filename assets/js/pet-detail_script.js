@@ -201,8 +201,9 @@ window.addEventListener("DOMContentLoaded", () => {
         !postal_code
       ) {
         Swal.fire({
-          title: "Faltan datos por rellenar",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editOwnerPopUp')
         });
         return;
       }
@@ -361,8 +362,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (!name_pet || !type || isNaN(weight) || !sex || !birth_date) {
         Swal.fire({
-          title: "El campo año está vacio",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPetPopUp')
         });
         return;
       }
@@ -464,10 +466,10 @@ window.addEventListener("DOMContentLoaded", () => {
         pathologiesList.appendChild(pathologyInfo);
       });
     }
-    //Variable para saber en que alergia estamos para sacar la informacion en los modales
+    //Variable para saber en que patología estamos para sacar la informacion en los modales
     let selectedPathologyId = null;
 
-    //Pop up para mostrar la información de la alergia en mayor detalle
+    //Pop up para mostrar la información de la patología en mayor detalle
     let showPathologyId = null;
     let showBtn;
     const popUpShowPathology = document.getElementById('showPathologyPopUp');
@@ -481,13 +483,22 @@ window.addEventListener("DOMContentLoaded", () => {
         const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
         console.log(pathology);
 
+        let pathologyChronic = "";
+
+        if (pathology.is_chronic == 1) {
+          pathologyChronic = "Yes";
+        }
+        else {
+          pathologyChronic = "No";
+        }
+
         document.getElementById("show_name").textContent = pathology.name;
         document.getElementById("show_type").textContent = pathology.type;
         document.getElementById("show_diagnostic_method").textContent = pathology.diagnostic_method;
         document.getElementById("show_symptoms").textContent = pathology.symptoms;
         document.getElementById("show_severity_level").textContent = pathology.severity_level;
         document.getElementById("show_treatment").textContent = pathology.treatment;
-        document.getElementById("show_is_chronic").textContent = pathology.is_chronic;
+        document.getElementById("show_is_chronic").textContent = pathologyChronic;
         document.getElementById("show_detection_date").textContent = pathology.detection_date;
 
         popUpShowPathology.showModal();
@@ -569,8 +580,9 @@ window.addEventListener("DOMContentLoaded", () => {
         !detection_date
       ) {
         Swal.fire({
-          title: "Faltan campos por rellenar",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPathologyPopUp')
         });
         return;
       }
@@ -618,13 +630,13 @@ window.addEventListener("DOMContentLoaded", () => {
         const idPathologyDelete = deleteBtn.getAttribute("data-id");
 
         const confirmAction = await Swal.fire({
-          title: `¡Estás a punto de eliminar la alergia!`,
-          html: `¿<strong>Segur@ que deseas eliminar</strong> la alergia de la mascota <strong>${name_pet}</strong>?`,
+          title: `You are going to delete this pathology!`,
+          html: `¿<strong>Are you sure you want to remove</strong> this pathology from <strong>${name_pet}</strong>?`,
           icon: "warning",
           iconColor: "#8a3938",
           showCancelButton: true,
-          confirmButtonText: "Sí, eliminar",
-          cancelButtonText: "Cancelar",
+          confirmButtonText: "Yes, remove",
+          cancelButtonText: "Cancele",
         });
 
         if (confirmAction.isConfirmed) {
@@ -646,11 +658,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (deleteResponse.ok) {
           Swal.fire({
-            title: "Alergia eliminado!",
-            text: "La alergia se ha eliminado correctamente",
+            title: "Pathology removed!",
+            text: "Pathology deleted successfully",
             icon: "success",
             iconColor: "#318a3a",
-            confirmButtonText: "Volver al dashboard",
+            confirmButtonText: "Go back to pet",
             confirmButtonColor: "#2a1418",
           }).then(() => {
             window.location.reload();

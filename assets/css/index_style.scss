@@ -87,6 +87,18 @@
     padding-right: 5%;
 }
 
+.btn-dark:hover{
+    background-color: $turquoise;
+    color: $grey;
+    border-color: $turquoise;
+}
+
+.btn-info:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+}
+
 @media (min-width: 1020px) {
     .nav-link {
         color: $white !important;

@@ -147,7 +147,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="form-allergy">
                 <div class="form-section">
                     <h5>Alergias</h5>
-                    <button type="button" class="btn btn-primary" id="btn-add">Introducir nueva alergia</button>
+                    <button type="button" class="btn btn-dark" id="btn-add">Introducir nueva alergia</button>
                     <div id="container-allergies">
 
                     </div>
@@ -197,7 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
                                 <input type="date" class="form-control detection_date">
                             </div>
-                            <button type="button" class="btn btn-secondary btn-remove"
+                            <button type="button" class="btn btn-info btn-remove"
                                 aria-label="Close">Eliminar</button>
                         </div>
                     </template>
@@ -206,10 +206,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             <div class="btns">
                 <a href="pet-list-page.html">
-                    <button type="submit" class="btn btn-primary" id="btnRegister">Registrar</button>
+                    <button type="submit" class="btn btn-dark" id="btnRegister">Registrar</button>
                 </a>
                 <a href="pet-list-page.html">
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-info">Cancelar</button>
                 </a>
             </div>
     `;

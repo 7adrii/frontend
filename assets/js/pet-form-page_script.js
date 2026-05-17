@@ -450,7 +450,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const date = new Date();
         const detectionDate = new Date(detection_date);
 
-        if (detectionDate.getTime() > date.getTime() || detectionDate.getTime() > newBirthDate.getTime()) {
+        if (detectionDate.getTime() > date.getTime() || detectionDate.getTime() < newBirthDate.getTime()) {
           Swal.fire({
             title: `La fecha de detección de la patologia nº ${i + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
             icon: "warning",

@@ -442,11 +442,11 @@ window.addEventListener("DOMContentLoaded", () => {
             </tr>
           </thead>
           <tbody id="consult-list">
-            <th scope="col" style="max-width: 80px">${name}</th>
-            <th scope="col" style="max-width: 80px">${type}</th>
-            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</th>
-            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</th>
-            <th scope="col">
+            <td scope="col" style="max-width: 80px">${name}</td>
+            <td scope="col" style="max-width: 80px">${type}</td>
+            <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</td>
+            <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</td>
+            <td scope="col">
               <div class="dropdown">
                 <button class="btn-options" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false"><i
@@ -458,7 +458,7 @@ window.addEventListener("DOMContentLoaded", () => {
                   <li><a class="dropdown-item btn-delete-pathology" data-id="${id_pathology}">Eliminar</a></li>
                 </ul>
               </div>
-            </th>
+            </td>
           </tbody>
         </table>
       `;
@@ -516,11 +516,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (editBtn) {
         e.preventDefault();
+        e.stopImmediatePropagation();
 
-        //almacenamos el id de la alergia
+        //almacenamos el id de la patologia
         selectedPathologyId = editBtn.getAttribute("data-id");
 
-        //buscamos la alergia de la base de datos que tiene ese id para mostrar los datos
+        //buscamos la patologia de la base de datos que tiene ese id para mostrar los datos
         const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
 
         //formateamos la fecha para poder mostrarla
@@ -537,7 +538,7 @@ window.addEventListener("DOMContentLoaded", () => {
           document.getElementById("symptoms").value = pathology.symptoms;
           document.getElementById("severity_level").value = pathology.severity_level;
           document.getElementById("treatment").value = pathology.treatment;
-          document.getElementById("is_chronic").value = pathology.is_chronic;
+          document.getElementById("is_chronic").checked = (pathology.is_chronic == 1 || pathology.is_chronic === true);
           document.getElementById("detection_date").value = newDetectionDate;
 
           popUpPathology.showModal();
@@ -557,7 +558,7 @@ window.addEventListener("DOMContentLoaded", () => {
         symptoms: document.getElementById("symptoms").value.trim(),
         severity_level: document.getElementById("severity_level").value.trim(),
         treatment: document.getElementById("treatment").value.trim(),
-        is_chronic: document.getElementById("is_chronic").value.trim(),
+        is_chronic: document.getElementById("is_chronic").checked,
         detection_date: document.getElementById("detection_date").value.trim(),
       };
 
@@ -586,11 +587,40 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         return;
       }
+
+      //Buscamos la fecha de nacimiento de la mascota para poder compararla con la fecha de detección de la
+      //patología. Si la fecha de la patología es anterior a la de nacimiento saltará un error.
+      const birthDateSplit = petData.birth_date;
+      const [day, month, year] = birthDateSplit.split("/");
+      const birthDate = new Date(`${year}-${month}-${day}`);
+      birthDate.setHours(0, 0, 0, 0);
+      console.log(birthDate);
+
+      const detectionDate = new Date(pathologyPutAPI.detection_date);
+      detectionDate.setHours(0, 0, 0, 0);
+      console.log(detectionDate);
+
+      if (detectionDate.getTime() < birthDate.getTime()) {
+        Swal.fire({
+          title: "Detection date can't be newer than birth_date of the pet.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPathologyPopUp')
+        });
+        return;
+      }
+
       console.log(id_pet);
       console.log("Cuerpo del envío:", JSON.stringify(pathologyPutAPI));
-      selectedPathologyId = editBtn.getAttribute("data-id");
+
       await sendPathologyData(pathologyPutAPI, selectedPathologyId);
     });
+
+    const btnCancelPathology = document.getElementById("btnCancelChangesPathology");
+    if (btnCancelPathology) {
+      btnCancelPathology.addEventListener("click", () => {
+        document.getElementById('editPathologyPopUp').close();
+      });
+    }
 
     const sendPathologyData = async (pathologyPutAPI, selectedPathologyId) => {
       try {

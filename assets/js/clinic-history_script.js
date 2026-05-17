@@ -313,10 +313,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     const year = dayMonthYear[2];
                     formatedDate = `${year}-${month}-${day}`;
                 }
+                const formatedHour = appointment.start_time ? appointment.start_time.substring(0, 5) : "";
 
                 if (appointment) {
                     document.getElementById("date_appointment").value = formatedDate;
-                    document.getElementById("start_time").value = appointment.start_time;
+                    document.getElementById("start_time").value = formatedHour;
                     document.getElementById("observations").value = appointment.observations;
 
                     popUpAppointment.showModal();
@@ -328,26 +329,38 @@ window.addEventListener("DOMContentLoaded", () => {
         saveBtnAppointment.addEventListener("click", async (e) => {
             e.preventDefault();
 
+            const startTime = document.getElementById("start_time").value.trim();
             const appointmentPutAPI = {
-
                 date_appointment: document.getElementById("date_appointment").value.trim(),
-                start_time: document.getElementById("start_time").value.trim(),
+                start_time: startTime.substring(0, 5),
                 observations: document.getElementById("observations").value.trim(),
             };
 
-            const {
-                date_appointment,
-                start_time,
-                observations
-            } = appointmentPutAPI;
+            console.log(appointmentPutAPI);
 
             if (
-                !date_appointment ||
-                !start_time ||
-                !observations
+                !appointmentPutAPI.date_appointment ||
+                !appointmentPutAPI.start_time ||
+                !appointmentPutAPI.observations
             ) {
                 Swal.fire({
                     title: "Required fields are empty.",
+                    confirmButtonText: "Go back to edition",
+                    target: document.getElementById('editAppointmentPopUp')
+                });
+                return;
+            }
+
+            //Buscamos que la fecha de date_appointment no sea anterior a la fecha actual
+            const dateAppointmentSplit = appointmentPutAPI.date_appointment;
+            const [day, month, year] = dateAppointmentSplit.split("/");
+            const dateAppointment = new Date(`${year}-${month}-${day}`);
+
+            const date = new Date();
+
+            if (dateAppointment.getTime() < date.getTime()) {
+                Swal.fire({
+                    title: "La fecha no puede ser anterior a la actual",
                     confirmButtonText: "Go back to edition",
                     target: document.getElementById('editAppointmentPopUp')
                 });
@@ -376,7 +389,13 @@ window.addEventListener("DOMContentLoaded", () => {
                     window.location.reload();
                 } else {
                     const errorData = await PutResponse.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Error: ${PutResponse.status}`);
+                    Swal.fire({
+                        title: "No se pudieron guardar los cambios",
+                        text: errorData.message || `Código de error: ${PutResponse.status}`,
+                        icon: "error",
+                        confirmButtonText: "Entendido",
+                        target: document.getElementById('editAppointmentPopUp')
+                    });
                 }
             } catch (error) {
                 console.log(error);

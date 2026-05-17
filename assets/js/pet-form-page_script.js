@@ -300,6 +300,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         const data = await postPetResponse.json();
+
         //Almacenamos el id para la asignacion de la patologias
         const id = data.data.id_pet;
         return id;
@@ -359,6 +360,9 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      //Declaramos una variable de fecha de nacimietno de la mascota para poder usarla posteriormente en patologias
+      let newBirthDate;
+
       //Registrar datos de la mascota
       const petSendAPI = {
         name_pet: document.getElementById("name_pet").value.trim(),
@@ -373,9 +377,24 @@ window.addEventListener("DOMContentLoaded", () => {
       const { name_pet, type, breed, weight, sex, birth_date, owner_dni } =
         petSendAPI;
 
+      newBirthDate = new Date(birth_date);
+
       if (!name_pet || !type || !weight || !sex || !birth_date) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de mascota.",
+          icon: "warning",
+          confirmButtonText: "Volver al registro",
+        });
+        return;
+      }
+
+      //Si la fecha de nacimiento introducida es mayor que la actual lanza error
+      const date = new Date();
+      const birthDate = new Date(birth_date);
+
+      if (birthDate.getTime() > date.getTime()) {
+        Swal.fire({
+          title: "La fecha de nacimiento no puede ser mayor que la fecha actual.",
           icon: "warning",
           confirmButtonText: "Volver al registro",
         });
@@ -421,6 +440,19 @@ window.addEventListener("DOMContentLoaded", () => {
         ) {
           Swal.fire({
             title: `Faltan campos por rellenar en la patologia nº ${i + 1}`,
+            icon: "warning",
+            confirmButtonText: "Volver al registro",
+          });
+          error = true;
+          break;
+        }
+
+        const date = new Date();
+        const detectionDate = new Date(detection_date);
+
+        if (detectionDate.getTime() > date.getTime() || detectionDate.getTime() > newBirthDate.getTime()) {
+          Swal.fire({
+            title: `La fecha de detección de la patologia nº ${i + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
             icon: "warning",
             confirmButtonText: "Volver al registro",
           });

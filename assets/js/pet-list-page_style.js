@@ -101,10 +101,10 @@ const createPets = (petsList, ownersList) => {
   const cardAllOwners = document.getElementById("card-owners");
 
   const dniOwners = [];
-  let numberOwners =0;
+  let numberOwners = 0;
 
-  for(let i = 0; i<ownersList.length; i++){
-    if(!dniOwners.includes(ownersList[i].dni_owner)){
+  for (let i = 0; i < ownersList.length; i++) {
+    if (!dniOwners.includes(ownersList[i].dni_owner)) {
       dniOwners.push(ownersList[i].dni_owner);
       numberOwners++;
     }
@@ -175,7 +175,7 @@ const createPets = (petsList, ownersList) => {
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
 
     // Obtener el nombre y teléfono de contacto del dueño
-    const ownerName = owner ? owner.name_owner : "Desconocido";
+    const ownerSurname = owner ? owner.surname : "Desconocido";
     const ownerContact = owner ? owner.phone : "Desconocido";
 
     const tableRow = document.createElement("tr");
@@ -185,7 +185,7 @@ const createPets = (petsList, ownersList) => {
             <th scope="row">${register_date}</th>
             <th scope="row">${name_pet}</th>
             <th scope="row" class="d-none d-md-table-cell">${type}</th>
-            <th scope="row">${ownerName}</th>
+            <th scope="row">${ownerSurname}</th>
             <th scope="row" class="d-none d-md-table-cell">${owner_dni}</th>
             <th scope="row" class="d-none d-md-table-cell">${ownerContact}</th>
             <th scope="row">
@@ -265,6 +265,28 @@ const createPets = (petsList, ownersList) => {
     `;
 
     cardPets.appendChild(cardPet);
+
+    //Boton eliminar mascota de la base de datos desde las tarjetas de registros más recientes
+    const btnDelete = cardPet.querySelector(".btn-delete-pet");
+    btnDelete.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const confirmAction = await Swal.fire({
+        title: `¡Estás a punto de eliminar un registro!`,
+        html: `¿<strong>Segur@ que deseas eliminar</strong> a la mascota <strong>${name_pet}</strong>?`,
+        icon: "warning",
+        iconColor: "#8a3938",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+      });
+
+      if (confirmAction.isConfirmed) {
+        await deletePet(id);
+      } else {
+        return;
+      }
+    });
   }
 
   const deletePet = async (id_pet) => {

@@ -224,6 +224,10 @@
                     <input type="text" class="form-control" id="surname" required>
                 </div>
                 <div class="mb-3">
+                    <label>Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="birth_date_owner" required>
+                </div>
+                <div class="mb-3">
                     <label>Teléfono</label>
                     <input type="text" class="form-control" id="phone" required>
                 </div>
@@ -260,19 +264,19 @@
             </form>
     </dialog>
 
-    <!-- Pop up para editar la información de una alergia de la mascota -->
+    <!-- Pop up para editar la información de una patologia de la mascota -->
     <dialog id="editPathologyPopUp" class="pet-modal">
-        <form id="formEditPet" method="dialog">
+        <form id="formEditPathology" method="dialog">
             <div class="intro">
                 <h3 class="text-light">Editar Patologia</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Allergeno</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <label>Nombre Patología*</label>
+                    <input type="text" class="form-control" id="name">
                 </div>
                 <div class="mb-3">
-                    <label>Tipo</label>
+                    <label>Tipo*</label>
                     <select id="type" class="form-select">
                         <option>Alergia</option>
                         <option>Enfermedad</option>
@@ -282,14 +286,14 @@
                 </div>
                 <div class="mb-3">
                     <label>Diagnostico (metodo)</label>
-                    <input type="text" class="form-control" id="diagnostic_method" required>
+                    <input type="text" class="form-control" id="diagnostic_method">
                 </div>
                 <div class="mb-3">
                     <label>Sintomas</label>
-                    <input type="text" class="form-control" id="symptoms" required>
+                    <input type="text" class="form-control" id="symptoms">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Nivel de severidad</label>
+                    <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
                     <select id="severity_level" class="form-select">
                         <option>Leve</option>
                         <option>Moderada</option>
@@ -298,26 +302,25 @@
                 </div>
                 <div class="mb-3">
                     <label>Tratamiento</label>
-                    <input type="text" class="form-control" id="treatment" required>
+                    <input type="text" class="form-control" id="treatment">
                 </div>
                 <div class="mb-3">
-                    <label>Es cronico</label>
-                    <input type="checkbox" class="form-control" id="is_chronic" required>
+                    <label>Es cronico*</label>
+                    <input type="checkbox" class="form-check-input" id="is_chronic">
                 </div>
                 <div class="mb-3">
                     <label>Fecha de deteccion</label>
-                    <input type="date" class="form-control" id="detection_date" required>
+                    <input type="date" class="form-control" id="detection_date">
                 </div>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
                 <button type="submit" id="saveChangesPathology" class="btn btn-dark">Guardar</button>
-                <button type="button" class="btn btn-dark"
-                    onclick="document.getElementById('editPathologyPopUp').close()">Cancelar</button>
+                <button type="button" id="btnCancelChangesPathology" class="btn btn-dark">Cancelar</button>
             </div>
         </form>
     </dialog>
 
-    <!-- Pop up para mostrar la información detalle de una alergia de la mascota -->
+    <!-- Pop up para mostrar la información detalle de una patologia de la mascota -->
     <dialog id="showPathologyPopUp" class="pathology-modal">
         <div id="showInfoPathology">
             <div class="intro">
@@ -367,13 +370,6 @@
                             <p id="show_severity_level"></p>
                         </div>
                     </div>
-                    <div class="element-info">
-                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
-                        <div class="mb-3">
-                            <h5>Tratamiento</h5>
-                            <p id="show_treatment"></p>
-                        </div>
-                    </div>
 
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
@@ -386,10 +382,38 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
                         <div class="mb-3">
-                            <h5>Tratamiento</h5>
+                            <h5>Fecha de detección</h5>
                             <p id="show_detection_date"></p>
                         </div>
                     </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
+                        <div class="mb-3">
+                            <h5>Tratamiento</h5>
+                            <p id="show_treatment"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </dialog>
+
+    <!-- Pop up para mostrar la información detalle de un registro de la mascota -->
+    <dialog id="showRegisterPopUp" class="pathology-modal">
+        <div id="showInfoRegister">
+            <div class="intro">
+                <h3 class="text-light">Información del registro</h3>
+                <button type="button" class="btn btn-light"
+                    onclick="document.getElementById('showRegisterPopUp').close()"><i
+                        class="fa-solid fa-x"></i></button>
+            </div>
+            <div class="element-info mt-3">
+                <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
+                <div class="mb-3">
+                    <h5>Observaciones</h5>
+                    <p id="show_observation_appointment"></p>
                 </div>
             </div>
         </div>

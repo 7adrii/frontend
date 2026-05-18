@@ -7,8 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const urlPet = `http://localhost:8080/pets/${idPet}`;
   const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
-  const urlAppointments = `http://localhost:8080/appointments/pet/${idPet}`;
+  const urlRegisters = `http://localhost:8080/registers/pet/${idPet}`;
   const urlVeterinarians = `http://localhost:8080/veterinarians`;
+  const urlServices = `http://localhost:8080/services`;
+  const urlAppointments = `http://localhost:8080/appointments`;
 
   const getPetData = async () => {
     try {
@@ -30,30 +32,35 @@ window.addEventListener("DOMContentLoaded", () => {
         pathologiesData = await pathologies.json();
       }
 
-      const appointments = await fetch(urlAppointments);
-      const appointmentsData = await appointments.json();
+      const registers = await fetch(urlRegisters);
+      const registersData = await registers.json();
 
       const veterinarians = await fetch(urlVeterinarians);
       const veterinariansData = await veterinarians.json();
 
-      console.log(petData);
-      console.log(ownerData);
-      console.log(pathologiesData);
-      console.log(appointmentsData);
+      const services = await fetch(urlServices);
+      const servicesData = await services.json();
+
+      const appointments = await fetch(urlAppointments);
+      const appointmentsData = await appointments.json();
 
       if (
         petData.data &&
         ownerData.data &&
         pathologiesData.data &&
-        appointmentsData.data &&
-        veterinariansData
+        registersData.data &&
+        veterinariansData.data &&
+        servicesData.data &&
+        appointmentsData.data
       ) {
         createPet(
           petData.data,
           ownerData.data,
           pathologiesData.data,
-          appointmentsData.data,
-          veterinariansData.data
+          registersData.data,
+          veterinariansData.data,
+          servicesData.data,
+          appointmentsData.data
         );
       }
     } catch (error) {
@@ -61,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const createPet = async (petData, ownerData, pathologiesData, appointmentsData, veterinariansData) => {
+  const createPet = async (petData, ownerData, pathologiesData, registersData, veterinariansData, servicesData, appointmentsData) => {
     //Datos del dueño
     const ownerElement = document.getElementById("owner");
     const {
@@ -76,6 +83,10 @@ window.addEventListener("DOMContentLoaded", () => {
       province,
       postal_code,
     } = ownerData;
+
+    const ownerBirth = ownerData.birth_date;
+    const oBirth = new Date(ownerBirth);
+
 
     ownerElement.innerHTML = `
     <div class="owner-name">
@@ -93,6 +104,10 @@ window.addEventListener("DOMContentLoaded", () => {
           <div class="information-section">
             <h6>Apellidos</h6>
             <h6 class="text-primary">${surname}</h6>
+          </div>
+          <div class="information-section">
+            <h6>Fecha de nacimiento</h6>
+            <h6 class="text-primary">${oBirth.toLocaleDateString('es-ES')}</h6>
           </div>
         </div>
         <div class="owner-contact">
@@ -141,8 +156,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
       console.log("Abriendo modal");
 
+      //Cambiamos la fecha a formato año-mes-dia para que se muestre en el modal
+      const newDate = new Date(oBirth);
+      const day = String(newDate.getDate()).padStart(2, '0');
+      const month = String(newDate.getMonth() + 1).padStart(2, '0');
+      const year = newDate.getFullYear();
+      const formattedToday = `${year}-${month}-${day}`
+      console.log(formattedToday);
+
       document.getElementById("name_owner").value = name_owner;
       document.getElementById("surname").value = surname;
+      document.getElementById("birth_date_owner").value = formattedToday;
       document.getElementById("phone").value = phone;
       document.getElementById("email").value = email;
       document.getElementById("direction").value = direction;
@@ -194,8 +218,9 @@ window.addEventListener("DOMContentLoaded", () => {
         !postal_code
       ) {
         Swal.fire({
-          title: "Faltan datos por rellenar",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editOwnerPopUp')
         });
         return;
       }
@@ -251,7 +276,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!breed || breed === undefined || breed == "anonymous") {
       newBreed = "-";
     }
-    else{
+    else {
       newBreed = breed;
     }
 
@@ -354,8 +379,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (!name_pet || !type || isNaN(weight) || !sex || !birth_date) {
         Swal.fire({
-          title: "El campo año está vacio",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPetPopUp')
         });
         return;
       }
@@ -433,11 +459,11 @@ window.addEventListener("DOMContentLoaded", () => {
             </tr>
           </thead>
           <tbody id="consult-list">
-            <th scope="col" style="max-width: 80px">${name}</th>
-            <th scope="col" style="max-width: 80px">${type}</th>
-            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</th>
-            <th scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</th>
-            <th scope="col">
+            <td scope="col" style="max-width: 80px">${name}</td>
+            <td scope="col" style="max-width: 80px">${type}</td>
+            <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</td>
+            <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</td>
+            <td scope="col">
               <div class="dropdown">
                 <button class="btn-options" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false"><i
@@ -449,7 +475,7 @@ window.addEventListener("DOMContentLoaded", () => {
                   <li><a class="dropdown-item btn-delete-pathology" data-id="${id_pathology}">Eliminar</a></li>
                 </ul>
               </div>
-            </th>
+            </td>
           </tbody>
         </table>
       `;
@@ -457,10 +483,10 @@ window.addEventListener("DOMContentLoaded", () => {
         pathologiesList.appendChild(pathologyInfo);
       });
     }
-    //Variable para saber en que alergia estamos para sacar la informacion en los modales
+    //Variable para saber en que patología estamos para sacar la informacion en los modales
     let selectedPathologyId = null;
 
-    //Pop up para mostrar la información de la alergia en mayor detalle
+    //Pop up para mostrar la información de la patología en mayor detalle
     let showPathologyId = null;
     let showBtn;
     const popUpShowPathology = document.getElementById('showPathologyPopUp');
@@ -474,13 +500,22 @@ window.addEventListener("DOMContentLoaded", () => {
         const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
         console.log(pathology);
 
+        let pathologyChronic = "";
+
+        if (pathology.is_chronic == 1) {
+          pathologyChronic = "Yes";
+        }
+        else {
+          pathologyChronic = "No";
+        }
+
         document.getElementById("show_name").textContent = pathology.name;
         document.getElementById("show_type").textContent = pathology.type;
         document.getElementById("show_diagnostic_method").textContent = pathology.diagnostic_method;
         document.getElementById("show_symptoms").textContent = pathology.symptoms;
         document.getElementById("show_severity_level").textContent = pathology.severity_level;
         document.getElementById("show_treatment").textContent = pathology.treatment;
-        document.getElementById("show_is_chronic").textContent = pathology.is_chronic;
+        document.getElementById("show_is_chronic").textContent = pathologyChronic;
         document.getElementById("show_detection_date").textContent = pathology.detection_date;
 
         popUpShowPathology.showModal();
@@ -498,11 +533,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (editBtn) {
         e.preventDefault();
+        e.stopImmediatePropagation();
 
-        //almacenamos el id de la alergia
+        //almacenamos el id de la patologia
         selectedPathologyId = editBtn.getAttribute("data-id");
 
-        //buscamos la alergia de la base de datos que tiene ese id para mostrar los datos
+        //buscamos la patologia de la base de datos que tiene ese id para mostrar los datos
         const pathology = pathologiesData.find(all => all.id_pathology == selectedPathologyId);
 
         //formateamos la fecha para poder mostrarla
@@ -519,7 +555,7 @@ window.addEventListener("DOMContentLoaded", () => {
           document.getElementById("symptoms").value = pathology.symptoms;
           document.getElementById("severity_level").value = pathology.severity_level;
           document.getElementById("treatment").value = pathology.treatment;
-          document.getElementById("is_chronic").value = pathology.is_chronic;
+          document.getElementById("is_chronic").checked = (pathology.is_chronic == 1 || pathology.is_chronic === true);
           document.getElementById("detection_date").value = newDetectionDate;
 
           popUpPathology.showModal();
@@ -539,7 +575,7 @@ window.addEventListener("DOMContentLoaded", () => {
         symptoms: document.getElementById("symptoms").value.trim(),
         severity_level: document.getElementById("severity_level").value.trim(),
         treatment: document.getElementById("treatment").value.trim(),
-        is_chronic: document.getElementById("is_chronic").value.trim(),
+        is_chronic: document.getElementById("is_chronic").checked,
         detection_date: document.getElementById("detection_date").value.trim(),
       };
 
@@ -562,16 +598,46 @@ window.addEventListener("DOMContentLoaded", () => {
         !detection_date
       ) {
         Swal.fire({
-          title: "Faltan campos por rellenar",
-          confirmButtonText: "Volver a la edición",
+          title: "Required fields are empty.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPathologyPopUp')
         });
         return;
       }
+
+      //Buscamos la fecha de nacimiento de la mascota para poder compararla con la fecha de detección de la
+      //patología. Si la fecha de la patología es anterior a la de nacimiento saltará un error.
+      const birthDateSplit = petData.birth_date;
+      const [day, month, year] = birthDateSplit.split("/");
+      const petBirthDate = new Date(`${year}-${month}-${day}`);
+      petBirthDate.setHours(0, 0, 0, 0);
+      console.log(birthDate);
+
+      const detectionDate = new Date(pathologyPutAPI.detection_date);
+      detectionDate.setHours(0, 0, 0, 0);
+      console.log(detectionDate);
+
+      if (detectionDate.getTime() < petBirthDate.getTime()) {
+        Swal.fire({
+          title: "Detection date can't be newer than birth_date of the pet.",
+          confirmButtonText: "Go back to edition",
+          target: document.getElementById('editPathologyPopUp')
+        });
+        return;
+      }
+
       console.log(id_pet);
       console.log("Cuerpo del envío:", JSON.stringify(pathologyPutAPI));
-      selectedPathologyId = editBtn.getAttribute("data-id");
+
       await sendPathologyData(pathologyPutAPI, selectedPathologyId);
     });
+
+    const btnCancelPathology = document.getElementById("btnCancelChangesPathology");
+    if (btnCancelPathology) {
+      btnCancelPathology.addEventListener("click", () => {
+        document.getElementById('editPathologyPopUp').close();
+      });
+    }
 
     const sendPathologyData = async (pathologyPutAPI, selectedPathologyId) => {
       try {
@@ -611,13 +677,13 @@ window.addEventListener("DOMContentLoaded", () => {
         const idPathologyDelete = deleteBtn.getAttribute("data-id");
 
         const confirmAction = await Swal.fire({
-          title: `¡Estás a punto de eliminar la alergia!`,
-          html: `¿<strong>Segur@ que deseas eliminar</strong> la alergia de la mascota <strong>${name_pet}</strong>?`,
+          title: `You are going to delete this pathology!`,
+          html: `¿<strong>Are you sure you want to remove</strong> this pathology from <strong>${name_pet}</strong>?`,
           icon: "warning",
           iconColor: "#8a3938",
           showCancelButton: true,
-          confirmButtonText: "Sí, eliminar",
-          cancelButtonText: "Cancelar",
+          confirmButtonText: "Yes, remove",
+          cancelButtonText: "Cancele",
         });
 
         if (confirmAction.isConfirmed) {
@@ -639,11 +705,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (deleteResponse.ok) {
           Swal.fire({
-            title: "Alergia eliminado!",
-            text: "La alergia se ha eliminado correctamente",
+            title: "Pathology removed!",
+            text: "Pathology deleted successfully",
             icon: "success",
             iconColor: "#318a3a",
-            confirmButtonText: "Volver al dashboard",
+            confirmButtonText: "Go back to pet",
             confirmButtonColor: "#2a1418",
           }).then(() => {
             window.location.reload();
@@ -665,37 +731,37 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     //Datos del historial de citas
-    const appointmentsList = document.getElementById("clinic-history");
-    appointmentsList.innerHTML = `
+    const registersList = document.getElementById("clinic-history");
+    registersList.innerHTML = `
       <thead>
         <tr>
           <th scope="col">Día de la cita</th>
-          <th scope="col" class="d-none d-md-table-cell">Hora</th>
-          <th scope="col" class="d-none d-md-table-cell">Causa</th>
-          <th scope="col">Veterinario</th>
+          <th scope="col" class="d-none d-md-table-cell">Nombre</th>
+          <th scope="col" class="d-none d-md-table-cell">Tipo de servicio</th>
           <th scope="col" class="d-none d-md-table-cell">Duración</th>
+          <th scope="col">Veterinario</th>
+          <th scope="col"></th>
         </tr>
       </thead>
     `;
 
-    if (appointmentsData.length === 0) {
-      appointmentsList.classList.add("text-center")
-      appointmentsList.classList.add("m-2")
-      appointmentsList.innerHTML = `
+    if (registersData.length === 0) {
+      registersList.classList.add("text-center")
+      registersList.classList.add("m-2")
+      registersList.innerHTML = `
       <h6>No hay registro previo de citas para ${petData.name_pet}.</h6>
       `;
     } else {
-      appointmentsData.forEach((appointment) => {
-        const appointmentInfo = document.createElement("tbody");
+      registersData.forEach((register) => {
+        const registerInfo = document.createElement("tbody");
 
         const {
-          date_appointment,
-          start_time,
-          end_time,
-          observations,
-          consult_id,
-          veterinarian_dni,
-        } = appointment;
+          id_register,
+          date_service,
+          observation_appointment,
+          service_id,
+          veterinarian_dni
+        } = register;
 
         //Buscamos el nombre del veterinario buscando por su DNI
         const veterinarian = veterinariansData.find(v => v.dni_veterinarian == veterinarian_dni);
@@ -703,25 +769,51 @@ window.addEventListener("DOMContentLoaded", () => {
         const veterinarianSurname = veterinarian.surname;
         const fullVeterinarianName = veterinarianName + " " + veterinarianSurname;
 
-        const date = "2024-01-01";
+        //Buscamos el nombre del servicio
+        const service = servicesData.find(s => s.id_service == service_id);
+        const serviceName = service.name;
+        const serviceType = service.service_type;
 
-        const start = new Date(`${date}T${start_time}`);
-        const end = new Date(`${date}T${end_time}`);
+        //Buscamos la duracion del servicio
+        const serviceDuration = service.duration;
 
-        const diferenceMs = end - start;
-        const duration = diferenceMs / (1000 * 60);
-
-        appointmentInfo.innerHTML = `
+        registerInfo.innerHTML = `
         <tr>
-          <td scope="col">${date_appointment}</td>
-          <td scope="col" class="d-none d-md-table-cell">${start_time}</td>
-          <td scope="col" class="d-none d-md-table-cell">${observations}</td>
+          <td scope="col">${date_service}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceName}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceType}</td>
+          <td scope="col" class="d-none d-md-table-cell">${serviceDuration} min</td>
           <td scope="col">${fullVeterinarianName}</td>
-          <td scope="col" class="d-none d-md-table-cell">${duration} minutos</td>
+          <td scope="row">
+            <a class="btn text-dark btn-show-register" data-id="${id_register}" style="cursor: pointer;">
+              <i class="fa-solid fa-info"></i>
+            </a>
+          </td>
         </tr>
       `;
+        registersList.appendChild(registerInfo);
+      });
 
-        appointmentsList.appendChild(appointmentInfo);
+      //Variable para saber en que registro estamos para sacar la informacion en los modales
+      let selectedRegisterId = null;
+
+      //Pop up para mostrar las observaciones del registro
+      let showRegisterId = null;
+      let showBtn;
+      const popUpShowRegister = document.getElementById('showRegisterPopUp');
+      registersList.addEventListener("click", (e) => {
+        showBtn = e.target.closest('.btn-show-register');
+
+        if (showBtn) {
+          e.preventDefault();
+
+          selectedRegisterId = showBtn.getAttribute("data-id");
+          const register = registersData.find(all => all.id_register == selectedRegisterId);
+
+          document.getElementById("show_observation_appointment").textContent = register.observation_appointment;
+
+          popUpShowRegister.showModal();
+        }
       });
     }
 

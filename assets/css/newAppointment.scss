@@ -98,3 +98,26 @@ textarea.form-control {
     border-radius: 15px !important;
     padding: 15px !important;
 }
+
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.btn-dark:hover{
+    background-color: $turquoise;
+    color: $grey;
+    border-color: $turquoise;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-info:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}

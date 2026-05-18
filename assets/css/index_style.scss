@@ -87,6 +87,30 @@
     padding-right: 5%;
 }
 
+.btn-dark:hover{
+    background-color: $turquoise;
+    color: $grey;
+    border-color: $turquoise;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-info:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-light:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
 @media (min-width: 1020px) {
     .nav-link {
         color: $white !important;
@@ -152,19 +176,19 @@ h3.text-center {
 
 // Estilos de los botones principales
 a.btn.btn-primary.btn-lg.custom-btn {
-    color: $white;
+    color: $grey;
     font-size: 1.1rem;
     font-weight: 600;
-    background-color: $gold;
-    border-color: $gold;
+    background-color: $turquoise;
+    border-color: $turquoise;
     transition: background-color 0.3s;
     padding: 15px 35px;
 }
 
 // Efecto al pasar el ratón por los botones principales
 a.btn.btn-primary.btn-lg.custom-btn:hover {
-    background-color: $turquoise;
-    border-color: $turquoise;
+    background-color: $gold;
+    border-color: $gold;
 }
 
 // Tamaño del título de las tarjetas
@@ -180,36 +204,7 @@ a.btn.btn-primary.btn-lg.custom-btn:hover {
 
 // Estilos del footer
 
-// Definición del degradado
-.footer-gradient {
-    background: linear-gradient(135deg, $turquoise 0%, $grey 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-
 // Sección inferior con tu color $grey
 .footer-bottom {
     background-color: $grey;
-}
-
-
-// Estilo para los enlaces del footer
-.footer-gradient a {
-    transition: all 0.3s ease;
-    opacity: 0.9;
-}
-
-
-// Efecto al pasar el ratón por los enlaces del footer
-.footer-gradient a:hover {
-    opacity: 1;
-    color: $gold !important;
-    padding-left: 5px;
-}
-
-
-// Iconos en dorado
-.footer-gradient i {
-    color: $gold;
 }

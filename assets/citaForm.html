@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/consults_style.css">
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/newAppointment.css">
     <script src="js/clock_header_script.js"></script>
     <script src="js/newAppointment.js" defer></script>
 </head>
@@ -162,7 +162,7 @@
                             <!-- Tipo de Consulta -->
                             <div class="col-md-12">
                                 <label class="form-label small fw-bold text-muted">TIPO DE CONSULTA</label>
-                                <select class="form-select" name="consult_id" id="select-consulta" required>
+                                <select class="form-select" name="service_id" id="select-servicio" required>
                                     <option value="">Cargando tipos de consulta...</option>
                                 </select>
                             </div>
@@ -170,24 +170,24 @@
                             <!-- Sala -->
                             <div class="col-md-12">
                                 <label class="form-label small fw-bold text-muted">SALA</label>
-                                <select class="form-select" name="consult_room">
-                                    <option value="consulta 1">Sala 1</option>
-                                    <option value="consulta 2">Sala 2</option>
-                                    <option value="consulta 3">Sala 3</option>
-                                    <option value="consulta 4">Sala 4</option>
+                                <select class="form-select" name="code_room" id="select-sala" required>
+                                    <option value="">Cargando salas...</option>
                                 </select>
                             </div>
 
                             <!-- Observaciones -->
                             <div class="col-12">
                                 <label class="form-label small fw-bold text-muted">OBSERVACIONES</label>
-                                <textarea class="form-control" name="observations" rows="2"></textarea>
+                                <textarea class="form-control" name="observations" rows="5"></textarea>
                             </div>
 
                             <!-- Boton de crear cita -->
-                            <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-vettion-primary w-100 py-3">
+                            <div class="col-12 mt-4 text-end">
+                                <button type="submit" class="btn btn-dark w-60 py-2">
                                     Crear Cita <i class="bi bi-plus-circle ms-2"></i>
+                                </button>
+                                <button type="click" onclick="window.location.href='clinic-historic.html'" class="btn btn-info w-60 py-2">
+                                    Cancelar <i class="bi bi-plus-circle ms-2"></i>
                                 </button>
                             </div>
                         </div>
@@ -196,6 +196,55 @@
             </div>
         </div>
     </div>
+
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
+        <div class="container-footer">
+            <div class="row gy-4">
+
+                <!-- Vettion -->
+                <div class="col-12 col-md-4 text-center text-md-start">
+                    <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
+                    <p class="small">
+                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
+                        atención personalizada.
+                    </p>
+                </div>
+
+                <!-- Contactos Directos -->
+                <div class="col-12 col-md-4 text-center">
+                    <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
+                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Ciudad</p>
+                    <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
+                    <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
+                </div>
+
+                <!-- Soporte -->
+                <div class="col-12 col-md-4 text-center text-md-end">
+                    <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
+                    <p class="small mb-1">¿Problemas con la aplicación?</p>
+                    <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
+                        <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4 border-primary opacity-50">
+
+            <!-- Copyright y Estado -->
+            <div class="row justify-content-between">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small">
+                        &copy; 2026 Vettion - Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="small">
+                        <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

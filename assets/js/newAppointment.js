@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Cargamos los 4 desplegables en paralelo
+    // Cargamos los 5 desplegables en paralelo
     await Promise.all([
         // Mascotas
         cargarDesplegable(
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cargarDesplegable(
             'http://localhost:8080/veterinarians',
             'select-veterinario',
-            v => `${v.surname}, ${v.name}  [${v.dni_veterinarian}]`,
+            v => `${v.surname} ${v.name}, ${v.speciality}, [${v.dni_veterinarian}]`,
             v => v.dni_veterinarian,
             '— Selecciona un veterinario —'
         ),
@@ -50,13 +50,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             c => c.dni_cleaner,
             '— Selecciona personal de limpieza —'
         ),
-        // Tipos de consulta
+        // Tipos de servicio
         cargarDesplegable(
-            'http://localhost:8080/consults',
-            'select-consulta',
-            c => `${c.name} — ${c.consult_type} (${c.duration} min, ${c.base_price}€)`,
-            c => c.id_consult,
-            '— Selecciona tipo de consulta —'
+            'http://localhost:8080/services',
+            'select-servicio',
+            c => `${c.name} — ${c.service_type} (${c.duration} min, ${c.base_price}€)`,
+            c => c.id_service,
+            '— Selecciona tipo de servicio —'
+        ),
+
+        // Salas
+        cargarDesplegable(
+            'http://localhost:8080/rooms',
+            'select-sala',
+            r => `${r.name} — ${r.type}`,
+            r => r.room_code,
+            '— Selecciona la sala —'
         )
     ]);
 
@@ -86,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Desplegables: asignar el value que corresponde al dato guardado
                 document.getElementById('select-mascota').value    = app.pet_id || '';
                 document.getElementById('select-veterinario').value = app.veterinarian_dni || '';
-                document.getElementById('select-consulta').value   = app.consult_id || '';
+                document.getElementById('select-servicio').value   = app.service_id || '';
 
                 // cleaner_dni viene del servicio de limpieza asociado a esta cita
                 // Lo buscamos consultando el clean_service
@@ -102,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     console.warn('No se pudo cargar el personal de limpieza de la cita:', e);
                 }
 
-                form.consult_room.value  = app.consult_room || '';
+                form.code_room.value  = app.code_room || '';
                 form.observations.value  = app.observations || '';
             }
         } catch (err) {
@@ -119,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Convertir a número los campos que el backend espera como int
         dataCita.pet_id     = parseInt(dataCita.pet_id, 10);
-        dataCita.consult_id = parseInt(dataCita.consult_id, 10);
+        dataCita.service_id = parseInt(dataCita.service_id, 10);
 
         // Validar que no sea fin de semana
         const [year, month, day] = dataCita.date_appointment.split('-').map(Number);

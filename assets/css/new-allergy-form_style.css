@@ -1,80 +1,71 @@
 body {
-    background-color: rgba(196, 227, 227, 0.368);
+  background-color: rgba(196, 227, 227, 0.368);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 form {
-    background-color: #F8F9FA;
-    border: 1px solid rgba(187, 187, 187, 0.5);
-    margin: 3%;
+  background-color: #F8F9FA;
+  border: 1px solid rgba(187, 187, 187, 0.5);
+  margin: 3%;
 }
 
 .form-title {
-    background-color: #1E272E;
-    border-top-left-radius:15px;
-    border-top-right-radius: 15px;
-    text-align: center;
-    padding:2%;
+  background-color: #1E272E;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+  padding: 2%;
 }
 
 .form-section {
-    margin-bottom: 5%;
-    border-bottom: 1px solid rgba(187, 187, 187, 0.5);
-    padding: 4%;
+  margin-bottom: 5%;
+  border-bottom: 1px solid rgba(187, 187, 187, 0.5);
+  padding: 4%;
 }
 
 .btns {
-    display: flex;
-    justify-content: end;
-    gap: 10px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  padding: 4%;
 }
 
 .container-footer {
-    display: flex;
-    flex-direction: column;
-    padding-left: 5%;
-    padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+  padding-right: 5%;
 }
-
 
 @media (min-width: 1020px) {
-    .container {
-        justify-content: center;
-        max-width: 40%;
-    }
-
-    .form-container {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            "form-title form-title"
-            "form-pet form-owner"
-            "form-allergy form-allergy"
-            "btns btns";
-        gap: 10px;
-        justify-content: center;
-    }
-
-    .form-title {
-        grid-area: form-title;
-        max-width: 100%;
-        margin-right: 4px;
-        margin-left: 3px;
-    }
-
-    .form-allergy {
-        grid-area: form-allergy;
-    }
-
-    .btns {
-        grid-area: btns;
-    }
-
-    .form-section {
-        margin-bottom: 3%;
-    }
-}
+  .container {
+    justify-content: center;
+    max-width: 40%;
+  }
+  .form-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    grid-template-areas: "form-title form-title" "form-pet form-owner" "form-allergy form-allergy" "btns btns";
+    gap: 10px;
+    justify-content: center;
+  }
+  .form-title {
+    grid-area: form-title;
+    max-width: 100%;
+    margin-right: 4px;
+    margin-left: 3px;
+  }
+  .form-allergy {
+    grid-area: form-allergy;
+  }
+  .btns {
+    grid-area: btns;
+  }
+  .form-section {
+    margin-bottom: 3%;
+  }
+}/*# sourceMappingURL=new-allergy-form_style.css.map */

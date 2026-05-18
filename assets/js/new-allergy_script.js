@@ -1,19 +1,22 @@
 window.addEventListener("DOMContentLoaded", () => {
     let params = new URLSearchParams(document.location.search);
     let idPet = params.get("id");
-    console.log(idPet);
 
     const urlPathologies = `http://localhost:8080/pathologies`;
+    const urlPet = `http://localhost:8080/pets/${idPet}`;
 
     const getNewPathology = async () => {
         try {
-            createNewPathology();
+            const pet = await fetch(urlPet);
+            const petData = await pet.json();
+
+            createNewPathology(petData.data);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const createNewPathology = () => {
+    const createNewPathology = (petData) => {
         const form = document.getElementById("form-new-pathology");
         form.innerHTML = `
         <div class="form-title">
@@ -124,6 +127,39 @@ window.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const date = new Date();
+            const newDetectionDate = new Date(detection_date);
+            const newBirthDate = new Date(petData.birth_date);
+
+            if (newDetectionDate.getTime() > date.getTime() || newDetectionDate.getTime() < newBirthDate.getTime()) {
+                Swal.fire({
+                    title: `La fecha de detección de la patologia nº ${petData.id_pet + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
+                    icon: "warning",
+                    confirmButtonText: "Volver al registro",
+                });
+                return
+            }
+
+
+
+            //Buscamos la fecha de nacimiento de la mascota para poder compararla con la fecha de detección de la
+            //patología. Si la fecha de la patología es anterior a la de nacimiento saltará un error.
+            const birthDateSplit = petData.birth_date;
+            const [day, month, year] = birthDateSplit.split("/");
+            const birthDate = new Date(`${year}-${month}-${day}`);
+
+            const detectionDate = new Date(detection_date);
+            console.log(birthDate);
+            console.log(detectionDate);
+            if (detectionDate.getTime() < birthDate.getTime()) {
+                Swal.fire({
+                    title: "La fecha de la detección de la patología no puede ser anterior a la de la fecha de nacimiento.",
+                    icon: "warning",
+                    confirmButtonText: "Volver al registro",
+                });
+                return;
+            }
+
             await sendPathology(pathologySendAPI);
         });
 
@@ -156,7 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         icon: "error",
                     });
                 }
-            } catch (error){
+            } catch (error) {
                 Swal.fire({
                     title: "Error de conexión",
                     text: error.message,

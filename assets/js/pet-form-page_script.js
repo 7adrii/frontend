@@ -83,6 +83,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     </div>
                   </div>
                   <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <input type="date" class="form-control" id="birth_date">
+                  </div>
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
                     <input type="text" class="form-control" id="owner_dni" placeholder="94299329V">
                   </div>
@@ -153,7 +157,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="form-allergy">
                 <div class="form-section">
                     <h5>Alergias</h5>
-                    <button type="button" class="btn btn-primary" id="btn-add">Introducir nueva alergia</button>
+                    <button type="button" class="btn btn-dark" id="btn-add">Introducir nueva alergia</button>
                     <div id="container-allergies">
 
                     </div>
@@ -203,7 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
                                 <input type="date" class="form-control detection_date">
                             </div>
-                            <button type="button" class="btn btn-secondary btn-remove"
+                            <button type="button" class="btn btn-info btn-remove"
                                 aria-label="Close">Eliminar</button>
                         </div>
                     </template>
@@ -212,10 +216,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             <div class="btns">
                 <a href="pet-list-page.html">
-                    <button type="submit" class="btn btn-primary" id="btnRegister">Registrar</button>
+                    <button type="submit" class="btn btn-dark" id="btnRegister">Registrar</button>
                 </a>
                 <a href="pet-list-page.html">
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-info">Cancelar</button>
                 </a>
             </div>
     `;
@@ -247,7 +251,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Creamos los elementos para la lista
     ownersList.forEach((owner) => {
-      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = owner;
+      const { dni_owner, name_owner, surname, birth_date, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
       ownerElement.innerHTML = `
@@ -261,6 +265,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("owner_dni").value = dni_owner;
         document.getElementById("name_owner").value = name_owner;
         document.getElementById("surname").value = surname;
+        document.getElementById("birth_date").value = birth_date;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
         document.getElementById("direction").value = direction;
@@ -314,6 +319,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         const data = await postPetResponse.json();
+
         //Almacenamos el id para la asignacion de la patologias
         const id = data.data.id_pet;
         return id;
@@ -364,13 +370,10 @@ window.addEventListener("DOMContentLoaded", () => {
         postal_code: document.getElementById("postal_code").value.trim(),
       };
 
-      const { dni_owner, name_owner, surname, birth_date: owner_birth_date, phone, email, direction, floor, city, province, postal_code } = ownerSendAPI;
+      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = ownerSendAPI;
+      const ownerBirth = ownerSendAPI.birth_date;
 
-      const ownerFieldsAreComplete = isNewOwner
-        ? dni_owner && name_owner && surname && owner_birth_date && phone && email && direction && city && province && postal_code
-        : dni_owner && name_owner && surname && phone && email && direction && city && province && postal_code;
-
-      if (!ownerFieldsAreComplete) {
+      if (!dni_owner || !name_owner || !surname || !ownerBirth || !phone || !email || !direction || !city || !province || !postal_code) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de dueño",
           icon: "warning",
@@ -378,6 +381,9 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         return;
       }
+
+      //Declaramos una variable de fecha de nacimietno de la mascota para poder usarla posteriormente en patologias
+      let newBirthDate;
 
       //Registrar datos de la mascota
       const petSendAPI = {
@@ -393,9 +399,24 @@ window.addEventListener("DOMContentLoaded", () => {
       const { name_pet, type, breed, weight, sex, birth_date, owner_dni } =
         petSendAPI;
 
+      newBirthDate = new Date(birth_date);
+
       if (!name_pet || !type || !weight || !sex || !birth_date) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de mascota.",
+          icon: "warning",
+          confirmButtonText: "Volver al registro",
+        });
+        return;
+      }
+
+      //Si la fecha de nacimiento introducida es mayor que la actual lanza error
+      const date = new Date();
+      const birthDate = new Date(birth_date);
+
+      if (birthDate.getTime() > date.getTime()) {
+        Swal.fire({
+          title: "La fecha de nacimiento no puede ser mayor que la fecha actual.",
           icon: "warning",
           confirmButtonText: "Volver al registro",
         });
@@ -448,19 +469,17 @@ window.addEventListener("DOMContentLoaded", () => {
           break;
         }
 
-        // detection_date must not be before pet birth_date
-        if (birth_date) {
-          const det = new Date(detection_date);
-          const b = new Date(birth_date);
-          if (!isNaN(det.getTime()) && det < b) {
-            Swal.fire({
-              title: `La fecha de detección de la patología nº ${i + 1} no puede ser anterior a la fecha de nacimiento de la mascota.`,
-              icon: "error",
-              confirmButtonText: "Corregir",
-            });
-            error = true;
-            break;
-          }
+        const date = new Date();
+        const detectionDate = new Date(detection_date);
+
+        if (detectionDate.getTime() > date.getTime() || detectionDate.getTime() < newBirthDate.getTime()) {
+          Swal.fire({
+            title: `La fecha de detección de la patologia nº ${i + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
+            icon: "warning",
+            confirmButtonText: "Volver al registro",
+          });
+          error = true;
+          break;
         }
 
         pathologies.push(pathology);

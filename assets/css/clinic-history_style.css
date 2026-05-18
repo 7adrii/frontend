@@ -33,7 +33,7 @@
 }
 
 .scroll-container {
-  max-height: 600px;
+  max-height: 350px;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid #dee2e6;

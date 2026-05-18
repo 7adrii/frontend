@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
     urlServices = `http://localhost:8080/services`;
     urlVeterinarians = `http://localhost:8080/veterinarians`;
     urlOwners = `http://localhost:8080/owners`;
+    urlRegisters = `http://localhost:8080/registers`;
 
     const getData = async () => {
         try {
@@ -22,14 +23,17 @@ window.addEventListener("DOMContentLoaded", () => {
             const owners = await fetch(urlOwners);
             const ownersData = await owners.json();
 
-            createData(appointmentsData.data, petsData.data, servicesData.data, veterinariansData.data, ownersData.data);
+            const registers = await fetch(urlRegisters);
+            const registersData = await registers.json();
+
+            createData(appointmentsData.data, petsData.data, servicesData.data, veterinariansData.data, ownersData.data, registersData.data);
         }
         catch (Error) {
             console.error(Error);
         }
     }
 
-    const createData = async (appointments, pets, services, veterinarians, owners) => {
+    const createData = async (appointments, pets, services, veterinarians, owners, registers) => {
 
         //Tarjeta de total citas realizadas en la clínica
         const cardAppointment = document.getElementById("card-appointments");
@@ -140,89 +144,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const clinicDay = document.getElementById("today");
         clinicDay.innerHTML = `Citas del día: ${formattedToday}`;
 
-        //Creación de la tabla de historial de consultas que ya han pasado
-        const table = document.getElementById("table-consults");
-
-        table.innerHTML = `
-            <thead>
-                <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col"class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-        `;
-
-        //Tabla para mostrar el listado de citas que ya han ocurrido
-        let counter = 0;
-        appointments.forEach((appointment) => {
-            const { date_appointment, start_time } = appointment;
-            if (formattedToday > date_appointment) {
-                const service = services.find(s => s.id_service === appointment.service_id);
-                const serviceName = service.name;
-
-                const pet = pets.find(p => p.id === appointment.pet_id);
-                const petName = pet.name_pet;
-
-                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
-                const veterinarianName = veterinarian.name;
-                const veterinarianSurname = veterinarian.surname;
-                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
-
-                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
-                const ownerName = owner.name_owner;
-                const ownerSurname = owner.surname;
-
-                const fullNameOwner = ownerSurname + " " + ownerName;
-
-                const tbody = document.createElement("tbody");
-                tbody.innerHTML = `
-                <tr>
-                    <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
-                    <td scope="row">${fullNameOwner}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
-                </tr>
-            `;
-                table.appendChild(tbody);
-                counter++;
-            }
-        });
-
-        if (counter == 0) {
-            table.innerHTML = `
-            <div class="p-2 text-center justify-content-center">
-                <h6>No hay registro de citas</h6>
-            </div>
-                `;
-        }
-
-        //Creacion de la tabla de historial de consultas que se van a hacer
-        const tableFuture = document.getElementById("future-consults");
-        tableFuture.innerHTML = `
-            <thead>
-                <tr class="align-middle">
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-        `;
-
-
         //Tabla con las citas para el dia actual.
         const tableToday = document.getElementById("table-today-consults");
         tableToday.innerHTML = `
@@ -240,38 +161,45 @@ window.addEventListener("DOMContentLoaded", () => {
             </thead>
         `;
 
+        //contador de citas del día actual
         let counterToday = 0;
         appointments.forEach((appointment) => {
-
+            //formateamos la fecha actual a formato yyyy-mm-dd
             const todayDate = new Date();
             const today = todayDate.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
             const todayFormat = today.split('/').reverse().join('-');
 
+            //formateamos la fecha de la cita a formato yyyy-mm-dd
             const dateAppointmentSplit = appointment.date_appointment;
             const [day, month, year] = dateAppointmentSplit.split("/");
             const dateAppointment = new Date(`${year}-${month}-${day}`);
             const appDate = dateAppointment.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
             const newDate = appDate.split('/').reverse().join('-');
 
+            //si son iguales entonces metemos la cita en esta tabla
             if (todayFormat === newDate) {
                 const { date_appointment, start_time, end_time } = appointment;
                 const service = services.find(s => s.id_service === appointment.service_id);
                 const serviceName = service.name;
 
+                //buscamos el nombre de la mascota
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const petName = pet.name_pet;
 
+                //buscamos el nombre del veterinario
                 const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
                 const veterinarianName = veterinarian.name;
                 const veterinarianSurname = veterinarian.surname;
                 const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
 
+                //buscamos el nombre del dueño
                 const owner = owners.find(o => o.dni_owner === pet.owner_dni);
                 const ownerName = owner.name_owner;
                 const ownerSurname = owner.surname;
 
                 const fullNameOwner = ownerName + " " + ownerSurname;
 
+                //metemos todos los datos en el inner.html
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
                 <tr>
@@ -285,11 +213,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
                     <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
                 </tr>
-            `;
+                `;
                 tableToday.appendChild(tbody);
                 counterToday++;
 
-                //Boton eliminar mascota de la base de datos
+                //Boton eliminar la cita de la base de datos
                 const btnDelete = tbody.querySelector(".btn-delete-app");
                 btnDelete.addEventListener("click", async (e) => {
                     e.preventDefault();
@@ -313,6 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        //si no hay citas rellenamos la seccion con este contenido.
         if (counterToday == 0) {
             tableToday.innerHTML = `
             <div class="p-2 text-center justify-content-center">
@@ -321,11 +250,65 @@ window.addEventListener("DOMContentLoaded", () => {
                 `;
         }
 
+        //Creacion de la tabla de historial de consultas que se van a hacer
+        const tableFuture = document.getElementById("future-consults");
+        tableFuture.innerHTML = `
+            <thead>
+                <tr class="align-middle">
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Dueño</th>
+                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        `;
+
         //Tabla para mostrar el listado de citas que se han concertado en el futuro
         let counterNext = 0;
+
+        //ordenamos el array de citas por fecha de la cita concertada
+        appointments.sort((a, b) => {
+            const A = a.date_appointment.split('T')[0].split('/');
+            const B = b.date_appointment.split('T')[0].split('/');
+
+            const dayA = parseInt(A[0], 10);
+            const monthA = parseInt(A[1], 10) - 1;
+            const yearA = parseInt(A[2], 10);
+
+            const dayB = parseInt(B[0], 10);
+            const monthB = parseInt(B[1], 10) - 1;
+            const yearB = parseInt(B[2], 10);
+
+            const dateA = new Date(yearA, monthA, dayA).getTime();
+            const dateB = new Date(yearB, monthB, dayB).getTime();
+
+            // 4. Restamos los milisegundos para ordenar cronológicamente
+            return dateA - dateB;
+        });
+
+        //Recorremos la lista de appointments y si la fecha es mayor que la actual entonces lo añadimos la tabla
         appointments.forEach((appointment) => {
             const { id_appointment, date_appointment, start_time } = appointment;
-            if (formattedToday < date_appointment) {
+
+            //formateamos la fecha actual a formato yyyy-mm-dd
+            const todayDate = new Date();
+            const today = todayDate.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const todayFormat = today.split('/').reverse().join('-');
+
+            //formateamos la fecha de la cita a formato yyyy-mm-dd
+            const dateAppointmentSplit = appointment.date_appointment;
+            const [day, month, year] = dateAppointmentSplit.split("/");
+            const dateAppointment = new Date(`${year}-${month}-${day}`);
+            const appDate = dateAppointment.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const newDate = appDate.split('/').reverse().join('-');
+
+            //si es mayor que la fecha actual añadimos los datos y sumamos 1 al contador
+            if (todayFormat < newDate) {
                 const service = services.find(s => s.id_service === appointment.service_id);
                 const serviceName = service.name;
 
@@ -384,6 +367,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        //Si el contador es 0 entonces rellenamos la tabla con el siguiente contenido.
         if (counterNext == 0) {
             table.innerHTML = `
             <div class="p-2 text-center justify-content-center">
@@ -391,6 +375,77 @@ window.addEventListener("DOMContentLoaded", () => {
             </div>
                 `;
         }
+
+        //Creación de la tabla de historial de consultas que ya han pasado
+        const table = document.getElementById("table-consults");
+
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Dueño</th>
+                    <th scope="col"class="d-none d-md-table-cell">Servicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        `;
+
+        //Tabla para mostrar el listado de citas que ya han ocurrido
+        let counter = 0;
+        registers.forEach((register) => {
+            const { date_service } = register;
+
+            const service = services.find(s => s.id_service === register.service_id);
+            const pet = pets.find(p => p.id === register.pet_id);
+            const veterinarian = veterinarians.find(v => v.dni_veterinarian === register.veterinarian_dni);
+
+            if (service && pet && veterinarian) {
+                const serviceName = service.name;
+
+                const petName = pet.name_pet;
+
+                const veterinarianName = veterinarian.name;
+                const veterinarianSurname = veterinarian.surname;
+                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
+
+                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
+
+                const fullNameOwner = ownerSurname + " " + ownerName;
+
+                if (owner) {
+                    const tbody = document.createElement("tbody");
+                    tbody.innerHTML = `
+                    <tr>
+                        <td scope="row">${date_service}</td>
+                        <td scope="row">${petName}</td>
+                        <td scope="row">${fullNameOwner}</td>
+                        <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
+                        <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
+                        <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
+                        <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
+                    </tr>
+                    `;
+                    table.appendChild(tbody);
+                    counter++;
+                }
+
+            }
+
+        });
+
+        if (counter == 0) {
+            table.innerHTML = `
+            <div class="p-2 text-center justify-content-center">
+                <h6>No hay registro de citas</h6>
+            </div>
+                `;
+        }
+
 
         //Pop up de editar datos de una cita y guardar los cambios
         const popUpAppointment = document.getElementById("editAppointmentPopUp");

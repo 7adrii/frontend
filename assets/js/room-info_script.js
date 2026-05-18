@@ -38,7 +38,7 @@ const fetchDayInfo = async (room, date) => {
 const renderAppointments = (appointments) => {
   if (!appointments || appointments.length === 0) {
     appointmentsList.innerHTML =
-      '<p class="text-muted">No hay citas para la fecha seleccionada.</p>';
+      '<p class="text-muted">There are no appointments for the selected date.</p>';
     return;
   }
 
@@ -53,7 +53,7 @@ const renderAppointments = (appointments) => {
       <div class="card mb-2">
         <div class="card-body">
           <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text"><strong>Mascota:</strong> ${pet} <br/><strong>Dueño:</strong> ${owner}</p>
+          <p class="card-text"><strong>Pacient:</strong> ${pet} <br/><strong>Owner:</strong> ${owner}</p>
         </div>
       </div>
     `;
@@ -65,7 +65,7 @@ const renderAppointments = (appointments) => {
 const renderCleanServices = (cleanServices) => {
   if (!cleanServices || cleanServices.length === 0) {
     cleaningList.innerHTML =
-      '<p class="text-muted">No hay servicios de limpieza para la fecha seleccionada.</p>';
+      '<p class="text-muted">There are no clean services for the selected date</p>';
     return;
   }
 
@@ -76,7 +76,7 @@ const renderCleanServices = (cleanServices) => {
       <div class="card mb-2">
         <div class="card-body">
           <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text">Asociado a cita: ${c.appointment_id || "-"} </p>
+          <p class="card-text">Associated with appointment: ${c.appointment_id || "-"} </p>
         </div>
       </div>
     `;

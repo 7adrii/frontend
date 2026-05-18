@@ -63,11 +63,11 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <textarea class="form-control" id="treatment" rows="3" placeholder="Intravenous medication"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Is cronic</label>
+                                <label for="exampleInputEmail1" class="form-label">Is cronic?</label>
                                 <input type="checkbox" class="form-check-input" id="is_chronic">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Detection date</label>
+                                <label for="exampleInputEmail1" class="form-label">Detection's date</label>
                                 <input type="date" class="form-control" id="detection_date">
                             </div>
                         </div>

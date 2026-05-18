@@ -163,6 +163,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
         //contador de citas del día actual
         let counterToday = 0;
+
+        //ordenamos por hora con la funcion localCompare
+        appointments.sort((a, b) => a.start_time.localeCompare(b.start_time));
+
         appointments.forEach((appointment) => {
             //formateamos la fecha actual a formato yyyy-mm-dd
             const todayDate = new Date();
@@ -178,7 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             //si son iguales entonces metemos la cita en esta tabla
             if (todayFormat === newDate) {
-                const { date_appointment, start_time, end_time } = appointment;
+                const {id_appointment, date_appointment, start_time, end_time } = appointment;
                 const service = services.find(s => s.id_service === appointment.service_id);
                 const serviceName = service.name;
 
@@ -386,7 +390,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     <th scope="col">Paciente</th>
                     <th scope="col">Dueño</th>
                     <th scope="col"class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Duración</th>
                     <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
                     <th scope="col"></th>
                 </tr>
@@ -404,6 +408,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (service && pet && veterinarian) {
                 const serviceName = service.name;
+                const serviceDuration = service.duration;
 
                 const petName = pet.name_pet;
 
@@ -425,7 +430,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         <td scope="row">${petName}</td>
                         <td scope="row">${fullNameOwner}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
-                        <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
+                        <td scope="row" class="d-none d-md-table-cell">${serviceDuration} min</td>
                         <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
                         <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
                     </tr>
@@ -437,6 +442,8 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
         });
+
+        //Si no hay historial de registros se inserta este div en table
 
         if (counter == 0) {
             table.innerHTML = `
@@ -486,6 +493,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        //Guardar los cambios que se han hecho en la edición de la cita
         const saveBtnAppointment = document.getElementById("saveChangesAppointment");
         saveBtnAppointment.addEventListener("click", async (e) => {
             e.preventDefault();
@@ -531,6 +539,7 @@ window.addEventListener("DOMContentLoaded", () => {
             await sendAppointmentData(appointmentPutAPI, selectedAppointmentId);
         });
 
+        //Llamamos a la API para mandar los datos
         const sendAppointmentData = async (appointmentPutAPI, selectedAppointmentId) => {
             try {
                 const PutResponse = await fetch(

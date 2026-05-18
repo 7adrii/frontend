@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let idPet = params.get("id");
 
     const urlPathologies = `http://localhost:8080/pathologies`;
-    const urlPet= `http://localhost:8080/pets/${idPet}`;
+    const urlPet = `http://localhost:8080/pets/${idPet}`;
 
     const getNewPathology = async () => {
         try {
@@ -127,16 +127,31 @@ window.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const date = new Date();
+            const newDetectionDate = new Date(detection_date);
+            const newBirthDate = new Date(petData.birth_date);
+
+            if (newDetectionDate.getTime() > date.getTime() || newDetectionDate.getTime() < newBirthDate.getTime()) {
+                Swal.fire({
+                    title: `La fecha de detección de la patologia nº ${petData.id_pet + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
+                    icon: "warning",
+                    confirmButtonText: "Volver al registro",
+                });
+                return
+            }
+
+
+
             //Buscamos la fecha de nacimiento de la mascota para poder compararla con la fecha de detección de la
             //patología. Si la fecha de la patología es anterior a la de nacimiento saltará un error.
             const birthDateSplit = petData.birth_date;
             const [day, month, year] = birthDateSplit.split("/");
             const birthDate = new Date(`${year}-${month}-${day}`);
-            
+
             const detectionDate = new Date(detection_date);
             console.log(birthDate);
             console.log(detectionDate);
-            if(detectionDate.getTime() < birthDate.getTime()){
+            if (detectionDate.getTime() < birthDate.getTime()) {
                 Swal.fire({
                     title: "La fecha de la detección de la patología no puede ser anterior a la de la fecha de nacimiento.",
                     icon: "warning",

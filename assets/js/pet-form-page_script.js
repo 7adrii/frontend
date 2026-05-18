@@ -32,15 +32,17 @@ window.addEventListener("DOMContentLoaded", () => {
       const ownersList = await fetch(urlGetOwners);
       const ownerListData = await ownersList.json();
       console.log(ownerListData);
-
-      createNewData(ownerListData.data);
+      createNewData(ownerListData && ownerListData.data ? ownerListData.data : []);
     } catch (error) {
       console.error(error);
+      // Si la petición falla, renderizamos el formulario vacío para permitir alta manual
+      createNewData([]);
     }
   };
 
   //Creación de los datos nuevos
   const createNewData = (ownersList) => {
+    ownersList = ownersList || [];
     //De momento no sabemos si vamos a crear un dueño nuevo asi que dejarmos la variable en falso.
     let isNewOwner = false;
 
@@ -74,6 +76,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
                         <input type="text" class="form-control" id="surname" placeholder="Pérez García">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                      <input type="date" class="form-control" id="birth_date_owner">
                     </div>
                   </div>
                   <div class="mb-3">
@@ -284,12 +290,15 @@ window.addEventListener("DOMContentLoaded", () => {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
+
+        if (!postOwnerResponse.ok) {
+          const errorData = await postOwnerResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Error: ${postOwnerResponse.status}`);
+        }
+
+        return await postOwnerResponse.json();
       } catch (error) {
-        Swal.fire({
-          title: "Error de conexión",
-          text: error.message,
-          icon: "error",
-        });
+        throw error;
       }
     };
 
@@ -304,6 +313,11 @@ window.addEventListener("DOMContentLoaded", () => {
           },
         });
 
+        if (!postPetResponse.ok) {
+          const errorData = await postPetResponse.json().catch(() => ({}));
+          throw new Error(errorData.message || `Error: ${postPetResponse.status}`);
+        }
+
         const data = await postPetResponse.json();
 
         //Almacenamos el id para la asignacion de la patologias
@@ -311,11 +325,7 @@ window.addEventListener("DOMContentLoaded", () => {
         return id;
 
       } catch (error) {
-        Swal.fire({
-          title: "Error de conexión",
-          text: error.message,
-          icon: "error",
-        });
+        throw error;
       }
     };
 
@@ -331,8 +341,13 @@ window.addEventListener("DOMContentLoaded", () => {
               "Content-type": "application/json; charset=UTF-8",
             },
           });
+
+          if (!postPathologyResponse.ok) {
+            const errorData = await postPathologyResponse.json().catch(() => ({}));
+            throw new Error(errorData.message || `Pathology post failed: ${postPathologyResponse.status}`);
+          }
         } catch (error) {
-          console.error("Error en los datos de patologias: ", error);
+          throw error;
         }
       }
     };
@@ -345,7 +360,7 @@ window.addEventListener("DOMContentLoaded", () => {
         dni_owner: document.getElementById("owner_dni").value.trim(),
         name_owner: document.getElementById("name_owner").value.trim(),
         surname: document.getElementById("surname").value.trim(),
-        birth_date: document.getElementById("birth_date").value.trim(),
+        birth_date: document.getElementById("birth_date_owner").value,
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
         direction: document.getElementById("direction").value.trim(),
@@ -489,13 +504,17 @@ window.addEventListener("DOMContentLoaded", () => {
           window.location.href = `pet-list-page.html`;
         });
       } catch (err) {
-        Swal.fire("Problema a la hora de registrar");
+        Swal.fire({
+          title: "Problema a la hora de registrar",
+          text: err.message,
+          icon: "error",
+        });
         console.error(err);
       }
     });
   };
 
-  getNewData().then(() => {
-    setAllergyForm();
-  });
+    getNewData().then(() => {
+      setAllergyForm();
+    });
 });

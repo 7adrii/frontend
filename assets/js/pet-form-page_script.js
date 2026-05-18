@@ -335,8 +335,13 @@ window.addEventListener("DOMContentLoaded", () => {
               "Content-type": "application/json; charset=UTF-8",
             },
           });
+
+          if (!postPathologyResponse.ok) {
+            const errorData = await postPathologyResponse.json().catch(() => ({}));
+            throw new Error(errorData.message || `Pathology post failed: ${postPathologyResponse.status}`);
+          }
         } catch (error) {
-          console.error("Error en los datos de patologias: ", error);
+          throw error;
         }
       }
     };
@@ -441,6 +446,21 @@ window.addEventListener("DOMContentLoaded", () => {
           });
           error = true;
           break;
+        }
+
+        // detection_date must not be before pet birth_date
+        if (birth_date) {
+          const det = new Date(detection_date);
+          const b = new Date(birth_date);
+          if (!isNaN(det.getTime()) && det < b) {
+            Swal.fire({
+              title: `La fecha de detección de la patología nº ${i + 1} no puede ser anterior a la fecha de nacimiento de la mascota.`,
+              icon: "error",
+              confirmButtonText: "Corregir",
+            });
+            error = true;
+            break;
+          }
         }
 
         pathologies.push(pathology);

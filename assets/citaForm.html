@@ -4,15 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vettion - Nueva Cita</title>
+    <title>Vettion - Schedule Appointment</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom css -->
     <link rel="stylesheet" href="css/newAppointment.css">
+
+    <!-- Scripts js -->
     <script src="js/clock_header_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/newAppointment.js" defer></script>
 </head>
 
@@ -30,7 +36,7 @@
                         <img src="./img/logo.png" alt="Logo" class="img-header">
                     </a>
                     <div class="collapse navbar-collapse">
-                        <p class="mb-0 me-3">Clínica veterinaria</p>
+                        <p class="mb-0 me-3">Veterinary Clinic</p>
                     </div>
                 </div>
 
@@ -39,26 +45,26 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                                     class="bi bi-door-closed"></i>
-                                Salas</a>
+                                Rooms</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                                    class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                                    class="bi bi-file-earmark-medical"></i> Medical Record</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                                     class="fa-solid fa-book-medical"></i>
-                                Pacientes</a>
+                                Pacients</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="pet-form.html"><i
                                     class="fa-solid fa-paw"></i>
-                                Dar de alta</a>
+                                Register New Pacient</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                                     class="fa-solid fa-calendar-plus"></i>
-                                Concertar cita</a>
+                                Schedule Appointment</a>
                         </li>
                     </ul>
                 </div>
@@ -78,26 +84,26 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                                 class="bi bi-door-closed"></i>
-                            Salas</a>
+                            Rooms</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                                class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                                class="bi bi-file-earmark-medical"></i> Medical Record</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                                 class="fa-solid fa-book-medical"></i>
-                            Pacientes</a>
+                            Pacients</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="pet-form.html"><i
                                 class="fa-solid fa-paw"></i>
-                            Dar de alta</a>
+                            Register New Pacient</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                                 class="fa-solid fa-calendar-plus"></i>
-                            Concertar cita</a>
+                            Schedule Appointment</a>
                     </li>
                 </ul>
             </div>
@@ -112,82 +118,84 @@
             <div class="col-12 col-md-8 col-lg-6">
                 <!-- Boton para volver a la lista de consultas -->
                 <a href="consults.html" class="text-decoration-none text-muted mb-3 d-inline-block">
-                    <i class="bi bi-arrow-left"></i> Volver a Consultas
+                    <i class="bi bi-arrow-left"></i> Go back to medical record
                 </a>
 
                 <!-- Formulario para agendar cita -->
-                <div class="card shadow-sm border-0 p-4" style="border-radius: 15px;">
-                    <h2 class="text-center fw-bold mb-4">Agendar Cita</h2>
+                <div class="card shadow-sm border-0" style="border-radius: 15px;">
+                    <h2 class="text-center text-light bg-dark fw-bold p-4 rounded-top-4">Schedule Appointment</h2>
 
                     <!-- Agrega el script para el JS -->
-                    <form id="formNuevaCita">
+                    <form id="formNuevaCita" class="p-4">
                         <div class="row g-3">
                             <!-- Fecha -->
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">FECHA</label>
+                                <label class="form-label small fw-bold text-muted">Date*</label>
                                 <input type="date" class="form-control" name="date_appointment" required>
                             </div>
 
                             <!-- Hora -->
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold text-muted">HORA INICIO</label>
+                                <label class="form-label small fw-bold text-muted">Hour start</label>
                                 <input type="time" class="form-control" name="start_time" required>
                             </div>
 
                             <!-- Mascota -->
                             <div class="col-md-12">
-                                <label class="form-label small fw-bold text-muted">MASCOTA</label>
+                                <label class="form-label small fw-bold text-muted">Pacient</label>
                                 <select class="form-select" name="pet_id" id="select-mascota" required>
-                                    <option value="">Cargando mascotas...</option>
+                                    <option value="">Loading pacients...</option>
                                 </select>
                             </div>
 
                             <!-- Veterinario -->
                             <div class="col-md-12">
-                                <label class="form-label small fw-bold text-muted">VETERINARIO</label>
+                                <label class="form-label small fw-bold text-muted">Veterinarian</label>
                                 <select class="form-select" name="veterinarian_dni" id="select-veterinario" required>
-                                    <option value="">Cargando veterinarios...</option>
+                                    <option value="">Loading veterinarians...</option>
                                 </select>
                             </div>
 
                             <!-- Personal de Limpieza -->
                             <div class="col-md-12">
-                                <label class="form-label small fw-bold text-muted">PERSONAL DE LIMPIEZA</label>
+                                <label class="form-label small fw-bold text-muted">Cleaner</label>
                                 <select class="form-select" name="cleaner_dni" id="select-limpieza" required>
-                                    <option value="">Cargando personal de limpieza...</option>
+                                    <option value="">Loading cleaners...</option>
                                 </select>
-                                <div class="form-text">Necesario para agendar la limpieza automática tras la cita.</div>
+                                <div class="form-text">Required to schedule automatic cleaning after the appointment.
+                                </div>
                             </div>
 
                             <!-- Tipo de Consulta -->
                             <div class="col-md-12">
-                                <label class="form-label small fw-bold text-muted">TIPO DE CONSULTA</label>
+                                <label class="form-label small fw-bold text-muted">Type of service</label>
                                 <select class="form-select" name="service_id" id="select-servicio" required>
-                                    <option value="">Cargando tipos de consulta...</option>
+                                    <option value="">Loading services...</option>
                                 </select>
                             </div>
 
                             <!-- Sala -->
                             <div class="col-md-12">
-                                <label class="form-label small fw-bold text-muted">SALA</label>
+                                <label class="form-label small fw-bold text-muted">Room</label>
                                 <select class="form-select" name="code_room" id="select-sala" required>
-                                    <option value="">Cargando salas...</option>
+                                    <option value="">Loading rooms...</option>
                                 </select>
                             </div>
 
                             <!-- Observaciones -->
                             <div class="col-12">
-                                <label class="form-label small fw-bold text-muted">OBSERVACIONES</label>
+                                <label class="form-label small fw-bold text-muted">Observations</label>
                                 <textarea class="form-control" name="observations" rows="5"></textarea>
                             </div>
 
                             <!-- Boton de crear cita -->
                             <div class="col-12 mt-4 text-end">
                                 <button type="submit" class="btn btn-dark w-60 py-2">
-                                    Crear Cita <i class="bi bi-plus-circle ms-2"></i>
+                                    Schedule Appointment
                                 </button>
-                                <button type="click" onclick="window.location.href='clinic-historic.html'" class="btn btn-info w-60 py-2">
-                                    Cancelar <i class="bi bi-plus-circle ms-2"></i>
+                                <button type="click" onclick="window.location.href='clinic-historic.html'"
+                                    class="btn btn-info w-60 py-2">
+                                    Go back
                                 </button>
                             </div>
                         </div>
@@ -205,25 +213,25 @@
                 <div class="col-12 col-md-4 text-center text-md-start">
                     <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
                     <p class="small">
-                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
-                        atención personalizada.
+                        The care your pet deserves, with the love you give them. Experts in animal health with
+                        personalized attention.
                     </p>
                 </div>
 
                 <!-- Contactos Directos -->
                 <div class="col-12 col-md-4 text-center">
-                    <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
-                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Ciudad</p>
+                    <h5 class="fw-bold mb-3 text-primary">Direct Contact</h5>
+                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Zaragoza</p>
                     <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
                     <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
                 </div>
 
                 <!-- Soporte -->
                 <div class="col-12 col-md-4 text-center text-md-end">
-                    <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
-                    <p class="small mb-1">¿Problemas con la aplicación?</p>
+                    <h5 class="fw-bold mb-3 text-primary">Technical Support</h5>
+                    <p class="small mb-1">Problems with the app?</p>
                     <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
-                        <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+                        <i class="bi bi-envelope-fill me-1"></i> contact-it@system.com
                     </a>
                 </div>
             </div>
@@ -234,12 +242,12 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="small">
-                        &copy; 2026 Vettion - Todos los derechos reservados.
+                        &copy; 2026 Vettion - All rights reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
                     <span class="small">
-                        <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+                        <i class="bi bi-shield-check text-success"></i> Secure Environment
                     </span>
                 </div>
             </div>

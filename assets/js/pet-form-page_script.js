@@ -77,14 +77,10 @@ window.addEventListener("DOMContentLoaded", () => {
                         <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
                         <input type="text" class="form-control" id="surname" placeholder="Pérez García">
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                      <input type="date" class="form-control" id="birth_date_owner">
-                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                    <input type="date" class="form-control" id="birth_date">
+                    <input type="date" class="form-control" id="birth_date_owner">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
@@ -254,6 +250,12 @@ window.addEventListener("DOMContentLoaded", () => {
       const { dni_owner, name_owner, surname, birth_date, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
+      const birthDate = new Date(birth_date);
+      const day = String(birthDate.getDate()).padStart(2, '0');
+      const month = String(birthDate.getMonth() + 1).padStart(2, '0');
+      const year = birthDate.getFullYear();
+      const formattedDateBirth = `${year}-${month}-${day}`
+
       ownerElement.innerHTML = `
         <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.add('d-none')">${surname} ${name_owner} - ${dni_owner}</a>
       `;
@@ -265,7 +267,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("owner_dni").value = dni_owner;
         document.getElementById("name_owner").value = name_owner;
         document.getElementById("surname").value = surname;
-        document.getElementById("birth_date").value = birth_date;
+        document.getElementById("birth_date_owner").value = formattedDateBirth;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
         document.getElementById("direction").value = direction;

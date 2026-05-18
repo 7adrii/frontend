@@ -77,6 +77,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     </div>
                   </div>
                   <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <input type="date" class="form-control" id="birth_date">
+                  </div>
+                  <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">DNI*</label>
                     <input type="text" class="form-control" id="owner_dni" placeholder="94299329V">
                   </div>
@@ -241,7 +245,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     //Creamos los elementos para la lista
     ownersList.forEach((owner) => {
-      const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = owner;
+      const { dni_owner, name_owner, surname, birth_date, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
       ownerElement.innerHTML = `
@@ -255,6 +259,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("owner_dni").value = dni_owner;
         document.getElementById("name_owner").value = name_owner;
         document.getElementById("surname").value = surname;
+        document.getElementById("birth_date").value = birth_date;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
         document.getElementById("direction").value = direction;
@@ -340,6 +345,7 @@ window.addEventListener("DOMContentLoaded", () => {
         dni_owner: document.getElementById("owner_dni").value.trim(),
         name_owner: document.getElementById("name_owner").value.trim(),
         surname: document.getElementById("surname").value.trim(),
+        birth_date: document.getElementById("birth_date").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
         direction: document.getElementById("direction").value.trim(),
@@ -350,8 +356,9 @@ window.addEventListener("DOMContentLoaded", () => {
       };
 
       const { dni_owner, name_owner, surname, phone, email, direction, floor, city, province, postal_code } = ownerSendAPI;
+      const ownerBirth = ownerSendAPI.birth_date;
 
-      if (!dni_owner || !name_owner || !surname || !phone || !email || !direction || !city || !province || !postal_code) {
+      if (!dni_owner || !name_owner || !surname || !ownerBirth || !phone || !email || !direction || !city || !province || !postal_code) {
         Swal.fire({
           title: "Faltan campos obligatorios en el apartado de dueño",
           icon: "warning",

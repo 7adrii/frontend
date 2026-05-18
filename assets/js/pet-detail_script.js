@@ -84,6 +84,10 @@ window.addEventListener("DOMContentLoaded", () => {
       postal_code,
     } = ownerData;
 
+    const ownerBirth = ownerData.birth_date;
+    const oBirth = new Date(ownerBirth);
+
+
     ownerElement.innerHTML = `
     <div class="owner-name">
         <div class="intro">
@@ -100,6 +104,10 @@ window.addEventListener("DOMContentLoaded", () => {
           <div class="information-section">
             <h6>Apellidos</h6>
             <h6 class="text-primary">${surname}</h6>
+          </div>
+          <div class="information-section">
+            <h6>Fecha de nacimiento</h6>
+            <h6 class="text-primary">${oBirth.toLocaleDateString('es-ES')}</h6>
           </div>
         </div>
         <div class="owner-contact">
@@ -148,8 +156,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
       console.log("Abriendo modal");
 
+      //Cambiamos la fecha a formato año-mes-dia para que se muestre en el modal
+      const newDate = new Date(oBirth);
+      const day = String(newDate.getDate()).padStart(2, '0');
+      const month = String(newDate.getMonth() + 1).padStart(2, '0');
+      const year = newDate.getFullYear();
+      const formattedToday = `${year}-${month}-${day}`
+      console.log(formattedToday);
+
       document.getElementById("name_owner").value = name_owner;
       document.getElementById("surname").value = surname;
+      document.getElementById("birth_date_owner").value = formattedToday;
       document.getElementById("phone").value = phone;
       document.getElementById("email").value = email;
       document.getElementById("direction").value = direction;
@@ -592,15 +609,15 @@ window.addEventListener("DOMContentLoaded", () => {
       //patología. Si la fecha de la patología es anterior a la de nacimiento saltará un error.
       const birthDateSplit = petData.birth_date;
       const [day, month, year] = birthDateSplit.split("/");
-      const birthDate = new Date(`${year}-${month}-${day}`);
-      birthDate.setHours(0, 0, 0, 0);
+      const petBirthDate = new Date(`${year}-${month}-${day}`);
+      petBirthDate.setHours(0, 0, 0, 0);
       console.log(birthDate);
 
       const detectionDate = new Date(pathologyPutAPI.detection_date);
       detectionDate.setHours(0, 0, 0, 0);
       console.log(detectionDate);
 
-      if (detectionDate.getTime() < birthDate.getTime()) {
+      if (detectionDate.getTime() < petBirthDate.getTime()) {
         Swal.fire({
           title: "Detection date can't be newer than birth_date of the pet.",
           confirmButtonText: "Go back to edition",

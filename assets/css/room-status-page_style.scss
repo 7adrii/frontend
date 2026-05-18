@@ -18,11 +18,9 @@
 }
 
 .hero-card {
-  background: linear-gradient(
-    120deg,
-    rgba($turquoise, 0.18),
-    rgba($gold, 0.18)
-  );
+  background: linear-gradient(120deg,
+      rgba($turquoise, 0.18),
+      rgba($gold, 0.18));
   border: 1px solid rgba($grey, 0.12);
   border-radius: 14px;
   padding: 1rem;
@@ -134,10 +132,11 @@
 
 // Estilos para las tarjetas de salas
 .room-card {
-  border: none;
+  border: 1px solid var($grey);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
   background-color: white;
+  box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .room-card:hover {
@@ -155,4 +154,12 @@
 
 .rooms-grid {
   margin-bottom: 2rem;
+}
+
+.btn-dark:hover {
+  background-color: $turquoise;
+  color: $grey;
+  border-color: $turquoise;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }

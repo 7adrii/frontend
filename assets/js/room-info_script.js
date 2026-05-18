@@ -38,11 +38,23 @@ const fetchDayInfo = async (room, date) => {
 const renderAppointments = (appointments) => {
   if (!appointments || appointments.length === 0) {
     appointmentsList.innerHTML =
-      '<p class="text-muted">There are no appointments for the selected date.</p>';
+      `<ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Appointments</h6>
+              <h6 class="text-light">Total: ${appointments.length}</h6>
+            </div>
+
+            <div class="p-3 text-center justify-content-center">
+              <h6>There are no registers of appointments in this room</h6>
+            </div>
+        </li>
+      </ul>
+      `;
     return;
   }
 
-  const items = appointments.map((a) => {
+  const tableRows = appointments.map((a) => {
     const owner = a.name_owner
       ? `${a.name_owner} ${a.owner_surname || ""}`.trim()
       : "-";
@@ -50,39 +62,105 @@ const renderAppointments = (appointments) => {
     const start = String(a.start_time).slice(0, 5);
     const end = String(a.end_time || "").slice(0, 5) || "-";
     return `
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text"><strong>Pacient:</strong> ${pet} <br/><strong>Owner:</strong> ${owner}</p>
-        </div>
-      </div>
+      <tr>
+        <td scope="row">${pet}</td>
+        <td scope="row">${start}</td>
+        <td scope="row">${end}</td>
+        <td scope="row"></td>
+        <td scope="row" class="d-none d-md-table-cell"></td>
+        <td scope="row" class="d-none d-md-table-cell"></td>
+      </tr>
     `;
-  });
+  }).join("");
 
-  appointmentsList.innerHTML = items.join("");
+  appointmentsList.innerHTML = `
+    <div class="border border-2 rounded shadow-sm overflow-hidden">
+      <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Appointments</h6>
+              <h6 class="text-light">Total: ${appointments.length}</h6>
+            </div>
+        </li>
+      </ul>
+
+      <table class="table table-striped m-0">
+        <thead>
+          <tr>
+            <th scope="col">Patient</th>
+            <th scope="col">Start hour</th>
+            <th scope="col">End hour</th>
+            <th scope="col">Owner</th>
+            <th scope="col" class="d-none d-md-table-cell">Service</th>
+            <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRows}
+        </tbody>
+      </table>
+    </div>
+  `;
 };
 
 const renderCleanServices = (cleanServices) => {
   if (!cleanServices || cleanServices.length === 0) {
-    cleaningList.innerHTML =
-      '<p class="text-muted">There are no clean services for the selected date</p>';
+    cleaningList.innerHTML = `
+    <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Clean services</h6>
+              <h6 class="text-light">Total: ${cleanServices.length}</h6>
+            </div>
+
+            <div class="p-3 text-center justify-content-center">
+              <h6>There are no registers of clean services in this room</h6>
+            </div>
+        </li>
+      </ul>`;
     return;
   }
 
-  const items = cleanServices.map((c) => {
+  const tableRowsClean = cleanServices.map((c) => {
     const start = String(c.start_time).slice(0, 5);
     const end = String(c.end_time || "").slice(0, 5) || "-";
     return `
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text">Associated with appointment: ${c.appointment_id || "-"} </p>
-        </div>
-      </div>
+      <tr>
+        <td scope="row">${start}</td>
+        <td scope="row">${end}</td>
+        <td scope="row">${c.cleaner_dni}</td>
+        <td scope="row"></td>
+        <td scope="row" class="d-none d-md-table-cell"></td>
+        <td scope="row" class="d-none d-md-table-cell"></td>
+      </tr>
     `;
-  });
+  }).join("");
 
-  cleaningList.innerHTML = items.join("");
+  cleaningList.innerHTML = `
+    <div class="border border-2 rounded shadow-sm overflow-hidden">
+      <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Appointments</h6>
+              <h6 class="text-light">Total: ${cleanServices.length}</h6>
+            </div>
+        </li>
+      </ul>
+
+      <table class="table table-striped m-0">
+        <thead>
+          <tr>
+            <th scope="col">Start hour</th>
+            <th scope="col">End hour</th>
+            <th scope="col">Cleaner</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRowsClean}
+        </tbody>
+      </table>
+    </div>
+  `;
 };
 
 const load = async () => {

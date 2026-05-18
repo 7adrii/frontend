@@ -53,27 +53,26 @@ const renderRoomsList = (rooms) => {
     const typeIcon = getTypeIcon(room.type);
 
     return `
-      <div class="col-12 col-sm-6 col-lg-4">
+      <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100 shadow-sm room-card">
-          <div class="card-header bg-light d-flex justify-content-between align-items-center">
+          <div class="card-header bg-dark text-light d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
-              <i class="bi ${typeIcon} text-primary fs-5"></i>
-              <h5 class="mb-0">${room.room_code}</h5>
+              <i class="bi ${typeIcon} text-light fs-5"></i>
+              <h5 class="mb-0">${room.name}</h5>
             </div>
           </div>
           <div class="card-body">
-            <h6 class="card-title text-dark">${room.name}</h6>
             <div class="mb-3">
               <small class="text-muted d-block mb-2">
-                <i class="bi bi-tag"></i> Tipo: <strong>${room.type}</strong>
+                <i class="bi bi-tag"></i> Type: <strong>${room.type}</strong>
               </small>
               <small class="text-muted d-block mb-2">
-                <i class="bi bi-geo-alt"></i> Ubicación: <strong>${room.location}</strong>
+                <i class="bi bi-geo-alt"></i> Location: <strong>${room.location}</strong>
               </small>
             </div>
           </div>
           <div class="card-footer bg-white border-top">
-            <a href="${infoUrl}" class="btn btn-sm btn-outline-primary w-100">
+            <a href="${infoUrl}" class="btn btn-dark w-100">
               <i class="bi bi-info-circle"></i> Ver información
             </a>
           </div>

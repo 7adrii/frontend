@@ -12110,10 +12110,11 @@ textarea.form-control-lg {
   }
 }
 .room-card {
-  border: none;
+  border: 1px solid var(#1E272E);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
   background-color: white;
+  box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4);
 }
 
 .room-card:hover {
@@ -12131,4 +12132,12 @@ textarea.form-control-lg {
 
 .rooms-grid {
   margin-bottom: 2rem;
+}
+
+.btn-dark:hover {
+  background-color: #59b2b0;
+  color: #1E272E;
+  border-color: #59b2b0;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
 }/*# sourceMappingURL=room-status-page_style.css.map */

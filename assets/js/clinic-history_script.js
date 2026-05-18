@@ -31,12 +31,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const createData = async (appointments, pets, services, veterinarians, owners) => {
 
-        //Tarjeta de total citas
+        //Tarjeta de total citas realizadas en la clínica
         const cardAppointment = document.getElementById("card-appointments");
         const numberAppointments = appointments.length;
 
         if (cardAppointment) {
-
             cardAppointment.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
@@ -48,12 +47,15 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
         }
 
-        //Tarjeta total mascotas/pacientes
+        //Tarjeta total mascotas/pacientes que han tenido citas.
         const cardPet = document.getElementById("card-pets");
 
-        //Aqui buscamos ver de las mascotas que estan registradas, cuales ya han tenido minimo una cita
+        //Aqui buscamos ver de las mascotas que estan registradas, cuales ya han tenido minimo una cita.
         const numberPacients = [];
         let numberPets = 0;
+
+        //Si desde la lista de citas, el id de la mascota no esta incluida en numberPacients, entonces lo metemos
+        //en el array y sumamos uno numberPets.
         for (let i = 0; i < appointments.length; i++) {
             if (!numberPacients.includes(appointments[i].pet_id)) {
                 numberPacients.push(appointments[i].pet_id);
@@ -73,11 +75,13 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
         }
 
-        //Tarjeta total especies
+        //Tarjeta total especies registradas en la clínica.
         const cardBreed = document.getElementById("card-breeds");
         const dataBreed = [];
         let numberBreeds = 0;
 
+        //Si desde la lista de mascotas, la especie de la mascota no esta incluida en dataBreed, entonces la metemos
+        //en el array y sumamos uno numberBreeds.
         for (let i = 0; i < pets.length; i++) {
             const breed = pets[i].type;
             if (!dataBreed.includes(breed)) {
@@ -87,7 +91,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         if (cardBreed) {
-
             cardBreed.innerHTML = `
             <div class="card-body">
                 <div class="header-card">
@@ -99,11 +102,13 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
         }
 
-        //Tarjeta total servicios que se ofrecen
+        //Tarjeta total servicios que se ofrecen en la clínica.
         const cardService = document.getElementById("card-services");
         const dataService = [];
         let numberServices = 0;
 
+        //Si desde la lista de servicios, el tipo de servicio no esta incluido en dataService, entonces lo metemos
+        //en el array y sumamos uno numberServices.        
         for (let i = 0; i < services.length; i++) {
             const serviceType = services[i].service_type;
             if (!dataService.includes(serviceType)) {
@@ -124,18 +129,20 @@ window.addEventListener("DOMContentLoaded", () => {
         `;
         }
 
-        //Obtenemos la fecha de hoy y la formateamos a formato dd-mm-yyyy para comparar con la fecha de la cita en las proximas tablas
+        //Obtenemos la fecha de hoy y la formateamos a formato dd-mm-yyyy para comparar con la fecha de la cita en las próximas tablas
         const dateToday = new Date();
         const day = String(dateToday.getDate()).padStart(2, '0');
         const month = String(dateToday.getMonth() + 1).padStart(2, '0');
         const year = dateToday.getFullYear();
         const formattedToday = `${day}/${month}/${year}`
 
+        //Metemos en <h6 class="text-light" id="today"></h6> la fecha del día actual.
         const clinicDay = document.getElementById("today");
         clinicDay.innerHTML = `Citas del día: ${formattedToday}`;
 
-        //Creacion de la tabla de historial de consultas que ya han pasado
+        //Creación de la tabla de historial de consultas que ya han pasado
         const table = document.getElementById("table-consults");
+
         table.innerHTML = `
             <thead>
                 <tr>
@@ -214,6 +221,105 @@ window.addEventListener("DOMContentLoaded", () => {
                 </tr>
             </thead>
         `;
+
+
+        //Tabla con las citas para el dia actual.
+        const tableToday = document.getElementById("table-today-consults");
+        tableToday.innerHTML = `
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Dueño</th>
+                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
+                    <th scope="col" class="d-none d-md-table-cell">Fin</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        `;
+
+        let counterToday = 0;
+        appointments.forEach((appointment) => {
+
+            const todayDate = new Date();
+            const today = todayDate.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const todayFormat = today.split('/').reverse().join('-');
+
+            const dateAppointmentSplit = appointment.date_appointment;
+            const [day, month, year] = dateAppointmentSplit.split("/");
+            const dateAppointment = new Date(`${year}-${month}-${day}`);
+            const appDate = dateAppointment.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const newDate = appDate.split('/').reverse().join('-');
+
+            if (todayFormat === newDate) {
+                const { date_appointment, start_time, end_time } = appointment;
+                const service = services.find(s => s.id_service === appointment.service_id);
+                const serviceName = service.name;
+
+                const pet = pets.find(p => p.id === appointment.pet_id);
+                const petName = pet.name_pet;
+
+                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
+                const veterinarianName = veterinarian.name;
+                const veterinarianSurname = veterinarian.surname;
+                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
+
+                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
+
+                const fullNameOwner = ownerName + " " + ownerSurname;
+
+                const tbody = document.createElement("tbody");
+                tbody.innerHTML = `
+                <tr>
+                    <th scope="row">${date_appointment}</th>
+                    <td scope="row">${petName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
+                    <td scope="row">${serviceName}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
+                    <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
+                    <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
+                    <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
+                </tr>
+            `;
+                tableToday.appendChild(tbody);
+                counterToday++;
+
+                //Boton eliminar mascota de la base de datos
+                const btnDelete = tbody.querySelector(".btn-delete-app");
+                btnDelete.addEventListener("click", async (e) => {
+                    e.preventDefault();
+
+                    const confirmAction = await Swal.fire({
+                        title: `You are going to remove this appointment!`,
+                        html: `¿<strong>Are you sure you want to remove</strong> this appointment for<strong>${petName}</strong>?`,
+                        icon: "warning",
+                        iconColor: "#8a3938",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, cancel",
+                        cancelButtonText: "No",
+                    });
+
+                    if (confirmAction.isConfirmed) {
+                        await deleteAppointment(id_appointment);
+                    } else {
+                        return;
+                    }
+                });
+            }
+        });
+
+        if (counterToday == 0) {
+            tableToday.innerHTML = `
+            <div class="p-2 text-center justify-content-center">
+                <h6>No hay citas agendas para hoy</h6>
+            </div>
+                `;
+        }
 
         //Tabla para mostrar el listado de citas que se han concertado en el futuro
         let counterNext = 0;
@@ -439,70 +545,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        //Tabla con las citas para el dia actual.
-        const tableToday = document.getElementById("table-today-consults");
-        tableToday.innerHTML = `
-            <thead>
-                <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Fin</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-        `;
-
-        let counterToday = 0;
-        appointments.forEach((appointment) => {
-
-            if (formattedToday === appointment.date_appointment) {
-                const { date_appointment, start_time, end_time } = appointment;
-                const service = services.find(s => s.id_service === appointment.service_id);
-                const serviceName = service.name;
-
-                const pet = pets.find(p => p.id === appointment.pet_id);
-                const petName = pet.name_pet;
-
-                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
-                const veterinarianName = veterinarian.name;
-                const veterinarianSurname = veterinarian.surname;
-                const fullNameVeterinarian = veterinarianName + " " + veterinarianSurname;
-
-                const owner = owners.find(o => o.dni_owner === pet.owner_dni);
-                const ownerName = owner.name_owner;
-                const ownerSurname = owner.surname;
-
-                const fullNameOwner = ownerName + " " + ownerSurname;
-
-                const tbody = document.createElement("tbody");
-                tbody.innerHTML = `
-                <tr>
-                    <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
-                    <td scope="row">${serviceName}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
-                    <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-plus"></i></a></td>
-                </tr>
-            `;
-                tableToday.appendChild(tbody);
-                counterToday++;
-            }
-        });
-
-        if (counterToday == 0) {
-            tableToday.innerHTML = `
-            <div class="p-2 text-center justify-content-center">
-                <h6>No hay citas agendas para hoy</h6>
-            </div>
-                `;
-        }
     }
 
     getData();

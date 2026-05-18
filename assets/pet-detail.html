@@ -120,7 +120,7 @@
 
     <section class="container">
         <div class="title-section">
-            <h2>Ficha del paciente</h2>
+            <h2>Pacient's data sheet</h2>
         </div>
 
         <div class="pet-header" id="pet-header">
@@ -151,7 +151,7 @@
         <div class="pet-clinic-history">
             <ul class="list-group">
                 <div class="intro-appointments">
-                    <h6 class="text-light">Listado consultas</h6>
+                    <h6 class="text-light">Pacient's register</h6>
                 </div>
                 <li class="list-group-item">
                     <div class="scroll-container">
@@ -168,41 +168,41 @@
     <dialog id="editPetPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Actualizar datos</h3>
+                <h3 class="text-light">Update pacient</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre*</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name_pet" required>
                 </div>
                 <div class="mb-3">
-                    <label>Especie*</label>
+                    <label>Specie</label>
                     <input type="text" class="form-control" id="type" required>
                 </div>
                 <div class="mb-3">
-                    <label>Raza*</label>
+                    <label>Breed</label>
                     <input type="text" class="form-control" id="breed" required>
                 </div>
                 <div class="mb-3">
-                    <label>Peso*</label>
+                    <label>Weight</label>
                     <input type="number" class="form-control" step="0.1" id="weight">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Sexo*</label>
+                    <label for="disabledSelect" class="form-label">Sex</label>
                     <select class="form-select" id="sex">
-                        <option>Macho</option>
-                        <option>Hembra</option>
+                        <option>Male</option>
+                        <option>Female</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <label for="exampleInputEmail1" class="form-label">Birth date</label>
                     <input type="date" class="form-control" id="birth_date">
                 </div>
 
                 <div class="pet-btns" style="margin-top: 20px;">
-                    <button type="submit" id="saveChangesPet" class="btn btn-dark">Guardar</button>
+                    <button type="submit" id="saveChangesPet" class="btn btn-dark">Save</button>
                     <button type="button" class="btn btn-dark"
-                        onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+                        onclick="document.getElementById('editPetPopUp').close()">Cancel</button>
                 </div>
             </div>
         </form>
@@ -212,23 +212,23 @@
     <dialog id="editOwnerPopUp" class="pet-modal">
         <div id="formEditPet" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Actualizar dueño</h3>
+                <h3 class="text-light">Update owner</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name_owner" required>
                 </div>
                 <div class="mb-3">
-                    <label>Apellidos</label>
+                    <label>Surname</label>
                     <input type="text" class="form-control" id="surname" required>
                 </div>
                 <div class="mb-3">
-                    <label>Fecha de nacimiento</label>
+                    <label>Birth date</label>
                     <input type="date" class="form-control" id="birth_date_owner" required>
                 </div>
                 <div class="mb-3">
-                    <label>Teléfono</label>
+                    <label>Phone</label>
                     <input type="text" class="form-control" id="phone" required>
                 </div>
                 <div class="mb-3">
@@ -236,29 +236,29 @@
                     <input type="text" class="form-control" id="email" required>
                 </div>
                 <div class="mb-3">
-                    <label>Direccion</label>
+                    <label>Direction</label>
                     <input type="text" class="form-control" id="direction" required>
                 </div>
                 <div class="mb-3">
-                    <label>Piso</label>
+                    <label>Floor</label>
                     <input type="text" class="form-control" id="floor" required>
                 </div>
                 <div class="mb-3">
-                    <label>Ciudad</label>
+                    <label>City</label>
                     <input type="text" class="form-control" id="city" required>
                 </div>
                 <div class="mb-3">
-                    <label>Provincia</label>
+                    <label>Province</label>
                     <input type="text" class="form-control" id="province" required>
                 </div>
                 <div class="mb-3">
-                    <label>Codigo postal</label>
+                    <label>Postal code</label>
                     <input type="text" class="form-control" id="postal_code" required>
                 </div>
                 <div class="pet-btns" style="margin-top: 20px;">
-                    <button type="submit" id="saveChangesOwner" class="btn btn-dark">Guardar</button>
+                    <button type="submit" id="saveChangesOwner" class="btn btn-dark">Save</button>
                     <button type="button" class="btn btn-dark"
-                        onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+                        onclick="document.getElementById('editOwnerPopUp').close()">Cancel</button>
                 </div>
             </div>
             </form>
@@ -268,54 +268,54 @@
     <dialog id="editPathologyPopUp" class="pet-modal">
         <form id="formEditPathology" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Editar Patologia</h3>
+                <h3 class="text-light">Update Pathology</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre Patología*</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name">
                 </div>
                 <div class="mb-3">
-                    <label>Tipo*</label>
+                    <label>Type</label>
                     <select id="type" class="form-select">
-                        <option>Alergia</option>
-                        <option>Enfermedad</option>
-                        <option>Síndrome</option>
-                        <option>Otro</option>
+                        <option>Allergy</option>
+                        <option>Illness</option>
+                        <option>Syndrom</option>
+                        <option>Other</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label>Diagnostico (metodo)</label>
+                    <label>Diagnostic (method)</label>
                     <input type="text" class="form-control" id="diagnostic_method">
                 </div>
                 <div class="mb-3">
-                    <label>Sintomas</label>
+                    <label>Symptoms</label>
                     <input type="text" class="form-control" id="symptoms">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
+                    <label for="disabledSelect" class="form-label">Severity level</label>
                     <select id="severity_level" class="form-select">
-                        <option>Leve</option>
-                        <option>Moderada</option>
-                        <option>Grave/Crítica</option>
+                        <option>Mild</option>
+                        <option>Moderate</option>
+                        <option>Severe/Critical</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label>Tratamiento</label>
+                    <label>Treatment</label>
                     <input type="text" class="form-control" id="treatment">
                 </div>
                 <div class="mb-3">
-                    <label>Es cronico*</label>
+                    <label>Cronic</label>
                     <input type="checkbox" class="form-check-input" id="is_chronic">
                 </div>
                 <div class="mb-3">
-                    <label>Fecha de deteccion</label>
+                    <label>Detection date</label>
                     <input type="date" class="form-control" id="detection_date">
                 </div>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesPathology" class="btn btn-dark">Guardar</button>
-                <button type="button" id="btnCancelChangesPathology" class="btn btn-dark">Cancelar</button>
+                <button type="submit" id="saveChangesPathology" class="btn btn-dark">Save</button>
+                <button type="button" id="btnCancelChangesPathology" class="btn btn-dark">Cancel</button>
             </div>
         </form>
     </dialog>
@@ -324,7 +324,7 @@
     <dialog id="showPathologyPopUp" class="pathology-modal">
         <div id="showInfoPathology">
             <div class="intro">
-                <h3 class="text-light">Información de la patología</h3>
+                <h3 class="text-light">Pathology's information</h3>
                 <button type="button" class="btn btn-light"
                     onclick="document.getElementById('showPathologyPopUp').close()"><i
                         class="fa-solid fa-x"></i></button>
@@ -335,21 +335,21 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
                         <div class="mb-3">
-                            <h5>Nombre</h5>
+                            <h5>Name</h5>
                             <p id="show_name"></p>
                         </div>
                     </div>
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
                         <div class="mb-3">
-                            <h5>Tipo</h5>
+                            <h5>Type</h5>
                             <p id="show_type"></p>
                         </div>
                     </div>
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-stethoscope"></i></span>
                         <div class="mb-3">
-                            <h5>Diagnostico</h5>
+                            <h5>Diagnostic</h5>
                             <p id="show_diagnostic_method"></p>
                         </div>
                     </div>
@@ -357,7 +357,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
                         <div class="mb-3">
-                            <h5>Sintomas</h5>
+                            <h5>Symptoms</h5>
                             <p id="show_symptoms"></p>
                         </div>
                     </div>
@@ -366,7 +366,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
                         <div class="mb-3">
-                            <h5>Nivel de severidad</h5>
+                            <h5>Severity level</h5>
                             <p id="show_severity_level"></p>
                         </div>
                     </div>
@@ -374,7 +374,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
                         <div class="mb-3">
-                            <h5>Crónico</h5>
+                            <h5>Cronic</h5>
                             <p id="show_is_chronic"></p>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
                         <div class="mb-3">
-                            <h5>Fecha de detección</h5>
+                            <h5>Detection date</h5>
                             <p id="show_detection_date"></p>
                         </div>
                     </div>
@@ -390,7 +390,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
                         <div class="mb-3">
-                            <h5>Tratamiento</h5>
+                            <h5>Treatment</h5>
                             <p id="show_treatment"></p>
                         </div>
                     </div>
@@ -404,7 +404,7 @@
     <dialog id="showRegisterPopUp" class="pathology-modal">
         <div id="showInfoRegister">
             <div class="intro">
-                <h3 class="text-light">Información del registro</h3>
+                <h3 class="text-light">Register's information</h3>
                 <button type="button" class="btn btn-light"
                     onclick="document.getElementById('showRegisterPopUp').close()"><i
                         class="fa-solid fa-x"></i></button>
@@ -412,7 +412,7 @@
             <div class="element-info mt-3">
                 <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
                 <div class="mb-3">
-                    <h5>Observaciones</h5>
+                    <h5>Observations</h5>
                     <p id="show_observation_appointment"></p>
                 </div>
             </div>

@@ -103,8 +103,8 @@ const renderAppointments = (appointments) => {
     const end = String(a.end_time || "").slice(0, 5) || "-";
 
     return `
-      <tr>
-        <td scope="row">${pet}</td>
+      <tr class="line-hover">
+        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${a.pet_id}">${pet}</a></td>
         <td scope="row">${start}</td>
         <td scope="row" class="d-none d-md-table-cell">${end}</td>
         <td scope="row" class="d-none d-md-table-cell">${owner}</td>
@@ -175,7 +175,7 @@ const renderCleanServices = (cleanServices, cleanersList) => {
     const cleanerPhone = cleaner.phone;
 
     return `
-      <tr>
+      <tr class="line-hover">
         <td scope="col">${start}</td>
         <td scope="col" class="d-none d-md-table-cell">${end}</td>
         <td scope="col">${fullName}</td>

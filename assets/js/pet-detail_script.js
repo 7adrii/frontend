@@ -461,13 +461,14 @@ window.addEventListener("DOMContentLoaded", () => {
             </tr>
           </thead>
           <tbody id="consult-list">
+          <tr class="line-hover">
             <td scope="col" style="max-width: 80px">${name}</td>
             <td scope="col" style="max-width: 80px">${type}</td>
             <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</td>
             <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</td>
             <td scope="col">
               <div class="dropdown">
-                <button class="btn-options" type="button" id="dropdownMenuButton1"
+                <button class="btn btn-options" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false"><i
                   class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -478,6 +479,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </ul>
               </div>
             </td>
+          </tr>
           </tbody>
         </table>
       `;
@@ -780,7 +782,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const serviceDuration = service.duration;
 
         registerInfo.innerHTML = `
-        <tr>
+        <tr class="line-hover">
           <td scope="col">${date_service}</td>
           <td scope="col" class="d-none d-md-table-cell">${serviceName}</td>
           <td scope="col" class="d-none d-md-table-cell">${serviceType}</td>

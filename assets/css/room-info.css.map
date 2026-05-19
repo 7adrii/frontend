@@ -1,1 +1,1 @@
-{"version":3,"sources":["room-info.scss","room-info.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;ACCJ;;ADEA;EACI;IACI,mBAAA;IACA,kBAAA;IACA,8BAAA;ECCN;AACF","file":"room-info.css"}
+{"version":3,"sources":["room-info.scss","room-info.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;ACCJ;;ADEA;EACI,iCAAA;EACA,cAAA;EACA,eAAA;EACA,qBAAA;EACA,eAAA;ACCJ;;ADEA;EACI,oDAAA;EACA,sCAAA;ACCJ;;ADEA;EACI;IACI,mBAAA;IACA,kBAAA;IACA,8BAAA;ECCN;EDEE;IACI,iCAAA;IACA,cAAA;IACA,eAAA;ECAN;AACF","file":"room-info.css"}

@@ -36,11 +36,11 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
                     <h5 class="card-title text-light"><i class="fa-solid fa-book-open"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-light">Registros</h6>
+                    <h6 class="card-subtitle mb-2 text-light">Registers</h6>
                 </div>
                 <h6 class="card-subtitle mb-2 text-light d-none d-lg-block">Total</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-light">Histórico completo</h6>
+                  <h6 class="card-subtitle mb-2 text-light">Complete historic</h6>
                   <h5 class="card-title text-light">${numberRegister}</h5>
                 </div>
             </div>
@@ -57,11 +57,11 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
                     <h5 class="card-title text-secondary"><i class="fa-solid fa-calendar-minus"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-secondary">Bajas</h6>
+                    <h6 class="card-subtitle mb-2 text-secondary">Cancellations</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-secondary d-none d-lg-block">Registros desactivados</h6>
+                <h6 class="card-subtitle mb-2 text-secondary d-none d-lg-block">Desactivated registers</h6>
                 <div class="body-card">
-                  <h6 class="card-subtitle mb-2 text-secondary">Bajas</h6>
+                  <h6 class="card-subtitle mb-2 text-secondary">Cancellations</h6>
                   <h5 class="card-title text-secondary">${deletePetData}</h5>
                 </div>
             </div>
@@ -86,9 +86,9 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-bone"></i></h5>
-                    <h6 class="card-subtitle mb-2">Especies</h6>
+                    <h6 class="card-subtitle mb-2">Species</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 d-none d-lg-block">Tipos de animales diferentes</h6>
+                <h6 class="card-subtitle mb-2 d-none d-lg-block">Different types of animals</h6>
                 <div class="body-card">
                   <h6 class="card-subtitle mb-2">Total</h6>
                   <h5 class="card-title">${numberSpecies}</h5>
@@ -115,9 +115,9 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-user"></i></h5>
-                    <h6 class="card-subtitle mb-2">Dueños</h6>
+                    <h6 class="card-subtitle mb-2">Owners</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 d-none d-lg-block">Dueños registrados</h6>
+                <h6 class="card-subtitle mb-2 d-none d-lg-block">Registered owners</h6>
                 <div class="body-card">
                   <h6 class="card-subtitle mb-2">Total</h6>
                   <h5 class="card-title">${numberOwners}</h5>
@@ -153,9 +153,9 @@ const createPets = (petsList, ownersList) => {
             <div class="card-body bg-dark rounded-4">
                 <div class="header-card">
                     <h5 class="card-title text-primary"><i class="fa-solid fa-calendar-plus"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-primary">Altas</h6>
+                    <h6 class="card-subtitle mb-2 text-primary">New</h6>
                 </div>
-                <h6 class="card-subtitle mb-2 text-primary d-none d-lg-block">Nuevos ingresos</h6>
+                <h6 class="card-subtitle mb-2 text-primary d-none d-lg-block">New registers</h6>
                 <div class="body-card">
                   <h6 class="card-subtitle mb-2 text-primary">${formattedToday}</h6>
                   <h5 class="card-title text-primary">${numberNewRegister}</h5>
@@ -209,13 +209,13 @@ const createPets = (petsList, ownersList) => {
       e.preventDefault();
 
       const confirmAction = await Swal.fire({
-        title: `¡Estás a punto de eliminar un registro!`,
-        html: `¿<strong>Segur@ que deseas eliminar</strong> a la mascota <strong>${name_pet}</strong>?`,
+        title: `You are going to delete this register!`,
+        html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
         icon: "warning",
         iconColor: "#8a3938",
         showCancelButton: true,
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: "Yes, remove",
+        cancelButtonText: "No, cancel",
       });
 
       if (confirmAction.isConfirmed) {
@@ -272,13 +272,13 @@ const createPets = (petsList, ownersList) => {
       e.preventDefault();
 
       const confirmAction = await Swal.fire({
-        title: `¡Estás a punto de eliminar un registro!`,
-        html: `¿<strong>Segur@ que deseas eliminar</strong> a la mascota <strong>${name_pet}</strong>?`,
+        title: `You are going to delete this register!`,
+        html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
         icon: "warning",
         iconColor: "#8a3938",
         showCancelButton: true,
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: "Yes, remove",
+        cancelButtonText: "No, cancel",
       });
 
       if (confirmAction.isConfirmed) {
@@ -302,11 +302,11 @@ const createPets = (petsList, ownersList) => {
         let currentDeletes = parseInt(localStorage.getItem("allDeletes") || "0");
         localStorage.setItem("allDeletes", currentDeletes + 1);
         Swal.fire({
-          title: "¡Registro eliminado!",
-          text: "El registro se ha eliminado correctamente",
+          title: "Register eliminated!",
+          text: "The register has been successfully removed",
           icon: "success",
           iconColor: "#318a3a",
-          confirmButtonText: "Volver al listado de registros",
+          confirmButtonText: "Go back to pacients",
           confirmButtonColor: "#2a1418",
         }).then(() => {
           window.location.href = "pet-list-page.html";
@@ -320,7 +320,7 @@ const createPets = (petsList, ownersList) => {
       }
     } catch (error) {
       Swal.fire({
-        title: "Error de conexión",
+        title: "Conection error",
         text: error.message,
         icon: "error",
       });

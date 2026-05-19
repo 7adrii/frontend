@@ -12,7 +12,7 @@ a {
   cursor: pointer;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1023px) {
   a {
     font-family: "Roboto", sans-serif;
     color: #F8F9FA;
@@ -12103,6 +12103,11 @@ textarea.form-control-lg {
   border-color: #D4AF37;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.section-container {
+  box-shadow: 2px 2px 12px rgba(54, 97, 96, 0.4) !important;
+  border-radius: 10px;
 }
 
 @media (min-width: 1020px) {

@@ -44,7 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title text-light"><i class="fa-solid fa-calendar-check"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-light">Citas</h6>
+                    <h6 class="card-subtitle mb-2 text-light">Appointments</h6>
                 </div>
                 <h5 class="card-title text-light">${numberAppointments}</h5>
             </div>
@@ -72,7 +72,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title text-light"><i class="fa-solid fa-bone"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-light">Pacientes</h6>
+                    <h6 class="card-subtitle mb-2 text-light">Pacients</h6>
                 </div>
                 <h5 class="card-title text-light">${numberPets}</h5>
             </div>
@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-paw"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Especies</h6>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Breeds</h6>
                 </div>
                 <h5 class="card-title">${numberBreeds}</h5>
             </div>
@@ -126,7 +126,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-shield-dog"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Servicios</h6>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Servicies</h6>
                 </div>
                 <h5 class="card-title">${numberServices}</h5>
             </div>
@@ -142,20 +142,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
         //Metemos en <h6 class="text-light" id="today"></h6> la fecha del día actual.
         const clinicDay = document.getElementById("today");
-        clinicDay.innerHTML = `Citas del día: ${formattedToday}`;
+        clinicDay.innerHTML = `Appointments of ${formattedToday}`;
 
         //Tabla con las citas para el dia actual.
         const tableToday = document.getElementById("table-today-consults");
         tableToday.innerHTML = `
             <thead>
                 <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Fin</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Pacient</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col" class="d-none d-md-table-cell">Service</th>
+                    <th scope="col" class="d-none d-md-table-cell">Start</th>
+                    <th scope="col" class="d-none d-md-table-cell">End</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -189,6 +189,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 //buscamos el nombre de la mascota
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const petName = pet.name_pet;
+                const petId = pet.id;
 
                 //buscamos el nombre del veterinario
                 const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
@@ -208,7 +209,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 tbody.innerHTML = `
                 <tr>
                     <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
+                    <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
                     <td scope="row">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
@@ -249,7 +250,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (counterToday == 0) {
             tableToday.innerHTML = `
             <div class="p-2 text-center justify-content-center">
-                <h6>No hay citas agendas para hoy</h6>
+                <h6>The are no appointments for today</h6>
             </div>
                 `;
         }
@@ -259,12 +260,12 @@ window.addEventListener("DOMContentLoaded", () => {
         tableFuture.innerHTML = `
             <thead>
                 <tr class="align-middle">
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col" class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Inicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Pacient</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col" class="d-none d-md-table-cell">Service</th>
+                    <th scope="col" class="d-none d-md-table-cell">Start</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -318,6 +319,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const petName = pet.name_pet;
+                const petId = pet.id;
+
+                console.log(pet)
 
                 const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
                 const veterinarianName = veterinarian.name;
@@ -332,9 +336,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
-                <tr>
+                <tr class="line-hover">
                     <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
+                    <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</a></td>
                     <td scope="row">${fullNameOwner}</td>
                     <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
@@ -375,7 +379,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (counterNext == 0) {
             table.innerHTML = `
             <div class="p-2 text-center justify-content-center">
-                <h6>No hay registro de citas</h6>
+                <h6>There are no registers of appointments in the future</h6>
             </div>
                 `;
         }
@@ -386,12 +390,12 @@ window.addEventListener("DOMContentLoaded", () => {
         table.innerHTML = `
             <thead>
                 <tr>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Dueño</th>
-                    <th scope="col"class="d-none d-md-table-cell">Servicio</th>
-                    <th scope="col" class="d-none d-md-table-cell">Duración</th>
-                    <th scope="col" class="d-none d-md-table-cell">Veterinario</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Pacients</th>
+                    <th scope="col">Owners</th>
+                    <th scope="col"class="d-none d-md-table-cell">Service</th>
+                    <th scope="col" class="d-none d-md-table-cell">Duration</th>
+                    <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -411,6 +415,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 const serviceDuration = service.duration;
 
                 const petName = pet.name_pet;
+                const petId = pet.id;
 
                 const veterinarianName = veterinarian.name;
                 const veterinarianSurname = veterinarian.surname;
@@ -425,9 +430,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (owner) {
                     const tbody = document.createElement("tbody");
                     tbody.innerHTML = `
-                    <tr>
+                    <tr class="line-hover">
                         <td scope="row">${date_service}</td>
-                        <td scope="row">${petName}</td>
+                        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</td>
                         <td scope="row">${fullNameOwner}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceDuration} min</td>
@@ -448,7 +453,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (counter == 0) {
             table.innerHTML = `
             <div class="p-2 text-center justify-content-center">
-                <h6>No hay registro de citas</h6>
+                <h6>There are no registers</h6>
             </div>
                 `;
         }
@@ -529,8 +534,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (dateAppointment.getTime() < date.getTime()) {
                 Swal.fire({
-                    title: "La fecha no puede ser anterior a la actual",
-                    confirmButtonText: "Go back to edition",
+                    title: "The date cannot be earlier than the current date.",
+                    confirmButtonText: "Go back to edition.",
                     target: document.getElementById('editAppointmentPopUp')
                 });
                 return;
@@ -560,10 +565,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 } else {
                     const errorData = await PutResponse.json().catch(() => ({}));
                     Swal.fire({
-                        title: "No se pudieron guardar los cambios",
-                        text: errorData.message || `Código de error: ${PutResponse.status}`,
+                        title: "Changes could not be saved.",
+                        text: errorData.message || `Error code: ${PutResponse.status}`,
                         icon: "error",
-                        confirmButtonText: "Entendido",
+                        confirmButtonText: "Understood",
                         target: document.getElementById('editAppointmentPopUp')
                     });
                 }
@@ -602,7 +607,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 Swal.fire({
-                    title: "Error de conexión",
+                    title: "Conection error",
                     text: error.message,
                     icon: "error",
                 });

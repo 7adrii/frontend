@@ -7,9 +7,15 @@
   <title>Información de Sala</title>
 
   <link rel="stylesheet" href="./css/index_style.css" />
+  <link rel="stylesheet" href="./css/room-info.css" />
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Bootstrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <script src="./js/bootstrap.bundle.min.js" defer></script>
   <script src="./js/clock_header_script.js" defer></script>
@@ -22,14 +28,14 @@
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-          <img src="./img/list.svg" alt="Icono menú">
+          <img src="./img/list.svg" style="width: 80%;" alt="Icono menú">
         </button>
         <div class="d-flex align-items-center mx-auto">
           <a class="navbar-brand mb-2 mb-lg-0" href="index.html">
             <img src="./img/logo.png" alt="Logo" class="img-header">
           </a>
           <div class="collapse navbar-collapse">
-            <p class="mb-0 me-3">Clínica veterinaria</p>
+            <p class="mb-0 me-3">Veterinary Clinic</p>
           </div>
         </div>
 
@@ -38,25 +44,25 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                   class="bi bi-door-closed"></i>
-                Salas</a>
+                Rooms</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                  class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                  class="bi bi-file-earmark-medical"></i> Medical Record</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                   class="fa-solid fa-book-medical"></i>
-                Pacientes</a>
+                Pacients</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="pet-form.html"><i class="fa-solid fa-paw"></i>
-                Dar de alta</a>
+                Register New Pacient</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                   class="fa-solid fa-calendar-plus"></i>
-                Concertar cita</a>
+                Schedule Appointment</a>
             </li>
           </ul>
         </div>
@@ -75,25 +81,25 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                 class="bi bi-door-closed"></i>
-              Salas</a>
+              Rooms</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                class="bi bi-file-earmark-medical"></i> Medical Record</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                 class="fa-solid fa-book-medical"></i>
-              Pacientes</a>
+              Pacients</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="pet-form.html"><i class="fa-solid fa-paw"></i>
-              Dar de alta</a>
+              Register New Pacient</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                 class="fa-solid fa-calendar-plus"></i>
-              Concertar cita</a>
+              Schedule Appointment</a>
           </li>
         </ul>
       </div>
@@ -101,31 +107,28 @@
   </header>
 
   <main class="container py-4">
-    <section class="hero-card">
+    <section class="room-info">
       <div>
-        <h1 id="room-title">Sala</h1>
+        <h2 id="room-title" class="mb-4">Room</h2>
+      </div>
+      <div class="mb-4 d-flex align-items-center gap-2">
+        <label for="date-input">Date:</label>
+        <input type="date" class="form-control" style="width: 200px;" id="date-input" />
+        <button id="load-day" class="btn btn-dark ms-2">Load</button>
       </div>
     </section>
 
-    <section class="mb-4">
-      <label for="date-input">Fecha:</label>
-      <input type="date" id="date-input" />
-      <button id="load-day" class="btn btn-primary ms-2">Cargar</button>
-    </section>
+
 
     <section>
-      <h3>Citas</h3>
-      <div id="appointments-list">
-        <p class="text-muted">No hay citas para la fecha seleccionada.</p>
+      <div id="appointments-list" class="section-container">
+
       </div>
     </section>
 
     <section class="mt-4">
-      <h3>Servicios de limpieza</h3>
-      <div id="cleaning-list">
-        <p class="text-muted">
-          No hay servicios de limpieza para la fecha seleccionada.
-        </p>
+      <div id="cleaning-list" class="section-container">
+
       </div>
     </section>
 
@@ -133,50 +136,48 @@
   </main>
 
   <footer class="bg-dark text-white pt-5 pb-3 mt-5">
-    <div class="container">
+    <div class="container-footer">
       <div class="row gy-4">
+
+        <!-- Vettion -->
         <div class="col-12 col-md-4 text-center text-md-start">
           <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
           <p class="small">
-            El cuidado que tu mascota merece, con el amor que tú le das.
-            Expertos en salud animal con atención personalizada.
+            The care your pet deserves, with the love you give them. Experts in animal health with
+            personalized attention.
           </p>
         </div>
 
+        <!-- Contactos Directos -->
         <div class="col-12 col-md-4 text-center">
-          <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
-          <p class="small">
-            <i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123,
-            Ciudad
-          </p>
-          <p class="small">
-            <i class="bi bi-telephone-fill me-2"></i> +34 900 123 456
-          </p>
-          <p class="small">
-            <i class="bi bi-envelope-fill me-2"></i> info@vettion.com
-          </p>
+          <h5 class="fw-bold mb-3 text-primary">Direct Contact</h5>
+          <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Zaragoza</p>
+          <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
+          <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
         </div>
 
+        <!-- Soporte -->
         <div class="col-12 col-md-4 text-center text-md-end">
-          <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
-          <p class="small mb-1">¿Problemas con la aplicación?</p>
+          <h5 class="fw-bold mb-3 text-primary">Technical Support</h5>
+          <p class="small mb-1">Problems with the app?</p>
           <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
-            <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+            <i class="bi bi-envelope-fill me-1"></i> contact-it@system.com
           </a>
         </div>
       </div>
 
-      <hr class="my-4 border-primary opacity-50" />
+      <hr class="my-4 border-primary opacity-50">
 
+      <!-- Copyright y Estado -->
       <div class="row justify-content-between">
         <div class="col-md-6 text-center text-md-start">
           <p class="small">
-            &copy; 2026 Vettion - Todos los derechos reservados.
+            &copy; 2026 Vettion - All rights reserved.
           </p>
         </div>
         <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
           <span class="small">
-            <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+            <i class="bi bi-shield-check text-success"></i> Secure Environment
           </span>
         </div>
       </div>

@@ -49,16 +49,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-new-pet");
     form.innerHTML = `
             <div class="form-title">
-                    <h4 class="text-light">Nuevo Registro</h4>
+                    <h4 class="text-light">New Pacient</h4>
             </div>
             <div class="form-section form-owner">
-                <h5>Datos del dueño</h5>
+                <h5>Owner's data</h5>
                 <div class="mb-4">
-                  <label class="form-label text-muted">Seleccionar dueño</label>
+                  <label class="form-label text-muted">Select owner</label>
                   <div class="dropdown">
                     <button class="btn btn-outline-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
                       type="button" id="owner-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                      <span id="selected-owner-text"><i class="fa-solid fa-users me-2"></i> DNI - Nombre</span>
+                      <span id="selected-owner-text"><i class="fa-solid fa-users me-2"></i> DNI - Name</span>
                     </button>
                     <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1" id="list-owners">
 
@@ -67,148 +67,144 @@ window.addEventListener("DOMContentLoaded", () => {
                 </div>
                 
                 <div id="new-owner-form" class="d-none">
-                  <h5>Datos del dueño</h5>
+                  <h5>Owner's data</h5>
                   <div class="line-form">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Nombre*</label>
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name_owner" placeholder="Juan">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Apellidos*</label>
+                        <label for="exampleInputEmail1" class="form-label">Surname</label>
                         <input type="text" class="form-control" id="surname" placeholder="Pérez García">
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                      <input type="date" class="form-control" id="birth_date_owner">
-                    </div>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
-                    <input type="date" class="form-control" id="birth_date">
+                    <label for="exampleInputEmail1" class="form-label">Birth date</label>
+                    <input type="date" class="form-control" id="birth_date_owner">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">DNI*</label>
+                    <label for="exampleInputEmail1" class="form-label">DNI</label>
                     <input type="text" class="form-control" id="owner_dni" placeholder="94299329V">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Teléfono*</label>
+                    <label for="exampleInputEmail1" class="form-label">Phone</label>
                     <input type="text" class="form-control" id="phone" placeholder="612345678">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email*</label>
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                    <label for="exampleInputEmail1" class="form-label">Direction</label>
                     <input type="text" class="form-control" id="direction" placeholder="Paseo de Independencia 1">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Piso</label>
+                    <label for="exampleInputEmail1" class="form-label">Floor</label>
                     <input type="text" class="form-control" id="floor" placeholder="3B">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Ciudad*</label>
+                    <label for="exampleInputEmail1" class="form-label">City</label>
                     <input type="text" class="form-control" id="city" placeholder="Zaragoza">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Provincia*</label>
+                    <label for="exampleInputEmail1" class="form-label">Province</label>
                     <input type="text" class="form-control" id="province" placeholder="Zaragoza">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Codigo postal*</label>
+                    <label for="exampleInputEmail1" class="form-label">Postal code</label>
                     <input type="text" class="form-control" id="postal_code" placeholder="50007">
                   </div>
                 </div>
             </div>
 
             <div class="form-section form-pet">
-                <h5>Datos de la mascota</h5>
+                <h5>Pet's data</h5>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre*</label>
+                    <label for="exampleInputEmail1" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name_pet" placeholder="Lana">
                 </div>
                 <div class="line-form">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Especie*</label>
+                        <label for="exampleInputEmail1" class="form-label">Specie</label>
                         <input type="text" class="form-control" id="type" placeholder="Perro">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Raza</label>
+                        <label for="exampleInputEmail1" class="form-label">Breed</label>
                         <input type="text" class="form-control" id="breed" placeholder="Golden Retriever">
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Peso (en kg)*</label>
+                    <label for="exampleInputEmail1" class="form-label">Weight (kg)</label>
                     <input type="text" class="form-control" id="weight" placeholder="25">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Sexo*</label>
+                    <label for="disabledSelect" class="form-label">Sex</label>
                     <select class="form-select" id="sex">
-                        <option>Macho</option>
-                        <option>Hembra</option>
+                        <option>Male</option>
+                        <option>Female</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <label for="exampleInputEmail1" class="form-label">Birth date</label>
                     <input type="date" class="form-control" id="birth_date">
                 </div>
             </div>
             
             <div class="form-allergy">
                 <div class="form-section">
-                    <h5>Alergias</h5>
-                    <button type="button" class="btn btn-dark" id="btn-add">Introducir nueva alergia</button>
+                    <h5>Pathologies</h5>
+                    <button type="button" class="btn btn-dark" id="btn-add">Add new pathology</button>
                     <div id="container-allergies">
 
                     </div>
                     <template id="allergy-item">
                         <div class="form-section allergy-block">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nombre Patología*</label>
+                                <label for="exampleInputEmail1" class="form-label">Name</label>
                                 <input type="text" class="form-control name" placeholder="Soplo en el corazón">
                             </div>
                             <div class="row mb-3"> 
                               <div class="col-md-6">
-                                <label for="exampleInputEmail1" class="form-label">Tipo*</label>
+                                <label for="exampleInputEmail1" class="form-label">Type</label>
                                 <select id="disabledSelect" class="form-select type">
-                                    <option>Alergia</option>
-                                    <option>Enfermedad</option>
-                                    <option>Síndrome</option>
-                                    <option>Otros</option>
+                                    <option>Allergy</option>
+                                    <option>Pathology</option>
+                                    <option>Syndrome</option>
+                                    <option>Other</option>
                                 </select>
                               </div>
                               <div class="col-md-6">
-                                <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
+                                <label for="disabledSelect" class="form-label">Severity Level</label>
                                 <select id="disabledSelect" class="form-select severity_level">
-                                    <option>Leve</option>
-                                    <option>Moderada</option>
-                                    <option>Grave/Crítica</option>
+                                    <option>Mild</option>
+                                    <option>Moderate</option>
+                                    <option>Severe/Critical</option>
                                 </select>
                               </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Método de diagnostico</label>
+                                <label for="exampleInputEmail1" class="form-label">Diagnostic method</label>
                                 <input type="text" class="form-control diagnostic_method" placeholder="Analisis de sangre">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Sintomas</label>
+                                <label for="exampleInputEmail1" class="form-label">Symptoms</label>
                                 <textarea class="form-control symptoms" rows="3" placeholder="Ronchas"></textarea>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tratamiento* </label>
+                                <label for="exampleInputEmail1" class="form-label">Treatment</label>
                                 <textarea class="form-control treatment" rows="3" placeholder="Ronchas"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Es cronico*</label>
+                                <label for="exampleInputEmail1" class="form-label">Is cronic?</label>
                                 <input type="checkbox" class="form-check-input is_chronic">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
+                                <label for="exampleInputEmail1" class="form-label">Detection's date</label>
                                 <input type="date" class="form-control detection_date">
                             </div>
                             <button type="button" class="btn btn-info btn-remove"
-                                aria-label="Close">Eliminar</button>
+                                aria-label="Close">Delete</button>
                         </div>
                     </template>
                 </div>
@@ -216,10 +212,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             <div class="btns">
                 <a href="pet-list-page.html">
-                    <button type="submit" class="btn btn-dark" id="btnRegister">Registrar</button>
+                    <button type="submit" class="btn btn-dark" id="btnRegister">Register</button>
                 </a>
                 <a href="pet-list-page.html">
-                    <button type="button" class="btn btn-info">Cancelar</button>
+                    <button type="button" class="btn btn-info">Cancel</button>
                 </a>
             </div>
     `;
@@ -231,7 +227,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const newOwner = document.createElement("li");
     newOwner.innerHTML = `
       <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.remove('d-none')">
-        <strong>+ Dar de alta nuevo dueño</strong>
+        <strong>+ Register new owner</strong>
       </a>
     `;
     listOwners.appendChild(newOwner);
@@ -254,6 +250,12 @@ window.addEventListener("DOMContentLoaded", () => {
       const { dni_owner, name_owner, surname, birth_date, phone, email, direction, floor, city, province, postal_code } = owner;
       const ownerElement = document.createElement("li");
 
+      const birthDate = new Date(birth_date);
+      const day = String(birthDate.getDate()).padStart(2, '0');
+      const month = String(birthDate.getMonth() + 1).padStart(2, '0');
+      const year = birthDate.getFullYear();
+      const formattedDateBirth = `${year}-${month}-${day}`
+
       ownerElement.innerHTML = `
         <a class="dropdown-item" href="#" onclick="document.getElementById('new-owner-form').classList.add('d-none')">${surname} ${name_owner} - ${dni_owner}</a>
       `;
@@ -265,7 +267,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("owner_dni").value = dni_owner;
         document.getElementById("name_owner").value = name_owner;
         document.getElementById("surname").value = surname;
-        document.getElementById("birth_date").value = birth_date;
+        document.getElementById("birth_date_owner").value = formattedDateBirth;
         document.getElementById("phone").value = phone;
         document.getElementById("email").value = email;
         document.getElementById("direction").value = direction;
@@ -375,9 +377,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (!dni_owner || !name_owner || !surname || !ownerBirth || !phone || !email || !direction || !city || !province || !postal_code) {
         Swal.fire({
-          title: "Faltan campos obligatorios en el apartado de dueño",
+          title: "Required fields are missing in the owner section.",
           icon: "warning",
-          confirmButtonText: "Volver al registro",
+          confirmButtonText: "Go back to the register",
         });
         return;
       }
@@ -403,9 +405,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (!name_pet || !type || !weight || !sex || !birth_date) {
         Swal.fire({
-          title: "Faltan campos obligatorios en el apartado de mascota.",
+          title: "Required fields are missing in the pet section.",
           icon: "warning",
-          confirmButtonText: "Volver al registro",
+          confirmButtonText: "Go back to the register",
         });
         return;
       }
@@ -416,9 +418,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (birthDate.getTime() > date.getTime()) {
         Swal.fire({
-          title: "La fecha de nacimiento no puede ser mayor que la fecha actual.",
+          title: "The date of birth cannot be later than the current date.",
           icon: "warning",
-          confirmButtonText: "Volver al registro",
+          confirmButtonText: "Go back to the register",
         });
         return;
       }
@@ -461,9 +463,9 @@ window.addEventListener("DOMContentLoaded", () => {
           !detection_date
         ) {
           Swal.fire({
-            title: `Faltan campos por rellenar en la patologia nº ${i + 1}`,
+            title: `Required fields are missing in the pathology nº${i + 1}.`,
             icon: "warning",
-            confirmButtonText: "Volver al registro",
+            confirmButtonText: "Go back to the register",
           });
           error = true;
           break;
@@ -474,9 +476,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (detectionDate.getTime() > date.getTime() || detectionDate.getTime() < newBirthDate.getTime()) {
           Swal.fire({
-            title: `La fecha de detección de la patologia nº ${i + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
+            title: `The detection date for pathology no. ${i + 1} cannot be later than the current date or earlier than the pet's date of birth`,
             icon: "warning",
-            confirmButtonText: "Volver al registro",
+            confirmButtonText: "Go back to the register",
           });
           error = true;
           break;
@@ -505,7 +507,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
       } catch (err) {
         Swal.fire({
-          title: "Problema a la hora de registrar",
+          title: "Problem when registering.",
           text: err.message,
           icon: "error",
         });

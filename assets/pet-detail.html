@@ -37,14 +37,14 @@
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <img src="./img/list.svg" alt="Icono menú">
+                    <img src="./img/list.svg" style="width: 80%;" alt="Icono menú">
                 </button>
                 <div class="d-flex align-items-center mx-auto">
                     <a class="navbar-brand mb-2 mb-lg-0" href="index.html">
                         <img src="./img/logo.png" alt="Logo" class="img-header">
                     </a>
                     <div class="collapse navbar-collapse">
-                        <p class="mb-0 me-3">Clínica veterinaria</p>
+                        <p class="mb-0 me-3">Veterinary Clinic</p>
                     </div>
                 </div>
 
@@ -53,26 +53,26 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                                     class="bi bi-door-closed"></i>
-                                Salas</a>
+                                Rooms</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                                    class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                                    class="bi bi-file-earmark-medical"></i> Medical Record</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                                     class="fa-solid fa-book-medical"></i>
-                                Pacientes</a>
+                                Pacients</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="pet-form.html"><i
                                     class="fa-solid fa-paw"></i>
-                                Dar de alta</a>
+                                Register New Pacient</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                                     class="fa-solid fa-calendar-plus"></i>
-                                Concertar cita</a>
+                                Schedule Appointment</a>
                         </li>
                     </ul>
                 </div>
@@ -92,26 +92,26 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="room-status-page.html"><i
                                 class="bi bi-door-closed"></i>
-                            Salas</a>
+                            Rooms</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="clinic-historic.html"><i
-                                class="bi bi-file-earmark-medical"></i> Historial clínico</a>
+                                class="bi bi-file-earmark-medical"></i> Medical Record</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="pet-list-page.html"><i
                                 class="fa-solid fa-book-medical"></i>
-                            Pacientes</a>
+                            Pacients</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="pet-form.html"><i
                                 class="fa-solid fa-paw"></i>
-                            Dar de alta</a>
+                            Register New Pacient</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="citaForm.html"><i
                                 class="fa-solid fa-calendar-plus"></i>
-                            Concertar cita</a>
+                            Schedule Appointment</a>
                     </li>
                 </ul>
             </div>
@@ -119,10 +119,6 @@
     </header>
 
     <section class="container">
-        <div class="title-section">
-            <h2>Ficha del paciente</h2>
-        </div>
-
         <div class="pet-header" id="pet-header">
 
         </div>
@@ -151,7 +147,7 @@
         <div class="pet-clinic-history">
             <ul class="list-group">
                 <div class="intro-appointments">
-                    <h6 class="text-light">Listado consultas</h6>
+                    <h6 class="text-light">Pacient's register</h6>
                 </div>
                 <li class="list-group-item">
                     <div class="scroll-container">
@@ -168,41 +164,41 @@
     <dialog id="editPetPopUp" class="pet-modal">
         <form id="formEditPet" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Actualizar datos</h3>
+                <h3 class="text-light">Update pacient</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre*</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name_pet" required>
                 </div>
                 <div class="mb-3">
-                    <label>Especie*</label>
+                    <label>Specie</label>
                     <input type="text" class="form-control" id="type" required>
                 </div>
                 <div class="mb-3">
-                    <label>Raza*</label>
+                    <label>Breed</label>
                     <input type="text" class="form-control" id="breed" required>
                 </div>
                 <div class="mb-3">
-                    <label>Peso*</label>
+                    <label>Weight</label>
                     <input type="number" class="form-control" step="0.1" id="weight">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Sexo*</label>
+                    <label for="disabledSelect" class="form-label">Sex</label>
                     <select class="form-select" id="sex">
-                        <option>Macho</option>
-                        <option>Hembra</option>
+                        <option>Male</option>
+                        <option>Female</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento*</label>
+                    <label for="exampleInputEmail1" class="form-label">Birth date</label>
                     <input type="date" class="form-control" id="birth_date">
                 </div>
 
                 <div class="pet-btns" style="margin-top: 20px;">
-                    <button type="submit" id="saveChangesPet" class="btn btn-dark">Guardar</button>
+                    <button type="submit" id="saveChangesPet" class="btn btn-dark">Save</button>
                     <button type="button" class="btn btn-dark"
-                        onclick="document.getElementById('editPetPopUp').close()">Cancelar</button>
+                        onclick="document.getElementById('editPetPopUp').close()">Cancel</button>
                 </div>
             </div>
         </form>
@@ -212,23 +208,23 @@
     <dialog id="editOwnerPopUp" class="pet-modal">
         <div id="formEditPet" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Actualizar dueño</h3>
+                <h3 class="text-light">Update owner</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name_owner" required>
                 </div>
                 <div class="mb-3">
-                    <label>Apellidos</label>
+                    <label>Surname</label>
                     <input type="text" class="form-control" id="surname" required>
                 </div>
                 <div class="mb-3">
-                    <label>Fecha de nacimiento</label>
+                    <label>Birth date</label>
                     <input type="date" class="form-control" id="birth_date_owner" required>
                 </div>
                 <div class="mb-3">
-                    <label>Teléfono</label>
+                    <label>Phone</label>
                     <input type="text" class="form-control" id="phone" required>
                 </div>
                 <div class="mb-3">
@@ -236,29 +232,29 @@
                     <input type="text" class="form-control" id="email" required>
                 </div>
                 <div class="mb-3">
-                    <label>Direccion</label>
+                    <label>Direction</label>
                     <input type="text" class="form-control" id="direction" required>
                 </div>
                 <div class="mb-3">
-                    <label>Piso</label>
+                    <label>Floor</label>
                     <input type="text" class="form-control" id="floor" required>
                 </div>
                 <div class="mb-3">
-                    <label>Ciudad</label>
+                    <label>City</label>
                     <input type="text" class="form-control" id="city" required>
                 </div>
                 <div class="mb-3">
-                    <label>Provincia</label>
+                    <label>Province</label>
                     <input type="text" class="form-control" id="province" required>
                 </div>
                 <div class="mb-3">
-                    <label>Codigo postal</label>
+                    <label>Postal code</label>
                     <input type="text" class="form-control" id="postal_code" required>
                 </div>
                 <div class="pet-btns" style="margin-top: 20px;">
-                    <button type="submit" id="saveChangesOwner" class="btn btn-dark">Guardar</button>
+                    <button type="submit" id="saveChangesOwner" class="btn btn-dark">Save</button>
                     <button type="button" class="btn btn-dark"
-                        onclick="document.getElementById('editOwnerPopUp').close()">Cancelar</button>
+                        onclick="document.getElementById('editOwnerPopUp').close()">Cancel</button>
                 </div>
             </div>
             </form>
@@ -268,54 +264,54 @@
     <dialog id="editPathologyPopUp" class="pet-modal">
         <form id="formEditPathology" method="dialog">
             <div class="intro">
-                <h3 class="text-light">Editar Patologia</h3>
+                <h3 class="text-light">Update Pathology</h3>
             </div>
             <div class="data-form">
                 <div class="mb-3">
-                    <label>Nombre Patología*</label>
+                    <label>Name</label>
                     <input type="text" class="form-control" id="name">
                 </div>
                 <div class="mb-3">
-                    <label>Tipo*</label>
+                    <label>Type</label>
                     <select id="type" class="form-select">
-                        <option>Alergia</option>
-                        <option>Enfermedad</option>
-                        <option>Síndrome</option>
-                        <option>Otro</option>
+                        <option>Allergy</option>
+                        <option>Illness</option>
+                        <option>Syndrom</option>
+                        <option>Other</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label>Diagnostico (metodo)</label>
+                    <label>Diagnostic (method)</label>
                     <input type="text" class="form-control" id="diagnostic_method">
                 </div>
                 <div class="mb-3">
-                    <label>Sintomas</label>
+                    <label>Symptoms</label>
                     <input type="text" class="form-control" id="symptoms">
                 </div>
                 <div class="mb-3">
-                    <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
+                    <label for="disabledSelect" class="form-label">Severity level</label>
                     <select id="severity_level" class="form-select">
-                        <option>Leve</option>
-                        <option>Moderada</option>
-                        <option>Grave/Crítica</option>
+                        <option>Mild</option>
+                        <option>Moderate</option>
+                        <option>Severe/Critical</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label>Tratamiento</label>
+                    <label>Treatment</label>
                     <input type="text" class="form-control" id="treatment">
                 </div>
                 <div class="mb-3">
-                    <label>Es cronico*</label>
+                    <label>Cronic</label>
                     <input type="checkbox" class="form-check-input" id="is_chronic">
                 </div>
                 <div class="mb-3">
-                    <label>Fecha de deteccion</label>
+                    <label>Detection date</label>
                     <input type="date" class="form-control" id="detection_date">
                 </div>
             </div>
             <div class="pet-btns" style="margin-top: 20px;">
-                <button type="submit" id="saveChangesPathology" class="btn btn-dark">Guardar</button>
-                <button type="button" id="btnCancelChangesPathology" class="btn btn-dark">Cancelar</button>
+                <button type="submit" id="saveChangesPathology" class="btn btn-dark">Save</button>
+                <button type="button" id="btnCancelChangesPathology" class="btn btn-dark">Cancel</button>
             </div>
         </form>
     </dialog>
@@ -324,7 +320,7 @@
     <dialog id="showPathologyPopUp" class="pathology-modal">
         <div id="showInfoPathology">
             <div class="intro">
-                <h3 class="text-light">Información de la patología</h3>
+                <h3 class="text-light">Pathology's information</h3>
                 <button type="button" class="btn btn-light"
                     onclick="document.getElementById('showPathologyPopUp').close()"><i
                         class="fa-solid fa-x"></i></button>
@@ -335,21 +331,21 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
                         <div class="mb-3">
-                            <h5>Nombre</h5>
+                            <h5>Name</h5>
                             <p id="show_name"></p>
                         </div>
                     </div>
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
                         <div class="mb-3">
-                            <h5>Tipo</h5>
+                            <h5>Type</h5>
                             <p id="show_type"></p>
                         </div>
                     </div>
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-stethoscope"></i></span>
                         <div class="mb-3">
-                            <h5>Diagnostico</h5>
+                            <h5>Diagnostic</h5>
                             <p id="show_diagnostic_method"></p>
                         </div>
                     </div>
@@ -357,7 +353,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
                         <div class="mb-3">
-                            <h5>Sintomas</h5>
+                            <h5>Symptoms</h5>
                             <p id="show_symptoms"></p>
                         </div>
                     </div>
@@ -366,7 +362,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
                         <div class="mb-3">
-                            <h5>Nivel de severidad</h5>
+                            <h5>Severity level</h5>
                             <p id="show_severity_level"></p>
                         </div>
                     </div>
@@ -374,7 +370,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
                         <div class="mb-3">
-                            <h5>Crónico</h5>
+                            <h5>Cronic</h5>
                             <p id="show_is_chronic"></p>
                         </div>
                     </div>
@@ -382,7 +378,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
                         <div class="mb-3">
-                            <h5>Fecha de detección</h5>
+                            <h5>Detection date</h5>
                             <p id="show_detection_date"></p>
                         </div>
                     </div>
@@ -390,7 +386,7 @@
                     <div class="element-info">
                         <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
                         <div class="mb-3">
-                            <h5>Tratamiento</h5>
+                            <h5>Treatment</h5>
                             <p id="show_treatment"></p>
                         </div>
                     </div>
@@ -404,7 +400,7 @@
     <dialog id="showRegisterPopUp" class="pathology-modal">
         <div id="showInfoRegister">
             <div class="intro">
-                <h3 class="text-light">Información del registro</h3>
+                <h3 class="text-light">Register's information</h3>
                 <button type="button" class="btn btn-light"
                     onclick="document.getElementById('showRegisterPopUp').close()"><i
                         class="fa-solid fa-x"></i></button>
@@ -412,7 +408,7 @@
             <div class="element-info mt-3">
                 <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
                 <div class="mb-3">
-                    <h5>Observaciones</h5>
+                    <h5>Observations</h5>
                     <p id="show_observation_appointment"></p>
                 </div>
             </div>
@@ -427,25 +423,25 @@
                 <div class="col-12 col-md-4 text-center text-md-start">
                     <h5 class="fw-bold mb-3 text-primary">Vettion</h5>
                     <p class="small">
-                        El cuidado que tu mascota merece, con el amor que tú le das. Expertos en salud animal con
-                        atención personalizada.
+                        The care your pet deserves, with the love you give them. Experts in animal health with
+                        personalized attention.
                     </p>
                 </div>
 
                 <!-- Contactos Directos -->
                 <div class="col-12 col-md-4 text-center">
-                    <h5 class="fw-bold mb-3 text-primary">Contactos Directos</h5>
-                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Ciudad</p>
+                    <h5 class="fw-bold mb-3 text-primary">Direct Contact</h5>
+                    <p class="small"><i class="bi bi-geo-alt-fill me-2"></i> Calle Veterinaria 123, Zaragoza</p>
                     <p class="small"><i class="bi bi-telephone-fill me-2"></i> +34 900 123 456</p>
                     <p class="small"><i class="bi bi-envelope-fill me-2"></i> info@vettion.com</p>
                 </div>
 
                 <!-- Soporte -->
                 <div class="col-12 col-md-4 text-center text-md-end">
-                    <h5 class="fw-bold mb-3 text-primary">Soporte Técnico</h5>
-                    <p class="small mb-1">¿Problemas con la aplicación?</p>
+                    <h5 class="fw-bold mb-3 text-primary">Technical Support</h5>
+                    <p class="small mb-1">Problems with the app?</p>
                     <a href="mailto:soporte@tuclinica.com" class="text-decoration-none text-primary small">
-                        <i class="bi bi-envelope-fill me-1"></i> contactar-it@sistema.com
+                        <i class="bi bi-envelope-fill me-1"></i> contact-it@system.com
                     </a>
                 </div>
             </div>
@@ -456,12 +452,12 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="small">
-                        &copy; 2026 Vettion - Todos los derechos reservados.
+                        &copy; 2026 Vettion - All rights reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
                     <span class="small">
-                        <i class="bi bi-shield-check text-success"></i> Entorno Seguro
+                        <i class="bi bi-shield-check text-success"></i> Secure Environment
                     </span>
                 </div>
             </div>

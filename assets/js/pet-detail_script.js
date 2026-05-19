@@ -91,27 +91,27 @@ window.addEventListener("DOMContentLoaded", () => {
     ownerElement.innerHTML = `
     <div class="owner-name">
         <div class="intro">
-          <h6 class="text-light">Información del dueñ@</h6>
+          <h6 class="text-light">Owner's data</h6>
           <button type="button" id="btnOpenPopUpOwner" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></button>
         </div>
 
       <div class="information-elements">
         <div class="owner-name">
           <div class="information-section">
-            <h6>Nombre</h6>
+            <h6>Name</h6>
             <h6 class="text-primary">${name_owner}</h6>
           </div>
           <div class="information-section">
-            <h6>Apellidos</h6>
+            <h6>Surname</h6>
             <h6 class="text-primary">${surname}</h6>
           </div>
           <div class="information-section">
-            <h6>Fecha de nacimiento</h6>
+            <h6>Birth date</h6>
             <h6 class="text-primary">${oBirth.toLocaleDateString('es-ES')}</h6>
           </div>
         </div>
         <div class="owner-contact">
-          <h6>Datos de contacto</h6>
+          <h6>Contact data</h6>
           <div class="information-section">
             <i class="fa-solid fa-address-card"></i>
             <h6 class="text-primary">${dni_owner}</h6>
@@ -126,21 +126,25 @@ window.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       <div class="owner-direction">
-        <h6>Dirección de residencia</h6>
+        <h6>Residence data</h6>
         <div class="information-section">
-          <h6>Calle</h6>
+          <h6>Street</h6>
           <h6 class="text-primary">${direction}</h6>
         </div>
         <div class="information-section">
-          <h6>Piso</h6>
+          <h6>Floor</h6>
           <h6 class="text-primary">${floor}</h6>
         </div>
         <div class="information-section">
-          <h6>Ciudad</h6>
+          <h6>City</h6>
           <h6 class="text-primary">${city}</h6>
         </div>
         <div class="information-section">
-          <h6>Código Postal</h6>
+          <h6>Province</h6>
+          <h6 class="text-primary">${province}</h6>
+        </div>
+        <div class="information-section">
+          <h6>Postal code</h6>
           <h6 class="text-primary">${postal_code}</h6>
         </div>
       </div>
@@ -293,39 +297,37 @@ window.addEventListener("DOMContentLoaded", () => {
         <button type="button" id="btnOpenPopUpPet" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></button>
         <a href="#" class="btn btn-secondary" id="btn-delete"><i class="fa-solid fa-trash"></i></a>
       </div>
-      
-
     `
 
     petElement.innerHTML = `
     <div class="intro">
-        <h6 class="text-light">Información de la mascota</h6>
+        <h6 class="text-light">Pet's data</h6>
     </div>
 
     <div class="information-elements">
 
       <div class="information-section">
-          <h6>Peso</h6>
+          <h6>Weight</h6>
           <h6 class="text-primary">${weight} kg</h6>
       </div>
 
       <div class="information-section">
-          <h6>Sexo</h6>
+          <h6>Sex</h6>
           <h6 class="text-primary">${sex}</h6>
       </div>
 
       <div class="information-section">
-          <h6>Fecha de nacimiento</h6>
+          <h6>Birth date</h6>
           <h6 class="text-primary">${birth_date}</h6>
       </div>
 
       <div class="information-section">
-          <h6>Edad</h6>
+          <h6>Age</h6>
           <h6 class="text-primary">${age}</h6>
       </div>
 
       <div class="information-section">
-          <h6>Fecha de registro</h6>
+          <h6>Registration's date</h6>
           <h6 class="text-primary">${register_date}</h6>
       </div>
 
@@ -419,7 +421,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const numPathologies = pathologiesData.length;
     pathologiesQuantity.classList.add("intro-pathologies");
     pathologiesQuantity.innerHTML = `
-      <h5 class="text-light">Total patologías: ${numPathologies}</h5>
+      <h5 class="text-light">Total pathologies: ${numPathologies}</h5>
       <a href="new-allergy.html?id=${id_pet}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
     `;
 
@@ -431,7 +433,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const pathologyInfo = document.createElement("div");
       pathologyInfo.classList.add("no-pathology")
       pathologyInfo.innerHTML = `
-        <h6>No hay alergias registradas para ${petData.name_pet}.</h6>
+        <h6>There are no pathologies registered for ${petData.name_pet}.</h6>
       `;
       pathologiesList.appendChild(pathologyInfo);
     } else {
@@ -451,31 +453,33 @@ window.addEventListener("DOMContentLoaded", () => {
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Tipo</th>
-              <th scope="col" class="d-none d-md-table-cell">Nivel</th>
-              <th scope="col" class="d-none d-md-table-cell">Fecha</th>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col" class="d-none d-md-table-cell">S.Level</th>
+              <th scope="col" class="d-none d-md-table-cell">Date</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody id="consult-list">
+          <tr class="line-hover">
             <td scope="col" style="max-width: 80px">${name}</td>
             <td scope="col" style="max-width: 80px">${type}</td>
             <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${severity_level}</td>
             <td scope="col" style="max-width: 80px" class="d-none d-md-table-cell">${detection_date}</td>
             <td scope="col">
               <div class="dropdown">
-                <button class="btn-options" type="button" id="dropdownMenuButton1"
+                <button class="btn btn-options" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false"><i
                   class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item btn-show-pathology" data-id="${id_pathology}">Más información</a></li>
-                  <li><a class="dropdown-item btn-edit-pathology" data-id="${id_pathology}">Editar</a></li>
-                  <li><a class="dropdown-item btn-delete-pathology" data-id="${id_pathology}">Eliminar</a></li>
+                  <li><a class="dropdown-item btn-show-pathology" data-id="${id_pathology}">More info</a></li>
+                  <li><a class="dropdown-item btn-edit-pathology" data-id="${id_pathology}">Update</a></li>
+                  <li><a class="dropdown-item btn-delete-pathology" data-id="${id_pathology}">Delete</a></li>
                 </ul>
               </div>
             </td>
+          </tr>
           </tbody>
         </table>
       `;
@@ -735,11 +739,11 @@ window.addEventListener("DOMContentLoaded", () => {
     registersList.innerHTML = `
       <thead>
         <tr>
-          <th scope="col">Día de la cita</th>
-          <th scope="col" class="d-none d-md-table-cell">Nombre</th>
-          <th scope="col" class="d-none d-md-table-cell">Tipo de servicio</th>
-          <th scope="col" class="d-none d-md-table-cell">Duración</th>
-          <th scope="col">Veterinario</th>
+          <th scope="col">Appointment's date</th>
+          <th scope="col" class="d-none d-md-table-cell">Name</th>
+          <th scope="col" class="d-none d-md-table-cell">Service type</th>
+          <th scope="col" class="d-none d-md-table-cell">Duration</th>
+          <th scope="col">Veterinarian</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -778,7 +782,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const serviceDuration = service.duration;
 
         registerInfo.innerHTML = `
-        <tr>
+        <tr class="line-hover">
           <td scope="col">${date_service}</td>
           <td scope="col" class="d-none d-md-table-cell">${serviceName}</td>
           <td scope="col" class="d-none d-md-table-cell">${serviceType}</td>
@@ -823,13 +827,13 @@ window.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const confirmAction = await Swal.fire({
-        title: `¡Estás a punto de eliminar un registro!`,
-        html: `¿<strong>Segur@ que deseas eliminar</strong> a la mascota <strong>${name_pet}</strong>?`,
+        title: `You are going to delete this pacient!`,
+        html: `¿<strong>Are you sure you want to remove</strong><strong>${name_pet}</strong> from the registers?`,
         icon: "warning",
         iconColor: "#8a3938",
         showCancelButton: true,
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: "Yes, remove",
+        cancelButtonText: "No, cancel",
       });
 
       if (confirmAction.isConfirmed) {
@@ -850,11 +854,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (deleteResponse.ok) {
           Swal.fire({
-            title: "¡Registro eliminado!",
-            text: "El registro se ha eliminado correctamente",
+            title: "¡Pacient delete!",
+            text: "The pacient's register has been successfully deleted",
             icon: "success",
             iconColor: "#318a3a",
-            confirmButtonText: "Volver al dashboard",
+            confirmButtonText: "Go back to pacients",
             confirmButtonColor: "#2a1418",
           }).then(() => {
             window.location.href = "pet-list-page.html";
@@ -868,7 +872,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       } catch (error) {
         Swal.fire({
-          title: "Error de conexión",
+          title: "Conection error",
           text: error.message,
           icon: "error",
         });

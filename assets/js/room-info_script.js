@@ -12,7 +12,28 @@ const roomCode = qs.get("room");
 
 const today = new Date().toISOString().split("T")[0];
 if (dateInput) dateInput.value = today;
-if (roomTitle) roomTitle.textContent = `Sala ${roomCode || ""}`;
+
+const urlRoom = `http://localhost:8080/rooms`;
+let roomName;
+
+const getRoomsData = async () => {
+  try {
+
+    const room = await fetch(urlRoom);
+    const roomData = await room.json();
+
+    createRoomName(roomData.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const createRoomName = (roomData) => {
+  const room = roomData.find((r) => r.room_code == roomCode);
+  roomName = room.name;
+
+  if (roomTitle) roomTitle.textContent = `Room ${roomCode || ""} - ${roomName}`;
+}
 
 const setError = (msg) => {
   if (errorElement) {
@@ -35,54 +56,162 @@ const fetchDayInfo = async (room, date) => {
   return json.data || {};
 };
 
+const urlCleaners = `http://localhost:8080/cleaners`;
+const fetchCleaners = async () => {
+  try {
+    const res = await fetch(urlCleaners);
+    if (!res.ok) throw new Error("Error fetching cleaners");
+    const json = await res.json();
+    return json.data || json || [];
+  } catch (err) {
+    console.error("No se pudieron cargar los limpiadores:", err);
+    return [];
+  }
+};
+
 const renderAppointments = (appointments) => {
   if (!appointments || appointments.length === 0) {
     appointmentsList.innerHTML =
-      '<p class="text-muted">No hay citas para la fecha seleccionada.</p>';
+      `<ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Appointments</h6>
+              <h6 class="text-light">Total: ${appointments.length}</h6>
+            </div>
+
+            <div class="p-3 text-center justify-content-center">
+              <h6>There are no registers of appointments in this room</h6>
+            </div>
+        </li>
+      </ul>
+      `;
     return;
   }
 
-  const items = appointments.map((a) => {
+  const tableRows = appointments.map((a) => {
     const owner = a.name_owner
       ? `${a.name_owner} ${a.owner_surname || ""}`.trim()
+      : "-";
+    const veterinarian = a.veterinarian_name
+      ? `${a.veterinarian_name} ${a.veterinarian_surname || ""}`.trim()
+      : "-";
+    const service = a.service_name
+      ? `${a.service_name || ""}`.trim()
       : "-";
     const pet = a.name_pet || "-";
     const start = String(a.start_time).slice(0, 5);
     const end = String(a.end_time || "").slice(0, 5) || "-";
-    return `
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text"><strong>Mascota:</strong> ${pet} <br/><strong>Dueño:</strong> ${owner}</p>
-        </div>
-      </div>
-    `;
-  });
 
-  appointmentsList.innerHTML = items.join("");
+    return `
+      <tr class="line-hover">
+        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${a.pet_id}">${pet}</a></td>
+        <td scope="row">${start}</td>
+        <td scope="row" class="d-none d-md-table-cell">${end}</td>
+        <td scope="row" class="d-none d-md-table-cell">${owner}</td>
+        <td scope="row">${service}</td>
+        <td scope="row" class="d-none d-md-table-cell">${veterinarian}</td>
+      </tr>
+    `;
+  }).join("");
+
+  appointmentsList.innerHTML = `
+    <div class="border border-2 rounded shadow-sm overflow-hidden">
+      <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Appointments</h6>
+              <h6 class="text-light">Total: ${appointments.length}</h6>
+            </div>
+        </li>
+      </ul>
+
+      <table class="table table-striped m-0">
+        <thead>
+          <tr>
+            <th scope="col">Patient</th>
+            <th scope="col">Start hour</th>
+            <th scope="col" class="d-none d-md-table-cell">End hour</th>
+            <th scope="col" class="d-none d-md-table-cell">Owner</th>
+            <th scope="col">Service</th>
+            <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRows}
+        </tbody>
+      </table>
+    </div>
+  `;
 };
 
-const renderCleanServices = (cleanServices) => {
+const renderCleanServices = (cleanServices, cleanersList) => {
   if (!cleanServices || cleanServices.length === 0) {
-    cleaningList.innerHTML =
-      '<p class="text-muted">No hay servicios de limpieza para la fecha seleccionada.</p>';
+    cleaningList.innerHTML = `
+    <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Clean services</h6>
+              <h6 class="text-light">Total: ${cleanServices.length}</h6>
+            </div>
+
+            <div class="p-3 text-center justify-content-center">
+              <h6>There are no registers of clean services in this room</h6>
+            </div>
+        </li>
+      </ul>`;
     return;
   }
 
-  const items = cleanServices.map((c) => {
+  const tableRowsClean = cleanServices.map((c) => {
     const start = String(c.start_time).slice(0, 5);
     const end = String(c.end_time || "").slice(0, 5) || "-";
-    return `
-      <div class="card mb-2">
-        <div class="card-body">
-          <h5 class="card-title">${start} - ${end}</h5>
-          <p class="card-text">Asociado a cita: ${c.appointment_id || "-"} </p>
-        </div>
-      </div>
-    `;
-  });
 
-  cleaningList.innerHTML = items.join("");
+    //Sacamos el nombre del limpiador y su contacto
+    const cleaner = cleanersList.find((cl) => cl.cleaner_dni === c.cleaner_dni);
+    console.log(cleaner);
+    const cleanerName = cleaner.name;
+    const cleanerSurname = cleaner.surname;
+    const fullName = cleanerSurname + " " + cleanerName;
+    const cleanerPhone = cleaner.phone;
+
+    return `
+      <tr class="line-hover">
+        <td scope="col">${start}</td>
+        <td scope="col" class="d-none d-md-table-cell">${end}</td>
+        <td scope="col">${fullName}</td>
+        <td scope="col">${cleanerPhone}</td>
+        <td scope="col" class="d-none d-md-table-cell">${c.observations || "There are no observations"}</td>
+      </tr>
+    `;
+  }).join("");
+
+  cleaningList.innerHTML = `
+    <div class="border border-2 rounded shadow-sm overflow-hidden">
+      <ul class="list-group">
+          <li class="list-group-item p-0">
+            <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
+              <h6 class="text-light">Clean services</h6>
+              <h6 class="text-light">Total: ${cleanServices.length}</h6>
+            </div>
+        </li>
+      </ul>
+
+      <table class="table table-striped m-0">
+        <thead>
+          <tr>
+            <th scope="col">Start hour</th>
+            <th scope="col" class="d-none d-md-table-cell">End hour</th>
+            <th scope="col">Cleaner</th>
+            <th scope="col">Contact</th>
+            <th scope="col" class="d-none d-md-table-cell">Observations</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRowsClean}
+        </tbody>
+      </table>
+    </div>
+  `;
 };
 
 const load = async () => {
@@ -93,9 +222,10 @@ const load = async () => {
       return;
     }
     const date = dateInput.value || today;
-    const data = await fetchDayInfo(roomCode, date);
+    const [data, cleanersList, ownersList] = await Promise.all([fetchDayInfo(roomCode, date), fetchCleaners()]);
+    console.log(data.appointments)
     renderAppointments(data.appointments || []);
-    renderCleanServices(data.cleanServices || []);
+    renderCleanServices(data.cleanServices || [], cleanersList);
   } catch (err) {
     console.error(err);
     setError("Error cargando información de la sala.");
@@ -105,3 +235,5 @@ const load = async () => {
 if (loadBtn) loadBtn.addEventListener("click", load);
 // Carga inicial
 load();
+
+getRoomsData();

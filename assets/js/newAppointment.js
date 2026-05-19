@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         } catch (err) {
             console.error(`Error cargando desplegable (${selectId}):`, err);
-            select.innerHTML = `<option value="">Error al cargar datos</option>`;
+            select.innerHTML = `<option value="">Error loading data</option>`;
         }
     }
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-mascota',
             p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Dueño: ${p.owner_name} ${p.owner_surname})`,
             p => p.id,
-            '— Selecciona una mascota —'
+            '— Select a pacient —'
         ),
         // Veterinarios
         cargarDesplegable(
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-veterinario',
             v => `${v.surname} ${v.name}, ${v.speciality}, [${v.dni_veterinarian}]`,
             v => v.dni_veterinarian,
-            '— Selecciona un veterinario —'
+            '— Select a veterinarian —'
         ),
         // Personal de limpieza
         cargarDesplegable(
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-limpieza',
             c => `${c.surname}, ${c.name}  [${c.dni_cleaner}]`,
             c => c.dni_cleaner,
-            '— Selecciona personal de limpieza —'
+            '— Select a cleaner —'
         ),
         // Tipos de servicio
         cargarDesplegable(
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-servicio',
             c => `${c.name} — ${c.service_type} (${c.duration} min, ${c.base_price}€)`,
             c => c.id_service,
-            '— Selecciona tipo de servicio —'
+            '— Select a service —'
         ),
 
         // Salas
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-sala',
             r => `${r.name} — ${r.type}`,
             r => r.room_code,
-            '— Selecciona la sala —'
+            '— Select a room —'
         )
     ]);
 
@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 form.start_time.value = app.start_time || '';
 
                 // Desplegables: asignar el value que corresponde al dato guardado
-                document.getElementById('select-mascota').value    = app.pet_id || '';
+                document.getElementById('select-mascota').value = app.pet_id || '';
                 document.getElementById('select-veterinario').value = app.veterinarian_dni || '';
-                document.getElementById('select-servicio').value   = app.service_id || '';
+                document.getElementById('select-servicio').value = app.service_id || '';
 
                 // cleaner_dni viene del servicio de limpieza asociado a esta cita
                 // Lo buscamos consultando el clean_service
@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     console.warn('No se pudo cargar el personal de limpieza de la cita:', e);
                 }
 
-                form.code_room.value  = app.code_room || '';
-                form.observations.value  = app.observations || '';
+                form.code_room.value = app.code_room || '';
+                form.observations.value = app.observations || '';
             }
         } catch (err) {
             console.error('Error al cargar cita para editar:', err);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const dataCita = Object.fromEntries(formData.entries());
 
         // Convertir a número los campos que el backend espera como int
-        dataCita.pet_id     = parseInt(dataCita.pet_id, 10);
+        dataCita.pet_id = parseInt(dataCita.pet_id, 10);
         dataCita.service_id = parseInt(dataCita.service_id, 10);
 
         // Validar que no sea fin de semana
@@ -136,13 +136,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Control de fin de semana
         if (fecha.getDay() === 0 || fecha.getDay() === 6) {
-            alert('Vettion no abre los sábados ni domingos. Por favor, selecciona otro día.');
+            Swal.fire({
+                title: "Vettion is closed on Saturdays and Sundays. Please select another day.",
+                confirmButtonText: "Go back to edition.",
+            });
             return;
         }
 
         // Ajusta el método y la URL
         const method = editId ? 'PUT' : 'POST';
-        const url    = editId
+        const url = editId
             ? `http://localhost:8080/appointments/${editId}`
             : 'http://localhost:8080/appointments';
 
@@ -156,8 +159,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Respuesta del servidor
             if (response.ok) {
-                alert(editId ? 'Cita actualizada con éxito.' : 'Cita agendada con éxito.');
-                window.location.href = 'consults.html';
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Appointment scheduled!',
+                    text: 'The appointment has been added to the register',
+                    confirmButtonColor: '#59b2b0',
+                    confirmButtonText: 'Accept'
+                });
+                window.location.href = 'clinic-historic.html';
             } else {
                 // Manejo de errores del servidor
                 const errorData = await response.json();
@@ -166,14 +175,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (errorData.errors) {
                     // Muestra los errores de validación
                     const msg = errorData.errors.map(err => `${err.path}: ${err.msg}`).join('\n');
-                    alert('Errores de validación:\n' + msg);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error in validation',
+                        text: msg,
+                        confirmButtonColor: '#D4AF37',
+                        confirmButtonText: 'Edit'
+                    });
                 } else {
-                    alert('Error del servidor: ' + (errorData.message || 'No se pudo procesar'));
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Server error',
+                        text: 'Server error: ' + (errorData.message || 'Could not process'),
+                        confirmButtonColor: '#D4AF37',
+                        confirmButtonText: 'Edit'
+                    });
                 }
             }
         } catch (error) {
             console.error('Error de red o ejecución:', error);
-            alert('Error de conexión: ¿Está el servidor encendido en el puerto 8080?');
+            Swal.fire({
+                icon: 'error',
+                title: 'Conection',
+                text: 'Connection error: Is the server running on port 8080?',
+                confirmButtonColor: '#D4AF37',
+                confirmButtonText: 'Edit'
+            });
         }
     });
 });

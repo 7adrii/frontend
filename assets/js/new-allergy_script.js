@@ -20,54 +20,54 @@ window.addEventListener("DOMContentLoaded", () => {
         const form = document.getElementById("form-new-pathology");
         form.innerHTML = `
         <div class="form-title">
-                    <h4 class="text-light">Nueva Patología</h4>
+                    <h4 class="text-light">New Pathology</h4>
             </div>
             
             <div class="form-allergy">
                 <div class="form-section">
                         <div class="form-section allergy-block">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Nombre Patología*</label>
-                                <input type="text" class="form-control" id="name" placeholder="Soplo en el corazón">
+                                <label for="exampleInputEmail1" class="form-label">Name pathology</label>
+                                <input type="text" class="form-control" id="name" placeholder="Heart murmur">
                             </div>
                             <div class="row mb-3"> 
                               <div class="col-md-6">
-                                <label for="exampleInputEmail1" class="form-label">Tipo*</label>
+                                <label for="exampleInputEmail1" class="form-label">Type</label>
                                 <select class="form-select" id="type">
-                                    <option>Alergia</option>
-                                    <option>Enfermedad</option>
-                                    <option>Síndrome</option>
-                                    <option>Otros</option>
+                                    <option>Allergy</option>
+                                    <option>Illness</option>
+                                    <option>Syndrom</option>
+                                    <option>Other</option>
                                 </select>
                               </div>
                               <div class="col-md-6">
-                                <label for="disabledSelect" class="form-label">Nivel de severidad*</label>
+                                <label for="disabledSelect" class="form-label">Severity level</label>
                                 <select class="form-select" id="severity_level">
-                                    <option>Leve</option>
-                                    <option>Moderada</option>
-                                    <option>Grave/Crítica</option>
+                                    <option>Mild</option>
+                                    <option>Moderate</option>
+                                    <option>Severe/Critical</option>
                                 </select>
                               </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Método de diagnostico</label>
-                                <input type="text" class="form-control" id="diagnostic_method" placeholder="Analisis de sangre">
+                                <label for="exampleInputEmail1" class="form-label">Diagnostic Method</label>
+                                <input type="text" class="form-control" id="diagnostic_method" placeholder="Blood test">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Sintomas</label>
-                                <textarea class="form-control" id="symptoms" rows="3" placeholder="Ronchas"></textarea>
+                                <label for="exampleInputEmail1" class="form-label">Symptoms</label>
+                                <textarea class="form-control" id="symptoms" rows="3" placeholder="Hives"></textarea>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Tratamiento* </label>
-                                <textarea class="form-control" id="treatment" rows="3" placeholder="Ronchas"></textarea>
+                                <label for="exampleInputEmail1" class="form-label">Treatment</label>
+                                <textarea class="form-control" id="treatment" rows="3" placeholder="Intravenous medication"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Es cronico*</label>
+                                <label for="exampleInputEmail1" class="form-label">Is cronic?</label>
                                 <input type="checkbox" class="form-check-input" id="is_chronic">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Fecha de detección*</label>
+                                <label for="exampleInputEmail1" class="form-label">Detection's date</label>
                                 <input type="date" class="form-control" id="detection_date">
                             </div>
                         </div>
@@ -76,10 +76,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             <div class="btns">
                 <a>
-                    <button type="submit" class="btn btn-primary" id="btnRegister">Registrar</button>
+                    <button type="submit" class="btn btn-dark" id="btnRegister">Register</button>
                 </a>
                 <a href="pet-detail.html?id=${idPet}">
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-info">Cancel</button>
                 </a>
             </div>
     `;
@@ -120,9 +120,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 !detection_date
             ) {
                 Swal.fire({
-                    title: "Faltan campos obligatorios de la alergia.",
+                    title: "Required pathology fields are missing.",
                     icon: "warning",
-                    confirmButtonText: "Volver al registro",
+                    confirmButtonText: "Go back to the register",
                 });
                 return;
             }
@@ -133,9 +133,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (newDetectionDate.getTime() > date.getTime() || newDetectionDate.getTime() < newBirthDate.getTime()) {
                 Swal.fire({
-                    title: `La fecha de detección de la patologia nº ${petData.id_pet + 1} no puede ser mayor que la fecha actual o a la de nacimiento de la mascota`,
+                    title: 'The pathology detection date cannot be later than the current date or earlier than the date of birth of the pet.',
                     icon: "warning",
-                    confirmButtonText: "Volver al registro",
+                    confirmButtonText: "Go back to the register",
                 });
                 return
             }
@@ -153,9 +153,9 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log(detectionDate);
             if (detectionDate.getTime() < birthDate.getTime()) {
                 Swal.fire({
-                    title: "La fecha de la detección de la patología no puede ser anterior a la de la fecha de nacimiento.",
+                    title: "The pathology detection date cannot be later than the current date or earlier than the date of birth of the pet.",
                     icon: "warning",
-                    confirmButtonText: "Volver al registro",
+                    confirmButtonText: "Go back to the register",
                 });
                 return;
             }
@@ -176,11 +176,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 if (postPathologyResponse.ok) {
                     Swal.fire({
-                        title: "Nueva alergia añadida",
-                        text: "Se ha añadido la alergia",
+                        title: "New pathology added",
+                        text: "The pathology has been added",
                         icon: "success",
                         iconColor: "#318a3a",
-                        confirmButtonText: "Volver a la ficha de la mascota",
+                        confirmButtonText: "Go back to the pets register",
                         confirmButtonColor: "#2a1418",
                     }).then(() => {
                         window.location.href = `pet-detail.html?id=${idPet}`;
@@ -194,7 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 Swal.fire({
-                    title: "Error de conexión",
+                    title: "Conection error",
                     text: error.message,
                     icon: "error",
                 });

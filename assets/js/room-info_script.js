@@ -33,6 +33,7 @@ const createRoomName = (roomData) => {
   roomName = room.name;
 
   if (roomTitle) roomTitle.textContent = `Room ${roomCode || ""} - ${roomName}`;
+  document.title=`Vettion - ${roomName}`;
 }
 
 const setError = (msg) => {

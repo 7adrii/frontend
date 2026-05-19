@@ -275,6 +275,8 @@ window.addEventListener("DOMContentLoaded", () => {
       owner_dni,
     } = petData;
 
+    document.title=`Vettion - ${name_pet}`;
+
     let newBreed;
 
     if (!breed || breed === undefined || breed == "anonymous") {

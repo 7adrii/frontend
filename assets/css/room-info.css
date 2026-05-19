@@ -1,0 +1,12 @@
+.room-info {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1023px) {
+  .room-info {
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+  }
+}/*# sourceMappingURL=room-info.css.map */

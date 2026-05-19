@@ -12003,6 +12003,10 @@ textarea.form-control-lg {
   background-color: #1E272E !important;
 }
 
+body {
+  background-color: rgba(196, 227, 227, 0.368627451);
+}
+
 .rooms-page {
   display: flex;
   flex-direction: column;

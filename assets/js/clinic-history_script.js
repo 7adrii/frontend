@@ -215,7 +215,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${end_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
+                    <td scope="row"><a class="btn-show-app" data-id="${id_appointment}"><i class="fa-solid fa-info text-dark"></i></a></td>
                     <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
                 </tr>
                 `;
@@ -342,6 +342,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
+                    <td scope="row"><a class="btn-show-app" data-id="${id_appointment}"><i class="fa-solid fa-info text-dark"></i></a></td>
                     <td scope="row"><a class="btn-edit-app" data-id="${id_appointment}"><i class="fa-solid fa-edit text-dark"></i></a></td>
                     <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
                 </tr>
@@ -454,11 +455,79 @@ window.addEventListener("DOMContentLoaded", () => {
                 `;
         }
 
+        let selectedAppointmentId;
+
+        //Pop up para mostrar los datos de una cita agendada para el día actual
+        let showPathologyId = null;
+        let showBtn;
+        const popUpShowAppointment = document.getElementById('showAppointmentPopUp');
+        tableToday.addEventListener("click", (e) => {
+            showBtn = e.target.closest('.btn-show-app');
+
+            if(showBtn) {
+                selectedAppointmentId = showBtn.getAttribute("data-id");
+                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
+
+                const pet = pets.find(p => p.id === appointment.pet_id);
+                const owner = owners.find(o => o.pet_id === appointment.id);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
+                const ownerFullName = ownerName + " " + ownerSurname;
+                const service = services.find(s => s.id_service === appointment.service_id);
+                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
+                const vetName = veterinarian.name;
+                const vetSurname = veterinarian.surname;
+                const vetFullName = vetName + " " + vetSurname;
+
+                document.getElementById("show_name_pet").textContent = pet.name_pet;
+                document.getElementById("show_date").textContent = appointment.date_appointment;
+                document.getElementById("show_start_time").textContent = appointment.start_time;
+                document.getElementById("show_end_time").textContent = appointment.end_time;
+                document.getElementById("show_owner_name").textContent = ownerFullName;
+                document.getElementById("show_service").textContent = service.name;
+                document.getElementById("show_veterinarian").textContent = vetFullName;
+                document.getElementById("show_observations").textContent = appointment.observations;
+
+                popUpShowAppointment.showModal();
+            }
+        });
+
+        //Pop up para mostrar los datos de una cita agendada para el futuro
+        tableFuture.addEventListener("click", (e) => {
+            showBtn = e.target.closest('.btn-show-app');
+
+            if(showBtn) {
+                selectedAppointmentId = showBtn.getAttribute("data-id");
+                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
+
+                const pet = pets.find(p => p.id === appointment.pet_id);
+                const owner = owners.find(o => o.pet_id === appointment.id);
+                const ownerName = owner.name_owner;
+                const ownerSurname = owner.surname;
+                const ownerFullName = ownerName + " " + ownerSurname;
+                const service = services.find(s => s.id_service === appointment.service_id);
+                const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
+                const vetName = veterinarian.name;
+                const vetSurname = veterinarian.surname;
+                const vetFullName = vetName + " " + vetSurname;
+
+                document.getElementById("show_name_pet").textContent = pet.name_pet;
+                document.getElementById("show_date").textContent = appointment.date_appointment;
+                document.getElementById("show_start_time").textContent = appointment.start_time;
+                document.getElementById("show_end_time").textContent = appointment.end_time;
+                document.getElementById("show_owner_name").textContent = ownerFullName;
+                document.getElementById("show_service").textContent = service.name;
+                document.getElementById("show_veterinarian").textContent = vetFullName;
+                document.getElementById("show_observations").textContent = appointment.observations;
+
+                popUpShowAppointment.showModal();
+            }
+        });
 
         //Pop up de editar datos de una cita y guardar los cambios
         const popUpAppointment = document.getElementById("editAppointmentPopUp");
         let editBtn;
-        let selectedAppointmentId;
+
 
         tableFuture.addEventListener("click", (e) => {
             //Se busca que se hizo click

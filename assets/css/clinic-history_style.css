@@ -70,7 +70,7 @@
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 500px;
+  max-width: 800px;
 }
 
 .appointment-modal::backdrop {
@@ -86,6 +86,45 @@ dialog[open] {
 .line-hover:hover > * {
   background-color: rgba(89, 178, 176, 0.5) !important;
   transition: background-color 0.3s ease;
+}
+
+.p-display {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.element-info {
+  display: flex;
+  margin-left: 1%;
+  gap: 15px;
+}
+
+.intro {
+  background-color: #1E272E;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.icon-element {
+  width: 50px;
+  height: 50px;
+  color: #1E272E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+  border: 2px solid rgba(56, 144, 144, 0.1);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  background-color: rgba(56, 144, 144, 0.1);
 }
 
 @media (min-width: 768px) {
@@ -110,5 +149,25 @@ dialog[open] {
   .card {
     width: 20rem;
     border-radius: 15px;
+  }
+  .p-display {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto;
+    grid-template-areas: "elements1 elements2";
+    align-items: start;
+    justify-items: center;
+  }
+  .elements-1 {
+    grid-area: elements1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+  }
+  .elements-2 {
+    grid-area: elements2;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
   }
 }/*# sourceMappingURL=clinic-history_style.css.map */

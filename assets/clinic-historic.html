@@ -234,6 +234,85 @@
         </div>
     </footer>
 
+    <!-- Pop up para mostrar la informacion de una cita -->
+    <dialog id="showAppointmentPopUp" class="appointment-modal">
+        <div id="showInfoAppointment">
+            <div class="intro">
+                <h3 class="text-light">Appointment's information</h3>
+                <button type="button" class="btn btn-light"
+                    onclick="document.getElementById('showAppointmentPopUp').close()"><i
+                        class="fa-solid fa-x"></i></button>
+            </div>
+
+            <div class="p-display">
+                <div class="elements-1">
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-notes-medical"></i></span>
+                        <div class="mb-3">
+                            <h5>Pacient</h5>
+                            <p id="show_name_pet"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-signature"></i></span>
+                        <div class="mb-3">
+                            <h5>Date</h5>
+                            <p id="show_date"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
+                        <div class="mb-3">
+                            <h5>Start hour</h5>
+                            <p id="show_start_time"></p>
+                        </div>
+                    </div>
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-microscope"></i></span>
+                        <div class="mb-3">
+                            <h5>End hour</h5>
+                            <p id="show_end_time"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="elements-2">
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div class="mb-3">
+                            <h5>Owner's name</h5>
+                            <p id="show_owner_name"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-arrows-spin"></i></span>
+                        <div class="mb-3">
+                            <h5>Service</h5>
+                            <p id="show_service"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-calendar-check"></i></span>
+                        <div class="mb-3">
+                            <h5>Veterinarian</h5>
+                            <p id="show_veterinarian"></p>
+                        </div>
+                    </div>
+
+                    <div class="element-info">
+                        <span class="icon-element"><i class="fa-solid fa-pills"></i></span>
+                        <div class="mb-3">
+                            <h5>Observations</h5>
+                            <p id="show_observations"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </dialog>
+
     <!-- Pop up para editar una cita que todavía no ha ocurrido -->
     <dialog id="editAppointmentPopUp" class="appointment-modal">
         <form id="formEditPet" method="dialog">

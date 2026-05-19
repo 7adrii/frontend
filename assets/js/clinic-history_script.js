@@ -189,6 +189,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 //buscamos el nombre de la mascota
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const petName = pet.name_pet;
+                const petId = pet.id;
 
                 //buscamos el nombre del veterinario
                 const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
@@ -208,7 +209,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 tbody.innerHTML = `
                 <tr>
                     <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
+                    <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameOwner}</td>
                     <td scope="row">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
@@ -318,6 +319,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const petName = pet.name_pet;
+                const petId = pet.id;
+
+                console.log(pet)
 
                 const veterinarian = veterinarians.find(v => v.dni_veterinarian === appointment.veterinarian_dni);
                 const veterinarianName = veterinarian.name;
@@ -332,9 +336,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
-                <tr>
+                <tr line-hover>
                     <th scope="row">${date_appointment}</th>
-                    <td scope="row">${petName}</td>
+                    <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</a></td>
                     <td scope="row">${fullNameOwner}</td>
                     <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
@@ -411,6 +415,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 const serviceDuration = service.duration;
 
                 const petName = pet.name_pet;
+                const petId = pet.id;
 
                 const veterinarianName = veterinarian.name;
                 const veterinarianSurname = veterinarian.surname;
@@ -427,7 +432,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     tbody.innerHTML = `
                     <tr>
                         <td scope="row">${date_service}</td>
-                        <td scope="row">${petName}</td>
+                        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</td>
                         <td scope="row">${fullNameOwner}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceDuration} min</td>

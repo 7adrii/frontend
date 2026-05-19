@@ -615,7 +615,6 @@ window.addEventListener("DOMContentLoaded", () => {
       const [day, month, year] = birthDateSplit.split("/");
       const petBirthDate = new Date(`${year}-${month}-${day}`);
       petBirthDate.setHours(0, 0, 0, 0);
-      console.log(birthDate);
 
       const detectionDate = new Date(pathologyPutAPI.detection_date);
       detectionDate.setHours(0, 0, 0, 0);

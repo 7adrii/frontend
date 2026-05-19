@@ -268,7 +268,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
         `;
@@ -343,7 +342,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                     <td scope="row" class="d-none d-md-table-cell">${start_time}</td>
                     <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                    <td scope="row"><a class="btn-show-app" data-id="${id_appointment}"><i class="fa-solid fa-info text-dark"></i></a></td>
                     <td scope="row"><a class="btn-edit-app" data-id="${id_appointment}"><i class="fa-solid fa-edit text-dark"></i></a></td>
                     <td scope="row"><a class="btn-delete-app"><i class="fa-solid fa-trash text-dark"></i></a></td>
                 </tr>
@@ -396,7 +394,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     <th scope="col"class="d-none d-md-table-cell">Service</th>
                     <th scope="col" class="d-none d-md-table-cell">Duration</th>
                     <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
         `;
@@ -437,7 +434,6 @@ window.addEventListener("DOMContentLoaded", () => {
                         <td scope="row" class="d-none d-md-table-cell">${serviceName}</td>
                         <td scope="row" class="d-none d-md-table-cell">${serviceDuration} min</td>
                         <td scope="row" class="d-none d-md-table-cell">${fullNameVeterinarian}</td>
-                        <td scope="row"><a href="#"><i class="fa-solid fa-info text-dark"></i></a></td>
                     </tr>
                     `;
                     table.appendChild(tbody);

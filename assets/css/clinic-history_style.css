@@ -83,6 +83,11 @@ dialog[open] {
   flex-direction: column;
 }
 
+.line-hover:hover > * {
+  background-color: rgba(89, 178, 176, 0.5) !important;
+  transition: background-color 0.3s ease;
+}
+
 @media (min-width: 768px) {
   .cards {
     grid-area: cards;

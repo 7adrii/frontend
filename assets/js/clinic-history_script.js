@@ -336,7 +336,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const tbody = document.createElement("tbody");
                 tbody.innerHTML = `
-                <tr line-hover>
+                <tr class="line-hover">
                     <th scope="row">${date_appointment}</th>
                     <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</a></td>
                     <td scope="row">${fullNameOwner}</td>
@@ -430,7 +430,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (owner) {
                     const tbody = document.createElement("tbody");
                     tbody.innerHTML = `
-                    <tr>
+                    <tr class="line-hover">
                         <td scope="row">${date_service}</td>
                         <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${petId}">${petName}</td>
                         <td scope="row">${fullNameOwner}</td>

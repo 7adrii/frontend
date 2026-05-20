@@ -1,0 +1,20 @@
+//Colores personalizados página web
+$turquoise: #59b2b0;    //Color para botones principales e iconos
+$gold: #D4AF37;         //Color para botones secundarios, iconos o detalles, avisos
+$grey: #1E272E;         //Color para fondos de header u otras secciones, texto principal
+$white: #F8F9FA;  
+$background: #c4e3e35e;    //Color fondo general de la pantalla.
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: (
+    "primary": $turquoise,
+    "secondary": $gold,
+    "success": $turquoise,
+    "info": $grey,
+    "warning": $gold,
+    "danger": $gold,
+    "light": $white,
+    "dark": $grey,
+);

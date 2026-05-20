@@ -1,0 +1,123 @@
+@import "variables";
+@import "typography_style";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Estilo First-Mobile
+.navbar {
+    background-color: $grey !important;
+}
+
+.container-fluid {
+    gap: 20px;
+}
+
+.navbar-toggler-icon{
+    background-image: url("");
+}
+
+.navbar-brand {
+    flex-direction: row;
+    align-items: center;
+}
+
+.img-header {
+    width: 80px;
+    height: 80px;
+}
+
+.navbar-collapse {
+    gap: 20px;
+}
+
+.navbar-nav {
+    gap: 20px;
+}
+
+.nav-link {
+    color: $grey !important;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba($color: $white, $alpha: 0.2);
+    color: $grey;
+    border-radius: 2rem;
+}
+
+.offcanvas {
+    z-index: 2000 !important;
+}
+
+.offcanvas-backdrop {
+    z-index: 1999 !important;
+}
+
+.clock{
+    font-family: "Roboto", sans-serif;
+    color: $white;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 1020px){
+    .nav-link{
+        color: $white !important;
+    }
+}
+
+body {
+    background-color: $background;
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+}
+
+// Estilos extra para formularios
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 3px rgba(89, 178, 176, 0.2);
+    border-color: var(--turquoise);
+    background-color: #fff !important;
+}
+
+label.small {
+    letter-spacing: 1px;
+}
+
+.input-group-text {
+    border-radius: 12px 0 0 12px !important;
+}
+
+.form-control {
+    border-radius: 12px !important;
+}
+
+textarea.form-control {
+    border-radius: 15px !important;
+    padding: 15px !important;
+}
+
+.container-footer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.btn-dark:hover{
+    background-color: $turquoise;
+    color: $grey;
+    border-color: $turquoise;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}
+
+.btn-info:hover{
+    background-color: $gold;
+    color: $grey;
+    border-color: $gold;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(89, 178, 176, 0.3);
+}

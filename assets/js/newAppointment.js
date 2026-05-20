@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([
         // Mascotas
         cargarDesplegable(
-            'http://localhost:8080/pets',
+            'http://44.195.69.26:8080/pets',
             'select-mascota',
             p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Dueño: ${p.owner_name} ${p.owner_surname})`,
             p => p.id,
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ),
         // Veterinarios
         cargarDesplegable(
-            'http://localhost:8080/veterinarians',
+            'http://44.195.69.26:8080/veterinarians',
             'select-veterinario',
             v => `${v.surname} ${v.name}, ${v.speciality}, [${v.dni_veterinarian}]`,
             v => v.dni_veterinarian,
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ),
         // Personal de limpieza
         cargarDesplegable(
-            'http://localhost:8080/cleaners',
+            'http://44.195.69.26:8080/cleaners',
             'select-limpieza',
             c => `${c.surname}, ${c.name}  [${c.dni_cleaner}]`,
             c => c.dni_cleaner,
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ),
         // Tipos de servicio
         cargarDesplegable(
-            'http://localhost:8080/services',
+            'http://44.195.69.26:8080/services',
             'select-servicio',
             c => `${c.name} — ${c.service_type} (${c.duration} min, ${c.base_price}€)`,
             c => c.id_service,
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Salas
         cargarDesplegable(
-            'http://localhost:8080/rooms',
+            'http://44.195.69.26:8080/rooms',
             'select-sala',
             r => `${r.name} — ${r.type}`,
             r => r.room_code,
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('button[type="submit"]').innerHTML = 'Actualizar Cita <i class="bi bi-check-circle ms-2"></i>';
 
         try {
-            const res = await fetch(`http://localhost:8080/appointments/${editId}`);
+            const res = await fetch(`http://44.195.69.26:8080/appointments/${editId}`);
             const result = await res.json();
 
             // Si hay datos de la cita, rellenamos el formulario
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // cleaner_dni viene del servicio de limpieza asociado a esta cita
                 // Lo buscamos consultando el clean_service
                 try {
-                    const csRes = await fetch(`http://localhost:8080/clean_services`);
+                    const csRes = await fetch(`http://44.195.69.26:8080/clean_services`);
                     const csResult = await csRes.json();
                     const csData = csResult.data || [];
                     const cs = csData.find(s => s.appointment_id == editId);
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Ajusta el método y la URL
         const method = editId ? 'PUT' : 'POST';
         const url = editId
-            ? `http://localhost:8080/appointments/${editId}`
-            : 'http://localhost:8080/appointments';
+            ? `http://44.195.69.26:8080/appointments/${editId}`
+            : 'http://44.195.69.26:8080/appointments';
 
         // Envío de la solicitud
         try {

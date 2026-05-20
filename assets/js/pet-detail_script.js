@@ -5,12 +5,12 @@ window.addEventListener("DOMContentLoaded", () => {
   let idPet = params.get("id");
   console.log(idPet);
 
-  const urlPet = `http://localhost:8080/pets/${idPet}`;
-  const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
-  const urlRegisters = `http://localhost:8080/registers/pet/${idPet}`;
-  const urlVeterinarians = `http://localhost:8080/veterinarians`;
-  const urlServices = `http://localhost:8080/services`;
-  const urlAppointments = `http://localhost:8080/appointments`;
+  const urlPet = `http://44.195.69.26:8080/pets/${idPet}`;
+  const urlPathologies = `http://44.195.69.26:8080/pathologies/pet/${idPet}`;
+  const urlRegisters = `http://44.195.69.26:8080/registers/pet/${idPet}`;
+  const urlVeterinarians = `http://44.195.69.26:8080/veterinarians`;
+  const urlServices = `http://44.195.69.26:8080/services`;
+  const urlAppointments = `http://44.195.69.26:8080/appointments`;
 
   const getPetData = async () => {
     try {
@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const petData = await pet.json();
 
       const dniOwner = petData.data.owner_dni;
-      const urlOwner = `http://localhost:8080/owners/${dniOwner}`;
+      const urlOwner = `http://44.195.69.26:8080/owners/${dniOwner}`;
 
       const owner = await fetch(urlOwner);
       const ownerData = await owner.json();
@@ -235,7 +235,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const sendOwnerData = async (ownerPutAPI, dni_owner) => {
       try {
         const PutResponse = await fetch(
-          `http://localhost:8080/owners/${dni_owner}`,
+          `http://44.195.69.26:8080/owners/${dni_owner}`,
           {
             method: "PUT",
             body: JSON.stringify(ownerPutAPI),
@@ -397,7 +397,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const sendPetData = async (petPutAPI, id) => {
       try {
-        const PutResponse = await fetch(`http://localhost:8080/pets/${id}`, {
+        const PutResponse = await fetch(`http://44.195.69.26:8080/pets/${id}`, {
           method: "PUT",
           body: JSON.stringify(petPutAPI),
           headers: {
@@ -647,7 +647,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const sendPathologyData = async (pathologyPutAPI, selectedPathologyId) => {
       try {
         const PutResponse = await fetch(
-          `http://localhost:8080/pathologies/${selectedPathologyId}`,
+          `http://44.195.69.26:8080/pathologies/${selectedPathologyId}`,
           {
             method: "PUT",
             body: JSON.stringify(pathologyPutAPI),
@@ -701,7 +701,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const deletePathology = async (idPathologyDelete) => {
       try {
-        const deleteResponse = await fetch(`http://localhost:8080/pathologies/${idPathologyDelete}`, {
+        const deleteResponse = await fetch(`http://44.195.69.26:8080/pathologies/${idPathologyDelete}`, {
           method: "DELETE",
           headers: {
             "Content-type": "application/json; charset=UTF-8",

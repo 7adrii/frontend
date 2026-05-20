@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-    urlAppointments = `http://localhost:8080/appointments`;
-    urlPets = `http://localhost:8080/pets`;
-    urlServices = `http://localhost:8080/services`;
-    urlVeterinarians = `http://localhost:8080/veterinarians`;
-    urlOwners = `http://localhost:8080/owners`;
-    urlRegisters = `http://localhost:8080/registers`;
+    urlAppointments = `http://44.195.69.26:8080/appointments`;
+    urlPets = `http://44.195.69.26:8080/pets`;
+    urlServices = `http://44.195.69.26:8080/services`;
+    urlVeterinarians = `http://44.195.69.26:8080/veterinarians`;
+    urlOwners = `http://44.195.69.26:8080/owners`;
+    urlRegisters = `http://44.195.69.26:8080/registers`;
 
     const getData = async () => {
         try {
@@ -613,7 +613,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const sendAppointmentData = async (appointmentPutAPI, selectedAppointmentId) => {
             try {
                 const PutResponse = await fetch(
-                    `http://localhost:8080/appointments/${selectedAppointmentId}`,
+                    `http://44.195.69.26:8080/appointments/${selectedAppointmentId}`,
                     {
                         method: "PUT",
                         body: JSON.stringify(appointmentPutAPI),
@@ -645,7 +645,7 @@ window.addEventListener("DOMContentLoaded", () => {
         //Boton eliminar cita que todavía no ha ocurrido
         const deleteAppointment = async (id_appointment) => {
             try {
-                const deleteResponse = await fetch(`http://localhost:8080/appointments/${id_appointment}`, {
+                const deleteResponse = await fetch(`http://44.195.69.26:8080/appointments/${id_appointment}`, {
                     method: "DELETE",
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",

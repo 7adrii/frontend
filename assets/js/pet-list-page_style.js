@@ -1,5 +1,5 @@
-const urlPet = `http://localhost:8080/pets`;
-const urlOwners = `http://localhost:8080/owners`;
+const urlPet = `http://44.195.69.26:8080/pets`;
+const urlOwners = `http://44.195.69.26:8080/owners`;
 
 const getListPets = async () => {
   try {
@@ -291,7 +291,7 @@ const createPets = (petsList, ownersList) => {
 
   const deletePet = async (id_pet) => {
     try {
-      const deleteResponse = await fetch(`http://localhost:8080/pets/${id_pet}`, {
+      const deleteResponse = await fetch(`http://44.195.69.26:8080/pets/${id_pet}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",

@@ -1,9 +1,9 @@
 window.addEventListener("DOMContentLoaded", () => {
   //Definición rutas de la API
-  const urlNewPet = `http://localhost:8080/pets`;
-  const urlNewOwner = `http://localhost:8080/owners`;
-  const urlGetOwners = `http://localhost:8080/owners`;
-  const urlNewPathology = `http://localhost:8080/pathologies`;
+  const urlNewPet = `http://44.195.69.26:8080/pets`;
+  const urlNewOwner = `http://44.195.69.26:8080/owners`;
+  const urlGetOwners = `http://44.195.69.26:8080/owners`;
+  const urlNewPathology = `http://44.195.69.26:8080/pathologies`;
 
   //Creación de contenido de nueva alergia en el formulario de dada de alta de una mascota nueva
   const setAllergyForm = () => {

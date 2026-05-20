@@ -1,0 +1,40 @@
+.swal2-confirm {
+    background-color: #1E272E;
+    border-style: none;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.swal2-confirm:hover {
+    background-color: #59b2b0;
+    color: #1E272E;
+    border-radius: 5px;
+    max-width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.swal2-cancel {
+    background-color: #1E272E;
+    border-style: none;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+.swal2-cancel:hover {
+    background-color: #D4AF37;
+    color: #1E272E;
+    border-style: none;
+    border-radius: 5px;
+    max-width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.swal2-popup {
+    background: #F8F9FA;
+    color: #1E272E;
+}
+
+.swal2-title {
+    color: #1E272E;
+    font-size: 20px;
+}

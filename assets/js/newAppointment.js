@@ -28,15 +28,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([
         // Mascotas
         cargarDesplegable(
-            'http://44.195.69.26:8080/pets',
+            'http://54.85.141.17:8080/pets',
             'select-mascota',
-            p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Dueño: ${p.owner_name} ${p.owner_surname})`,
+            p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Owner: ${p.owner_name} ${p.owner_surname})`,
             p => p.id,
             '— Select a pacient —'
         ),
         // Veterinarios
         cargarDesplegable(
-            'http://44.195.69.26:8080/veterinarians',
+            'http://54.85.141.17:8080/veterinarians',
             'select-veterinario',
             v => `${v.surname} ${v.name}, ${v.speciality}, [${v.dni_veterinarian}]`,
             v => v.dni_veterinarian,
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ),
         // Personal de limpieza
         cargarDesplegable(
-            'http://44.195.69.26:8080/cleaners',
+            'http://54.85.141.17:8080/cleaners',
             'select-limpieza',
             c => `${c.surname}, ${c.name}  [${c.dni_cleaner}]`,
             c => c.dni_cleaner,
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ),
         // Tipos de servicio
         cargarDesplegable(
-            'http://44.195.69.26:8080/services',
+            'http://54.85.141.17:8080/services',
             'select-servicio',
             c => `${c.name} — ${c.service_type} (${c.duration} min, ${c.base_price}€)`,
             c => c.id_service,
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Salas
         cargarDesplegable(
-            'http://44.195.69.26:8080/rooms',
+            'http://54.85.141.17:8080/rooms',
             'select-sala',
             r => `${r.name} — ${r.type}`,
             r => r.room_code,
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('button[type="submit"]').innerHTML = 'Actualizar Cita <i class="bi bi-check-circle ms-2"></i>';
 
         try {
-            const res = await fetch(`http://44.195.69.26:8080/appointments/${editId}`);
+            const res = await fetch(`http://54.85.141.17:8080/appointments/${editId}`);
             const result = await res.json();
 
             // Si hay datos de la cita, rellenamos el formulario
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // cleaner_dni viene del servicio de limpieza asociado a esta cita
                 // Lo buscamos consultando el clean_service
                 try {
-                    const csRes = await fetch(`http://44.195.69.26:8080/clean_services`);
+                    const csRes = await fetch(`http://54.85.141.17:8080/clean_services`);
                     const csResult = await csRes.json();
                     const csData = csResult.data || [];
                     const cs = csData.find(s => s.appointment_id == editId);
@@ -137,8 +137,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Control de fin de semana
         if (fecha.getDay() === 0 || fecha.getDay() === 6) {
             Swal.fire({
-                title: "Vettion is closed on Saturdays and Sundays. Please select another day.",
-                confirmButtonText: "Go back to edition.",
+                title: "Vettion is closed on weekends",
+                text:"The clinic is closed on saturdays and sundays. Please select another day.",
+                confirmButtonText: "Go back to edition",
+                icon: 'error',
+                iconColor: '#9f7217',
+                confirmButtonText: 'Edit',
+                confirmButtonColor: '#2a1418',
             });
             return;
         }
@@ -146,8 +151,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Ajusta el método y la URL
         const method = editId ? 'PUT' : 'POST';
         const url = editId
-            ? `http://44.195.69.26:8080/appointments/${editId}`
-            : 'http://44.195.69.26:8080/appointments';
+            ? `http://54.85.141.17:8080/appointments/${editId}`
+            : 'http://54.85.141.17:8080/appointments';
 
         // Envío de la solicitud
         try {
@@ -159,12 +164,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Respuesta del servidor
             if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
+                await Swal.fire({
                     title: '¡Appointment scheduled!',
                     text: 'The appointment has been added to the register',
-                    confirmButtonColor: '#59b2b0',
-                    confirmButtonText: 'Accept'
+                    icon: 'success',
+                    iconColor: '#59b2b0',
+                    confirmButtonText: 'Accept',
+                    confirmButtonColor: '#2a1418'
                 });
                 window.location.href = 'clinic-historic.html';
             } else {
@@ -176,30 +182,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                     // Muestra los errores de validación
                     const msg = errorData.errors.map(err => `${err.path}: ${err.msg}`).join('\n');
                     Swal.fire({
-                        icon: 'error',
                         title: 'Error in validation',
                         text: msg,
-                        confirmButtonColor: '#D4AF37',
-                        confirmButtonText: 'Edit'
+                        icon: 'error',
+                        iconColor: '#9f7217',
+                        confirmButtonText: 'Edit',
+                        confirmButtonColor: '#2a1418',
                     });
                 } else {
                     Swal.fire({
-                        icon: 'error',
                         title: 'Server error',
                         text: 'Server error: ' + (errorData.message || 'Could not process'),
-                        confirmButtonColor: '#D4AF37',
-                        confirmButtonText: 'Edit'
+                        icon: 'error',
+                        iconColor: '#9f7217',
+                        confirmButtonText: 'Edit',
+                        confirmButtonColor: '#2a1418',
                     });
                 }
             }
         } catch (error) {
             console.error('Error de red o ejecución:', error);
             Swal.fire({
-                icon: 'error',
                 title: 'Conection',
                 text: 'Connection error: Is the server running on port 8080?',
-                confirmButtonColor: '#D4AF37',
-                confirmButtonText: 'Edit'
+                icon: 'error',
+                iconColor: '#9f7217',
+                confirmButtonText: 'Edit',
+                confirmButtonColor: '#2a1418',
             });
         }
     });

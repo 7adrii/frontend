@@ -1,5 +1,5 @@
-const urlPet = `http://44.195.69.26:8080/pets`;
-const urlOwners = `http://44.195.69.26:8080/owners`;
+const urlPet = `http://54.85.141.17:8080/pets`;
+const urlOwners = `http://54.85.141.17:8080/owners`;
 
 const getListPets = async () => {
   try {
@@ -212,10 +212,12 @@ const createPets = (petsList, ownersList) => {
         title: `You are going to delete this register!`,
         html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
         icon: "warning",
-        iconColor: "#8a3938",
+        iconColor: "#9f7217",
         showCancelButton: true,
         confirmButtonText: "Yes, remove",
+        confirmButtonColor: "#2a1418",
         cancelButtonText: "No, cancel",
+        cancelButtonColor: "#2a1418",
       });
 
       if (confirmAction.isConfirmed) {
@@ -275,10 +277,12 @@ const createPets = (petsList, ownersList) => {
         title: `You are going to delete this register!`,
         html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
         icon: "warning",
-        iconColor: "#8a3938",
+        iconColor: "#9f7217",
         showCancelButton: true,
         confirmButtonText: "Yes, remove",
+        confirmButtonColor: "#2a1418",
         cancelButtonText: "No, cancel",
+        cancelButtonColor: "#2a1418",
       });
 
       if (confirmAction.isConfirmed) {
@@ -291,7 +295,7 @@ const createPets = (petsList, ownersList) => {
 
   const deletePet = async (id_pet) => {
     try {
-      const deleteResponse = await fetch(`http://44.195.69.26:8080/pets/${id_pet}`, {
+      const deleteResponse = await fetch(`http://54.85.141.17:8080/pets/${id_pet}`, {
         method: "DELETE",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -305,7 +309,7 @@ const createPets = (petsList, ownersList) => {
           title: "Register eliminated!",
           text: "The register has been successfully removed",
           icon: "success",
-          iconColor: "#318a3a",
+          iconColor: "#59b2b0",
           confirmButtonText: "Go back to pacients",
           confirmButtonColor: "#2a1418",
         }).then(() => {
@@ -316,6 +320,9 @@ const createPets = (petsList, ownersList) => {
           title: "Error",
           text: `Error: ${deleteResponse.status}`,
           icon: "error",
+          iconColor: "#9f7217",
+          confirmButtonText: "Go back to register",
+          confirmButtonColor: "#2a1418"
         });
       }
     } catch (error) {
@@ -323,6 +330,9 @@ const createPets = (petsList, ownersList) => {
         title: "Conection error",
         text: error.message,
         icon: "error",
+        iconColor: "#9f7217",
+        confirmButtonText: "Go back to register",
+        confirmButtonColor: "#2a1418"
       });
     }
   };

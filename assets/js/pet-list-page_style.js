@@ -175,8 +175,8 @@ const createPets = (petsList, ownersList) => {
     const owner = ownersList.find(o => o.dni_owner == owner_dni);
 
     // Obtener el nombre y teléfono de contacto del dueño
-    const ownerSurname = owner ? owner.surname : "Desconocido";
-    const ownerContact = owner ? owner.phone : "Desconocido";
+    const ownerSurname = owner ? owner.surname : "Unknown";
+    const ownerContact = owner ? owner.phone : "Unknown";
 
     const tableRow = document.createElement("tr");
     tableRow.classList.add("line-hover");

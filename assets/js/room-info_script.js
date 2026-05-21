@@ -65,7 +65,7 @@ const fetchCleaners = async () => {
     const json = await res.json();
     return json.data || json || [];
   } catch (err) {
-    console.error("No se pudieron cargar los limpiadores:", err);
+    console.error("Cleaners could not be loaded:", err);
     return [];
   }
 };
@@ -219,7 +219,7 @@ const load = async () => {
   try {
     clearError();
     if (!roomCode) {
-      setError("Código de sala no especificado en la URL.");
+      setError("Room code not especified in the URL.");
       return;
     }
     const date = dateInput.value || today;
@@ -229,7 +229,7 @@ const load = async () => {
     renderCleanServices(data.cleanServices || [], cleanersList);
   } catch (err) {
     console.error(err);
-    setError("Error cargando información de la sala.");
+    setError("Error loading information of the room.");
   }
 };
 

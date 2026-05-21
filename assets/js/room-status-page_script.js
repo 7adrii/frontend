@@ -41,7 +41,7 @@ const getTypeIcon = (type) => {
 const renderRoomsList = (rooms) => {
   if (!Array.isArray(rooms) || rooms.length === 0) {
     roomsContainer.innerHTML =
-      '<div class="col-12 text-center py-5"><p class="text-muted">No hay salas registradas.</p></div>';
+      '<div class="col-12 text-center py-5"><p class="text-muted">No rooms registered.</p></div>';
     totalRoomsElement.textContent = "0";
     return;
   }
@@ -73,7 +73,7 @@ const renderRoomsList = (rooms) => {
           </div>
           <div class="card-footer bg-white border-top">
             <a href="${infoUrl}" class="btn btn-dark w-100">
-              <i class="bi bi-info-circle"></i> Ver información
+              <i class="bi bi-info-circle"></i> View information
             </a>
           </div>
         </div>
@@ -92,7 +92,7 @@ const init = async () => {
   } catch (err) {
     console.error(err);
     setError(
-      "No se han podido cargar las salas. Comprueba que el back-end está iniciado en http://54.85.141.17:8080",
+      "The rooms could not be loading. Confirm back is running on http://54.85.141.17:8080",
     );
     roomsContainer.innerHTML =
       '<div class="col-12 text-center py-5"><p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Error loading data.</p></div>';

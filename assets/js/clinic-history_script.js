@@ -126,7 +126,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title"><i class="fa-solid fa-shield-dog"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Servicies</h6>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Services</h6>
                 </div>
                 <h5 class="card-title">${numberServices}</h5>
             </div>
@@ -266,6 +266,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     <th scope="col" class="d-none d-md-table-cell">Service</th>
                     <th scope="col" class="d-none d-md-table-cell">Start</th>
                     <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>

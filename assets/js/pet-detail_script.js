@@ -5,12 +5,12 @@ window.addEventListener("DOMContentLoaded", () => {
   let idPet = params.get("id");
   console.log(idPet);
 
-  const urlPet = `http://localhost:8080/pets/${idPet}`;
-  const urlPathologies = `http://localhost:8080/pathologies/pet/${idPet}`;
-  const urlRegisters = `http://localhost:8080/registers/pet/${idPet}`;
-  const urlVeterinarians = `http://localhost:8080/veterinarians`;
-  const urlServices = `http://localhost:8080/services`;
-  const urlAppointments = `http://localhost:8080/appointments`;
+  const urlPet = `http://54.85.141.17:8080/pets/${idPet}`;
+  const urlPathologies = `http://54.85.141.17:8080/pathologies/pet/${idPet}`;
+  const urlRegisters = `http://54.85.141.17:8080/registers/pet/${idPet}`;
+  const urlVeterinarians = `http://54.85.141.17:8080/veterinarians`;
+  const urlServices = `http://54.85.141.17:8080/services`;
+  const urlAppointments = `http://54.85.141.17:8080/appointments`;
 
   const getPetData = async () => {
     try {
@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const petData = await pet.json();
 
       const dniOwner = petData.data.owner_dni;
-      const urlOwner = `http://localhost:8080/owners/${dniOwner}`;
+      const urlOwner = `http://54.85.141.17:8080/owners/${dniOwner}`;
 
       const owner = await fetch(urlOwner);
       const ownerData = await owner.json();
@@ -235,7 +235,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const sendOwnerData = async (ownerPutAPI, dni_owner) => {
       try {
         const PutResponse = await fetch(
-          `http://localhost:8080/owners/${dni_owner}`,
+          `http://54.85.141.17:8080/owners/${dni_owner}`,
           {
             method: "PUT",
             body: JSON.stringify(ownerPutAPI),
@@ -397,7 +397,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const sendPetData = async (petPutAPI, id) => {
       try {
-        const PutResponse = await fetch(`http://localhost:8080/pets/${id}`, {
+        const PutResponse = await fetch(`http://54.85.141.17:8080/pets/${id}`, {
           method: "PUT",
           body: JSON.stringify(petPutAPI),
           headers: {
@@ -647,7 +647,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const sendPathologyData = async (pathologyPutAPI, selectedPathologyId) => {
       try {
         const PutResponse = await fetch(
-          `http://localhost:8080/pathologies/${selectedPathologyId}`,
+          `http://54.85.141.17:8080/pathologies/${selectedPathologyId}`,
           {
             method: "PUT",
             body: JSON.stringify(pathologyPutAPI),
@@ -685,10 +685,12 @@ window.addEventListener("DOMContentLoaded", () => {
           title: `You are going to delete this pathology!`,
           html: `¿<strong>Are you sure you want to remove</strong> this pathology from <strong>${name_pet}</strong>?`,
           icon: "warning",
-          iconColor: "#8a3938",
+          iconColor: "#9f7217",
           showCancelButton: true,
           confirmButtonText: "Yes, remove",
-          cancelButtonText: "Cancele",
+          confirmButtonColor: "#2a1418",
+          cancelButtonText: "Cancel",
+          confirmButtonColor: "#2a1418",
         });
 
         if (confirmAction.isConfirmed) {
@@ -701,7 +703,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const deletePathology = async (idPathologyDelete) => {
       try {
-        const deleteResponse = await fetch(`http://localhost:8080/pathologies/${idPathologyDelete}`, {
+        const deleteResponse = await fetch(`http://54.85.141.17:8080/pathologies/${idPathologyDelete}`, {
           method: "DELETE",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -713,7 +715,7 @@ window.addEventListener("DOMContentLoaded", () => {
             title: "Pathology removed!",
             text: "Pathology deleted successfully",
             icon: "success",
-            iconColor: "#318a3a",
+            iconColor: "#59b2b0",
             confirmButtonText: "Go back to pet",
             confirmButtonColor: "#2a1418",
           }).then(() => {
@@ -724,13 +726,19 @@ window.addEventListener("DOMContentLoaded", () => {
             title: "Error",
             text: `Error: ${deleteResponse.status}`,
             icon: "error",
+            iconColor: "#9f7217",
+            confirmButtonText: "Go back",
+            confirmButtonColor: "#2a1418"
           });
         }
       } catch (error) {
         Swal.fire({
-          title: "Error de conexión",
+          title: "Conection error",
           text: error.message,
           icon: "error",
+          iconColor: "#9f7217",
+          confirmButtonText: "Go back",
+          confirmButtonColor: "#2a1418"
         });
       }
     };
@@ -831,10 +839,12 @@ window.addEventListener("DOMContentLoaded", () => {
         title: `You are going to delete this pacient!`,
         html: `¿<strong>Are you sure you want to remove</strong><strong>${name_pet}</strong> from the registers?`,
         icon: "warning",
-        iconColor: "#8a3938",
+        iconColor: "#9f7217",
         showCancelButton: true,
         confirmButtonText: "Yes, remove",
+        confirmButtonColor: "#2a1418",
         cancelButtonText: "No, cancel",
+        cancelButtonColor: "#2a1418"
       });
 
       if (confirmAction.isConfirmed) {
@@ -858,7 +868,7 @@ window.addEventListener("DOMContentLoaded", () => {
             title: "¡Pacient delete!",
             text: "The pacient's register has been successfully deleted",
             icon: "success",
-            iconColor: "#318a3a",
+            iconColor: "#59b2b0",
             confirmButtonText: "Go back to pacients",
             confirmButtonColor: "#2a1418",
           }).then(() => {
@@ -869,6 +879,9 @@ window.addEventListener("DOMContentLoaded", () => {
             title: "Error",
             text: `Error: ${deleteResponse.status}`,
             icon: "error",
+            iconColor: "#9f7217",
+            confirmButtonText: "Go back",
+            confirmButtonColor: "#2a1418"
           });
         }
       } catch (error) {
@@ -876,6 +889,9 @@ window.addEventListener("DOMContentLoaded", () => {
           title: "Conection error",
           text: error.message,
           icon: "error",
+          iconColor: "#9f7217",
+          confirmButtonText: "Go back",
+          confirmButtonColor: "#2a1418"
         });
       }
     };

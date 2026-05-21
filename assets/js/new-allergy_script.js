@@ -2,8 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let params = new URLSearchParams(document.location.search);
     let idPet = params.get("id");
 
-    const urlPathologies = `http://localhost:8080/pathologies`;
-    const urlPet = `http://localhost:8080/pets/${idPet}`;
+    const urlPathologies = `http://54.85.141.17:8080/pathologies`;
+    const urlPet = `http://54.85.141.17:8080/pets/${idPet}`;
 
     const getNewPathology = async () => {
         try {
@@ -122,7 +122,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 Swal.fire({
                     title: "Required pathology fields are missing.",
                     icon: "warning",
+                    iconColor: "#9f7217",
                     confirmButtonText: "Go back to the register",
+                    confirmButtonColor: "#2a1418",
                 });
                 return;
             }
@@ -135,7 +137,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 Swal.fire({
                     title: 'The pathology detection date cannot be later than the current date or earlier than the date of birth of the pet.',
                     icon: "warning",
+                    iconColor: "#9f7217",
                     confirmButtonText: "Go back to the register",
+                    confirmButtonColor: "#2a1418",
                 });
                 return
             }
@@ -155,7 +159,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 Swal.fire({
                     title: "The pathology detection date cannot be later than the current date or earlier than the date of birth of the pet.",
                     icon: "warning",
+                    iconColor: "#9f7217",
                     confirmButtonText: "Go back to the register",
+                    confirmButtonColor: "#2a1418",
                 });
                 return;
             }
@@ -179,8 +185,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: "New pathology added",
                         text: "The pathology has been added",
                         icon: "success",
-                        iconColor: "#318a3a",
-                        confirmButtonText: "Go back to the pets register",
+                        iconColor: "#59b2b0",
+                        confirmButtonText: "Go back to pet",
                         confirmButtonColor: "#2a1418",
                     }).then(() => {
                         window.location.href = `pet-detail.html?id=${idPet}`;
@@ -190,6 +196,9 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: "Error",
                         text: `Error: ${postPathologyResponse.status}`,
                         icon: "error",
+                        iconColor: "#9f7217",
+                        confirmButtonText: "Go back to register",
+                        confirmButtonColor: "#2a1418"
                     });
                 }
             } catch (error) {
@@ -197,6 +206,9 @@ window.addEventListener("DOMContentLoaded", () => {
                     title: "Conection error",
                     text: error.message,
                     icon: "error",
+                    iconColor: "#9f7217",
+                    confirmButtonText: "Go back to register",
+                    confirmButtonColor: "#2a1418"
                 });
             }
         };

@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-    urlAppointments = `http://localhost:8080/appointments`;
-    urlPets = `http://localhost:8080/pets`;
-    urlServices = `http://localhost:8080/services`;
-    urlVeterinarians = `http://localhost:8080/veterinarians`;
-    urlOwners = `http://localhost:8080/owners`;
-    urlRegisters = `http://localhost:8080/registers`;
+    urlAppointments = `http://54.85.141.17:8080/appointments`;
+    urlPets = `http://54.85.141.17:8080/pets`;
+    urlServices = `http://54.85.141.17:8080/services`;
+    urlVeterinarians = `http://54.85.141.17:8080/veterinarians`;
+    urlOwners = `http://54.85.141.17:8080/owners`;
+    urlRegisters = `http://54.85.141.17:8080/registers`;
 
     const getData = async () => {
         try {
@@ -231,7 +231,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: `You are going to remove this appointment!`,
                         html: `¿<strong>Are you sure you want to remove</strong> this appointment for<strong>${petName}</strong>?`,
                         icon: "warning",
-                        iconColor: "#8a3938",
+                        iconColor: "#9f7217",
                         showCancelButton: true,
                         confirmButtonText: "Yes, cancel",
                         cancelButtonText: "No",
@@ -359,7 +359,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: `You are going to remove this appointment!`,
                         html: `¿<strong>Are you sure you want to remove</strong> this appointment for<strong>${petName}</strong>?`,
                         icon: "warning",
-                        iconColor: "#8a3938",
+                        iconColor: "#9f7217",
                         showCancelButton: true,
                         confirmButtonText: "Yes, cancel",
                         cancelButtonText: "No",
@@ -466,8 +466,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if(showBtn) {
                 selectedAppointmentId = showBtn.getAttribute("data-id");
-                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
-
+                const appointment = appointments.find(all => all.id_appointment == selectedAppointmentId);
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const owner = owners.find(o => o.pet_id === appointment.id);
                 const ownerName = owner.name_owner;
@@ -498,8 +497,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if(showBtn) {
                 selectedAppointmentId = showBtn.getAttribute("data-id");
-                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
-
+                const appointment = appointments.find(all => all.id_appointment == selectedAppointmentId);
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const owner = owners.find(o => o.pet_id === appointment.id);
                 const ownerName = owner.name_owner;
@@ -613,7 +611,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const sendAppointmentData = async (appointmentPutAPI, selectedAppointmentId) => {
             try {
                 const PutResponse = await fetch(
-                    `http://localhost:8080/appointments/${selectedAppointmentId}`,
+                    `http://54.85.141.17:8080/appointments/${selectedAppointmentId}`,
                     {
                         method: "PUT",
                         body: JSON.stringify(appointmentPutAPI),
@@ -633,7 +631,9 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: "Changes could not be saved.",
                         text: errorData.message || `Error code: ${PutResponse.status}`,
                         icon: "error",
+                        iconColor: "#9f7217",
                         confirmButtonText: "Understood",
+                        confirmButtonColor: "#2a1418",
                         target: document.getElementById('editAppointmentPopUp')
                     });
                 }
@@ -645,7 +645,7 @@ window.addEventListener("DOMContentLoaded", () => {
         //Boton eliminar cita que todavía no ha ocurrido
         const deleteAppointment = async (id_appointment) => {
             try {
-                const deleteResponse = await fetch(`http://localhost:8080/appointments/${id_appointment}`, {
+                const deleteResponse = await fetch(`http://54.85.141.17:8080/appointments/${id_appointment}`, {
                     method: "DELETE",
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
@@ -657,7 +657,7 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: "Appointment cancelled!",
                         text: "Appointment successfully cancelled",
                         icon: "success",
-                        iconColor: "#318a3a",
+                        iconColor: "#59b2b0",
                         confirmButtonText: "GO back to clinic historic",
                         confirmButtonColor: "#2a1418",
                     }).then(() => {
@@ -668,6 +668,9 @@ window.addEventListener("DOMContentLoaded", () => {
                         title: "Error",
                         text: `Error: ${deleteResponse.status}`,
                         icon: "error",
+                        iconColor: "#9f7217",
+                        confirmButtonText: "Go back to register",
+                        confirmButtonColor: "#2a1418"
                     });
                 }
             } catch (error) {
@@ -675,6 +678,9 @@ window.addEventListener("DOMContentLoaded", () => {
                     title: "Conection error",
                     text: error.message,
                     icon: "error",
+                    iconColor: "#9f7217",
+                    confirmButtonText: "Go back to register",
+                    confirmButtonColor: "#2a1418"
                 });
             }
         };

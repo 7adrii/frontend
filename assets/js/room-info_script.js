@@ -1,4 +1,4 @@
-const ENDPOINT_BASE = "http://localhost:8080";
+const ENDPOINT_BASE = "http://54.85.141.17:8080";
 
 const roomTitle = document.getElementById("room-title");
 const dateInput = document.getElementById("date-input");
@@ -13,7 +13,7 @@ const roomCode = qs.get("room");
 const today = new Date().toISOString().split("T")[0];
 if (dateInput) dateInput.value = today;
 
-const urlRoom = `http://localhost:8080/rooms`;
+const urlRoom = `http://54.85.141.17:8080/rooms`;
 let roomName;
 
 const getRoomsData = async () => {
@@ -57,7 +57,7 @@ const fetchDayInfo = async (room, date) => {
   return json.data || {};
 };
 
-const urlCleaners = `http://localhost:8080/cleaners`;
+const urlCleaners = `http://54.85.141.17:8080/cleaners`;
 const fetchCleaners = async () => {
   try {
     const res = await fetch(urlCleaners);

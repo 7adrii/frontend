@@ -1,9 +1,9 @@
 window.addEventListener("DOMContentLoaded", () => {
   //Definición rutas de la API
-  const urlNewPet = `http://localhost:8080/pets`;
-  const urlNewOwner = `http://localhost:8080/owners`;
-  const urlGetOwners = `http://localhost:8080/owners`;
-  const urlNewPathology = `http://localhost:8080/pathologies`;
+  const urlNewPet = `http://54.85.141.17:8080/pets`;
+  const urlNewOwner = `http://54.85.141.17:8080/owners`;
+  const urlGetOwners = `http://54.85.141.17:8080/owners`;
+  const urlNewPathology = `http://54.85.141.17:8080/pathologies`;
 
   //Creación de contenido de nueva alergia en el formulario de dada de alta de una mascota nueva
   const setAllergyForm = () => {
@@ -379,7 +379,9 @@ window.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           title: "Required fields are missing in the owner section.",
           icon: "warning",
+          iconColor: "#9f7217",
           confirmButtonText: "Go back to the register",
+          confirmButtonColor: "#2a1418",
         });
         return;
       }
@@ -407,7 +409,9 @@ window.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           title: "Required fields are missing in the pet section.",
           icon: "warning",
+          iconColor: "#9f7217",
           confirmButtonText: "Go back to the register",
+          confirmButtonColor: "#2a1418",
         });
         return;
       }
@@ -420,7 +424,9 @@ window.addEventListener("DOMContentLoaded", () => {
         Swal.fire({
           title: "The date of birth cannot be later than the current date.",
           icon: "warning",
+          iconColor: "#9f7217",
           confirmButtonText: "Go back to the register",
+          confirmButtonColor: "#2a1418",
         });
         return;
       }
@@ -465,7 +471,9 @@ window.addEventListener("DOMContentLoaded", () => {
           Swal.fire({
             title: `Required fields are missing in the pathology nº${i + 1}.`,
             icon: "warning",
+            iconColor: "#9f7217",
             confirmButtonText: "Go back to the register",
+            confirmButtonColor: "#2a1418",
           });
           error = true;
           break;
@@ -478,7 +486,9 @@ window.addEventListener("DOMContentLoaded", () => {
           Swal.fire({
             title: `The detection date for pathology no. ${i + 1} cannot be later than the current date or earlier than the pet's date of birth`,
             icon: "warning",
+            iconColor: "#9f7217",
             confirmButtonText: "Go back to the register",
+            confirmButtonColor: "#2a1418",
           });
           error = true;
           break;
@@ -510,6 +520,9 @@ window.addEventListener("DOMContentLoaded", () => {
           title: "Problem when registering.",
           text: err.message,
           icon: "error",
+          iconColor: "#9f7217",
+          confirmButtonText: "Understood",
+          confirmButtonColor: "#2a1418",
         });
         console.error(err);
       }

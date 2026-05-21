@@ -466,8 +466,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if(showBtn) {
                 selectedAppointmentId = showBtn.getAttribute("data-id");
-                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
-
+                const appointment = appointments.find(all => all.id_appointment == selectedAppointmentId);
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const owner = owners.find(o => o.pet_id === appointment.id);
                 const ownerName = owner.name_owner;
@@ -498,8 +497,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if(showBtn) {
                 selectedAppointmentId = showBtn.getAttribute("data-id");
-                const appointment = appointments.find(all => all.id_appointment = selectedAppointmentId);
-
+                const appointment = appointments.find(all => all.id_appointment == selectedAppointmentId);
                 const pet = pets.find(p => p.id === appointment.pet_id);
                 const owner = owners.find(o => o.pet_id === appointment.id);
                 const ownerName = owner.name_owner;

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cargarDesplegable(
             'http://54.85.141.17:8080/pets',
             'select-mascota',
-            p => `${p.name_pet} — ${p.type}, ${p.breed || 'sin raza'} (Owner: ${p.owner_name} ${p.owner_surname})`,
+            p => `${p.name_pet} — ${p.type}, ${p.breed || '-'} (Owner: ${p.owner_name} ${p.owner_surname})`,
             p => p.id,
             '— Select a pacient —'
         ),
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Carga de datos si es un id de edicion
     if (editId) {
         document.querySelector('h2').innerText = 'Editar Cita';
-        document.querySelector('button[type="submit"]').innerHTML = 'Actualizar Cita <i class="bi bi-check-circle ms-2"></i>';
+        document.querySelector('button[type="submit"]').innerHTML = 'Update appointment <i class="bi bi-check-circle ms-2"></i>';
 
         try {
             const res = await fetch(`http://54.85.141.17:8080/appointments/${editId}`);

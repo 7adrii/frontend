@@ -158,8 +158,6 @@ window.addEventListener("DOMContentLoaded", () => {
     btnPopUpOwner.addEventListener("click", (e) => {
       e.preventDefault();
 
-      console.log("Abriendo modal");
-
       //Cambiamos la fecha a formato año-mes-dia para que se muestre en el modal
       const newDate = new Date(oBirth);
       const day = String(newDate.getDate()).padStart(2, '0');
@@ -349,8 +347,6 @@ window.addEventListener("DOMContentLoaded", () => {
       const month = dayMonthYear[1].toString().padStart(2, '0');
       const year = dayMonthYear[2];
       const newBirthDate = `${year}-${month}-${day}`;
-
-      console.log("Abriendo modal");
 
       document.getElementById("name_pet").value = name_pet;
       document.getElementById("type").value = type;
@@ -762,7 +758,7 @@ window.addEventListener("DOMContentLoaded", () => {
       registersList.classList.add("text-center")
       registersList.classList.add("m-2")
       registersList.innerHTML = `
-      <h6>No hay registro previo de citas para ${petData.name_pet}.</h6>
+      <h6>There are no registers for pet ${petData.name_pet}.</h6>
       `;
     } else {
       registersData.forEach((register) => {

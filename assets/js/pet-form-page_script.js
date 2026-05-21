@@ -512,7 +512,14 @@ window.addEventListener("DOMContentLoaded", () => {
           }
         }
 
-        Swal.fire("Registro completado", "success").then(() => {
+        Swal.fire({
+          title: "Register completed.",
+          text: "The pacient has been registered successfully",
+          icon: 'success',
+          iconColor: '#59b2b0',
+          confirmButtonText: 'Accept',
+          confirmButtonColor: '#2a1418'
+        }).then(() => {
           window.location.href = `pet-list-page.html`;
         });
       } catch (err) {

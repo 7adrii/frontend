@@ -18,7 +18,6 @@ let roomName;
 
 const getRoomsData = async () => {
   try {
-
     const room = await fetch(urlRoom);
     const roomData = await room.json();
 
@@ -33,8 +32,8 @@ const createRoomName = (roomData) => {
   roomName = room.name;
 
   if (roomTitle) roomTitle.textContent = `Room ${roomCode || ""} - ${roomName}`;
-  document.title=`Vettion - ${roomName}`;
-}
+  document.title = `Vettion - ${roomName}`;
+};
 
 const setError = (msg) => {
   if (errorElement) {
@@ -65,15 +64,14 @@ const fetchCleaners = async () => {
     const json = await res.json();
     return json.data || json || [];
   } catch (err) {
-    console.error("No se pudieron cargar los limpiadores:", err);
+    console.error("Cleaners could not be loaded:", err);
     return [];
   }
 };
 
 const renderAppointments = (appointments) => {
   if (!appointments || appointments.length === 0) {
-    appointmentsList.innerHTML =
-      `<ul class="list-group">
+    appointmentsList.innerHTML = `<ul class="list-group">
           <li class="list-group-item p-0">
             <div class="bg-dark p-2 rounded-top-2 d-flex justify-content-between">
               <h6 class="text-light">Appointments</h6>
@@ -89,31 +87,32 @@ const renderAppointments = (appointments) => {
     return;
   }
 
-  const tableRows = appointments.map((a) => {
-    const owner = a.name_owner
-      ? `${a.name_owner} ${a.owner_surname || ""}`.trim()
-      : "-";
-    const veterinarian = a.veterinarian_name
-      ? `${a.veterinarian_name} ${a.veterinarian_surname || ""}`.trim()
-      : "-";
-    const service = a.service_name
-      ? `${a.service_name || ""}`.trim()
-      : "-";
-    const pet = a.name_pet || "-";
-    const start = String(a.start_time).slice(0, 5);
-    const end = String(a.end_time || "").slice(0, 5) || "-";
+  const tableRows = appointments
+    .map((a) => {
+      const owner = a.name_owner
+        ? `${a.name_owner} ${a.owner_surname || ""}`.trim()
+        : "-";
+      const veterinarian = a.veterinarian_name
+        ? `${a.veterinarian_name} ${a.veterinarian_surname || ""}`.trim()
+        : "-";
+      const service = a.service_name ? `${a.service_name || ""}`.trim() : "-";
+      const pet = a.name_pet || "-";
+      const start = String(a.start_time).slice(0, 5);
+      const end = String(a.end_time || "").slice(0, 5) || "-";
 
-    return `
+      return `
       <tr class="line-hover">
-        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${a.pet_id}">${pet}</a></td>
+        <td scope="row">${pet}</td>
         <td scope="row">${start}</td>
         <td scope="row" class="d-none d-md-table-cell">${end}</td>
         <td scope="row" class="d-none d-md-table-cell">${owner}</td>
         <td scope="row">${service}</td>
         <td scope="row" class="d-none d-md-table-cell">${veterinarian}</td>
+        <td scope="row"><a class="text-dark text-decoration-none" href="pet-detail.html?id=${a.pet_id}"><i class="fa-solid fa-eye"></i></a></td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 
   appointmentsList.innerHTML = `
     <div class="border border-2 rounded shadow-sm overflow-hidden">
@@ -135,6 +134,7 @@ const renderAppointments = (appointments) => {
             <th scope="col" class="d-none d-md-table-cell">Owner</th>
             <th scope="col">Service</th>
             <th scope="col" class="d-none d-md-table-cell">Veterinarian</th>
+            <th scope="col" class="d-none d-md-table-cell"></th>
           </tr>
         </thead>
         <tbody>
@@ -163,19 +163,22 @@ const renderCleanServices = (cleanServices, cleanersList) => {
     return;
   }
 
-  const tableRowsClean = cleanServices.map((c) => {
-    const start = String(c.start_time).slice(0, 5);
-    const end = String(c.end_time || "").slice(0, 5) || "-";
+  const tableRowsClean = cleanServices
+    .map((c) => {
+      const start = String(c.start_time).slice(0, 5);
+      const end = String(c.end_time || "").slice(0, 5) || "-";
 
-    //Sacamos el nombre del limpiador y su contacto
-    const cleaner = cleanersList.find((cl) => cl.cleaner_dni === c.cleaner_dni);
-    console.log(cleaner);
-    const cleanerName = cleaner.name;
-    const cleanerSurname = cleaner.surname;
-    const fullName = cleanerSurname + " " + cleanerName;
-    const cleanerPhone = cleaner.phone;
+      //Sacamos el nombre del limpiador y su contacto
+      const cleaner = cleanersList.find(
+        (cl) => cl.cleaner_dni === c.cleaner_dni,
+      );
+      console.log(cleaner);
+      const cleanerName = cleaner.name;
+      const cleanerSurname = cleaner.surname;
+      const fullName = cleanerSurname + " " + cleanerName;
+      const cleanerPhone = cleaner.phone;
 
-    return `
+      return `
       <tr class="line-hover">
         <td scope="col">${start}</td>
         <td scope="col" class="d-none d-md-table-cell">${end}</td>
@@ -184,7 +187,8 @@ const renderCleanServices = (cleanServices, cleanersList) => {
         <td scope="col" class="d-none d-md-table-cell">${c.observations || "There are no observations"}</td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 
   cleaningList.innerHTML = `
     <div class="border border-2 rounded shadow-sm overflow-hidden">
@@ -219,17 +223,20 @@ const load = async () => {
   try {
     clearError();
     if (!roomCode) {
-      setError("Código de sala no especificado en la URL.");
+      setError("Room code not especified in the URL.");
       return;
     }
     const date = dateInput.value || today;
-    const [data, cleanersList, ownersList] = await Promise.all([fetchDayInfo(roomCode, date), fetchCleaners()]);
-    console.log(data.appointments)
+    const [data, cleanersList, ownersList] = await Promise.all([
+      fetchDayInfo(roomCode, date),
+      fetchCleaners(),
+    ]);
+    console.log(data.appointments);
     renderAppointments(data.appointments || []);
     renderCleanServices(data.cleanServices || [], cleanersList);
   } catch (err) {
     console.error(err);
-    setError("Error cargando información de la sala.");
+    setError("Error loading information of the room.");
   }
 };
 

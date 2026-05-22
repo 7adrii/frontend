@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-new-pet");
     form.innerHTML = `
             <div class="form-title">
-                    <h4 class="text-light">New Pacient</h4>
+                    <h4 class="text-light">New Patient</h4>
             </div>
             <div class="form-section form-owner">
                 <h5>Owner's data</h5>
@@ -514,7 +514,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         Swal.fire({
           title: "Register completed.",
-          text: "The pacient has been registered successfully",
+          text: "The patient has been registered successfully",
           icon: 'success',
           iconColor: '#59b2b0',
           confirmButtonText: 'Accept',

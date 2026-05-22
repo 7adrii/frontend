@@ -210,7 +210,7 @@ const createPets = (petsList, ownersList) => {
 
       const confirmAction = await Swal.fire({
         title: `You are going to delete this register!`,
-        html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
+        html: `¿<strong>Are you sure you want to remove</strong> patient <strong>${name_pet}</strong>?`,
         icon: "warning",
         iconColor: "#9f7217",
         showCancelButton: true,
@@ -275,7 +275,7 @@ const createPets = (petsList, ownersList) => {
 
       const confirmAction = await Swal.fire({
         title: `You are going to delete this register!`,
-        html: `¿<strong>Are you sure you want to remove</strong> pacient <strong>${name_pet}</strong>?`,
+        html: `¿<strong>Are you sure you want to remove</strong> patient <strong>${name_pet}</strong>?`,
         icon: "warning",
         iconColor: "#9f7217",
         showCancelButton: true,
@@ -310,7 +310,7 @@ const createPets = (petsList, ownersList) => {
           text: "The register has been successfully removed",
           icon: "success",
           iconColor: "#59b2b0",
-          confirmButtonText: "Go back to pacients",
+          confirmButtonText: "Go back to patients",
           confirmButtonColor: "#2a1418",
         }).then(() => {
           window.location.href = "pet-list-page.html";

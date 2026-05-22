@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             'select-mascota',
             p => `${p.name_pet} — ${p.type}, ${p.breed || '-'} (Owner: ${p.owner_name} ${p.owner_surname})`,
             p => p.id,
-            '— Select a pacient —'
+            '— Select a patient —'
         ),
         // Veterinarios
         cargarDesplegable(

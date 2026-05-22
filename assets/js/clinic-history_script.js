@@ -84,7 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <div class="card-body">
                 <div class="header-card">
                     <h5 class="card-title text-light"><i class="fa-solid fa-bone"></i></h5>
-                    <h6 class="card-subtitle mb-2 text-light">Pacients</h6>
+                    <h6 class="card-subtitle mb-2 text-light">Patients</h6>
                 </div>
                 <h5 class="card-title text-light">${numberPets}</h5>
             </div>
@@ -162,7 +162,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <thead>
                 <tr>
                     <th scope="col">Date</th>
-                    <th scope="col">Pacient</th>
+                    <th scope="col">Patient</th>
                     <th scope="col">Owner</th>
                     <th scope="col" class="d-none d-md-table-cell">Service</th>
                     <th scope="col" class="d-none d-md-table-cell">Start</th>
@@ -289,7 +289,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <thead>
                 <tr class="align-middle">
                     <th scope="col">Date</th>
-                    <th scope="col">Pacient</th>
+                    <th scope="col">Patient</th>
                     <th scope="col">Owner</th>
                     <th scope="col" class="d-none d-md-table-cell">Service</th>
                     <th scope="col" class="d-none d-md-table-cell">Start</th>
@@ -434,7 +434,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <thead>
                 <tr>
                     <th scope="col">Date</th>
-                    <th scope="col">Pacients</th>
+                    <th scope="col">Patients</th>
                     <th scope="col">Owners</th>
                     <th scope="col"class="d-none d-md-table-cell">Service</th>
                     <th scope="col" class="d-none d-md-table-cell">Duration</th>

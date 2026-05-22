@@ -832,7 +832,7 @@ window.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const confirmAction = await Swal.fire({
-        title: `You are going to delete this pacient!`,
+        title: `You are going to delete this patient!`,
         html: `¿<strong>Are you sure you want to remove</strong><strong>${name_pet}</strong> from the registers?`,
         icon: "warning",
         iconColor: "#9f7217",
@@ -861,11 +861,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (deleteResponse.ok) {
           Swal.fire({
-            title: "¡Pacient delete!",
-            text: "The pacient's register has been successfully deleted",
+            title: "¡Patient delete!",
+            text: "The patient's register has been successfully deleted",
             icon: "success",
             iconColor: "#59b2b0",
-            confirmButtonText: "Go back to pacients",
+            confirmButtonText: "Go back to patients",
             confirmButtonColor: "#2a1418",
           }).then(() => {
             window.location.href = "pet-list-page.html";

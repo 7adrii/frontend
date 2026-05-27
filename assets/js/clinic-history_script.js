@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-  urlAppointments = `http://54.85.141.17:8080/appointments`;
-  urlPets = `http://54.85.141.17:8080/pets`;
-  urlServices = `http://54.85.141.17:8080/services`;
-  urlVeterinarians = `http://54.85.141.17:8080/veterinarians`;
-  urlOwners = `http://54.85.141.17:8080/owners`;
-  urlRegisters = `http://54.85.141.17:8080/registers`;
+  urlAppointments = `http://localhost:8080/appointments`;
+  urlPets = `http://localhost:8080/pets`;
+  urlServices = `http://localhost:8080/services`;
+  urlVeterinarians = `http://localhost:8080/veterinarians`;
+  urlOwners = `http://localhost:8080/owners`;
+  urlRegisters = `http://localhost:8080/registers`;
 
   const getData = async () => {
     try {
@@ -691,7 +691,7 @@ window.addEventListener("DOMContentLoaded", () => {
     ) => {
       try {
         const PutResponse = await fetch(
-          `http://54.85.141.17:8080/appointments/${selectedAppointmentId}`,
+          `http://localhost:8080/appointments/${selectedAppointmentId}`,
           {
             method: "PUT",
             body: JSON.stringify(appointmentPutAPI),
@@ -726,7 +726,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const deleteAppointment = async (id_appointment) => {
       try {
         const deleteResponse = await fetch(
-          `http://54.85.141.17:8080/appointments/${id_appointment}`,
+          `http://localhost:8080/appointments/${id_appointment}`,
           {
             method: "DELETE",
             headers: {

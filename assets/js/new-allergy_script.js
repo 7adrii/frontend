@@ -2,8 +2,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let params = new URLSearchParams(document.location.search);
     let idPet = params.get("id");
 
-    const urlPathologies = `http://54.85.141.17:8080/pathologies`;
-    const urlPet = `http://54.85.141.17:8080/pets/${idPet}`;
+    const urlPathologies = `http://localhost:8080/pathologies`;
+    const urlPet = `http://localhost:8080/pets/${idPet}`;
 
     const getNewPathology = async () => {
         try {

@@ -1,6 +1,6 @@
 // Script para mostrar la lista de salas con diseño de tarjetas (grid)
 const ENDPOINTS = {
-  rooms: "http://54.85.141.17:8080/rooms",
+  rooms: "http://localhost:8080/rooms",
 };
 
 const roomsContainer = document.getElementById("rooms-container");
@@ -92,7 +92,7 @@ const init = async () => {
   } catch (err) {
     console.error(err);
     setError(
-      "The rooms could not be loading. Confirm back is running on http://54.85.141.17:8080",
+      "The rooms could not be loading. Confirm back is running on http://localhost:8080",
     );
     roomsContainer.innerHTML =
       '<div class="col-12 text-center py-5"><p class="text-danger"><i class="bi bi-exclamation-triangle"></i> Error loading data.</p></div>';
